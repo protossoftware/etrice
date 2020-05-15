@@ -142,7 +142,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -153,7 +152,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -167,7 +165,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public int getSize()
   {
     return size;
@@ -178,7 +175,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSize(int newSize)
   {
     int oldSize = size;
@@ -192,7 +188,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public RefableType getType()
   {
     return type;
@@ -220,7 +215,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setType(RefableType newType)
   {
     if (newType != type)
@@ -242,7 +236,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDefaultValueLiteral()
   {
     return defaultValueLiteral;
@@ -253,7 +246,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDefaultValueLiteral(String newDefaultValueLiteral)
   {
     String oldDefaultValueLiteral = defaultValueLiteral;
@@ -267,7 +259,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -295,7 +286,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -446,7 +436,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", size: ");

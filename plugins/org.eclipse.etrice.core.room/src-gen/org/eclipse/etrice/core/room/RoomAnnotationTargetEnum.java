@@ -142,6 +142,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>DATA CLASS</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>DATA CLASS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #DATA_CLASS
    * @model literal="DataClass"
@@ -153,6 +157,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>ACTOR CLASS</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>ACTOR CLASS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #ACTOR_CLASS
    * @model literal="ActorClass"
@@ -164,6 +172,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>ACTOR BEHAVIOR</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>ACTOR BEHAVIOR</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #ACTOR_BEHAVIOR
    * @model literal="ActorBehavior"
@@ -175,6 +187,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>PROTOCOL CLASS</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>PROTOCOL CLASS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #PROTOCOL_CLASS
    * @model literal="ProtocolClass"
@@ -186,6 +202,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>COMPOUND PROTOCOL CLASS</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>COMPOUND PROTOCOL CLASS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #COMPOUND_PROTOCOL_CLASS
    * @model literal="CompoundProtocolClass"
@@ -197,6 +217,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>SUBSYSTEM CLASS</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>SUBSYSTEM CLASS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #SUBSYSTEM_CLASS
    * @model literal="SubSystemClass"
@@ -208,6 +232,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>LOGICAL SYSTEM CLASS</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>LOGICAL SYSTEM CLASS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #LOGICAL_SYSTEM_CLASS
    * @model literal="LogicalSystem"
@@ -219,6 +247,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>PORT</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>PORT</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #PORT
    * @model literal="Port"
@@ -230,6 +262,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>MESSAGE</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>MESSAGE</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #MESSAGE
    * @model literal="Message"
@@ -241,6 +277,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>STATE</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>STATE</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #STATE
    * @model literal="State"
@@ -252,6 +292,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>TRANSITION</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>TRANSITION</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #TRANSITION
    * @model literal="Transition"
@@ -263,6 +307,10 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   /**
    * The '<em><b>ROOM MODEL</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>ROOM MODEL</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #ROOM_MODEL
    * @model literal="RoomModel"
@@ -411,7 +459,6 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public int getValue()
   {
     return value;
@@ -422,7 +469,6 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -433,7 +479,6 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getLiteral()
   {
     return literal;

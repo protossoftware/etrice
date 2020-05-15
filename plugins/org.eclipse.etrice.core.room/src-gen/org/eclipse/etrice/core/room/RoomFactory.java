@@ -194,15 +194,6 @@ public interface RoomFactory extends EFactory
   ClassStructor createClassStructor();
 
   /**
-   * Returns a new object of class '<em>General Protocol Class</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>General Protocol Class</em>'.
-   * @generated
-   */
-  GeneralProtocolClass createGeneralProtocolClass();
-
-  /**
    * Returns a new object of class '<em>Protocol Class</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -210,24 +201,6 @@ public interface RoomFactory extends EFactory
    * @generated
    */
   ProtocolClass createProtocolClass();
-
-  /**
-   * Returns a new object of class '<em>Compound Protocol Class</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Compound Protocol Class</em>'.
-   * @generated
-   */
-  CompoundProtocolClass createCompoundProtocolClass();
-
-  /**
-   * Returns a new object of class '<em>Sub Protocol</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Sub Protocol</em>'.
-   * @generated
-   */
-  SubProtocol createSubProtocol();
 
   /**
    * Returns a new object of class '<em>Message</em>'.

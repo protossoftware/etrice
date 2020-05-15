@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.common.base.util.ImportHelpers
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.GeneralProtocolClass
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
@@ -48,7 +47,7 @@ class InterfaceContractHelpers {
 	@Inject IQualifiedNameConverter fqnConverter
 	@Inject IQualifiedNameProvider fqnProvider
 	
-	def boolean hasContract(GeneralProtocolClass pc) {
+	def boolean hasContract(ProtocolClass pc) {
 		roomHelpers.isAnnotationPresent(pc.annotations, InterfaceContract_NAME)
 	}
 	

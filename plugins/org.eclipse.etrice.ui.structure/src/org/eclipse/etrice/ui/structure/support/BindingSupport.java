@@ -19,18 +19,14 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.CompoundProtocolClass;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.common.base.support.BaseToolBehaviorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
-import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
-import org.eclipse.etrice.ui.structure.dialogs.SubProtocolSelectionDialog;
 import org.eclipse.etrice.ui.structure.support.context.ConnectionUpdateContext;
 import org.eclipse.etrice.ui.structure.support.context.InitialAddConnectionContext;
 import org.eclipse.etrice.ui.structure.support.feature.ConnectionUpdateFeature;
@@ -47,15 +43,12 @@ import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddConnectionContext;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
-import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
-import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.IReconnectionContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
-import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -74,9 +67,6 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-import org.eclipse.jface.window.Window;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 
 public class BindingSupport {
 
@@ -114,7 +104,7 @@ public class BindingSupport {
 				
 				ActorContainerRef tgtRef = SupportUtil.getInstance().getRef(context.getTargetAnchor(), featureProvider);
 				
-				return SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, null, tgt, tgtRef, null, ac, null, false).isOk();
+				return SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, tgt, tgtRef, ac, null).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
@@ -168,7 +158,7 @@ public class BindingSupport {
 				for (Shape subShape : scContainer.getChildren()) {
 					Object bo = getBusinessObjectForPictogramElement(subShape);
 					if (bo instanceof Port) {
-						if (SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, null, (Port) bo, null, null, sc, null, false).isOk()) {
+						if (SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, (Port) bo, null, sc, null).isOk()) {
 							DecorationProvider.addAllowedPortShape(subShape);
 							getDiagramBehavior().refreshRenderingDecorators(subShape);
 						}
@@ -178,7 +168,7 @@ public class BindingSupport {
 						for (Shape subSubShape : ((ContainerShape)subShape).getChildren()) {
 							bo = getBusinessObjectForPictogramElement(subSubShape);
 							if (bo instanceof Port) {
-								if (SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, null, (Port) bo, tgtRef, null, sc, null, false).isOk()) {
+								if (SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, (Port) bo, tgtRef, sc, null).isOk()) {
 									DecorationProvider.addAllowedPortShape(subSubShape);
 									getDiagramBehavior().refreshRenderingDecorators(subSubShape);
 								}
@@ -217,18 +207,6 @@ public class BindingSupport {
 					bind.setEndpoint1(ep1);
 					bind.setEndpoint2(ep2);
 
-					GeneralProtocolClass srcGPC = src.getProtocol();
-					GeneralProtocolClass dstGPC = dst.getProtocol();
-					if (srcGPC instanceof CompoundProtocolClass || dstGPC instanceof CompoundProtocolClass) {
-				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, ar1, dst, ar2, null, sc);
-						if (dlg.open()!=Window.OK)
-							return null;
-						
-						ep1.setSub(dlg.getSelected().getLeft());
-						ep2.setSub(dlg.getSelected().getRight());
-					}
-					
 					sc.getBindings().add(bind);
 					
 					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
@@ -332,10 +310,7 @@ public class BindingSupport {
 				
 				ActorContainerRef tgtRef = SupportUtil.getInstance().getRef(atgt, featureProvider);
 				
-				return SupportUtil.getInstance().getValidationUtil().isConnectable(
-						src, srcRef, bind.getEndpoint1().getSub(),
-						tgt, tgtRef, bind.getEndpoint2().getSub(),
-						ac, bind, true).isOk();
+				return SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, tgt, tgtRef, ac, bind).isOk();
 			}
 			
 			@Override
@@ -356,18 +331,6 @@ public class BindingSupport {
 					ActorContainerRef ar2 = SupportUtil.getInstance().getRef(context.getConnection().getEnd(), featureProvider);
 					ep2.setPort(dst);
 					ep2.setActorRef(ar2);
-					
-					GeneralProtocolClass srcGPC = src.getProtocol();
-					GeneralProtocolClass dstGPC = dst.getProtocol();
-					if (srcGPC != null || dstGPC != null) {
-				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, ar1, dst, ar2, bind, sc);
-						if (dlg.open()!=Window.OK)
-							return;
-						
-						ep1.setSub(dlg.getSelected().getLeft());
-						ep2.setSub(dlg.getSelected().getRight());
-					}
 					
 					bind.setEndpoint1(ep1);
 					bind.setEndpoint2(ep2);
@@ -433,49 +396,6 @@ public class BindingSupport {
 			}
 		}
 		
-		private static class PropertyFeature extends ChangeAwareCustomFeature {
-
-			public PropertyFeature(IFeatureProvider fp) {
-				super(fp);
-			}
-
-			@Override
-			public String getName() {
-				return "Edit Binding...";
-			}
-			
-			@Override
-			public String getDescription() {
-				return "Edit Binding Properties";
-			}
-
-			public boolean canExecute(ICustomContext context) {
-				return getBusinessObjectForPictogramElement(context.getPictogramElements()[0]) instanceof Binding;
-			}
-
-			@Override
-			public boolean doExecute(ICustomContext context) {
-				Binding bind = (Binding) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
-				StructureClass sc = (StructureClass) bind.eContainer();
-				
-		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(
-						shell,
-						bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),
-						bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef(),
-						bind, sc);
-				
-				if (dlg.open()==Window.OK){
-					bind.getEndpoint1().setSub(dlg.getSelected().getLeft());
-					bind.getEndpoint2().setSub(dlg.getSelected().getRight());
-					
-					return true;
-				}
-				
-				return false;
-			}
-			
-		}
 		
 		private IFeatureProvider fp;
 		
@@ -518,11 +438,6 @@ public class BindingSupport {
 		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
 			return new DeleteFeature(fp);
 		}
-		
-		@Override
-		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp) };
-		}
 	}
 	
 	class BehaviorProvider extends BaseToolBehaviorProvider {
@@ -541,11 +456,6 @@ public class BindingSupport {
 			}
 			
 			return super.getToolTip(ga);
-		}
-
-		@Override
-		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
-			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
 
 		public BehaviorProvider(IDiagramTypeProvider dtp) {

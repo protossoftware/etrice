@@ -250,14 +250,14 @@ class DCLinker implements IDCAstNodeVisitor {
 	
 	protected def void getCandidates(InterfaceItem ifItem, CandidateMap candidates) {
 		// operations
-		ifItem.roomProtocol.getAllOperations(!ifItem.conjugated).forEach[candidates.put(it.name, it)]
+		ifItem.protocol.getAllOperations(!ifItem.conjugated).forEach[candidates.put(it.name, it)]
 		
 		// messages
 		switch reference {
 			case CP_BRANCH_TRANSITION__CONDITION,
 			case GUARDED_TRANSITION__GUARD,
 			case GUARD__GUARD: {
-				val pc = ifItem.roomProtocol
+				val pc = ifItem.protocol
 				switch pc?.commType {
 					case DATA_DRIVEN:
 						if (!ifItem.conjugated) pc.allIncomingMessages.forEach[candidates.put(it.name, it)]
@@ -266,7 +266,7 @@ class DCLinker implements IDCAstNodeVisitor {
 				}
 			}
 			case owner.getContainerOfType(StateGraphItem)!==null: {
-				val pc = ifItem.roomProtocol
+				val pc = ifItem.protocol
 				switch pc?.commType {
 					case EVENT_DRIVEN:
 						pc.getAllMessages(ifItem.conjugated).forEach[candidates.put(it.name, it)]

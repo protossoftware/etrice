@@ -106,7 +106,7 @@ public class SPPSupport extends InterfaceItemSupport {
 				acc.getServiceProvisionPoints().add(spp);
 		        
 		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getSAP_Protocol());
+		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, true, false);
 				if (dlg.open()==Window.OK) {
@@ -172,7 +172,7 @@ public class SPPSupport extends InterfaceItemSupport {
 				boolean refport = isRefItem(context.getPictogramElements()[0]);
 				
 		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getSAP_Protocol());
+		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, false, refport);
 				if (dlg.open()==Window.OK){

@@ -51,7 +51,6 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
-@SuppressWarnings("rawtypes")
 public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 	
 	class NameValidator implements IValidator {

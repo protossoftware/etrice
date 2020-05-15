@@ -14,7 +14,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * of the ROOM class model:
  * <ul>
  *   <li>{@link DataType}</li>
- *   <li>{@link GeneralProtocolClass}</li>
+ *   <li>{@link ProtocolClass}</li>
  *   <li>{@link StructureClass}</li>
  * </ul>
  * 

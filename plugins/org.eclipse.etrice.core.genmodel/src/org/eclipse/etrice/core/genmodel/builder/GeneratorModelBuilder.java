@@ -73,7 +73,6 @@ import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -1026,7 +1025,7 @@ public class GeneratorModelBuilder {
 			if (obj instanceof AbstractInstance) {
 				for (PortInstance pi : ((AbstractInstance) obj).getPorts()) {
 					if (pi.getKind()!=PortKind.RELAY) {
-						List<PortInstance> peers = getFinalPeers(pi, null, null);
+						List<PortInstance> peers = getFinalPeers(pi, null);
 						pi.getPeers().addAll(peers);
 						// we don't have to add pi to its peer.peers since we do that once we reach there
 					}
@@ -1061,7 +1060,7 @@ public class GeneratorModelBuilder {
 	 * @param from - the binding from which we reached pi or null if start
 	 * @return a list of final peer port instances (end ports themselves)
 	 */
-	private List<PortInstance> getFinalPeers(PortInstance pi, BindingInstance from, SubProtocol fromSub) {
+	private List<PortInstance> getFinalPeers(PortInstance pi, BindingInstance from) {
 		List<PortInstance> peers = new LinkedList<PortInstance>();
 		
 		for (BindingInstance bi : pi.getBindings()) {
@@ -1074,19 +1073,10 @@ public class GeneratorModelBuilder {
 				// by this we make sure that we go from inside to outside or vice versa
 				continue;
 			
-			SubProtocol mySub = getMySubProtocol(pi, bi);
-			if (mySub!=null && fromSub!=null && fromSub!=mySub)
-				// we follow only same sub protocols
-				continue;
-			
 			PortInstance end = (bi.getPorts().get(0)!=pi)? bi.getPorts().get(0) : bi.getPorts().get(1);
 			if (end.getKind()==PortKind.RELAY) {
-				SubProtocol peerSub = getPeerSubProtocol(pi, bi);
-				if (peerSub!=null)
-					fromSub = peerSub;
-				
 				// continue recursion
-				peers.addAll(getFinalPeers(end, bi, fromSub));
+				peers.addAll(getFinalPeers(end, bi));
 			}
 			else {
 				
@@ -1097,14 +1087,6 @@ public class GeneratorModelBuilder {
 		return peers;
 	}
 
-	private SubProtocol getMySubProtocol(PortInstance pi, BindingInstance bi) {
-		return (bi.getPorts().get(0)==pi)? bi.getBinding().getEndpoint1().getSub() : bi.getBinding().getEndpoint2().getSub();
-	}
-
-	private SubProtocol getPeerSubProtocol(PortInstance pi, BindingInstance bi) {
-		return (bi.getPorts().get(0)!=pi)? bi.getBinding().getEndpoint1().getSub() : bi.getBinding().getEndpoint2().getSub();
-	}
-	
 	private void connectPeersOneToOne(PortInstance pi) {
 		HashSet<InterfaceItemInstance> thisSide = new HashSet<InterfaceItemInstance>(pi.getPeers());
 		HashSet<InterfaceItemInstance> thatSide = new HashSet<InterfaceItemInstance>(pi.getPeers().get(0).getPeers());

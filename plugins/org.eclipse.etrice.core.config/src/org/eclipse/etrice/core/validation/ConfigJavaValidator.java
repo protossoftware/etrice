@@ -54,7 +54,6 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumerationType;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -514,18 +513,15 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		List<AttrClassConfig> rootClassAttrConfigs = new ArrayList<AttrClassConfig>();
 		if (source.eContainer() instanceof PortInstanceConfig) {
 			PortInstanceConfig portInstanceConfig = (PortInstanceConfig) source.eContainer();
-			GeneralProtocolClass generalProtocol = portInstanceConfig.getItem().getGeneralProtocol();
+			ProtocolClass protocol = portInstanceConfig.getItem().getProtocol();
 			PortClassConfig portClassConfig = null;
-			if (generalProtocol instanceof ProtocolClass) {
-				ProtocolClass protocol = (ProtocolClass) generalProtocol;
-				for (ProtocolClassConfig cf : model.getProtocolClassConfigs()) {
-					if (cf.getProtocol().equals(protocol)) {
-						if (protocol.getRegular()!=null && protocol.getRegular().equals(configUtil.getPortClass(portInstanceConfig)))
-							portClassConfig = cf.getRegular();
-						else
-							portClassConfig = cf.getConjugated();
-						break;
-					}
+			for (ProtocolClassConfig cf : model.getProtocolClassConfigs()) {
+				if (cf.getProtocol().equals(protocol)) {
+					if (protocol.getRegular()!=null && protocol.getRegular().equals(configUtil.getPortClass(portInstanceConfig)))
+						portClassConfig = cf.getRegular();
+					else
+						portClassConfig = cf.getConjugated();
+					break;
 				}
 			}
 			if (portClassConfig != null)

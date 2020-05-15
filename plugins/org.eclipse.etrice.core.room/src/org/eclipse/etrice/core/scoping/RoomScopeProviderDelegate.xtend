@@ -17,7 +17,6 @@ import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ActorContainerRef
 import org.eclipse.etrice.core.room.ActorRef
 import org.eclipse.etrice.core.room.BindingEndPoint
-import org.eclipse.etrice.core.room.CompoundProtocolClass
 import org.eclipse.etrice.core.room.ExternalPort
 import org.eclipse.etrice.core.room.InMessageHandler
 import org.eclipse.etrice.core.room.InterfaceItem
@@ -27,7 +26,6 @@ import org.eclipse.etrice.core.room.OutMessageHandler
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.PortOperation
-import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RefSAPoint
 import org.eclipse.etrice.core.room.RelaySAPoint
 import org.eclipse.etrice.core.room.SAP
@@ -83,8 +81,7 @@ class RoomScopeProviderDelegate {
 	private def scopeTriggerMessages(List<InterfaceItem> ifitems) {
 		ifitems.flatMap[
 			switch(it) {
-				Port case generalProtocol instanceof ProtocolClass:
-					(generalProtocol as ProtocolClass).getAllMessages(!conjugated)
+				Port: protocol.getAllMessages(!conjugated)
 				SAP: protocol.getAllMessages(false)
 				SPP: protocol.getAllMessages(true)
 				default: emptyList
@@ -104,7 +101,6 @@ class RoomScopeProviderDelegate {
 		switch (ref) {
 			case BINDING_END_POINT__ACTOR_REF: scopeBindingActorRef(ep.structureClass)
 			case BINDING_END_POINT__PORT: scopeBindingPort(ep.structureClass, ep.actorRef)
-			case BINDING_END_POINT__SUB: scopeBindingSub(ep.port)
 			default: emptyScope
 		}
 	}
@@ -141,16 +137,6 @@ class RoomScopeProviderDelegate {
 					return epref.type.classHierarchy.flatMap[interfacePorts].simpleScope
 				SubSystemRef:
 					return epref.type.relayPorts.simpleScope
-			}
-		}
-	}
-	
-	/** returns a flat list of SubProtocol scopes for a {@link BindingEndPoint} */
-	private def scopeBindingSub(Port port) {
-		if (port !== null) {
-			if (port.protocol instanceof CompoundProtocolClass) {
-				val pc = (port.protocol as CompoundProtocolClass)
-				return pc.subProtocols.simpleScope
 			}
 		}
 	}

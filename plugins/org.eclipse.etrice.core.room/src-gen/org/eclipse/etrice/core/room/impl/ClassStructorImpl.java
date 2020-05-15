@@ -88,7 +88,6 @@ public class ClassStructorImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -99,7 +98,6 @@ public class ClassStructorImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -113,7 +111,6 @@ public class ClassStructorImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getDetailCode()
   {
     return detailCode;
@@ -141,7 +138,6 @@ public class ClassStructorImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDetailCode(DetailCode newDetailCode)
   {
     if (newDetailCode != detailCode)
@@ -163,7 +159,6 @@ public class ClassStructorImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isConstructor()
   {
     return "ctor".equals(this.getName());
@@ -272,7 +267,7 @@ public class ClassStructorImpl extends MinimalEObjectImpl.Container implements C
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

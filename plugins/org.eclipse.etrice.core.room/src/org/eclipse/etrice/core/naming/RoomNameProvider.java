@@ -284,10 +284,7 @@ public class RoomNameProvider extends FSMNameProvider {
 	 * @return a human readable name for the end point
 	 */
 	public String getDisplayName(BindingEndPoint ep) {
-		if (ep.getSub()!=null)
-			return ep.getPort().getName()+" sub "+ep.getSub().getName();
-		else
-			return ep.getPort().getName();
+		return ep.getPort().getName();
 	}
 
 	/**

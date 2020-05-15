@@ -42,6 +42,10 @@ public enum ReferenceType implements Enumerator
   /**
    * The '<em><b>FIXED</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>FIXED</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #FIXED
    * @model literal="fixed"
@@ -53,6 +57,10 @@ public enum ReferenceType implements Enumerator
   /**
    * The '<em><b>OPTIONAL</b></em>' literal value.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>OPTIONAL</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @see #OPTIONAL
    * @model literal="optional"
@@ -181,7 +189,6 @@ public enum ReferenceType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public int getValue()
   {
     return value;
@@ -192,7 +199,6 @@ public enum ReferenceType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -203,7 +209,6 @@ public enum ReferenceType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getLiteral()
   {
     return literal;

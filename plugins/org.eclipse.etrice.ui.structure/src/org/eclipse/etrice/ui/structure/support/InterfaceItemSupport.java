@@ -20,9 +20,9 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.ui.commands.RoomOpeningHelper;
@@ -510,7 +510,7 @@ public class InterfaceItemSupport {
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof InterfaceItem) {
-						final GeneralProtocolClass pc = ((InterfaceItem)bo).getGeneralProtocol();
+						final ProtocolClass pc = ((InterfaceItem)bo).getProtocol();
 				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				        shell.getDisplay().asyncExec(new Runnable() {
 							@Override
@@ -774,7 +774,7 @@ public class InterfaceItemSupport {
 			if (bo instanceof InterfaceItem) {
 				InterfaceItem ifitem = (InterfaceItem) bo;
 				String name = ifitem.getName();
-				String protocol = SupportUtil.getInstance().getRoomHelpers().getGeneralProtocol(ifitem).getName();
+				String protocol = ifitem.getProtocol().getName();
 				if (ifitem instanceof Port) {
 					Port port = (Port) ifitem;
 					if (port.getMultiplicity()==-1)

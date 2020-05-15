@@ -77,7 +77,6 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ActorContainerRef getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -108,7 +107,6 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRef(ActorContainerRef newRef)
   {
     ActorContainerRef oldRef = ref;
@@ -122,7 +120,6 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public SPP getService()
   {
     if (service != null && service.eIsProxy())
@@ -153,7 +150,6 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setService(SPP newService)
   {
     SPP oldService = service;

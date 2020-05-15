@@ -42,7 +42,6 @@ import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
@@ -476,10 +475,7 @@ public class RoomHelpers extends FSMHelpers {
 	 * @return a list of all incoming {@link Message}s of this item
 	 */
 	public List<Message> getIncoming(InterfaceItem item) {
-		if (getRoomProtocol(item)!=null)
-			return getAllMessages(getRoomProtocol(item), !isConjugated(item));
-		else
-			return Collections.emptyList();
+		return getAllMessages(item.getProtocol(), !isConjugated(item));
 	}
 
 	/**
@@ -487,10 +483,7 @@ public class RoomHelpers extends FSMHelpers {
 	 * @return a list of all outgoing {@link Message}s of this item
 	 */
 	public List<Message> getOutgoing(InterfaceItem item) {
-		if (getRoomProtocol(item)!=null)
-			return getAllMessages(getRoomProtocol(item), isConjugated(item));
-		else
-			return Collections.emptyList();
+		return getAllMessages(item.getProtocol(), isConjugated(item));
 	}
 
 	/**
@@ -1216,36 +1209,10 @@ public class RoomHelpers extends FSMHelpers {
 	 * @see #getAllMessages(ProtocolClass, boolean)
 	 */
 	public List<Message> getMessageListDeep(InterfaceItem item, boolean outgoing) {
-		if(item.getGeneralProtocol().eIsProxy()){
-			return Lists.newArrayList();
-		}
+		if(item.getProtocol().eIsProxy())
+			return Collections.emptyList();
 		
-		ProtocolClass protocol = null;
-		if (item instanceof Port) {
-			Port port = (Port) item;
-			if (!(port.getProtocol() instanceof ProtocolClass)) {
-				// end ports (for which this is called) can have no CompoundProtocolClass
-				assert(false): "unexpected protocol type";
-				return null;
-			}
-
-			protocol = (ProtocolClass) port.getProtocol();
-			if (((Port) item).isConjugated())
-				outgoing = !outgoing;
-		}
-		else if (item instanceof SAP) {
-			outgoing = !outgoing;
-			protocol = ((SAP)item).getProtocol();
-		}
-		else if (item instanceof SPP) {
-			protocol = ((SPP)item).getProtocol();
-		}
-		else {
-			assert(false): "unexpected sub type";
-			return null;
-		}
-
-		return getAllMessages(protocol, !outgoing);
+		return getAllMessages(item.getProtocol(), outgoing == isConjugated(item));
 	}
 
 	/**
@@ -1258,32 +1225,21 @@ public class RoomHelpers extends FSMHelpers {
 	 * @return the PortClass or null if not defined
 	 */
 	public PortClass getPortClass(InterfaceItem item) {
-		ProtocolClass protocol = null;
-		boolean conjugated = false;
-		if (item instanceof Port) {
-			if (!(((Port) item).getProtocol() instanceof ProtocolClass)) {
-				// end ports (for which this is called) can have no CompoundProtocolClass
-				assert(false): "unexpected protocol type";
-				return null;
-			}
-
-			protocol = (ProtocolClass) ((Port) item).getProtocol();
-			conjugated = ((Port) item).isConjugated();
-		}
-		else if (item instanceof SAP) {
-			protocol = ((SAP)item).getProtocol();
-			conjugated = true;
-		}
-		else if (item instanceof SPP) {
-			protocol = ((SPP)item).getProtocol();
-		}
-		else {
-			assert(false): "unexpected sub type";
-			return null;
-		}
-
-		return conjugated? protocol.getConjugated():protocol.getRegular();
+		ProtocolClass protocol = item.getProtocol();
+		return isConjugated(item) ? protocol.getConjugated() : protocol.getRegular();
 	}
+	
+	/**
+	 * Returns the {@link ProtocolClass} of an {@link InterfaceItem}.
+	 *
+	 * @param item the interface item
+	 *
+	 * @return the {@link ProtocolClass} of an {@link InterfaceItem}
+	 * @deprecated use {@link InterfaceItem#getProtocol()} instead
+	 */
+//	public ProtocolClass getRoomProtocol(InterfaceItem item) {
+//		return item.getProtocol();
+//	}
 
 	/**
 	 * returns true if this is a relay port
@@ -1344,53 +1300,13 @@ public class RoomHelpers extends FSMHelpers {
 	}
 
 	/**
-	 * Returns the {@link ProtocolClass} of an {@link InterfaceItem}.
-	 * In case of a relay port with a CompoundProtocolClass <code>null</code> is returned.
-	 *
-	 * @param item the interface item
-	 *
-	 * @return the {@link ProtocolClass} of an {@link InterfaceItem}
-	 */
-	public ProtocolClass getRoomProtocol(InterfaceItem item) {
-		GeneralProtocolClass pc = getGeneralProtocol(item);
-		if (pc instanceof ProtocolClass)
-			return (ProtocolClass) pc;
-			else
-				return null;
-	}
-
-	/**
 	 * Returns {@code true} if the interface item is data driven (i.e. has a data driven {@link ProtocolClass}.
 	 *
 	 * @param item an {@link InterfaceItem}
 	 * @return {@code true} if the interface item is data driven (i.e. has a data driven {@link ProtocolClass}
 	 */
 	public boolean isDataDriven(InterfaceItem item) {
-		ProtocolClass pc = getRoomProtocol(item);
-		if (pc!=null && pc.getCommType()==CommunicationType.DATA_DRIVEN)
-			return true;
-
-		return false;
-	}
-
-	/**
-	 * Returns the {@link GeneralProtocolClass} of an {@link InterfaceItem}.
-	 *
-	 * @param item the interface item
-	 *
-	 * @return the {@link GeneralProtocolClass} of an {@link InterfaceItem}
-	 */
-	public GeneralProtocolClass getGeneralProtocol(InterfaceItem item) {
-		if (item instanceof Port) {
-			return ((Port)item).getProtocol();
-		}
-		else if (item instanceof SAP)
-			return ((SAP)item).getProtocol();
-		else if (item instanceof SPP)
-			return ((SPP)item).getProtocol();
-
-		assert(item.eIsProxy()): "unexpected sub type";
-		return null;
+		return item.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN;
 	}
 
 	/**

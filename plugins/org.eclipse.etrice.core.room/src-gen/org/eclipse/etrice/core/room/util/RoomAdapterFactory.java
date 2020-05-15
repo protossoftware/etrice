@@ -174,24 +174,9 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createClassStructorAdapter();
       }
       @Override
-      public Adapter caseGeneralProtocolClass(GeneralProtocolClass object)
-      {
-        return createGeneralProtocolClassAdapter();
-      }
-      @Override
       public Adapter caseProtocolClass(ProtocolClass object)
       {
         return createProtocolClassAdapter();
-      }
-      @Override
-      public Adapter caseCompoundProtocolClass(CompoundProtocolClass object)
-      {
-        return createCompoundProtocolClassAdapter();
-      }
-      @Override
-      public Adapter caseSubProtocol(SubProtocol object)
-      {
-        return createSubProtocolAdapter();
       }
       @Override
       public Adapter caseMessage(Message object)
@@ -661,21 +646,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.GeneralProtocolClass <em>General Protocol Class</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.GeneralProtocolClass
-   * @generated
-   */
-  public Adapter createGeneralProtocolClassAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ProtocolClass <em>Protocol Class</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -686,36 +656,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createProtocolClassAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.CompoundProtocolClass <em>Compound Protocol Class</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.CompoundProtocolClass
-   * @generated
-   */
-  public Adapter createCompoundProtocolClassAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SubProtocol <em>Sub Protocol</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SubProtocol
-   * @generated
-   */
-  public Adapter createSubProtocolAdapter()
   {
     return null;
   }

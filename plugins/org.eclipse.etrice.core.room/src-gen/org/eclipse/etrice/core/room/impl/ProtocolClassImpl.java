@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.core.common.base.Annotation;
+
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
@@ -36,6 +38,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getUserCode3 <em>User Code3</em>}</li>
@@ -48,7 +51,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *
  * @generated
  */
-public class ProtocolClassImpl extends GeneralProtocolClassImpl implements ProtocolClass
+public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
 {
   /**
    * The default value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
@@ -79,6 +82,16 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * @ordered
    */
   protected ProtocolClass base;
+
+  /**
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
+  protected EList<Annotation> annotations;
 
   /**
    * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
@@ -186,7 +199,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public CommunicationType getCommType()
   {
     return commType;
@@ -197,7 +209,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setCommType(CommunicationType newCommType)
   {
     CommunicationType oldCommType = commType;
@@ -211,7 +222,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ProtocolClass getBase()
   {
     if (base != null && base.eIsProxy())
@@ -242,7 +252,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setBase(ProtocolClass newBase)
   {
     ProtocolClass oldBase = base;
@@ -256,7 +265,20 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
+  public EList<Annotation> getAnnotations()
+  {
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.PROTOCOL_CLASS__ANNOTATIONS);
+    }
+    return annotations;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DetailCode getUserCode1()
   {
     return userCode1;
@@ -284,7 +306,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode1(DetailCode newUserCode1)
   {
     if (newUserCode1 != userCode1)
@@ -306,7 +327,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode2()
   {
     return userCode2;
@@ -334,7 +354,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode2(DetailCode newUserCode2)
   {
     if (newUserCode2 != userCode2)
@@ -356,7 +375,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode3()
   {
     return userCode3;
@@ -384,7 +402,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode3(DetailCode newUserCode3)
   {
     if (newUserCode3 != userCode3)
@@ -406,7 +423,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Message> getIncomingMessages()
   {
     if (incomingMessages == null)
@@ -421,7 +437,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Message> getOutgoingMessages()
   {
     if (outgoingMessages == null)
@@ -436,7 +451,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public PortClass getRegular()
   {
     return regular;
@@ -464,7 +478,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRegular(PortClass newRegular)
   {
     if (newRegular != regular)
@@ -486,7 +499,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public PortClass getConjugated()
   {
     return conjugated;
@@ -514,7 +526,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setConjugated(PortClass newConjugated)
   {
     if (newConjugated != conjugated)
@@ -536,7 +547,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ProtocolSemantics getSemantics()
   {
     return semantics;
@@ -564,7 +574,6 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSemantics(ProtocolSemantics newSemantics)
   {
     if (newSemantics != semantics)
@@ -591,6 +600,8 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
   {
     switch (featureID)
     {
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
       case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
         return basicSetUserCode1(null, msgs);
       case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
@@ -626,6 +637,8 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
       case RoomPackage.PROTOCOL_CLASS__BASE:
         if (resolve) return getBase();
         return basicGetBase();
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        return getAnnotations();
       case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
         return getUserCode1();
       case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
@@ -662,6 +675,10 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
         return;
       case RoomPackage.PROTOCOL_CLASS__BASE:
         setBase((ProtocolClass)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
         return;
       case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
         setUserCode1((DetailCode)newValue);
@@ -709,6 +726,9 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
       case RoomPackage.PROTOCOL_CLASS__BASE:
         setBase((ProtocolClass)null);
         return;
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
       case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
         setUserCode1((DetailCode)null);
         return;
@@ -751,6 +771,8 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
         return commType != COMM_TYPE_EDEFAULT;
       case RoomPackage.PROTOCOL_CLASS__BASE:
         return base != null;
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
       case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
         return userCode1 != null;
       case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
@@ -781,7 +803,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (commType: ");
     result.append(commType);
     result.append(')');

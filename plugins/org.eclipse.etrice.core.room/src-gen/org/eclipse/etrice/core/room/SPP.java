@@ -19,12 +19,6 @@ package org.eclipse.etrice.core.room;
  * 
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.SPP#getProtocol <em>Protocol</em>}</li>
- * </ul>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getSPP()
  * @model
@@ -32,30 +26,4 @@ package org.eclipse.etrice.core.room;
  */
 public interface SPP extends InterfaceItem
 {
-  /**
-   * Returns the value of the '<em><b>Protocol</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the SAP's protocol class.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Protocol</em>' reference.
-   * @see #setProtocol(ProtocolClass)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getSPP_Protocol()
-   * @model
-   * @generated
-   */
-  ProtocolClass getProtocol();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.SPP#getProtocol <em>Protocol</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Protocol</em>' reference.
-   * @see #getProtocol()
-   * @generated
-   */
-  void setProtocol(ProtocolClass value);
-
 } // SPP

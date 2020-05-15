@@ -93,7 +93,6 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ActorInstanceMapping> getActorInstanceMappings()
   {
     if (actorInstanceMappings == null)
@@ -108,7 +107,6 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<LogicalThread> getThreads()
   {
     if (threads == null)
@@ -123,7 +121,6 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Port> getRelayPorts()
   {
     if (relayPorts == null)

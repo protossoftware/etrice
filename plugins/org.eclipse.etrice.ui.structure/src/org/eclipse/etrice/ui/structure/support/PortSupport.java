@@ -126,7 +126,7 @@ public class PortSupport extends InterfaceItemSupport {
 		        }
 		        
 		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-		        IScope scope = scopeProvider.getScope(port, RoomPackage.eINSTANCE.getPort_Protocol());
+		        IScope scope = scopeProvider.getScope(port, RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, true, false, internal);
 				if (dlg.open()==Window.OK) {
@@ -197,7 +197,7 @@ public class PortSupport extends InterfaceItemSupport {
 					boolean refport = isRefItem(context.getPictogramElements()[0]);
 					
 			        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-			        IScope scope = scopeProvider.getScope(port.eContainer().eContainer(), RoomPackage.eINSTANCE.getPort_Protocol());
+			        IScope scope = scopeProvider.getScope(port.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
 			        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, false, refport, internal);
 					if (dlg.open()==Window.OK){

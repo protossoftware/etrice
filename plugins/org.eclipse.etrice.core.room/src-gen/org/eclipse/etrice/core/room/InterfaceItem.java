@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.room.InterfaceItem#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.InterfaceItem#getDocu <em>Docu</em>}</li>
  * </ul>
  *
@@ -41,6 +42,32 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
  */
 public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
 {
+  /**
+   * Returns the value of the '<em><b>Protocol</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the SAP's protocol class.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Protocol</em>' reference.
+   * @see #setProtocol(ProtocolClass)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getInterfaceItem_Protocol()
+   * @model
+   * @generated
+   */
+  ProtocolClass getProtocol();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.InterfaceItem#getProtocol <em>Protocol</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Protocol</em>' reference.
+   * @see #getProtocol()
+   * @generated
+   */
+  void setProtocol(ProtocolClass value);
+
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
@@ -71,14 +98,7 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   * @generated
-   */
-  GeneralProtocolClass getGeneralProtocol();
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getProtocol().getSemantics();\r\n'"
    * @generated
    */
   ProtocolSemantics getSemantics();
@@ -87,6 +107,7 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new &lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;EObject&gt;(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%&gt;().getMessageListDeep(this, false));\r\n'"
    * @generated
    */
   EList<EObject> getAllIncomingAbstractMessages();
@@ -95,6 +116,7 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new &lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;EObject&gt;(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%&gt;().getMessageListDeep(this, true));\r\n'"
    * @generated
    */
   EList<EObject> getAllOutgoingAbstractMessages();
@@ -103,6 +125,7 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getProtocol().getCommType() == &lt;%org.eclipse.etrice.core.room.CommunicationType%&gt;.EVENT_DRIVEN;\r\n'"
    * @generated
    */
   boolean isEventDriven();

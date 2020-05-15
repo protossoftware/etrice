@@ -38,7 +38,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoomClass" eSuperTypes="#//RoomElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>This class is the super class of all classes&#xD;&#xA;of the ROOM class model:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link DataType}&lt;/li>&#xD;&#xA;  &lt;li>{@link GeneralProtocolClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link StructureClass}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>This class is the super class of all classes&#xD;&#xA;of the ROOM class model:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link DataType}&lt;/li>&#xD;&#xA;  &lt;li>{@link ProtocolClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link StructureClass}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -385,19 +385,7 @@
     <eLiterals name="DATA_DRIVEN" value="1" literal="datadriven"/>
     <eLiterals name="SYNCHRONOUS" value="2" literal="sync"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GeneralProtocolClass" eSuperTypes="#//RoomClass">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link ProtocolClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link CompoundProtocolClass}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Annotation"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of protocol class annotations.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//GeneralProtocolClass">
+  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//RoomClass">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>Together with {@link ActorClass} and {@link DataClass} one of&#xD;&#xA;the main class types of the ROOM language.&#xD;&#xA;&lt;p>&#xD;&#xA;A protocol class specifies a directed {@link Port} interface&#xD;&#xA;by two sets of {@link Message}s: incoming and outgoing.&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;A protocol class can derive from a base class (single inheritance).&#xD;&#xA;In this case it must only extend &lt;em>one&lt;/em> of the message sets:&#xD;&#xA;incoming &lt;em>or&lt;/em> outgoing.&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;Optionally {@link PortClass}es may be defined for regular and&#xD;&#xA;conjugate {@link Port}s. These classes can be used to add specific&#xD;&#xA;behavior e.g. by adding message handlers. This kind of felxibility&#xD;&#xA;can be used in particular for the efficient implementation of&#xD;&#xA;services (SAPs and SPPs).&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;Last not least a so called 'legal execution tree' can be specified&#xD;&#xA;using {@link ProtocolSemantics}.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
@@ -411,6 +399,9 @@
         <details key="documentation" value="&lt;br>The base class from which all messages are inherited.&#xD;&#xA;The port classes and the semantics are not inherited.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Annotation"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -457,32 +448,6 @@
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the optional semantics specification for this protocol.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompoundProtocolClass" eSuperTypes="#//GeneralProtocolClass">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>This special protocol class is used to bundle several protocols&#xD;&#xA;in relay ports. This can be useful to avoid parallel chains&#xD;&#xA;of {@link Binding}s traversing the structural hierarchy.&#xD;&#xA;&lt;p>&#xD;&#xA;The compound protocol class consists of several {@link SubProtocol}s.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subProtocols" upperBound="-1"
-        eType="#//SubProtocol" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of sub protocols.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SubProtocol" eSuperTypes="#//RoomElement">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The sub protocol is part of the {@link CompoundProtocolClass} and defines&#xD;&#xA;kind of a named channel for messages. The sub protocols are used to associate an&#xD;&#xA;end port with a particular channel.&#xD;&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>By this name the sub protocols or channels are distinguished.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//GeneralProtocolClass">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the protocol of this channel.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -600,12 +565,12 @@
         <details key="body" value="return getName();&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem">
+    <eOperations name="getAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//AbstractInterfaceItem">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;AbstractInterfaceItem>(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%>().getInterfaceItems(this));&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getAllAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem">
+    <eOperations name="getAllAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//AbstractInterfaceItem">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;AbstractInterfaceItem>(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%>().getAllInterfaceItems(this));&#xD;&#xA;"/>
       </eAnnotations>
@@ -678,14 +643,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This is a concrete sub class of an {@link AbstractInterfaceItem}.&#xD;&#xA;&#xD;&#xA;It is the super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link Port}&lt;/li>&#xD;&#xA;  &lt;li>{@link SAP}&lt;/li>&#xD;&#xA;  &lt;li>{@link SPP}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
     </eAnnotations>
-    <eOperations name="getGeneralProtocol" eType="#//GeneralProtocolClass">
+    <eOperations name="getSemantics" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//ProtocolSemantics">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof &lt;%org.eclipse.etrice.core.room.Port%>)&#xD;&#xA;&#x9;return ((Port) this).getProtocol();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.SAP%>)&#xD;&#xA;&#x9;return ((SAP) this).getProtocol();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.SPP%>)&#xD;&#xA;&#x9;return ((SPP) this).getProtocol();&#xD;&#xA;return null;&#xD;&#xA;"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="getSemantics" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//ProtocolSemantics">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (getGeneralProtocol() instanceof &lt;%org.eclipse.etrice.core.room.ProtocolClass%>)&#xD;&#xA;&#x9;return ((ProtocolClass)getGeneralProtocol()).getSemantics();&#xD;&#xA;else&#xD;&#xA;&#x9;return null;&#xD;&#xA;"/>
+        <details key="body" value="return getProtocol().getSemantics();&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllIncomingAbstractMessages" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
@@ -700,9 +660,14 @@
     </eOperations>
     <eOperations name="isEventDriven" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (getGeneralProtocol() instanceof ProtocolClass)&#xD;&#xA;    return ((ProtocolClass) getGeneralProtocol()).getCommType() == &lt;%org.eclipse.etrice.core.room.CommunicationType%>.EVENT_DRIVEN;&#xD;&#xA;else&#xD;&#xA;    return false;&#xD;&#xA;"/>
+        <details key="body" value="return getProtocol().getCommType() == &lt;%org.eclipse.etrice.core.room.CommunicationType%>.EVENT_DRIVEN;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the SAP's protocol class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -730,11 +695,6 @@
         <details key="documentation" value="&lt;br>Ports with multiplicity >1 are called replicated ports. A multiplicity of {@code -1} means replicated&#xD;&#xA;port with arbitrary multiplicity.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//GeneralProtocolClass">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the port's protocol class.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Annotation"
         containment="true"/>
@@ -753,21 +713,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A service access point is similar to a {@link Port} but is not explicitly bound to a peer.&#xD;&#xA;Rather, it is bound to a {@link ServiceImplementation} which is connected to one of the&#xD;&#xA;containing actors.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;An SAP is associated with a {@link ProtocolClass} and is conjugate to this protocol.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the SAP's protocol class.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SPP" eSuperTypes="#//InterfaceItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A service provision point is used to connect an actor class with a {@link ServiceImplementation}.&#xD;&#xA;It can (similar to relay ports) delegate to another actor class (using a {@link LayerConnection})&#xD;&#xA;or connect to a {@link ServiceImplementation} of its actor class.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;An SPP is associated with a {@link ProtocolClass} and is regular to this protocol.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the SAP's protocol class.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ServiceImplementation" eSuperTypes="#//RoomElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -942,11 +892,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="#//Port">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the bound port.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sub" eType="#//SubProtocol">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the bound sub protocol or {@code null} if not applicable.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

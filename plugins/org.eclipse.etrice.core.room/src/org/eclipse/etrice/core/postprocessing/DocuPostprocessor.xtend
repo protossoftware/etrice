@@ -74,7 +74,7 @@ class DocuPostprocessor {
 			of the ROOM class model:
 			<ul>
 			  <li>{@link DataType}</li>
-			  <li>{@link GeneralProtocolClass}</li>
+			  <li>{@link ProtocolClass}</li>
 			  <li>{@link StructureClass}</li>
 			</ul>
 		''')
@@ -444,21 +444,6 @@ class DocuPostprocessor {
 		''')
 		
 		//------------------------------------------------------------------
-		cls = pckg.getClass("GeneralProtocolClass")
-		cls.setDocumentation('''
-			The super class of
-			<ul>
-			  <li>{@link ProtocolClass}</li>
-			  <li>{@link CompoundProtocolClass}</li>
-			</ul>
-		''')
-		
-		cls.getReference("annotations").setDocumentation(
-			'''
-				This is a list of protocol class annotations.
-			''')
-		
-		//------------------------------------------------------------------
 		cls = pckg.getClass("ProtocolClass")
 		cls.setDocumentation('''
 			Together with {@link ActorClass} and {@link DataClass} one of
@@ -541,39 +526,6 @@ class DocuPostprocessor {
 				This is the optional semantics specification for this protocol.
 			''')
 		
-		//------------------------------------------------------------------
-		cls = pckg.getClass("CompoundProtocolClass")
-		cls.setDocumentation('''
-			This special protocol class is used to bundle several protocols
-			in relay ports. This can be useful to avoid parallel chains
-			of {@link Binding}s traversing the structural hierarchy.
-			<p>
-			The compound protocol class consists of several {@link SubProtocol}s.
-			</p>
-		''')
-		
-		cls.getReference("subProtocols").setDocumentation(
-			'''
-				This is a list of sub protocols.
-			''')
-		
-		//------------------------------------------------------------------
-		cls = pckg.getClass("SubProtocol")
-		cls.setDocumentation('''
-			The sub protocol is part of the {@link CompoundProtocolClass} and defines
-			kind of a named channel for messages. The sub protocols are used to associate an
-			end port with a particular channel.
-		''')
-		
-		cls.getAttribute("name").setDocumentation(
-			'''
-				By this name the sub protocols or channels are distinguished.
-			''')
-		
-		cls.getReference("protocol").setDocumentation(
-			'''
-				This is the protocol of this channel.
-			''')
 		
 		//------------------------------------------------------------------
 		cls = pckg.getClass("Message")
@@ -1107,11 +1059,6 @@ class DocuPostprocessor {
 		cls.getReference("port").setDocumentation(
 			'''
 				This is the bound port.
-			''')
-		
-		cls.getReference("sub").setDocumentation(
-			'''
-				This is the bound sub protocol or {@code null} if not applicable.
 			''')
 		
 		//------------------------------------------------------------------

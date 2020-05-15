@@ -102,21 +102,21 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Room.RoomClass");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDataTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cGeneralProtocolClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cProtocolClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cStructureClassParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//RoomClass:
-		//	DataType | GeneralProtocolClass | StructureClass;
+		//	DataType | ProtocolClass | StructureClass;
 		@Override public ParserRule getRule() { return rule; }
 
-		//DataType | GeneralProtocolClass | StructureClass
+		//DataType | ProtocolClass | StructureClass
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//DataType
 		public RuleCall getDataTypeParserRuleCall_0() { return cDataTypeParserRuleCall_0; }
 
-		//GeneralProtocolClass
-		public RuleCall getGeneralProtocolClassParserRuleCall_1() { return cGeneralProtocolClassParserRuleCall_1; }
+		//ProtocolClass
+		public RuleCall getProtocolClassParserRuleCall_1() { return cProtocolClassParserRuleCall_1; }
 
 		//StructureClass
 		public RuleCall getStructureClassParserRuleCall_2() { return cStructureClassParserRuleCall_2; }
@@ -930,7 +930,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_6_0() { return cColonKeyword_6_0; }
 
-		//('void' | returnType=RefableType)
+		//'void' | returnType=RefableType
 		public Alternatives getAlternatives_6_1() { return cAlternatives_6_1; }
 
 		//'void'
@@ -1043,7 +1043,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_5_0_0() { return cColonKeyword_5_0_0; }
 
-		//('void' | returnType=RefableType)
+		//'void' | returnType=RefableType
 		public Alternatives getAlternatives_5_0_1() { return cAlternatives_5_0_1; }
 
 		//'void'
@@ -1117,26 +1117,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//DetailCode
 		public RuleCall getDetailCodeDetailCodeParserRuleCall_1_0() { return cDetailCodeDetailCodeParserRuleCall_1_0; }
-	}
-
-	public class GeneralProtocolClassElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Room.GeneralProtocolClass");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cProtocolClassParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cCompoundProtocolClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//GeneralProtocolClass:
-		//	ProtocolClass | CompoundProtocolClass;
-		@Override public ParserRule getRule() { return rule; }
-
-		//ProtocolClass | CompoundProtocolClass
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//ProtocolClass
-		public RuleCall getProtocolClassParserRuleCall_0() { return cProtocolClassParserRuleCall_0; }
-
-		//CompoundProtocolClass
-		public RuleCall getCompoundProtocolClassParserRuleCall_1() { return cCompoundProtocolClassParserRuleCall_1; }
 	}
 
 	public class ProtocolClassElements extends AbstractParserRuleElementFinder {
@@ -1367,105 +1347,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_15() { return cRightCurlyBracketKeyword_15; }
-	}
-
-	public class CompoundProtocolClassElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Room.CompoundProtocolClass");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCompoundProtocolClassKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Assignment cDocuAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cDocuDocumentationParserRuleCall_2_0 = (RuleCall)cDocuAssignment_2.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cAnnotationsAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cAnnotationsAnnotationParserRuleCall_4_0 = (RuleCall)cAnnotationsAssignment_4.eContents().get(0);
-		private final Assignment cSubProtocolsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cSubProtocolsSubProtocolParserRuleCall_5_0 = (RuleCall)cSubProtocolsAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		
-		//CompoundProtocolClass:
-		//	'CompoundProtocolClass' name=ID docu=Documentation? '{'
-		//	annotations+=Annotation*
-		//	subProtocols+=SubProtocol*
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-
-		//'CompoundProtocolClass' name=ID docu=Documentation? '{' annotations+=Annotation* subProtocols+=SubProtocol* '}'
-		public Group getGroup() { return cGroup; }
-
-		//'CompoundProtocolClass'
-		public Keyword getCompoundProtocolClassKeyword_0() { return cCompoundProtocolClassKeyword_0; }
-
-		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
-		//docu=Documentation?
-		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
-
-		//Documentation
-		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
-
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
-		//annotations+=Annotation*
-		public Assignment getAnnotationsAssignment_4() { return cAnnotationsAssignment_4; }
-
-		//Annotation
-		public RuleCall getAnnotationsAnnotationParserRuleCall_4_0() { return cAnnotationsAnnotationParserRuleCall_4_0; }
-
-		//subProtocols+=SubProtocol*
-		public Assignment getSubProtocolsAssignment_5() { return cSubProtocolsAssignment_5; }
-
-		//SubProtocol
-		public RuleCall getSubProtocolsSubProtocolParserRuleCall_5_0() { return cSubProtocolsSubProtocolParserRuleCall_5_0; }
-
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
-	}
-
-	public class SubProtocolElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Room.SubProtocol");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cSubProtocolKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cProtocolAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cProtocolGeneralProtocolClassCrossReference_3_0 = (CrossReference)cProtocolAssignment_3.eContents().get(0);
-		private final RuleCall cProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolGeneralProtocolClassCrossReference_3_0.eContents().get(1);
-		
-		//SubProtocol:
-		//	'SubProtocol' name=ID ':' protocol=[GeneralProtocolClass|FQN];
-		@Override public ParserRule getRule() { return rule; }
-
-		//'SubProtocol' name=ID ':' protocol=[GeneralProtocolClass|FQN]
-		public Group getGroup() { return cGroup; }
-
-		//'SubProtocol'
-		public Keyword getSubProtocolKeyword_0() { return cSubProtocolKeyword_0; }
-
-		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
-		//':'
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
-
-		//protocol=[GeneralProtocolClass|FQN]
-		public Assignment getProtocolAssignment_3() { return cProtocolAssignment_3; }
-
-		//[GeneralProtocolClass|FQN]
-		public CrossReference getProtocolGeneralProtocolClassCrossReference_3_0() { return cProtocolGeneralProtocolClassCrossReference_3_0; }
-
-		//FQN
-		public RuleCall getProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1() { return cProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1; }
 	}
 
 	public class MessageElements extends AbstractParserRuleElementFinder {
@@ -1836,7 +1717,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//structors+=ClassStructor)* stateMachine=StateMachine? '}')? '}'
 		public Group getGroup() { return cGroup; }
 
-		//(abstract?='abstract'? & commType=ComponentCommunicationType?)
+		//abstract?='abstract'? & commType=ComponentCommunicationType?
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
 		//abstract?='abstract'?
@@ -2114,19 +1995,19 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMultiplicityMULTIPLICITYParserRuleCall_3_0 = (RuleCall)cMultiplicityAssignment_3.eContents().get(0);
 		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cProtocolAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cProtocolGeneralProtocolClassCrossReference_5_0 = (CrossReference)cProtocolAssignment_5.eContents().get(0);
-		private final RuleCall cProtocolGeneralProtocolClassFQNParserRuleCall_5_0_1 = (RuleCall)cProtocolGeneralProtocolClassCrossReference_5_0.eContents().get(1);
+		private final CrossReference cProtocolProtocolClassCrossReference_5_0 = (CrossReference)cProtocolAssignment_5.eContents().get(0);
+		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_5_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_5_0.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_6_0 = (RuleCall)cAnnotationsAssignment_6.eContents().get(0);
 		private final Assignment cDocuAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cDocuDocumentationParserRuleCall_7_0 = (RuleCall)cDocuAssignment_7.eContents().get(0);
 		
 		//Port:
-		//	conjugated?='conjugated'? 'Port' name=ID multiplicity=MULTIPLICITY? ':' protocol=[GeneralProtocolClass|FQN]
+		//	conjugated?='conjugated'? 'Port' name=ID multiplicity=MULTIPLICITY? ':' protocol=[ProtocolClass|FQN]
 		//	annotations+=Annotation* docu=Documentation?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//conjugated?='conjugated'? 'Port' name=ID multiplicity=MULTIPLICITY? ':' protocol=[GeneralProtocolClass|FQN]
+		//conjugated?='conjugated'? 'Port' name=ID multiplicity=MULTIPLICITY? ':' protocol=[ProtocolClass|FQN]
 		//annotations+=Annotation* docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
@@ -2154,14 +2035,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
 
-		//protocol=[GeneralProtocolClass|FQN]
+		//protocol=[ProtocolClass|FQN]
 		public Assignment getProtocolAssignment_5() { return cProtocolAssignment_5; }
 
-		//[GeneralProtocolClass|FQN]
-		public CrossReference getProtocolGeneralProtocolClassCrossReference_5_0() { return cProtocolGeneralProtocolClassCrossReference_5_0; }
+		//[ProtocolClass|FQN]
+		public CrossReference getProtocolProtocolClassCrossReference_5_0() { return cProtocolProtocolClassCrossReference_5_0; }
 
 		//FQN
-		public RuleCall getProtocolGeneralProtocolClassFQNParserRuleCall_5_0_1() { return cProtocolGeneralProtocolClassFQNParserRuleCall_5_0_1; }
+		public RuleCall getProtocolProtocolClassFQNParserRuleCall_5_0_1() { return cProtocolProtocolClassFQNParserRuleCall_5_0_1; }
 
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_6() { return cAnnotationsAssignment_6; }
@@ -2854,17 +2735,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cPortAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cPortPortCrossReference_1_0 = (CrossReference)cPortAssignment_1.eContents().get(0);
 		private final RuleCall cPortPortIDTerminalRuleCall_1_0_1 = (RuleCall)cPortPortCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cSubKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cSubAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cSubSubProtocolCrossReference_2_1_0 = (CrossReference)cSubAssignment_2_1.eContents().get(0);
-		private final RuleCall cSubSubProtocolIDTerminalRuleCall_2_1_0_1 = (RuleCall)cSubSubProtocolCrossReference_2_1_0.eContents().get(1);
 		
 		//BindingEndPoint:
-		//	(actorRef=[ActorContainerRef] '.')? port=[Port] ('sub' sub=[SubProtocol])?;
+		//	(actorRef=[ActorContainerRef] '.')? port=[Port];
 		@Override public ParserRule getRule() { return rule; }
 
-		//(actorRef=[ActorContainerRef] '.')? port=[Port] ('sub' sub=[SubProtocol])?
+		//(actorRef=[ActorContainerRef] '.')? port=[Port]
 		public Group getGroup() { return cGroup; }
 
 		//(actorRef=[ActorContainerRef] '.')?
@@ -2890,21 +2766,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ID
 		public RuleCall getPortPortIDTerminalRuleCall_1_0_1() { return cPortPortIDTerminalRuleCall_1_0_1; }
-
-		//('sub' sub=[SubProtocol])?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//'sub'
-		public Keyword getSubKeyword_2_0() { return cSubKeyword_2_0; }
-
-		//sub=[SubProtocol]
-		public Assignment getSubAssignment_2_1() { return cSubAssignment_2_1; }
-
-		//[SubProtocol]
-		public CrossReference getSubSubProtocolCrossReference_2_1_0() { return cSubSubProtocolCrossReference_2_1_0; }
-
-		//ID
-		public RuleCall getSubSubProtocolIDTerminalRuleCall_2_1_0_1() { return cSubSubProtocolIDTerminalRuleCall_2_1_0_1; }
 	}
 
 	public class LayerConnectionElements extends AbstractParserRuleElementFinder {
@@ -3163,7 +3024,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 
-		//('*' | INT)
+		//'*' | INT
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'*'
@@ -3461,10 +3322,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private final PortOperationElements pPortOperation;
 	private final ClassStructorElements pClassStructor;
 	private final CommunicationTypeElements eCommunicationType;
-	private final GeneralProtocolClassElements pGeneralProtocolClass;
 	private final ProtocolClassElements pProtocolClass;
-	private final CompoundProtocolClassElements pCompoundProtocolClass;
-	private final SubProtocolElements pSubProtocol;
 	private final MessageElements pMessage;
 	private final PortClassElements pPortClass;
 	private final MessageHandlerElements pMessageHandler;
@@ -3537,10 +3395,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		this.pPortOperation = new PortOperationElements();
 		this.pClassStructor = new ClassStructorElements();
 		this.eCommunicationType = new CommunicationTypeElements();
-		this.pGeneralProtocolClass = new GeneralProtocolClassElements();
 		this.pProtocolClass = new ProtocolClassElements();
-		this.pCompoundProtocolClass = new CompoundProtocolClassElements();
-		this.pSubProtocol = new SubProtocolElements();
 		this.pMessage = new MessageElements();
 		this.pPortClass = new PortClassElements();
 		this.pMessageHandler = new MessageHandlerElements();
@@ -3628,7 +3483,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RoomClass:
-	//	DataType | GeneralProtocolClass | StructureClass;
+	//	DataType | ProtocolClass | StructureClass;
 	public RoomClassElements getRoomClassAccess() {
 		return pRoomClass;
 	}
@@ -3834,16 +3689,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getCommunicationTypeAccess().getRule();
 	}
 
-	//GeneralProtocolClass:
-	//	ProtocolClass | CompoundProtocolClass;
-	public GeneralProtocolClassElements getGeneralProtocolClassAccess() {
-		return pGeneralProtocolClass;
-	}
-	
-	public ParserRule getGeneralProtocolClassRule() {
-		return getGeneralProtocolClassAccess().getRule();
-	}
-
 	//ProtocolClass:
 	//	commType=CommunicationType?
 	//	'ProtocolClass' name=ID docu=Documentation? ('extends' base=[ProtocolClass|FQN])? '{'
@@ -3858,29 +3703,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getProtocolClassRule() {
 		return getProtocolClassAccess().getRule();
-	}
-
-	//CompoundProtocolClass:
-	//	'CompoundProtocolClass' name=ID docu=Documentation? '{'
-	//	annotations+=Annotation*
-	//	subProtocols+=SubProtocol*
-	//	'}';
-	public CompoundProtocolClassElements getCompoundProtocolClassAccess() {
-		return pCompoundProtocolClass;
-	}
-	
-	public ParserRule getCompoundProtocolClassRule() {
-		return getCompoundProtocolClassAccess().getRule();
-	}
-
-	//SubProtocol:
-	//	'SubProtocol' name=ID ':' protocol=[GeneralProtocolClass|FQN];
-	public SubProtocolElements getSubProtocolAccess() {
-		return pSubProtocol;
-	}
-	
-	public ParserRule getSubProtocolRule() {
-		return getSubProtocolAccess().getRule();
 	}
 
 	//Message:
@@ -3987,7 +3809,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Port:
-	//	conjugated?='conjugated'? 'Port' name=ID multiplicity=MULTIPLICITY? ':' protocol=[GeneralProtocolClass|FQN]
+	//	conjugated?='conjugated'? 'Port' name=ID multiplicity=MULTIPLICITY? ':' protocol=[ProtocolClass|FQN]
 	//	annotations+=Annotation* docu=Documentation?;
 	public PortElements getPortAccess() {
 		return pPort;
@@ -4137,7 +3959,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BindingEndPoint:
-	//	(actorRef=[ActorContainerRef] '.')? port=[Port] ('sub' sub=[SubProtocol])?;
+	//	(actorRef=[ActorContainerRef] '.')? port=[Port];
 	public BindingEndPointElements getBindingEndPointAccess() {
 		return pBindingEndPoint;
 	}

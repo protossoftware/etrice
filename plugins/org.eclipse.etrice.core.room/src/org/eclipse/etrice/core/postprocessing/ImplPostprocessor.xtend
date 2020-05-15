@@ -47,22 +47,9 @@ class ImplPostprocessor {
 		actorRef.getAttribute("multiplicity").setDefaultValueLiteral("1")
 			
 		val interfaceItem = roomPackage.getClass("InterfaceItem")
-		interfaceItem.addOperation("getGeneralProtocol", roomPackage.getEClassifier("GeneralProtocolClass"), 1, 
-			'''
-			if (this instanceof <%org.eclipse.etrice.core.room.Port%>)
-				return ((Port) this).getProtocol();
-			else if (this instanceof <%org.eclipse.etrice.core.room.SAP%>)
-				return ((SAP) this).getProtocol();
-			else if (this instanceof <%org.eclipse.etrice.core.room.SPP%>)
-				return ((SPP) this).getProtocol();
-			return null;
-			''')
 		interfaceItem.addOperation("getSemantics", FSMPackage.Literals.PROTOCOL_SEMANTICS, 1, 
 			'''
-			if (getGeneralProtocol() instanceof <%org.eclipse.etrice.core.room.ProtocolClass%>)
-				return ((ProtocolClass)getGeneralProtocol()).getSemantics();
-			else
-				return null;
+				return getProtocol().getSemantics();
 			''')
 		interfaceItem.addOperation("getAllIncomingAbstractMessages", EcorePackage.Literals.EOBJECT, -1,
 			'''
@@ -75,10 +62,7 @@ class ImplPostprocessor {
 		)
         interfaceItem.addOperation("isEventDriven", EcorePackage.Literals.EBOOLEAN, 1, 
             '''
-            if (getGeneralProtocol() instanceof ProtocolClass)
-                return ((ProtocolClass) getGeneralProtocol()).getCommType() == <%org.eclipse.etrice.core.room.CommunicationType%>.EVENT_DRIVEN;
-            else
-                return false;
+                return getProtocol().getCommType() == <%org.eclipse.etrice.core.room.CommunicationType%>.EVENT_DRIVEN;
             '''
         )
 		

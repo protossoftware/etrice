@@ -259,6 +259,10 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * Returns the value of the '<em><b>Structors</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ClassStructor}.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Structors</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Structors</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Structors()
@@ -271,6 +275,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList&lt;Port&gt; ports = new BasicEList&lt;Port&gt;();\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tif(ep.getInterfacePort() != null)\r\n\t\tports.add(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
    * @generated
    */
   EList<Port> getExternalEndPorts();
@@ -279,6 +284,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList&lt;Port&gt; ports = new BasicEList&lt;Port&gt;(getInterfacePorts());\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tif(ep.getInterfacePort() != null)\r\n\t\tports.remove(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
    * @generated
    */
   EList<Port> getRelayPorts();
@@ -287,6 +293,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList&lt;SPP&gt; spps = new BasicEList&lt;SPP&gt;();\r\nfor (ServiceImplementation spp : getServiceImplementations()) {\r\n\tif(spp.getSpp() != null)\r\n\t\tspps.add(spp.getSpp());\r\n}\r\nreturn spps;\r\n'"
    * @generated
    */
   EList<SPP> getImplementedSPPs();
@@ -295,6 +302,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return (ActorClass)getBase();\r\n'"
    * @generated
    */
   ActorClass getActorBase();
@@ -303,6 +311,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getName();\r\n'"
    * @generated
    */
   String getComponentName();
@@ -311,6 +320,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new &lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;AbstractInterfaceItem&gt;(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%&gt;().getInterfaceItems(this));\r\n'"
    * @generated
    */
   EList<AbstractInterfaceItem> getAbstractInterfaceItems();
@@ -319,6 +329,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new &lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;AbstractInterfaceItem&gt;(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%&gt;().getAllInterfaceItems(this));\r\n'"
    * @generated
    */
   EList<AbstractInterfaceItem> getAllAbstractInterfaceItems();

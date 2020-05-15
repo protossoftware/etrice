@@ -51,7 +51,6 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.CommunicationType;
-import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
@@ -417,20 +416,19 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		//boolean synchronous = ac.getCommType() == ComponentCommunicationType.SYNCHRONOUS;
 
 		for(InterfaceItem item : items){
-			ProtocolClass pc = roomHelpers.getRoomProtocol(item);
-			if (pc!=null)
-				switch(pc.getCommType()){
-					case DATA_DRIVEN:
-						if(!datadriven && !async)
-							error("ports with datadriven protocols not allowed", ref, items.indexOf(item));
-						break;
-					case EVENT_DRIVEN:
-						if(!eventdriven && !async)
-							error("ports with eventdriven protocols not allowed", ref, items.indexOf(item));
-						break;
-					case SYNCHRONOUS:
-						// not supported yet
-				}
+			ProtocolClass pc = item.getProtocol();
+			switch(pc.getCommType()){
+				case DATA_DRIVEN:
+					if(!datadriven && !async)
+						error("ports with datadriven protocols not allowed", ref, items.indexOf(item));
+					break;
+				case EVENT_DRIVEN:
+					if(!eventdriven && !async)
+						error("ports with eventdriven protocols not allowed", ref, items.indexOf(item));
+					break;
+				case SYNCHRONOUS:
+					// not supported yet
+			}
 		}
 	}
 	
@@ -626,7 +624,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkMessageFromIf(MessageFromIf mfi){
 		if (mfi.getFrom() != null){
-			ProtocolClass protocol = roomHelpers.getRoomProtocol((InterfaceItem)mfi.getFrom());
+			ProtocolClass protocol = ((InterfaceItem)mfi.getFrom()).getProtocol();
 			if (protocol!=null && !protocol.eIsProxy()) {
 				if (protocol.getCommType() != CommunicationType.EVENT_DRIVEN)
 					error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());
@@ -654,12 +652,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 
 	@Check
-	public void checkCompoundProtocolClass(CompoundProtocolClass cpc) {
-		if (cpc.getSubProtocols().isEmpty())
-			error("no sub protocols defined", cpc, RoomPackage.Literals.COMPOUND_PROTOCOL_CLASS__SUB_PROTOCOLS);
-	}
-
-	@Check
 	public void checkAnnotationTarget(Annotation a) {
 		if(a.getType() == null || a.getType().eIsProxy())
 			return;
@@ -681,9 +673,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 		else if(parent instanceof ProtocolClass && !targetList.contains(RoomAnnotationTargetEnum.PROTOCOL_CLASS.getLiteral())) {
 			invalidTargetType = RoomAnnotationTargetEnum.PROTOCOL_CLASS;
-		}
-		else if(parent instanceof CompoundProtocolClass && !targetList.contains(RoomAnnotationTargetEnum.COMPOUND_PROTOCOL_CLASS.getLiteral())) {
-			invalidTargetType = RoomAnnotationTargetEnum.COMPOUND_PROTOCOL_CLASS;
 		}
 		else if(parent instanceof LogicalSystem && !targetList.contains(RoomAnnotationTargetEnum.LOGICAL_SYSTEM_CLASS.getLiteral())) {
 			invalidTargetType = RoomAnnotationTargetEnum.LOGICAL_SYSTEM_CLASS;

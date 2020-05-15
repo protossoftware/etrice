@@ -201,8 +201,6 @@ The following parts of the model are changed or added:
 
 -   the default `multiplicity` of the `ActorRef` is set to 1
 
--   an operation `getGeneralProtocol` is added to the `InterfaceItem`
-
 -   an operation `getSemantics` is added to the `InterfaceItem`
 
 -   an operation `getAllIncomingAbstractMessages` is added to the `InterfaceItem`

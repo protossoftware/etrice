@@ -21,13 +21,9 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 import org.eclipse.etrice.core.fsm.fSM.impl.AbstractInterfaceItemImpl;
 
 import org.eclipse.etrice.core.room.CommunicationType;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAP;
-import org.eclipse.etrice.core.room.SPP;
 
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
@@ -39,6 +35,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl#getDocu <em>Docu</em>}</li>
  * </ul>
  *
@@ -46,6 +43,16 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements InterfaceItem
 {
+  /**
+   * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProtocol()
+   * @generated
+   * @ordered
+   */
+  protected ProtocolClass protocol;
+
   /**
    * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -82,7 +89,49 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
+  public ProtocolClass getProtocol()
+  {
+    if (protocol != null && protocol.eIsProxy())
+    {
+      InternalEObject oldProtocol = (InternalEObject)protocol;
+      protocol = (ProtocolClass)eResolveProxy(oldProtocol);
+      if (protocol != oldProtocol)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.INTERFACE_ITEM__PROTOCOL, oldProtocol, protocol));
+      }
+    }
+    return protocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ProtocolClass basicGetProtocol()
+  {
+    return protocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setProtocol(ProtocolClass newProtocol)
+  {
+    ProtocolClass oldProtocol = protocol;
+    protocol = newProtocol;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__PROTOCOL, oldProtocol, protocol));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Documentation getDocu()
   {
     return docu;
@@ -110,7 +159,6 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -132,31 +180,9 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public GeneralProtocolClass getGeneralProtocol()
-  {
-    if (this instanceof Port)
-      return ((Port) this).getProtocol();
-    else if (this instanceof SAP)
-      return ((SAP) this).getProtocol();
-    else if (this instanceof SPP)
-      return ((SPP) this).getProtocol();
-    return null;
-    
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public ProtocolSemantics getSemantics()
   {
-    if (getGeneralProtocol() instanceof ProtocolClass)
-      return ((ProtocolClass)getGeneralProtocol()).getSemantics();
-    else
-      return null;
+    return getProtocol().getSemantics();
     
   }
 
@@ -165,7 +191,6 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EObject> getAllIncomingAbstractMessages()
   {
     return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, false));
@@ -177,7 +202,6 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EObject> getAllOutgoingAbstractMessages()
   {
     return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, true));
@@ -189,13 +213,9 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isEventDriven()
   {
-    if (getGeneralProtocol() instanceof ProtocolClass)
-        return ((ProtocolClass) getGeneralProtocol()).getCommType() == CommunicationType.EVENT_DRIVEN;
-    else
-        return false;
+    return getProtocol().getCommType() == CommunicationType.EVENT_DRIVEN;
     
   }
 
@@ -225,6 +245,9 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
   {
     switch (featureID)
     {
+      case RoomPackage.INTERFACE_ITEM__PROTOCOL:
+        if (resolve) return getProtocol();
+        return basicGetProtocol();
       case RoomPackage.INTERFACE_ITEM__DOCU:
         return getDocu();
     }
@@ -241,6 +264,9 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
   {
     switch (featureID)
     {
+      case RoomPackage.INTERFACE_ITEM__PROTOCOL:
+        setProtocol((ProtocolClass)newValue);
+        return;
       case RoomPackage.INTERFACE_ITEM__DOCU:
         setDocu((Documentation)newValue);
         return;
@@ -258,6 +284,9 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
   {
     switch (featureID)
     {
+      case RoomPackage.INTERFACE_ITEM__PROTOCOL:
+        setProtocol((ProtocolClass)null);
+        return;
       case RoomPackage.INTERFACE_ITEM__DOCU:
         setDocu((Documentation)null);
         return;
@@ -275,6 +304,8 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
   {
     switch (featureID)
     {
+      case RoomPackage.INTERFACE_ITEM__PROTOCOL:
+        return protocol != null;
       case RoomPackage.INTERFACE_ITEM__DOCU:
         return docu != null;
     }

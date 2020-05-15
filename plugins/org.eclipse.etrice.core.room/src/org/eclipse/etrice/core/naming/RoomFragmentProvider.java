@@ -31,7 +31,6 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Port;
@@ -45,7 +44,6 @@ import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
@@ -94,8 +92,6 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 			String loc = ep.getActorRef()==null? LOCAL:ep.getActorRef().getName();
 			if(ep.getPort()==null)
 				return "null" + loc;
-			else if (ep.getSub()!=null)
-				return ep.getPort().getName()+EP_SEP+loc+SUB_SEP+ep.getSub().getName();
 			else
 				return ep.getPort().getName()+EP_SEP+loc;
 		}
@@ -142,7 +138,6 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 	}
 
 	private static final char BIND_SEP = '-';
-	private static final char SUB_SEP = '/';
 	private static final char CONN_SEP = '-';
 	private static final char EP_SEP = '!';
 	private static final String LOCAL = ".";
@@ -272,9 +267,6 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		else if (type.equals(RoomPackage.eINSTANCE.getProtocolClass().getName())) {
 			return rc;
 		}
-		else if (type.equals(RoomPackage.eINSTANCE.getCompoundProtocolClass().getName())) {
-			return rc;
-		}
 		else if (type.equals(RoomPackage.eINSTANCE.getActorClass().getName())) {
 			return rc;
 		}
@@ -366,13 +358,6 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 
 	private boolean isEP(BindingEndPoint a, BindingEndPoint b) {
 		if (a.getPort().getName().equals(b.getPort().getName())) {
-			if (a.getSub()==null && b.getSub()!=null)
-				return false;
-			if (a.getSub()!=null && b.getSub()==null)
-				return false;
-			if (a.getSub()!=null && b.getSub()!=null)
-				if (!a.getSub().getName().equals(b.getSub().getName()))
-					return false;
 			if (a.getActorRef()==null && b.getActorRef()==null)
 				return true;
 			if (a.getActorRef()!=null && b.getActorRef()!=null)
@@ -389,12 +374,6 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 
 		String portName = name.substring(0, pos);
 		String refName = name.substring(pos+1);
-		String sub = null;
-		int subIdx = refName.indexOf(SUB_SEP);
-		if (subIdx>=0) {
-			sub = refName.substring(subIdx+1);
-			refName = refName.substring(0, subIdx);
-		}
 		ActorContainerRef ar = null;
 		if (!refName.equals(LOCAL))
 			ar = getActorContainerRef(sc, refName);
@@ -408,24 +387,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		BindingEndPoint ep = RoomFactory.eINSTANCE.createBindingEndPoint();
 		ep.setPort(port);
 		ep.setActorRef(ar);
-		if (subIdx>=0)
-			ep.setSub(getSubProtocol(sub, port));
 		return ep;
-	}
-
-	private SubProtocol getSubProtocol(String sub, Port port) {
-		if (port==null)
-			return null;
-
-		if (port.getProtocol() instanceof CompoundProtocolClass) {
-			CompoundProtocolClass cpc = (CompoundProtocolClass) port.getProtocol();
-			for (SubProtocol sp : cpc.getSubProtocols()) {
-				if (sp.getName().equals(sub))
-					return sp;
-			}
-		}
-
-		return null;
 	}
 
 	private EObject getLayerConnection(RoomClass rc, String name) {

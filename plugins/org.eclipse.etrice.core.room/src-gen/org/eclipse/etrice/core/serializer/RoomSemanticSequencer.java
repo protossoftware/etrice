@@ -54,7 +54,6 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ClassStructor;
-import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -84,7 +83,6 @@ import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -255,9 +253,6 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 			case RoomPackage.CLASS_STRUCTOR:
 				sequence_ClassStructor(context, (ClassStructor) semanticObject); 
 				return; 
-			case RoomPackage.COMPOUND_PROTOCOL_CLASS:
-				sequence_CompoundProtocolClass(context, (CompoundProtocolClass) semanticObject); 
-				return; 
 			case RoomPackage.DATA_CLASS:
 				sequence_DataClass(context, (DataClass) semanticObject); 
 				return; 
@@ -342,9 +337,6 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 			case RoomPackage.STANDARD_OPERATION:
 				sequence_StandardOperation(context, (StandardOperation) semanticObject); 
 				return; 
-			case RoomPackage.SUB_PROTOCOL:
-				sequence_SubProtocol(context, (SubProtocol) semanticObject); 
-				return; 
 			case RoomPackage.SUB_SYSTEM_CLASS:
 				sequence_SubSystemClass(context, (SubSystemClass) semanticObject); 
 				return; 
@@ -380,18 +372,18 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *         userCode1=DetailCode? 
 	 *         userCode2=DetailCode? 
 	 *         userCode3=DetailCode? 
-	 *         connections+=LayerConnection? 
+	 *         attributes+=Attribute? 
 	 *         (
 	 *             (
+	 *                 connections+=LayerConnection | 
 	 *                 bindings+=Binding | 
 	 *                 serviceImplementations+=ServiceImplementation | 
-	 *                 attributes+=Attribute | 
 	 *                 actorRefs+=ActorRef | 
 	 *                 serviceAccessPoints+=SAP | 
 	 *                 internalPorts+=Port | 
 	 *                 externalPorts+=ExternalPort
 	 *             )? 
-	 *             connections+=LayerConnection?
+	 *             attributes+=Attribute?
 	 *         )* 
 	 *         behaviorDocu=Documentation? 
 	 *         behaviorAnnotations+=Annotation* 
@@ -446,7 +438,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *     BindingEndPoint returns BindingEndPoint
 	 *
 	 * Constraint:
-	 *     (actorRef=[ActorContainerRef|ID]? port=[Port|ID] sub=[SubProtocol|ID]?)
+	 *     (actorRef=[ActorContainerRef|ID]? port=[Port|ID])
 	 */
 	protected void sequence_BindingEndPoint(ISerializationContext context, BindingEndPoint semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -482,20 +474,6 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *     ((name='ctor' | name='dtor') detailCode=DetailCode)
 	 */
 	protected void sequence_ClassStructor(ISerializationContext context, ClassStructor semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     RoomClass returns CompoundProtocolClass
-	 *     GeneralProtocolClass returns CompoundProtocolClass
-	 *     CompoundProtocolClass returns CompoundProtocolClass
-	 *
-	 * Constraint:
-	 *     (name=ID docu=Documentation? annotations+=Annotation* subProtocols+=SubProtocol*)
-	 */
-	protected void sequence_CompoundProtocolClass(ISerializationContext context, CompoundProtocolClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -740,7 +718,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *         conjugated?='conjugated'? 
 	 *         name=ID 
 	 *         multiplicity=MULTIPLICITY? 
-	 *         protocol=[GeneralProtocolClass|FQN] 
+	 *         protocol=[ProtocolClass|FQN] 
 	 *         annotations+=Annotation* 
 	 *         docu=Documentation?
 	 *     )
@@ -774,7 +752,6 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	/**
 	 * Contexts:
 	 *     RoomClass returns ProtocolClass
-	 *     GeneralProtocolClass returns ProtocolClass
 	 *     ProtocolClass returns ProtocolClass
 	 *
 	 * Constraint:
@@ -976,27 +953,6 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 */
 	protected void sequence_StandardOperation(ISerializationContext context, StandardOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     SubProtocol returns SubProtocol
-	 *
-	 * Constraint:
-	 *     (name=ID protocol=[GeneralProtocolClass|FQN])
-	 */
-	protected void sequence_SubProtocol(ISerializationContext context, SubProtocol semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RoomPackage.Literals.SUB_PROTOCOL__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.SUB_PROTOCOL__NAME));
-			if (transientValues.isValueTransient(semanticObject, RoomPackage.Literals.SUB_PROTOCOL__PROTOCOL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.SUB_PROTOCOL__PROTOCOL));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSubProtocolAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.eGet(RoomPackage.Literals.SUB_PROTOCOL__PROTOCOL, false));
-		feeder.finish();
 	}
 	
 	

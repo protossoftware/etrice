@@ -73,7 +73,6 @@ public class LogicalThreadImpl extends MinimalEObjectImpl.Container implements L
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -84,7 +83,6 @@ public class LogicalThreadImpl extends MinimalEObjectImpl.Container implements L
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -169,7 +167,7 @@ public class LogicalThreadImpl extends MinimalEObjectImpl.Container implements L
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

@@ -48,7 +48,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPortOperationAccess().getAlternatives_5(), "rule__PortOperation__Alternatives_5");
 					put(grammarAccess.getPortOperationAccess().getAlternatives_5_0_1(), "rule__PortOperation__Alternatives_5_0_1");
 					put(grammarAccess.getClassStructorAccess().getNameAlternatives_0_0(), "rule__ClassStructor__NameAlternatives_0_0");
-					put(grammarAccess.getGeneralProtocolClassAccess().getAlternatives(), "rule__GeneralProtocolClass__Alternatives");
 					put(grammarAccess.getPortClassAccess().getAlternatives_3(), "rule__PortClass__Alternatives_3");
 					put(grammarAccess.getMessageHandlerAccess().getAlternatives(), "rule__MessageHandler__Alternatives");
 					put(grammarAccess.getActorClassAccess().getAlternatives_7_2(), "rule__ActorClass__Alternatives_7_2");
@@ -139,8 +138,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getProtocolClassAccess().getGroup_11(), "rule__ProtocolClass__Group_11__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup_12(), "rule__ProtocolClass__Group_12__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup_13(), "rule__ProtocolClass__Group_13__0");
-					put(grammarAccess.getCompoundProtocolClassAccess().getGroup(), "rule__CompoundProtocolClass__Group__0");
-					put(grammarAccess.getSubProtocolAccess().getGroup(), "rule__SubProtocol__Group__0");
 					put(grammarAccess.getMessageAccess().getGroup(), "rule__Message__Group__0");
 					put(grammarAccess.getMessageAccess().getGroup_3(), "rule__Message__Group_3__0");
 					put(grammarAccess.getPortClassAccess().getGroup(), "rule__PortClass__Group__0");
@@ -176,7 +173,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBindingAccess().getGroup(), "rule__Binding__Group__0");
 					put(grammarAccess.getBindingEndPointAccess().getGroup(), "rule__BindingEndPoint__Group__0");
 					put(grammarAccess.getBindingEndPointAccess().getGroup_0(), "rule__BindingEndPoint__Group_0__0");
-					put(grammarAccess.getBindingEndPointAccess().getGroup_2(), "rule__BindingEndPoint__Group_2__0");
 					put(grammarAccess.getLayerConnectionAccess().getGroup(), "rule__LayerConnection__Group__0");
 					put(grammarAccess.getRefSAPointAccess().getGroup(), "rule__RefSAPoint__Group__0");
 					put(grammarAccess.getRelaySAPointAccess().getGroup(), "rule__RelaySAPoint__Group__0");
@@ -337,12 +333,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getProtocolClassAccess().getRegularAssignment_12_2(), "rule__ProtocolClass__RegularAssignment_12_2");
 					put(grammarAccess.getProtocolClassAccess().getConjugatedAssignment_13_2(), "rule__ProtocolClass__ConjugatedAssignment_13_2");
 					put(grammarAccess.getProtocolClassAccess().getSemanticsAssignment_14(), "rule__ProtocolClass__SemanticsAssignment_14");
-					put(grammarAccess.getCompoundProtocolClassAccess().getNameAssignment_1(), "rule__CompoundProtocolClass__NameAssignment_1");
-					put(grammarAccess.getCompoundProtocolClassAccess().getDocuAssignment_2(), "rule__CompoundProtocolClass__DocuAssignment_2");
-					put(grammarAccess.getCompoundProtocolClassAccess().getAnnotationsAssignment_4(), "rule__CompoundProtocolClass__AnnotationsAssignment_4");
-					put(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsAssignment_5(), "rule__CompoundProtocolClass__SubProtocolsAssignment_5");
-					put(grammarAccess.getSubProtocolAccess().getNameAssignment_1(), "rule__SubProtocol__NameAssignment_1");
-					put(grammarAccess.getSubProtocolAccess().getProtocolAssignment_3(), "rule__SubProtocol__ProtocolAssignment_3");
 					put(grammarAccess.getMessageAccess().getPrivAssignment_0(), "rule__Message__PrivAssignment_0");
 					put(grammarAccess.getMessageAccess().getNameAssignment_2(), "rule__Message__NameAssignment_2");
 					put(grammarAccess.getMessageAccess().getDataAssignment_3_1(), "rule__Message__DataAssignment_3_1");
@@ -429,7 +419,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBindingAccess().getEndpoint2Assignment_3(), "rule__Binding__Endpoint2Assignment_3");
 					put(grammarAccess.getBindingEndPointAccess().getActorRefAssignment_0_0(), "rule__BindingEndPoint__ActorRefAssignment_0_0");
 					put(grammarAccess.getBindingEndPointAccess().getPortAssignment_1(), "rule__BindingEndPoint__PortAssignment_1");
-					put(grammarAccess.getBindingEndPointAccess().getSubAssignment_2_1(), "rule__BindingEndPoint__SubAssignment_2_1");
 					put(grammarAccess.getLayerConnectionAccess().getFromAssignment_1(), "rule__LayerConnection__FromAssignment_1");
 					put(grammarAccess.getLayerConnectionAccess().getToAssignment_3(), "rule__LayerConnection__ToAssignment_3");
 					put(grammarAccess.getRefSAPointAccess().getRefAssignment_1(), "rule__RefSAPoint__RefAssignment_1");

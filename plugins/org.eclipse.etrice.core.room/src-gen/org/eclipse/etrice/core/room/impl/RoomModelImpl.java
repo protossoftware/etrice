@@ -143,7 +143,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -154,7 +153,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -168,7 +166,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -196,7 +193,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -218,7 +214,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -233,7 +228,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Import> getImports()
   {
     if (imports == null)
@@ -248,7 +242,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<AnnotationType> getAnnotationTypes()
   {
     if (annotationTypes == null)
@@ -263,7 +256,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<RoomClass> getRoomClasses()
   {
     if (roomClasses == null)
@@ -428,7 +420,7 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

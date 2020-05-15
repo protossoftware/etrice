@@ -24,10 +24,8 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.core.room.CompoundProtocolClass
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.EnumerationType
-import org.eclipse.etrice.core.room.GeneralProtocolClass
 import org.eclipse.etrice.core.room.LogicalSystem
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.Port
@@ -250,7 +248,7 @@ class AsciiDocGen {
 		«tagEnd(dc)»
 	'''
 	
-	def private dispatch generateProtocolDoc(ProtocolClass pc) '''
+	def private generateProtocolDoc(ProtocolClass pc) '''
 		«defineAnchor(pc)»
 		=== «pc.name»
 		«tagStart(pc)»
@@ -296,25 +294,6 @@ class AsciiDocGen {
 			==== Conjugated PortClass
 			«pc.getAllOperations(false).generateOperationsDoc»
 		«ENDIF»
-		«tagEnd(pc)»
-	'''
-	
-	def private dispatch generateProtocolDoc(CompoundProtocolClass pc) '''
-		«defineAnchor(pc)»
-		=== «pc.name»
-		«tagStart(pc)»
-		
-		«pc.docText»
-		
-		.Sub Protocols
-		|===
-		| Name | Protocol
-		«FOR sub : pc.subProtocols»
-			
-			| «sub.name»
-			| «sub.protocol.name»
-		«ENDFOR»
-		|===
 		«tagEnd(pc)»
 	'''
 	
@@ -540,7 +519,7 @@ class AsciiDocGen {
 		public final String name
 		public final Iterable<LogicalSystem> systems
 		public final Iterable<SubSystemClass> subSystemClasses
-		public final Iterable<GeneralProtocolClass> protocolClasses
+		public final Iterable<ProtocolClass> protocolClasses
 		public final Iterable<EnumerationType> enumerationTypes
 		public final Iterable<DataClass> dataClasses
 		public final Iterable<ActorClass> actorClasses
@@ -551,7 +530,7 @@ class AsciiDocGen {
 			val roomClasses = models.flatMap[roomClasses]
 			systems = roomClasses.filter(LogicalSystem).sortBy[name]
 			subSystemClasses = roomClasses.filter(SubSystemClass).sortBy[name]
-			protocolClasses = roomClasses.filter(GeneralProtocolClass).sortBy[name]
+			protocolClasses = roomClasses.filter(ProtocolClass).sortBy[name]
 			enumerationTypes = roomClasses.filter(EnumerationType).sortBy[name]
 			dataClasses = roomClasses.filter(DataClass).sortBy[name]
 			actorClasses = roomClasses.filter(ActorClass).sortBy[name]

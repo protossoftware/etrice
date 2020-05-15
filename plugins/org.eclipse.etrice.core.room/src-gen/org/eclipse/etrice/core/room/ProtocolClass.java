@@ -4,6 +4,8 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.etrice.core.common.base.Annotation;
+
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
@@ -44,6 +46,7 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getUserCode3 <em>User Code3</em>}</li>
@@ -58,7 +61,7 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
  * @model
  * @generated
  */
-public interface ProtocolClass extends GeneralProtocolClass
+public interface ProtocolClass extends RoomClass
 {
   /**
    * Returns the value of the '<em><b>Comm Type</b></em>' attribute.
@@ -115,6 +118,22 @@ public interface ProtocolClass extends GeneralProtocolClass
    * @generated
    */
   void setBase(ProtocolClass value);
+
+  /**
+   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getProtocolClass_Annotations()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Annotation> getAnnotations();
 
   /**
    * Returns the value of the '<em><b>User Code1</b></em>' containment reference.

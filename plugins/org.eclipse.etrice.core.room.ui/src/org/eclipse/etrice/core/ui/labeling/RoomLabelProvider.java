@@ -29,7 +29,6 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ClassStructor;
-import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -48,7 +47,6 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -103,14 +101,6 @@ public class RoomLabelProvider extends FSMLabelProvider {
 
 	String image(ProtocolClass pc) {
 		return "ProtocolClass.gif";
-	}
-
-	String image(CompoundProtocolClass pc) {
-		return "CompoundProtocolClass.gif";
-	}
-
-	String image(SubProtocol pc) {
-		return "SubProtocol.gif";
 	}
 
 	String image(ActorClass ac) {
@@ -240,10 +230,6 @@ public class RoomLabelProvider extends FSMLabelProvider {
 	String text(ProtocolClass pc) {
 		String base = pc.getBase()!=null? " extends "+pc.getBase().getName():"";
 		return pc.getName()+base;
-	}
-
-	String text(SubProtocol pc) {
-		return pc.getName()+": "+pc.getProtocol().getName();
 	}
 
 	StyledString text(ActorClass ac) {

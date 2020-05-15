@@ -83,6 +83,10 @@ public interface VarDecl extends RoomElement
   /**
    * Returns the value of the '<em><b>Varargs</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Varargs</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Varargs</em>' attribute.
    * @see #setVarargs(boolean)

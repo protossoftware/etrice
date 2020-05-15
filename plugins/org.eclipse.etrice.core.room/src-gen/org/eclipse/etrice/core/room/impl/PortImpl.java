@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.common.base.Annotation;
 
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
 
@@ -33,7 +32,6 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#isConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getMultiplicity <em>Multiplicity</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
@@ -82,16 +80,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
   protected int multiplicity = MULTIPLICITY_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getProtocol()
-   * @generated
-   * @ordered
-   */
-  protected GeneralProtocolClass protocol;
-
-  /**
    * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -127,7 +115,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isConjugated()
   {
     return conjugated;
@@ -138,7 +125,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setConjugated(boolean newConjugated)
   {
     boolean oldConjugated = conjugated;
@@ -152,7 +138,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public int getMultiplicity()
   {
     return multiplicity;
@@ -163,7 +148,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setMultiplicity(int newMultiplicity)
   {
     int oldMultiplicity = multiplicity;
@@ -177,52 +161,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public GeneralProtocolClass getProtocol()
-  {
-    if (protocol != null && protocol.eIsProxy())
-    {
-      InternalEObject oldProtocol = (InternalEObject)protocol;
-      protocol = (GeneralProtocolClass)eResolveProxy(oldProtocol);
-      if (protocol != oldProtocol)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.PORT__PROTOCOL, oldProtocol, protocol));
-      }
-    }
-    return protocol;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public GeneralProtocolClass basicGetProtocol()
-  {
-    return protocol;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setProtocol(GeneralProtocolClass newProtocol)
-  {
-    GeneralProtocolClass oldProtocol = protocol;
-    protocol = newProtocol;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__PROTOCOL, oldProtocol, protocol));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -237,7 +175,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isReplicated()
   {
     return multiplicity>1 || multiplicity==-1;
@@ -273,9 +210,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return isConjugated();
       case RoomPackage.PORT__MULTIPLICITY:
         return getMultiplicity();
-      case RoomPackage.PORT__PROTOCOL:
-        if (resolve) return getProtocol();
-        return basicGetProtocol();
       case RoomPackage.PORT__ANNOTATIONS:
         return getAnnotations();
     }
@@ -298,9 +232,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return;
       case RoomPackage.PORT__MULTIPLICITY:
         setMultiplicity((Integer)newValue);
-        return;
-      case RoomPackage.PORT__PROTOCOL:
-        setProtocol((GeneralProtocolClass)newValue);
         return;
       case RoomPackage.PORT__ANNOTATIONS:
         getAnnotations().clear();
@@ -326,9 +257,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
       case RoomPackage.PORT__MULTIPLICITY:
         setMultiplicity(MULTIPLICITY_EDEFAULT);
         return;
-      case RoomPackage.PORT__PROTOCOL:
-        setProtocol((GeneralProtocolClass)null);
-        return;
       case RoomPackage.PORT__ANNOTATIONS:
         getAnnotations().clear();
         return;
@@ -350,8 +278,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return conjugated != CONJUGATED_EDEFAULT;
       case RoomPackage.PORT__MULTIPLICITY:
         return multiplicity != MULTIPLICITY_EDEFAULT;
-      case RoomPackage.PORT__PROTOCOL:
-        return protocol != null;
       case RoomPackage.PORT__ANNOTATIONS:
         return annotations != null && !annotations.isEmpty();
     }
@@ -368,7 +294,7 @@ public class PortImpl extends InterfaceItemImpl implements Port
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (conjugated: ");
     result.append(conjugated);
     result.append(", multiplicity: ");

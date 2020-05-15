@@ -3,8 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.etrice.core.room/src-gen" editDirectory="/org.eclipse.etrice.core.room.edit/src"
     editorDirectory="/org.eclipse.etrice.core.room.editor/src" modelPluginID="org.eclipse.etrice.core.room"
     forceOverwrite="true" modelName="Room" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="8.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.room.edit"
-    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.20" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM">
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.room.edit"
+    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.13" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//CommunicationType">
@@ -124,12 +124,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ClassStructor/detailCode"/>
       <genOperations ecoreOperation="Room.ecore#//ClassStructor/isConstructor"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//GeneralProtocolClass">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//GeneralProtocolClass/annotations"/>
-    </genClasses>
     <genClasses ecoreClass="Room.ecore#//ProtocolClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ProtocolClass/commType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/base"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/annotations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/userCode1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/userCode2"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/userCode3"/>
@@ -138,13 +136,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/regular"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/conjugated"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/semantics"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//CompoundProtocolClass">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//CompoundProtocolClass/subProtocols"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SubProtocol">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//SubProtocol/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SubProtocol/protocol"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Message">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/priv"/>
@@ -186,8 +177,8 @@
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getAllAbstractInterfaceItems"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//InterfaceItem">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//InterfaceItem/protocol"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//InterfaceItem/docu"/>
-      <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getGeneralProtocol"/>
       <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getSemantics"/>
       <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getAllIncomingAbstractMessages"/>
       <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getAllOutgoingAbstractMessages"/>
@@ -196,19 +187,14 @@
     <genClasses ecoreClass="Room.ecore#//Port">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/conjugated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/multiplicity"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Port/protocol"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Port/annotations"/>
       <genOperations ecoreOperation="Room.ecore#//Port/isReplicated"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ExternalPort">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ExternalPort/interfacePort"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SAP">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SAP/protocol"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SPP">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SPP/protocol"/>
-    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SAP"/>
+    <genClasses ecoreClass="Room.ecore#//SPP"/>
     <genClasses ecoreClass="Room.ecore#//ServiceImplementation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ServiceImplementation/spp"/>
     </genClasses>
@@ -252,7 +238,6 @@
     <genClasses ecoreClass="Room.ecore#//BindingEndPoint">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//BindingEndPoint/actorRef"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//BindingEndPoint/port"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//BindingEndPoint/sub"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//LayerConnection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//LayerConnection/from"/>

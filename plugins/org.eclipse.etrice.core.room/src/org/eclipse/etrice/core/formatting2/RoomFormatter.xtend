@@ -15,7 +15,6 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ExternalType
-import org.eclipse.etrice.core.room.GeneralProtocolClass
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.PrimitiveType
@@ -26,6 +25,7 @@ import org.eclipse.etrice.core.services.RoomGrammarAccess
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.formatting2.IFormattableDocument
+import org.eclipse.etrice.core.room.ProtocolClass
 
 // In order to save effort, try writing generic rules. Use 'highPriority' to override them in specific rules.
 class RoomFormatter extends FSMFormatter { 
@@ -53,7 +53,7 @@ class RoomFormatter extends FSMFormatter {
 		// top level contents
 		eContents.head.prepend[newLines = 2]
 		eContents.tail.filter(DataClass).forEach[prepend[newLines = 2]]
-		eContents.tail.filter(GeneralProtocolClass).forEach[prepend[newLines = 2]]
+		eContents.tail.filter(ProtocolClass).forEach[prepend[newLines = 2]]
 		eContents.tail.filter(ActorClass).forEach[prepend[newLines = 2]]
 		eContents.tail.filter(SubSystemClass).forEach[prepend[newLines = 2]]
 		eContents.tail.filter(AnnotationType).forEach[prepend[newLines = 2]]

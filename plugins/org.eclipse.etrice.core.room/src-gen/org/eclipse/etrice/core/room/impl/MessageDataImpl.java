@@ -87,7 +87,6 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDeprecatedName()
   {
     return deprecatedName;
@@ -98,7 +97,6 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDeprecatedName(String newDeprecatedName)
   {
     String oldDeprecatedName = deprecatedName;
@@ -112,7 +110,6 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public RefableType getRefType()
   {
     return refType;
@@ -140,7 +137,6 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRefType(RefableType newRefType)
   {
     if (newRefType != refType)
@@ -259,7 +255,7 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (deprecatedName: ");
     result.append(deprecatedName);
     result.append(')');

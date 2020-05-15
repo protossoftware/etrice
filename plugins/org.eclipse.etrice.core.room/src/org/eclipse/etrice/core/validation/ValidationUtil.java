@@ -17,9 +17,6 @@ package org.eclipse.etrice.core.validation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -32,9 +29,7 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CommunicationType;
-import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.Port;
@@ -47,10 +42,7 @@ import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.util.CompoundProtocolHelpers;
-import org.eclipse.etrice.core.room.util.CompoundProtocolHelpers.Match;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 import com.google.inject.Inject;
@@ -62,37 +54,6 @@ public class ValidationUtil extends FSMValidationUtil {
 	@Inject
 	private RoomHelpers roomHelpers;
 
-	/**
-	 * check if compound protocol is circular
-	 * @param ref
-	 * @param cpc
-	 * @return <code>true</code> if cpc contains a cycle
-	 */
-	public boolean isCircular(CompoundProtocolClass ref, CompoundProtocolClass cpc) {
-		Set<CompoundProtocolClass> visited = new HashSet<CompoundProtocolClass>();
-		LinkedList<CompoundProtocolClass> stack = new LinkedList<CompoundProtocolClass>();
-		visited.add(cpc);
-		stack.push(ref);
-		
-		CompoundProtocolClass next;
-		while(!stack.isEmpty()){
-			next = stack.pop();
-			if(next == cpc)
-				return true;
-			if(visited.contains(next))
-				continue;
-			for(SubProtocol subProtocol : next.getSubProtocols()){
-				if(subProtocol.getProtocol() instanceof CompoundProtocolClass){	
-					CompoundProtocolClass c = (CompoundProtocolClass)subProtocol.getProtocol();
-					stack.push(c);
-				}
-			}
-			visited.add(next);
-		}
-		
-		return false;
-	}
-	
 	/**
 	 * returns true if this port is connectable inside its parent, i.e. an internal end port or a relay port
 	 * 
@@ -124,9 +85,6 @@ public class ValidationUtil extends FSMValidationUtil {
 		if (ref!=null && ref instanceof ActorRef && ((ActorRef)ref).getMultiplicity()>1)
 			return true;
 		
-		if (roomHelpers.isRelay(port) && port.getProtocol() instanceof CompoundProtocolClass)
-			return true;
-		
 		if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType() == CommunicationType.DATA_DRIVEN) {
 			if (ref == null) {
 				// this port is local in the structure class
@@ -144,27 +102,20 @@ public class ValidationUtil extends FSMValidationUtil {
 
 	public Result isValid(Binding bind) {
 		return isConnectable(
-				bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),  bind.getEndpoint1().getSub(),
-				bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef(),  bind.getEndpoint2().getSub(),
-				(StructureClass)bind.eContainer(), bind, true);
+				bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),
+				bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef(),
+				(StructureClass)bind.eContainer(), bind);
 	}
 
 	public Result isConnectable(BindingEndPoint ep1, BindingEndPoint ep2, StructureClass sc) {
-		return isConnectable(ep1.getPort(), ep1.getActorRef(), ep1.getSub(), ep2.getPort(), ep2.getActorRef(), ep2.getSub(), sc);
+		return isConnectable(ep1.getPort(), ep1.getActorRef(), ep2.getPort(), ep2.getActorRef(), sc);
 	}
 	
-	public Result isConnectable(
-			Port p1, ActorContainerRef ref1, SubProtocol sub1,
-			Port p2, ActorContainerRef ref2, SubProtocol sub2, StructureClass sc) {
-		return isConnectable(p1, ref1, sub1, p2, ref2, sub2, sc, null, true);
+	public Result isConnectable(Port p1, ActorContainerRef ref1, Port p2, ActorContainerRef ref2, StructureClass sc) {
+		return isConnectable(p1, ref1, p2, ref2, sc, null);
 	}
 	
-	public Result isConnectable(
-			Port p1, ActorContainerRef ref1, SubProtocol sub1,
-			Port p2, ActorContainerRef ref2, SubProtocol sub2,
-			StructureClass sc, Binding exclude,
-			boolean checkCompound) {
-		
+	public Result isConnectable(Port p1, ActorContainerRef ref1, Port p2, ActorContainerRef ref2, StructureClass sc, Binding exclude) {
 		if (p1==p2)
 			return Result.error("no self connection allowed, ports are identical");
 		
@@ -174,110 +125,47 @@ public class ValidationUtil extends FSMValidationUtil {
 		boolean pc2extendsIncoming = false;
 		boolean pc2extendsOutgoing = false;
 		{
-			GeneralProtocolClass pc1 = p1.getProtocol();
-			GeneralProtocolClass pc2 = p2.getProtocol();
-			boolean compoundInvolved = pc1 instanceof CompoundProtocolClass || pc2 instanceof CompoundProtocolClass;
-			if (pc1 instanceof CompoundProtocolClass && pc2 instanceof CompoundProtocolClass) {
-				if (sub1!=null)
-					pc1 = sub1.getProtocol();
-				if (sub2!=null)
-					pc2 = sub2.getProtocol();
-				if (checkCompound && pc1!=pc2)
-					return Result.error("(sub) protocols don't match");
-			}
-			else if (pc1 instanceof ProtocolClass && pc2 instanceof CompoundProtocolClass) {
-				if (checkCompound) {
-					if (sub2==null)
-						return Result.error("specify a sub protocol at "+p2.getName());
-					if (pc1!=sub2.getProtocol())
-						return Result.error("sub protocol doesn't match");
+			ProtocolClass pc1 = p1.getProtocol();
+			ProtocolClass pc2 = p2.getProtocol();
+			if (pc1!=pc2) {
+				if (roomHelpers.isDerivedFrom((ProtocolClass)pc1, (ProtocolClass)pc2)) {
+					if (roomHelpers.getAllMessages((ProtocolClass)pc1,true).size() > roomHelpers.getAllMessages((ProtocolClass)pc2,true).size())
+						pc1extendsIncoming = true;
+					if (roomHelpers.getAllMessages((ProtocolClass)pc1,false).size()>roomHelpers.getAllMessages((ProtocolClass)pc2,false).size())
+						pc1extendsOutgoing = true;
+					if (pc1extendsIncoming && pc1extendsOutgoing)
+						return Result.error("derived protocols not connectable (both directions extended)");
+
 				}
-			}
-			else if (pc1 instanceof CompoundProtocolClass && pc2 instanceof ProtocolClass) {
-				if (checkCompound) {
-					if (sub1==null)
-						return Result.error("specify a sub protocol at "+p1.getName());
-					if (pc2!=sub1.getProtocol())
-						return Result.error("sub protocol doesn't match");
+				else if (roomHelpers.isDerivedFrom((ProtocolClass)pc2, (ProtocolClass)pc1)) {
+					if (roomHelpers.getAllMessages((ProtocolClass)pc2,true).size()>roomHelpers.getAllMessages((ProtocolClass)pc1,true).size())
+						pc2extendsIncoming = true;
+					if (roomHelpers.getAllMessages((ProtocolClass)pc2,false).size()>roomHelpers.getAllMessages((ProtocolClass)pc1,false).size())	
+						pc2extendsOutgoing = true;
+					if (pc2extendsIncoming && pc2extendsOutgoing)
+						return Result.error("derived protocols not connectable (both directions extended)");
 				}
-			}
-			else {
-				if (pc1!=pc2) {
-					if (compoundInvolved) {
-						return Result.error("protocols don't match");
-					}
-					else {
-						// RoomValidator circumvents this case because its is already a linker error
-						if (!(pc1 instanceof ProtocolClass && pc2 instanceof ProtocolClass))
-							return Result.error("protocols don't match");
+				else {
+					if (pc1.getName().equals(pc2.getName())) {
+						String ns1 = ((RoomModel)pc1.eContainer()).getName();
+						String ns2 = ((RoomModel)pc2.eContainer()).getName();
+						if (!ns1.equals(ns2))
+							return Result.error("protocols have different name spaces");
+						if(pc1.eResource() != pc2.eResource())
+							return Result.error("protocols were not loaded uniquely - check imports");
 						
-						if (roomHelpers.isDerivedFrom((ProtocolClass)pc1, (ProtocolClass)pc2)) {
-							if (roomHelpers.getAllMessages((ProtocolClass)pc1,true).size() > roomHelpers.getAllMessages((ProtocolClass)pc2,true).size())
-								pc1extendsIncoming = true;
-							if (roomHelpers.getAllMessages((ProtocolClass)pc1,false).size()>roomHelpers.getAllMessages((ProtocolClass)pc2,false).size())
-								pc1extendsOutgoing = true;
-							if (pc1extendsIncoming && pc1extendsOutgoing)
-								return Result.error("derived protocols not connectable (both directions extended)");
-
-						}
-						else if (roomHelpers.isDerivedFrom((ProtocolClass)pc2, (ProtocolClass)pc1)) {
-							if (roomHelpers.getAllMessages((ProtocolClass)pc2,true).size()>roomHelpers.getAllMessages((ProtocolClass)pc1,true).size())
-								pc2extendsIncoming = true;
-							if (roomHelpers.getAllMessages((ProtocolClass)pc2,false).size()>roomHelpers.getAllMessages((ProtocolClass)pc1,false).size())	
-								pc2extendsOutgoing = true;
-							if (pc2extendsIncoming && pc2extendsOutgoing)
-								return Result.error("derived protocols not connectable (both directions extended)");
-						}
-						else {
-							if (pc1.getName().equals(pc2.getName())) {
-								String ns1 = ((RoomModel)pc1.eContainer()).getName();
-								String ns2 = ((RoomModel)pc2.eContainer()).getName();
-								if (!ns1.equals(ns2))
-									return Result.error("protocols have different name spaces");
-								if(pc1.eResource() != pc2.eResource())
-									return Result.error("protocols were not loaded uniquely - check imports");
-								
-								// should not happen
-								return Result.error("protocols don't match (but have same name)");
-							}
-							
-							return Result.error("protocols don't match");
-						}
+						// should not happen
+						return Result.error("protocols don't match (but have same name)");
 					}
+					
+					return Result.error("protocols don't match");
 				}
 			}
 
-			if (checkCompound || !compoundInvolved) {
-				ProtocolClass spc1 = null;
-				if (pc1 instanceof ProtocolClass)
-					spc1 = (ProtocolClass) pc1;
-				else if (sub1.getProtocol() instanceof ProtocolClass)
-					spc1 = (ProtocolClass) sub1.getProtocol();
-				ProtocolClass spc2 = null;
-				if (pc2 instanceof ProtocolClass)
-					spc2 = (ProtocolClass) pc2;
-				else if (sub2.getProtocol() instanceof ProtocolClass)
-					spc2 = (ProtocolClass) sub2.getProtocol();
-				if (spc1!=null && spc2!=null)
-					if (spc1.getCommType()!=spc2.getCommType())
-						return Result.error("protocol communication types don't match");
-			}
-			if (compoundInvolved) {
-				List<Match> matches = CompoundProtocolHelpers.getMatches(p1, ref1, p2, ref2, sc, exclude);
-				if (matches.isEmpty())
-					return Result.error("no matching sub protocol(s) found");
-				if (matches.size()==1)
-					if (exclude!=null) {
-						if (matches.get(0).getLeft()!=exclude.getEndpoint1().getSub())
-							return Result.error("sub protocol already connected");
-						if (matches.get(0).getRight()!=exclude.getEndpoint2().getSub())
-							return Result.error("sub protocol already connected");
-					}
-			}
-			else {
-				if (alreadyConnected(p1, ref1, p2, ref2, sc, exclude))
-					return Result.error("ports are already bound");
-			}
+			if (pc1.getCommType() != pc2.getCommType())
+				return Result.error("protocol communication types don't match");
+			if (alreadyConnected(p1, ref1, p2, ref2, sc, exclude))
+				return Result.error("ports are already bound");
 		}
 		
 		
