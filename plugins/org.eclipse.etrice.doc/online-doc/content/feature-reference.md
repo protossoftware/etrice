@@ -1925,6 +1925,90 @@ A connection of Ports is denoted by a Binding.
 ---
 
 
+### PortClass
+A PortClass allows a specifc implementation of a port class of a protocol
+
+*This is an advanced feature which is highly target language specific.*
+
+A ProtocolClass may define a port class which can be used to intercept messages within a port either on the sending or on the receiving side. On the sending side the messages are intercepted before they are passed to the message service. On the receiving side they are intercepted before they are passed to the receiving actor.
+
+A PortClass is always either *regular*, i.e. it "lives" within a regular port, or *conjugated*. A PortClass may define local attributes, operations and/or handlers for incoming or outgoing messages. The message direction of handlers in PortClasses always matches the message direction of the ProtocolClass. It is not switched for the *conjugated* PortClass. Whether a message is passed from the message service into the handler and has to be forwarded to the actor or vise versa depends on the type of the PortClass (*regular*, *conjugated*) and the message direction in the ProtocolClass.
+
+
+
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is contained in:</td>
+	<td>[ProtocolClass](#protocolclass)
+	 </td>
+	<td>A ProtocolClass defines messages and is the interface specification for a Port</td>
+</tr>
+</tbody>
+</table>
+
+**Example**:
+
+```room
+// This example uses the port class interface provided by the c code generator
+ProtocolClass PingPong {
+	incoming {
+		Message ping(uint8)
+	}
+	outgoing {
+		Message pong(uint8)
+	}
+	regular PortClass {
+		handle incoming ping '''
+			uint8 msgDataOffset = MEM_CEIL(sizeof(etMessage));
+			uint8 transitionData = (uint8)((char*)msg + msgDataOffset);;
+			
+			// do something here
+						
+			/* hand over the message to the actor:      */
+			(*receiveMessageFunc)(actor, self, msg);
+		'''
+		handle outgoing pong '''
+			uint8 transitionData = data__et;
+			
+			// do something with the data here
+			
+			// hand over data to message service
+			etPort_sendMessage(self, PingPong_OUT_pong, sizeof(uint8), &transitionData);
+		'''
+	}
+	conjugated PortClass {
+		handle incoming ping '''
+			// The ping message is outgoing in the conjugated portclass
+			uint8 transitionData = data__et;
+			
+			// do something with the data here
+			
+			// hand over data to message service
+			etPort_sendMessage(self, PingPong_IN_ping, sizeof(uint8), &transitionData);
+		'''
+		handle outgoing pong '''
+			// The pong message is incoming in the conjugated portclass
+			uint8 msgDataOffset = MEM_CEIL(sizeof(etMessage));
+			uint8 transitionData = (uint8)((char*)msg + msgDataOffset);;
+			
+			// do something here
+			
+			/* hand over the message to the actor:      */
+			(*receiveMessageFunc)(actor, self, msg);
+		'''
+	}		
+}
+```
+
+---
+
+
 ### PrimitiveType
 A PrimitiveType is an abstraction of a target language's basic type (e.g. integer or boolean)
 
@@ -2002,7 +2086,7 @@ ProtocolClass SimpleProtocolClass {
 </thead>
 <tbody>
 <tr>
-	<td rowspan="4" style="white-space: nowrap;">Contains:</td>
+	<td rowspan="5" style="white-space: nowrap;">Contains:</td>
 	<td>[CommunicationType](#communicationtype)
 	 </td>
 	<td>The CommunicationType defines the communication semantics of a ProtocolClass</td>
@@ -2021,6 +2105,11 @@ ProtocolClass SimpleProtocolClass {
 	<td>[Annotation](#annotation)
 	 </td>
 	<td>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</td>
+</tr>
+<tr>
+	<td>[PortClass](#portclass)
+	 </td>
+	<td>A PortClass allows a specifc implementation of a port class of a protocol</td>
 </tr>
 <tr>
 	<td rowspan="1" style="white-space: nowrap;">Uses:</td>
@@ -3614,14 +3703,6 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 
 
 
-[TextualROOMEditor]: #textualroomeditor
-[OutlineView]: #outlineview
-[GraphicalBehaviorEditor]: #graphicalbehavioreditor
-[GraphicalStructureEditor]: #graphicalstructureeditor
-[StructureEditorPalette]: #structureeditorpalette
-[ActorRefPropertyDialog]: #actorrefpropertydialog
-[PortPropertyDialog]: #portpropertydialog
-[SPPPropertyDialog]: #spppropertydialog
 [CCodeGenerator]: #ccodegenerator
 [JavaCodeGenerator]: #javacodegenerator
 [CPPCodeGenerator]: #cppcodegenerator
@@ -3661,6 +3742,7 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [ExecutionType]: #executiontype
 [CommunicationType]: #communicationtype
 [ProtocolClass]: #protocolclass
+[PortClass]: #portclass
 [DataType]: #datatype
 [PrimitiveType]: #primitivetype
 [Enumeration]: #enumeration
@@ -3675,3 +3757,11 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [SAP]: #sap
 [ServiceImplementation]: #serviceimplementation
 [SPP]: #spp
+[TextualROOMEditor]: #textualroomeditor
+[OutlineView]: #outlineview
+[GraphicalBehaviorEditor]: #graphicalbehavioreditor
+[GraphicalStructureEditor]: #graphicalstructureeditor
+[StructureEditorPalette]: #structureeditorpalette
+[ActorRefPropertyDialog]: #actorrefpropertydialog
+[PortPropertyDialog]: #portpropertydialog
+[SPPPropertyDialog]: #spppropertydialog

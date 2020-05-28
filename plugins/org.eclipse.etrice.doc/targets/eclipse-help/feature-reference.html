@@ -1517,6 +1517,77 @@
 </tbody>
 </table>
 <hr>
+<h3><a href="#portclass" name="portclass"></a>PortClass</h3>
+<p>A PortClass allows a specifc implementation of a port class of a protocol</p>
+<p><em>This is an advanced feature which is highly target language specific.</em></p>
+<p>A ProtocolClass may define a port class which can be used to intercept messages within a port either on the sending or on the receiving side. On the sending side the messages are intercepted before they are passed to the message service. On the receiving side they are intercepted before they are passed to the receiving actor.</p>
+<p>A PortClass is always either <em>regular</em>, i.e. it “lives” within a regular port, or <em>conjugated</em>. A PortClass may define local attributes, operations and/or handlers for incoming or outgoing messages. The message direction of handlers in PortClasses always matches the message direction of the ProtocolClass. It is not switched for the <em>conjugated</em> PortClass. Whether a message is passed from the message service into the handler and has to be forwarded to the actor or vise versa depends on the type of the PortClass (*regular*, <em>conjugated</em>) and the message direction in the ProtocolClass.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="comment">// This example uses the port class interface provided by the c code generator
+</span><span class="keyword">ProtocolClass</span> PingPong {
+	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> ping(uint8)
+	}
+	<span class="keyword">outgoing</span> {
+		<span class="keyword">Message</span> pong(uint8)
+	}
+	<span class="keyword">regular</span> <span class="keyword">PortClass</span> {
+		<span class="keyword">handle</span> <span class="keyword">incoming</span> ping <span class="string">'''
+			uint8 msgDataOffset = MEM_CEIL(sizeof(etMessage));
+			uint8 transitionData = (uint8)((char*)msg + msgDataOffset);;
+			
+			// do something here
+						
+			/* hand over the message to the actor:      */
+			(*receiveMessageFunc)(actor, self, msg);
+		'''</span>
+		<span class="keyword">handle</span> <span class="keyword">outgoing</span> pong <span class="string">'''
+			uint8 transitionData = data__et;
+			
+			// do something with the data here
+			
+			// hand over data to message service
+			etPort_sendMessage(self, PingPong_OUT_pong, sizeof(uint8), &amp;transitionData);
+		'''</span>
+	}
+	<span class="keyword">conjugated</span> <span class="keyword">PortClass</span> {
+		<span class="keyword">handle</span> <span class="keyword">incoming</span> ping <span class="string">'''
+			// The ping message is outgoing in the conjugated portclass
+			uint8 transitionData = data__et;
+			
+			// do something with the data here
+			
+			// hand over data to message service
+			etPort_sendMessage(self, PingPong_IN_ping, sizeof(uint8), &amp;transitionData);
+		'''</span>
+		<span class="keyword">handle</span> <span class="keyword">outgoing</span> pong <span class="string">'''
+			// The pong message is incoming in the conjugated portclass
+			uint8 msgDataOffset = MEM_CEIL(sizeof(etMessage));
+			uint8 transitionData = (uint8)((char*)msg + msgDataOffset);;
+			
+			// do something here
+			
+			/* hand over the message to the actor:      */
+			(*receiveMessageFunc)(actor, self, msg);
+		'''</span>
+	}		
+}
+</code></pre>
+<hr>
 <h3><a href="#primitivetype" name="primitivetype"></a>PrimitiveType</h3>
 <p>A PrimitiveType is an abstraction of a target language’s basic type (e.g. integer or boolean)</p>
 <table style="vertical-align: middle;" class="table">
@@ -1575,7 +1646,7 @@
 </thead>
 <tbody>
 <tr>
-	<td rowspan="4" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td rowspan="5" style="white-space: nowrap;"><p>Contains:</p></td>
 	<td><p><a href="#communicationtype">CommunicationType</a></p></td>
 	<td><p>The CommunicationType defines the communication semantics of a ProtocolClass</p></td>
 </tr>
@@ -1590,6 +1661,10 @@
 <tr>
 	<td><p><a href="#annotation">Annotation</a></p></td>
 	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
+</tr>
+<tr>
+	<td><p><a href="#portclass">PortClass</a></p></td>
+	<td><p>A PortClass allows a specifc implementation of a port class of a protocol</p></td>
 </tr>
 <tr>
 	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
