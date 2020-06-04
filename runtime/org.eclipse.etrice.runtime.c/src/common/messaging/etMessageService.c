@@ -160,8 +160,8 @@ void etMessageService_pushMessage(etMessageService* self, etMessage* msg){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "pushMessage")
 	etMutex_enter(&self->queueMutex);
 	etMessageQueue_push(&self->messageQueue, msg);
-	etSema_wakeup(&self->executionSemaphore);
 	etMutex_leave(&self->queueMutex);
+	etSema_wakeup(&self->executionSemaphore);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
