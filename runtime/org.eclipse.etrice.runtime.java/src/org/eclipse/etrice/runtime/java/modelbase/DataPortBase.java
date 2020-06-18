@@ -31,6 +31,8 @@ public class DataPortBase extends RTObject {
 	 */
 	protected DataPortBase(IRTObject parent, String name, int localId) {
 		super(parent, name);
+		
+		this.localId = localId;
 	}
 
 	public int getLocalId() {
