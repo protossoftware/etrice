@@ -14,12 +14,18 @@
 
 package org.eclipse.etrice.core.ui.imports;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.common.base.util.ImportHelpers;
 import org.eclipse.etrice.core.common.ui.imports.IOrganizeImportHelper;
@@ -48,6 +54,8 @@ public class RoomOrganizeImportHelper implements IOrganizeImportHelper {
 	@Override
 	public Multimap<EClass, EReference> getTypeReferences() {
 		Multimap<EClass, EReference> result = ArrayListMultimap.create();
+		Map<EClass,List<EClass>> subTypes = new HashMap<>();
+		getSubTypes(RoomPackage.eINSTANCE, subTypes);
 		RoomPackage.eINSTANCE.getEClassifiers().stream() //
 				.filter(EClass.class::isInstance) //
 				.map(EClass.class::cast) //
@@ -57,6 +65,12 @@ public class RoomOrganizeImportHelper implements IOrganizeImportHelper {
 						.collect(Collectors.toList());
 					if (!refs.isEmpty()) {
 						result.putAll(cls, refs);
+						List<EClass> subClasses = subTypes.get(cls);
+						if (subClasses!=null) {
+							for (EClass subClass : subClasses) {
+								result.putAll(subClass, refs);
+							}
+						}
 					}
 				});
 		return result;
@@ -111,4 +125,34 @@ public class RoomOrganizeImportHelper implements IOrganizeImportHelper {
 	private boolean typeNeedsImport(EClass type) {
 		return RoomPackage.Literals.ROOM_CLASS.isSuperTypeOf(type);
 	}
-}
+	
+	// copied from org.eclipse.emf.cdo.common/src/org/eclipse/emf/cdo/common/model/CDOModelUtil.java
+	private static void getSubTypes(EPackage ePackage, Map<EClass, List<EClass>> result) {
+		for (EClassifier classifier : ePackage.getEClassifiers()) {
+			if (classifier instanceof EClass) {
+				EClass eClass = (EClass) classifier;
+				getSubType(eClass, EcorePackage.eINSTANCE.getEObject(), result);
+
+				for (EClass eSuperType : eClass.getEAllSuperTypes()) {
+					getSubType(eClass, eSuperType, result);
+				}
+			}
+		}
+	}
+
+	private static void getSubType(EClass eClass, EClass eSuperType, Map<EClass, List<EClass>> result) {
+		if (eSuperType.eIsProxy()) {
+			// OM.LOG.warn("getSubTypes encountered a proxy EClass which will be ignored: "
+			// + eSuperType);
+			return;
+		}
+
+		List<EClass> list = result.get(eSuperType);
+		if (list == null) {
+			list = new ArrayList<>();
+			result.put(eSuperType, list);
+		}
+
+		list.add(eClass);
+	}
+  }
