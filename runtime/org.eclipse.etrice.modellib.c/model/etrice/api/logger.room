@@ -25,10 +25,6 @@ RoomModel etrice.api.logger {
 	 * ----
 	 */
 	ProtocolClass PLogger {
-		usercode3 '''
-			#include <stdarg.h>
-			extern void PLogging_internal_logF();
-		'''
 		conjugated PortClass
 		{
 
@@ -36,19 +32,25 @@ RoomModel etrice.api.logger {
 			 *  Logs a simple message. Appends line separator.
 			 */
 			Operation log(message: char ref) '''
-				logF(message, NULL);
+				// TODO call etLogger
 			'''
 
 			/**
 			 *  Logs a formatted message with arguments. Appends line separator.
 			 */
 			Operation logF(format: char ref, args: voidType varargs) '''
-				va_list argptr;
-				va_start(argptr, format);
 				// TODO call etLogger
-				PLogger_internal_logF(format, argptr);
-				va_end(argptr);
 			'''
+		}
+	}
+	
+	/** Simple protocol to flush logging. */
+	ProtocolClass PLoggerFlush {
+		incoming {
+			Message flush()
+		}
+		outgoing {
+			Message done()
 		}
 	}
 }
