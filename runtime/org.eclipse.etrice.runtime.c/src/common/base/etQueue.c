@@ -20,7 +20,6 @@ void etQueue_init(etQueue* self){
 
 	self->first = NULL;
 	self->last = NULL;
-	self->highWaterMark = 0;
 	self->size = 0;
 
 	ET_MSC_LOGGER_SYNC_EXIT
@@ -40,9 +39,7 @@ void etQueue_push(etQueue* self, etQueueObj* obj){
 		self->last = obj;
 	}
 	obj->next = NULL; /*TODO: optimization: this line could be removed if we assume that all objects are initialized*/
-
-	if (++self->size > self->highWaterMark)
-		self->highWaterMark++;
+	self->size++;
 
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -97,8 +94,3 @@ etBool etQueue_isNotEmpty(etQueue* self){
 	return self->last != NULL;
 }
 
-etInt16 etQueue_getHighWaterMark(etQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "getHightWaterMark")
-	ET_MSC_LOGGER_SYNC_EXIT
-	return self->highWaterMark;
-}

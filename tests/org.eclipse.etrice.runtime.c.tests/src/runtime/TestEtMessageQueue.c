@@ -28,13 +28,11 @@ void TestEtMessageQueue_testPushPop(etInt16 id){
 	etMessageQueue_push(&queue1, &msg2);
 
 	EXPECT_EQUAL_INT16(id, "etMessageQueue.size before", 2, queue1.size);
-	EXPECT_EQUAL_INT16(id, "etMessageQueue.statistics.highWaterMark before", 2, queue1.statistics.highWaterMark);
 
 	etMessage* rcvMsg1 = etMessageQueue_pop(&queue1);
 	etMessage* rcvMsg2 = etMessageQueue_pop(&queue1);
 
 	EXPECT_EQUAL_INT16(id, "etMessageQueue.size after", 0, queue1.size);
-	EXPECT_EQUAL_INT16(id, "etMessageQueue.statistics.highWaterMark after", 2, queue1.statistics.highWaterMark);
 
 	EXPECT_EQUAL_INT16(id, "rcvMsg1->address", 123, rcvMsg1->address);
 	EXPECT_EQUAL_INT16(id, "rcvMsg1->evtID", 456, rcvMsg1->evtID);

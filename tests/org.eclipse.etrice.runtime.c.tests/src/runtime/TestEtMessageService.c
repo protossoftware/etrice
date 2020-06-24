@@ -237,7 +237,8 @@ void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 			DummyMessageDispatcher,
 			EXECMODE_BLOCKED);
 
-	EXPECT_EQUAL_INT16(id, "inital low water mark", max, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "inital low water mark", 0, msgService.statistics.queueStatistics.lowWaterMark);
+	EXPECT_EQUAL_INT16(id, "inital high water mark", 0, msgService.statistics.queueStatistics.highWaterMark);
 
 	// get messages from pool
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -253,7 +254,8 @@ void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 	etMessageService_pushMessage(&msgService, msg2);
 	etMessageService_pushMessage(&msgService, msg1);
 
-	EXPECT_EQUAL_INT16(id, "low water mark 1", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 1", 0, msgService.statistics.queueStatistics.lowWaterMark);
+	EXPECT_EQUAL_INT16(id, "high water mark 1", 2, msgService.statistics.queueStatistics.highWaterMark);
 
 	// pop messages from queue
 	etMessage* rcvMsg1 = etMessageService_popMessage(&msgService);
@@ -262,7 +264,8 @@ void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 	etMessageService_returnMessageBuffer(&msgService, rcvMsg1);
 	etMessageService_returnMessageBuffer(&msgService, rcvMsg2);
 
-	EXPECT_EQUAL_INT16(id, "low water mark 2", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 2", 0, msgService.statistics.queueStatistics.lowWaterMark);
+	EXPECT_EQUAL_INT16(id, "high water mark 2", 2, msgService.statistics.queueStatistics.highWaterMark);
 
 	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -270,7 +273,8 @@ void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 	etMessageService_pushMessage(&msgService, msg1);
 
 	/*still the same*/
-	EXPECT_EQUAL_INT16(id, "low water mark 3", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 3", 0, msgService.statistics.queueStatistics.lowWaterMark);
+	EXPECT_EQUAL_INT16(id, "high water mark 3", 2, msgService.statistics.queueStatistics.highWaterMark);
 
 	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	etMessageService_pushMessage(&msgService, msg2);
@@ -282,13 +286,15 @@ void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 	etMessageService_pushMessage(&msgService, msg2);
 
 	/*  no message left */
-	EXPECT_EQUAL_INT16(id, "low water mark 4", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 4", 0, msgService.statistics.queueStatistics.lowWaterMark);
+	EXPECT_EQUAL_INT16(id, "high water mark 4", max, msgService.statistics.queueStatistics.highWaterMark);
 
 	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	EXPECT_EQUAL_PTR(id, "check message for NULL", NULL, msg1);
 
 	/*  still no message left */
-	EXPECT_EQUAL_INT16(id, "low water mark 6", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 6", 0, msgService.statistics.queueStatistics.lowWaterMark);
+	EXPECT_EQUAL_INT16(id, "high water mark 6", max, msgService.statistics.queueStatistics.highWaterMark);
 
 	etMessageService_destroy(&msgService);
 }

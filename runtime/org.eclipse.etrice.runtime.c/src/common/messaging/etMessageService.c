@@ -90,7 +90,10 @@ void etMessageService_initx(
 
 	/* init statistics */
 	self->statistics.highWaterMark = 0;
-	self->statistics.queueStatistics = &self->messageQueue.statistics;
+	self->statistics.queueStatistics.highWaterMark = 0;
+	self->statistics.queueStatistics.lowWaterMark = 0;
+	self->statistics.queueStatistics.nFailingRequests = 0;
+
 	self->resetStatistics = ET_FALSE;
 
 	/* register with runtime */
@@ -152,7 +155,6 @@ void etMessageService_initMessagePool(etMessageService* self){
 		etMessage* block = (etMessage*) &self->messageBuffer.buffer[i*self->messageBuffer.blockSize];
 		etMessageQueue_push(&self->messagePool, block);
 	}
-	etMessageQueue_resetLowWaterMark(&self->messagePool);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
@@ -184,14 +186,19 @@ etMessage* etMessageService_getMessageBuffer(etMessageService* self, etUInt16 si
 		if (self->messagePool.size>0){
 			etMessage* msg = etMessageQueue_pop(&self->messagePool);
 			etMutex_leave(&self->poolMutex);
+			if((self->messageBuffer.maxBlocks - self->messagePool.size) > self->statistics.queueStatistics.highWaterMark) {
+				self->statistics.queueStatistics.highWaterMark++;
+			}
 			ET_MSC_LOGGER_SYNC_EXIT
 			return msg;
 		}
 		else {
-			etLogger_logErrorF("etMessageService_getMessageBuffer: message pool empty: %d", etMessageService_getMessagePoolLowWaterMark(self));
+			self->statistics.queueStatistics.nFailingRequests++;
+			etLogger_logErrorF("etMessageService_getMessageBuffer: message pool empty: %d", self->statistics.queueStatistics.lowWaterMark);
 		}
 	}
 	else {
+		self->statistics.queueStatistics.nFailingRequests++;
 		etLogger_logErrorF("etMessageService_getMessageBuffer: message too big: %d, blockSize: %d", size, self->messageBuffer.blockSize);
 	}
 	etMutex_leave(&self->poolMutex);
@@ -203,6 +210,9 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "returnMessageBuffer")
 	etMutex_enter(&self->poolMutex);
 	etMessageQueue_push(&self->messagePool, buffer);
+	if ((self->messageBuffer.maxBlocks - self->messagePool.size) < self->statistics.queueStatistics.lowWaterMark) {
+		self->statistics.queueStatistics.lowWaterMark--;
+	}
 	etMutex_leave(&self->poolMutex);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -273,8 +283,9 @@ static void etMessageService_deliverAllMessages(etMessageService* self){
 				self->resetStatistics = ET_FALSE;
 
 				self->statistics.highWaterMark = 0;
-				etMessageQueue_resetHighWaterMark(&self->messageQueue);
-				etMessageQueue_resetLowWaterMark(&self->messageQueue);
+				self->statistics.queueStatistics.highWaterMark = 0;
+				self->statistics.queueStatistics.lowWaterMark = (self->messageBuffer.maxBlocks - self->messagePool.size);
+				self->statistics.queueStatistics.nFailingRequests = 0;
 			}
 
 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
@@ -288,13 +299,6 @@ static void etMessageService_deliverAllMessages(etMessageService* self){
 		}
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
-}
-
-etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self){
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "getMessagePoolLowWaterMark")
-	etInt16 lowWaterMark = etMessageQueue_getLowWaterMark(&self->messagePool);
-	ET_MSC_LOGGER_SYNC_EXIT
-	return lowWaterMark;
 }
 
 static void etMessageService_timerCallback(void* data) {

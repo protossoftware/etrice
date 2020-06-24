@@ -20,8 +20,6 @@ void etMessageQueue_init(etMessageQueue* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "init")
 	self->first = NULL;
 	self->last = NULL;
-	self->statistics.highWaterMark = 0;
-	self->statistics.lowWaterMark = 0;
 	self->size = 0;
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -40,9 +38,7 @@ void etMessageQueue_push(etMessageQueue* self, etMessage* msg){
 		self->last = msg;
 	}
 	msg->next = NULL; /*TODO: optimization: this line could be removed if we assume that all messages are initialized*/
-
-	if (++self->size > self->statistics.highWaterMark)
-		self->statistics.highWaterMark++;
+	self->size++;
 
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -66,9 +62,6 @@ etMessage* etMessageQueue_pop(etMessageQueue* self){
 
 	pop_msg->next=NULL;
 	self->size--;
-
-	if (self->size < self->statistics.lowWaterMark)
-		self->statistics.lowWaterMark--;
 
 	ET_MSC_LOGGER_SYNC_EXIT
 	return pop_msg;
@@ -98,32 +91,3 @@ etBool etMessageQueue_isNotEmpty(etMessageQueue* self){
 	return self->last != NULL;
 }
 
-const etQueueStatistics* etMessageQueue_getStatistics(etMessageQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getHighWaterMark")
-	ET_MSC_LOGGER_SYNC_EXIT
-	return &self->statistics;
-}
-
-etInt16 etMessageQueue_getHighWaterMark(etMessageQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getHighWaterMark")
-	ET_MSC_LOGGER_SYNC_EXIT
-	return self->statistics.highWaterMark;
-}
-
-void etMessageQueue_resetHighWaterMark(etMessageQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "resetHighWaterMark")
-	self->statistics.highWaterMark = 0;
-	ET_MSC_LOGGER_SYNC_EXIT
-}
-
-etInt16 etMessageQueue_getLowWaterMark(etMessageQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getLowWaterMark")
-	ET_MSC_LOGGER_SYNC_EXIT
-	return self->statistics.lowWaterMark;
-}
-
-void etMessageQueue_resetLowWaterMark(etMessageQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "resetLowWaterMark")
-	self->statistics.lowWaterMark = self->size;
-	ET_MSC_LOGGER_SYNC_EXIT
-}

@@ -202,6 +202,14 @@ void etMSCLogger_addVisibleComment(const char* comment);
  * If \ref ET_MSC_LOGGER_ACTIVATE isn't defined this macro is void
  */
 #define ET_MSC_LOGGER_CHANGE_STATE(objectName, stateName)
+
+/**
+ * calls \ref etMSCLogger_addVisibleComment(const char*)
+ * \par
+ * If \ref ET_MSC_LOGGER_ACTIVATE isn't defined this macro is void
+ */
+#define ET_MSC_LOGGER_VISIBLE_COMMENT(comment)
+
 #endif
 
 ET_EXTERN_C_END

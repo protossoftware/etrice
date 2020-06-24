@@ -8,42 +8,31 @@
  * SPDX-License-Identifier: EPL-2.0
  *
  * CONTRIBUTORS:
- * 		Thomas Schuetz (initial contribution)
+ * 		Henrik Rentz-Reichert (initial contribution)
  *
  *******************************************************************************/
 
-#ifndef _ETQUEUE_H_
-#define _ETQUEUE_H_
+#ifndef COMMON_BASE_ETQUEUESTATISTICS_H_
+#define COMMON_BASE_ETQUEUESTATISTICS_H_
 
-#include <stddef.h>
 #include "etDatatypes.h"
 
 ET_EXTERN_C_BEGIN
 
-typedef struct etQueueObj {
-	struct etQueueObj* next;
-} etQueueObj;
+/**
+ * a data structure for the queue statistics
+ */
+typedef struct etQueueStatistics {
+	etInt16 highWaterMark;			/**< high water mark */
+	etInt16 lowWaterMark;			/**< low water mark */
+	etInt16 nFailingRequests;		/**< queue would have exceeded maximum size */
+}
+etQueueStatistics;
 
-typedef struct etQueue {
-	etQueueObj* first;
-	etQueueObj* last;
-	etInt16 size;
-} etQueue;
+void etQueueStatistics_init(etQueueStatistics* self);
 
-void etQueue_init(etQueue* self);
-
-void etQueue_push(etQueue* self, etQueueObj* obj);
-
-etQueueObj* etQueue_pop(etQueue* self);
-
-etQueueObj* etQueue_getFirst(etQueue* self);
-
-etQueueObj* etQueue_getLast(etQueue* self);
-
-etBool etQueue_isNotEmpty(etQueue* self);
-
-etInt16 etQueue_getSize(etQueue* self);
+void etQueueStatistics_reset(etQueueStatistics* self, etInt16 lowWaterMark);
 
 ET_EXTERN_C_END
 
-#endif /* _ETQUEUE_H_ */
+#endif /* COMMON_BASE_ETQUEUESTATISTICS_H_ */

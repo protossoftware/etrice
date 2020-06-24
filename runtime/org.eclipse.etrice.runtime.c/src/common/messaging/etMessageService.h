@@ -27,6 +27,8 @@
 #include "etDatatypes.h"
 #include "messaging/etMessageQueue.h"
 #include "messaging/etMessageReceiver.h"
+#include "base/etQueue.h"
+#include "base/etQueueStatistics.h"
 
 #include "osal/etMutex.h"
 #include "osal/etThread.h"
@@ -71,7 +73,7 @@ struct etHighPrioFunc{
  */
 typedef struct etMessageServiceStatistics {
 	etTimeDiff highWaterMark;					/** high water mark */
-	etQueueStatistics* queueStatistics;			/** a pointer to the queue statistics */
+	etQueueStatistics queueStatistics;			/** a pointer to the queue statistics */
 }
 etMessageServiceStatistics;
 
@@ -210,14 +212,6 @@ etMessage* etMessageService_getMessageBuffer(etMessageService* self, etUInt16 si
  * \param buffer the memory to be freed
  */
 void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buffer);
-
-/**
- * returns the low water mark of the message pool
- *
- * \param self the this pointer
- * \return the low water mark of the message pool
- */
-etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self);
 
 /* functions to register and unregister high prio functions */
 void etMessageService_registerHighPrioFunc(etMessageService* self, etHighPrioFunc* func);
