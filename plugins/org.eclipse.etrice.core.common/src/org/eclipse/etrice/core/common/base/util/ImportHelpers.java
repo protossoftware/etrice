@@ -145,10 +145,6 @@ public class ImportHelpers {
 			while (iter.hasNext()) {
 				IEObjectDescription eObjDesc = iter.next();
 				if (importedFQN.equals(eObjDesc.getQualifiedName())) {
-					if (quickFixCandidateMatcher.apply(eObjDesc)) {
-						// exact match -> early quit
-						return Optional.of(Lists.newArrayList(eObjDesc));
-					}
 					candidates.add(eObjDesc);
 				} else if (quickFixCandidateMatcher.apply(eObjDesc)) {
 					candidates.add(eObjDesc);
