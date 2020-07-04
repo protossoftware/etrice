@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.ui.contentassist.ImportModelAssist;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -35,6 +36,7 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
@@ -131,12 +133,18 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 	}
 	
 	@Override
+	public void completeImport_ImportedNamespace(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		lookupImportedNamespace(model, context, acceptor, RoomPackage.eINSTANCE.getRoomClass(), BasePackage.eINSTANCE.getAnnotationType());
+	}
+	
+	@Override
 	public void completeImport_ImportURI(EObject model, Assignment assignment,
 			final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {
 		ImportModelAssist.addPaths(this, context, acceptor, ".room");
 	}
-
+	
 	@Override
 	public void completeActorInstanceMapping_Path(EObject model,
 			Assignment assignment, ContentAssistContext context,

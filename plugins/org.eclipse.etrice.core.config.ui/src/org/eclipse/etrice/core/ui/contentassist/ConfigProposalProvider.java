@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
@@ -58,12 +59,18 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 	private ConfigUtil configUtil;
 	
 	@Override
+	public void completeImport_ImportedNamespace(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		lookupImportedNamespace(model, context, acceptor, RoomPackage.eINSTANCE.getRoomClass());
+	}
+	
+	@Override
 	public void completeImport_ImportURI(EObject model, Assignment assignment,
 			final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {
 		ImportModelAssist.addPaths(this, context, acceptor, ".room");
 	}
-
+	
 	@Override
 	public void completeActorInstanceConfig_Path(EObject model,
 			Assignment assignment, ContentAssistContext context,

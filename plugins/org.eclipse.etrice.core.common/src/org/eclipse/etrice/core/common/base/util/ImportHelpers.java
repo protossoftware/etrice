@@ -84,17 +84,23 @@ public class ImportHelpers {
 	 *  Returns current visible/imported scope of given resource.
 	 */
 	public IScope getVisibleScope(Resource context) {
-		return getVisibleScope(context, null);
+		return getVisibleScope(context, EOBJECT);
 	}
 	
 	/**
 	 *  Returns current visible/imported scope of given resource.
 	 */
 	public IScope getVisibleScope(Resource context, EClass type) {
+		return getVisibleScope(context, type, Predicates.alwaysTrue());
+	}
+	
+	/**
+	 * Returns current imported scope of given resource.
+	 */
+	public IScope getVisibleScope(Resource context, EClass type, Predicate<IEObjectDescription> filter) {
 		EReference reference = EcoreFactory.eINSTANCE.createEReference();
-		reference.setEType((type != null) ? type : EOBJECT);	
-		
-		return globalScope.getScope(context, reference, Predicates.alwaysTrue());
+		reference.setEType((type != null) ? type : EOBJECT);
+		return globalScope.getScope(context, reference, filter);
 	}
 	
 	/**

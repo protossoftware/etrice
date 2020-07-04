@@ -14,6 +14,7 @@ package org.eclipse.etrice.core.etphys.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.ui.contentassist.ImportModelAssist;
+import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -22,6 +23,12 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class ETPhysProposalProvider extends AbstractETPhysProposalProvider {
+	
+	@Override
+	public void completeImport_ImportedNamespace(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		lookupImportedNamespace(model, context, acceptor, ETPhysPackage.eINSTANCE.getNodeClass(), ETPhysPackage.eINSTANCE.getRuntimeClass());
+	}
 
 	@Override
 	public void completeImport_ImportURI(EObject model, Assignment assignment,
@@ -29,5 +36,5 @@ public class ETPhysProposalProvider extends AbstractETPhysProposalProvider {
 			final ICompletionProposalAcceptor acceptor) {
 		ImportModelAssist.addPaths(this, context, acceptor, ".etphys");
 	}
-
+	
 }
