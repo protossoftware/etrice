@@ -15,17 +15,37 @@ RoomModel etrice.api.timer {
 	import etrice.api.types.int8
 	import etrice.api.types.int32
 	import etrice.api.types.uint32
-
+	
+	/**
+	 * Defines the communication protocol to control a single timer.
+	 */
 	ProtocolClass PTimer {
 		usercode3 '''
 			#define ET_TIMER_RUNNING	0x01
 			#define ET_TIMER_PERIODIC	0x02'''
 		incoming {
+			/**
+			 * Start a timer that notifies every time the specified period in milliseconds expires.
+			 * This has no effect if there is already an active timer or timeout.
+			 */
 			Message startTimer(uint32)
+			
+			/**
+			 * Start a timeout that notifies once when the specified duration in milliseconds expires.
+			 * This has no effect if there is already an active timer or timeout.
+			 */
 			Message startTimeout(uint32)
+			
+			/**
+			 * Stop an active timer or timeout.
+			 * This has no effect if neither a timer nor a timeout is active.
+			 */
 			Message kill()
 		}
 		outgoing {
+			/**
+			 * Inform about an expired timer or timeout.
+			 */
 			Message timeout()
 		}
 		conjugated PortClass
@@ -61,14 +81,18 @@ RoomModel etrice.api.timer {
 
 	ProtocolClass PTimerSupervisionControl {
 		incoming {
+			/** Reset the deviation high water mark. */
 			Message restTimerDeviationHighWaterMark()
+			/** Request the deviation high water mark. */
 			Message getTimerDeviationHighWaterMark()
 		}
 		outgoing {
+			/** Inform about the deviation high water mark in microseconds. */
 			Message timerDeviationHighWaterMark(uint32)
 		}
 	}
 
+	/** Provides a service to create and control timer. */
 	async ActorClass ATimerService {
 		Interface {
 			SPP timer: PTimer
