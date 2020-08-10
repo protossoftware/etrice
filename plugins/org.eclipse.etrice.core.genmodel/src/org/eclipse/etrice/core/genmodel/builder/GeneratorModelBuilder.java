@@ -647,9 +647,7 @@ public class GeneratorModelBuilder {
 				// relay ports are not instantiated and thus have no object ID
 				if (pi.getKind()!=PortKind.RELAY) {
 					// replicated ports have subsequent object IDs
-					int multiplicity = pi.getPort().getMultiplicity();
-					if (multiplicity==-1)
-						multiplicity = pi.getPeers().size();
+					int multiplicity = Math.max(pi.getPeers().size(), 1);
 					pi.setObjId(counter);
 					counter += multiplicity;
 				}
