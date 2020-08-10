@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
@@ -38,17 +39,23 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.support.SupportUtil;
+import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
+@SuppressWarnings("deprecation")
 public class PortPropertyDialog extends AbstractPropertyDialog {
 
 	class NameValidator implements IValidator {
@@ -175,6 +182,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	private boolean newPort;
 	private boolean refitem;
 	private boolean internal;
+	private Button relayCheck = null;
 	private boolean relay;
 	private boolean oldRelay;
 
@@ -240,6 +248,8 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		Text name = createText(body, "&Name:", port, FSMPackage.eINSTANCE.getAbstractInterfaceItem_Name(), nv);
 		Combo protocol = createComboUsingDesc(body, "&Protocol:", port, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, pv);
 		Button conj = createCheck(body, "&Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
+		if (!internal && !refitem && (acc instanceof ActorClass))
+			createRelayCheck(body, notReferenced, mform.getToolkit());
 		
 		Multiplicity2StringConverter m2s = new Multiplicity2StringConverter();
 		String2MultiplicityConverter s2m = new String2MultiplicityConverter();
@@ -277,6 +287,23 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		name.setFocus();
 	}
 
+	private void createRelayCheck(Composite parent, Result notReferenced, FormToolkit toolkit) {
+		Label l = toolkit.createLabel(parent, "Is Relay Port:", SWT.NONE);
+		l.setLayoutData(new GridData(SWT.NONE));
+		
+		relayCheck = toolkit.createButton(parent, "", SWT.CHECK);
+		relayCheck.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		relayCheck.setSelection(relay);
+		relayCheck.setEnabled(notReferenced.isOk());
+
+		getBindingContext().bindValue(SWTObservables.observeSelection(relayCheck), PojoObservables.observeValue(this, "relay"));
+		
+		if (notReferenced.isOk())
+			createDecorator(relayCheck, "");
+		else
+			createInfoDecorator(relayCheck, notReferenced.getMsg());
+	}
+	
 	@Override
 	protected void okPressed() {
 		if (relay!=oldRelay) {
