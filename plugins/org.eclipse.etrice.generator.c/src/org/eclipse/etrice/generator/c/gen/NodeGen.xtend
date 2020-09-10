@@ -374,8 +374,9 @@ class NodeGen {
 					«IF pi.portClassAttributesSize > 0»
 						ET_FOWARD_DECLARATION_OF_INST_VAR «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var«IF pi.replicated»[«pi.peers.size»]«ENDIF»={
 							«FOR Integer i:1.. if(pi.peers.size==0)1 else pi.peers.size SEPARATOR ', '»
-								«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»
-							«ENDFOR»};
+								«IF pi.replicated»{«ENDIF»«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»«IF pi.replicated»}«ENDIF»
+							«ENDFOR»
+						};
 					«ENDIF»
 				«ENDFOR»
 			«ENDIF»
