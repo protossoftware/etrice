@@ -350,24 +350,17 @@ public class StandardModelLocator implements IModelLocator {
 	 *  Copied from GlobalNonPlatformURIEditorOpener
 	 */
 	public static URI getPlatformURI(URI uri) {
-		if (uri.isPlatform())
+		if (uri.isPlatform()) {
 			return uri;
-
-		// HOWTO: find absolute path location in workspace (as platform URI)
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IFile[] files = root.findFilesForLocationURI(java.net.URI.create(uri.toString()));
-		
-		URI minLength = null;
-		for (IFile file : files) {
-			if (!file.isAccessible())	// avoid closed or other bad files
-				continue;
-			
-			URI platURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true).appendFragment(uri.fragment());
-			if(minLength == null || platURI.toString().length() < minLength.toString().length())
-				minLength = platURI;
-		}	
-
-		return minLength;
+		}
+		else if(uri.isFile()) {
+			// HOWTO: find absolute path location in workspace (as platform URI)
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			IFile file = root.getFileForLocation(new Path(uri.toFileString()));
+			if(file != null)
+				return URI.createPlatformResourceURI(file.getFullPath().toPortableString(), true).appendFragment(uri.fragment());
+		}
+		return null;
 	}
 
 }
