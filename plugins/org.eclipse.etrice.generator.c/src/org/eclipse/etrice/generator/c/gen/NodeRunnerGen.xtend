@@ -66,6 +66,7 @@ class NodeRunnerGen {
 
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
+		#include "debugging/etDataLogger.h"
 		
 		#include "osal/etPlatformLifecycle.h"
 		
@@ -89,6 +90,7 @@ class NodeRunnerGen {
 			
 			etLogger_logInfo("***   T H E   B E G I N   ***");
 			ET_MSC_LOGGER_OPEN("main");
+			ET_DATA_LOGGER_OPEN("main");
 		
 			/* startup sequence  of lifecycle */
 			«clsname»_init(); 		/* lifecycle init */
@@ -106,6 +108,7 @@ class NodeRunnerGen {
 			«clsname»_destroy(); 	/* lifecycle destroy */
 		
 			ET_MSC_LOGGER_CLOSE
+			ET_DATA_LOGGER_CLOSE
 			etLogger_logInfo("***   T H E   E N D   ***");
 		
 			etUserExit(); /* platform specific */
