@@ -52,9 +52,9 @@ In this tutorial you will have a first look at a very simple eTrice model. The g
 	- *Refresh using native hooks or polling*
 	- *Refresh on access*
 
-- Optional: Install [Trace2UML](http://trace2uml.stage.tigris.org/), an Open Source MSC viewer
-	- [Windows download site](http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208)
-	- [Linux package](http://apt.astade.de/)
+- Optional: Install [Trace2UML](https://wiki.astade.de/), an Open Source MSC viewer
+	- [Windows download site](https://wiki.astade.de/dokuwiki/doku.php?id=download:index)
+	- [Linux package](https://wiki.astade.de/dokuwiki/doku.php?id=download:index)
 
 #### How to install the MinGW compiler on Windows 10
 
@@ -167,9 +167,9 @@ The goal is to learn the work flow of eTrice and to understand a few basic featu
 	- *Refresh using native hooks or polling*
 	- *Refresh on access*
 
-- Optional: Install [Trace2UML](http://trace2uml.stage.tigris.org/), an Open Source MSC viewer
-	- [Windows download site](http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208)
-	- [Linux package](http://apt.astade.de/)
+- Optional: Install [Trace2UML](https://wiki.astade.de/), an Open Source MSC viewer
+	- [Windows download site](https://wiki.astade.de/dokuwiki/doku.php?id=download:index)
+	- [Linux package](https://wiki.astade.de/dokuwiki/doku.php?id=download:index)
 
 #### Create template project
 
@@ -264,9 +264,9 @@ In this tutorial you will have a first look at a very simple eTrice model. The g
 	-   *Refresh using native hooks or polling*
 	-   *Refresh on access*
 
--   Optional: Install [Trace2UML](http://trace2uml.stage.tigris.org/), an Open Source MSC viewer
-	-   [Windows download site](http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208)
-	-   [Linux package](http://apt.astade.de/)
+-   Optional: Install [Trace2UML](https://wiki.astade.de/), an Open Source MSC viewer
+	-   [Windows download site](https://wiki.astade.de/dokuwiki/doku.php?id=download:index)
+	-   [Linux package](https://wiki.astade.de/dokuwiki/doku.php?id=download:index)
 
 #### Create template project
 

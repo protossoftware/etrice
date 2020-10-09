@@ -25,7 +25,7 @@ import java.util.List;
  * @author Thomas Schuetz
  *
  * MSCLogger implements logging of sync and async MSCs into a file 
- * MSC-format is that of Trace2UML (http://trace2uml.tigris.org/)
+ * MSC-format is that of Trace2UML (https://wiki.astade.de/)
  * 
  */
 public class MSCLogger {

@@ -3656,7 +3656,7 @@ A list of available options:
 ## MSCLogging
 Runtime logger for event-driven Messages, represented as a Message Sequence Chart.
 
-The MSCLogging is activated by default, but can be set manually in the [GenerationOptions][]. The output file is created upon regular termination of the application. The resulting file can be found in the logging directory and has the name *msc.seq*, which can be open with the free open source tool [Trace2UML](http://trace2uml.stage.tigris.org/).
+The MSCLogging is activated by default, but can be set manually in the [GenerationOptions][]. The output file is created upon regular termination of the application. The resulting file can be found in the logging directory and has the name *msc.seq*, which can be open with the free open source tool [Trace2UML](https://wiki.astade.de/).
 
 ![MSCLogging](images/300-MSCLogging.png)
 
