@@ -5,8 +5,7 @@ eTrice documentation + help
 **Prerequistes**:
 
 - Featurizer (Download from Bitbucket and install - https://bitbucket.org/protos_de/de.protos.featurizer/downloads/)
-- Stagen (Download .jar from Bitbucket and put it to folder */xternalLibs*, **Java 8 **)
-- saxon9he.jar (in folder */xternalLibs*)
+- Stagen (Download from Bitbucket and put it to folder */xternalLibs*, **Java 8 ** - https://bitbucket.org/protos_de/stagen/downloads/stagen.jar)
 
 ## Project Structure
 

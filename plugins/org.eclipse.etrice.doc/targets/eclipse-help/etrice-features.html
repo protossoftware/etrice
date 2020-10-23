@@ -265,6 +265,71 @@
 <p>It is possible to generate a monitor, that can check the contract at runtime. The generator transforms any contract to an ActorClass, which can be placed between the implementing parties to detect any violation of the contract.</p>
 <img style="width: 100%;" src="images/050-InterfaceContractMonitor.png">
 <p>The generator is called “eTrice Contract Monitor Generator”. The usage is similar to the eTrice source code generators. By default the generated models are placed in the folder ‘model-gen’. The name of the generated ActorClass can be adjusted in the contract annotation <code>@InterfaceContractDefinition</code> using the attribute <code>generatedMontiorName</code>.<br>The generated monitor implements <code>PContractMonitorControl</code>, which can be used to query the violations status or to toggle the propagation of invalid messages. It can be found in the modellib under the namespace <code>etrice.api.contracts.monitors</code>.</p>
+<h2><a href="#interrupt-events" name="interrupt-events"></a>Interrupt Events</h2>
+<p>In eTrice the protocol <code>etrice.api.interrupt.PInterrupt</code> models an <a href="https://en.wikipedia.org/wiki/Interrupt">interrupt</a> event. The protocol consists of two messages <code>fire</code> and <code>event</code>, which have higher priority than other eTrice messages.<br>The flow of an interrupt event is as follows. First, the interrupt handler must create the eTrice message <code>PInterrupt.fire</code>. As soon as the execution returns to the eTrice thread, the eTrice runtime dispatches the <code>PInterrupt.event</code> message immediately before any other queued message. As a result, the interrupt <code>event</code> message will be received by the target state machine at once. The execution is always on the eTrice thread to avoid any concurrency issues from the interrupt context.</p>
+<p>The following examples shows how to connect an interrupt handler to the eTrice application.<br>First there is the simple actor <code>AExternalUSBIsr</code>, which exports the <code>PInterrupt</code> conjugated port to an external function called <code>USB_register_port</code>.</p>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> etrice.api.interrupt.PInterrupt
+
+<span class="keyword">ActorClass</span> AExternalUSBIsr {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> isrUSBExported: PInterrupt
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> isrUSBExported
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">StateMachine</span> {
+			<span class="keyword">State</span> state
+			<span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state {
+				<span class="keyword">action</span> <span class="string">'''
+					// export port isrUSBExported to external function
+					USB_register_port(isrUSBExported.export());
+				'''</span>
+			}
+		}
+	}
+}
+</code></pre>
+<p>The function <code>USB_register_port</code> saves the port handle to <code>usbIsr_port</code>. The interrupt handler can use this handle to trigger the <code>fire</code> message from its interrupt context.</p>
+<pre><code class="c">// #include "etrice/api/interrupt/PInterrupt.h"
+
+static PInterruptConjPort *usbIsr_port = NULL;
+
+// called from eTrice initial transition
+void USB_register_port(PInterruptConjPort *port) {
+	usbIsr_port = port;
+}
+
+// !! interrupt context !!
+void MY_USB_INTERRUPT_HANDLER() {
+	if(usbIsr_port) {
+		PInterruptConjPort_fire(usbIsr_port);
+	}
+}
+</code></pre>
+<p>The event is handled in actor <code>AUSBService</code>, which contains the previous actor <code>AExternalUSBIsr</code>. The port <code>usbIsr</code> is bound to <code>AExternalUSBIsr.externalUsbIsr</code>. If the interrupt handler triggers the <code>fire</code> message, the state machine will finally receive the associated <code>event</code> message on port <code>usbIsr</code>.</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> AUSBService {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Port</span> usbIsr: PInterrupt
+		<span class="keyword">ActorRef</span> externalUsbIsr: AExternalUSBIsr
+		<span class="keyword">Binding</span> usbIsr <span class="keyword">and</span> externalUsbIsr.isrUSBExported
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">StateMachine</span> {
+			<span class="keyword">State</span> state
+			<span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state
+			<span class="keyword">Transition</span> receiveUSB: state -&gt; state {
+				<span class="keyword">triggers</span> {
+					&lt;event: usbIsr&gt;
+				}
+				<span class="keyword">action</span> <span class="string">'''
+					// do something, e.g. read usb buffer
+				'''</span>
+			}
+		}
+	}
+}
+</code></pre>
 
 </body>
 </html>

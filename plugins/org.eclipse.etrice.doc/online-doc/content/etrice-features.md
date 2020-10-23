@@ -388,3 +388,81 @@ It is possible to generate a monitor, that can check the contract at runtime. Th
 The generator is called "eTrice Contract Monitor Generator". The usage is similar to the eTrice source code generators. By default the generated models are placed in the folder 'model-gen'. The name of the generated ActorClass can be adjusted in the contract annotation `@InterfaceContractDefinition` using the attribute `generatedMontiorName`.
 The generated monitor implements `PContractMonitorControl`, which can be used to query the violations status or to toggle the propagation of invalid messages. It can be found in the modellib under the namespace `etrice.api.contracts.monitors`.
 
+Interrupt Events
+------------
+
+In eTrice the protocol `etrice.api.interrupt.PInterrupt` models an [interrupt](https://en.wikipedia.org/wiki/Interrupt) event. The protocol consists of two messages `fire` and `event`, which have higher priority than other eTrice messages.
+The flow of an interrupt event is as follows. First, the interrupt handler must create the eTrice message `PInterrupt.fire`. As soon as the execution returns to the eTrice thread, the eTrice runtime dispatches the `PInterrupt.event` message immediately before any other queued message. As a result, the interrupt `event` message will be received by the target state machine at once. The execution is always on the eTrice thread to avoid any concurrency issues from the interrupt context.
+
+The following examples shows how to connect an interrupt handler to the eTrice application.
+First there is the simple actor `AExternalUSBIsr`, which exports the `PInterrupt` conjugated port to an external function called `USB_register_port`.
+
+```room
+import etrice.api.interrupt.PInterrupt
+
+ActorClass AExternalUSBIsr {
+	Interface {
+		conjugated Port isrUSBExported: PInterrupt
+	}
+	Structure {
+		external Port isrUSBExported
+	}
+	Behavior {
+		StateMachine {
+			State state
+			Transition init: initial -> state {
+				action '''
+					// export port isrUSBExported to external function
+					USB_register_port(isrUSBExported.export());
+				'''
+			}
+		}
+	}
+}
+```
+
+The function `USB_register_port` saves the port handle to `usbIsr_port`. The interrupt handler can use this handle to trigger the `fire` message from its interrupt context.
+
+```c
+// #include "etrice/api/interrupt/PInterrupt.h"
+
+static PInterruptConjPort *usbIsr_port = NULL;
+
+// called from eTrice initial transition
+void USB_register_port(PInterruptConjPort *port) {
+	usbIsr_port = port;
+}
+
+// !! interrupt context !!
+void MY_USB_INTERRUPT_HANDLER() {
+	if(usbIsr_port) {
+		PInterruptConjPort_fire(usbIsr_port);
+	}
+}
+```
+
+The event is handled in actor `AUSBService`, which contains the previous actor `AExternalUSBIsr`. The port `usbIsr` is bound to `AExternalUSBIsr.externalUsbIsr`. If the interrupt handler triggers the `fire` message, the state machine will finally receive the associated `event` message on port `usbIsr`.
+
+```room
+ActorClass AUSBService {
+	Structure {
+		Port usbIsr: PInterrupt
+		ActorRef externalUsbIsr: AExternalUSBIsr
+		Binding usbIsr and externalUsbIsr.isrUSBExported
+	}
+	Behavior {
+		StateMachine {
+			State state
+			Transition init: initial -> state
+			Transition receiveUSB: state -> state {
+				triggers {
+					<event: usbIsr>
+				}
+				action '''
+					// do something, e.g. read usb buffer
+				'''
+			}
+		}
+	}
+}
+```
