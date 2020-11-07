@@ -15,10 +15,13 @@
 package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
@@ -276,35 +279,28 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 		else
 			return text;
 	}
+
+	// This regular expression matches everything of the form 'ID.ID' and single line comments.
+	private static Pattern enumLiteralPattern = Pattern.compile("\\/\\/.*$|(\\w+\\.\\w+)");
 	
 	private String replaceAllEnums(String text, Set<EnumerationType> enumClasses) {
-		return Arrays.stream(text.split("\n")) //
-				.map(line -> replaceEnums(line, enumClasses)) //
-				.collect(Collectors.joining("\n"));
-	}
-
-	private String replaceEnums(String line, Set<EnumerationType> enumClasses) {
-		// only do replacements before // (iff)
-		int pos = line.indexOf("//");
-		String input = pos<0 ? line : line.substring(0, pos);
-		
 		ITranslationProvider prov = (ITranslationProvider) provider;
-		
-		for (EnumerationType et : enumClasses) {
-			for (EnumLiteral lit : et.getLiterals()) {
-				String pattern = et.getName()+"."+lit.getName();
-				if (input.contains(pattern)) {
-					String replacement = prov.getEnumText(lit);
-					input = input.replace(pattern, replacement);
+		Map<String, EnumLiteral> literals = enumClasses.stream()
+				.flatMap(type -> type.getLiterals().stream())
+				.collect(Collectors.toMap(EnumLiteral::getFullName, Function.identity()));
+		Matcher matcher = enumLiteralPattern.matcher(text);
+		StringBuffer sb = new StringBuffer(text.length());
+		while(matcher.find()) {
+			if(matcher.group(1) != null) {
+				EnumLiteral literal = literals.get(matcher.group(1));
+				if(literal != null) {
+					String replacement = prov.getEnumText(literal);
+					matcher.appendReplacement(sb, Matcher.quoteReplacement(replacement));
 				}
 			}
 		}
-		
-		if (pos>=0) {
-			input += line.substring(pos);
-		}
-		
-		return input;
+		matcher.appendTail(sb);
+		return sb.toString();
 	}
 
 	@Override
