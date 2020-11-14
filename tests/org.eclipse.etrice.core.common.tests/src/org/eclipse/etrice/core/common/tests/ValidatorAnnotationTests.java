@@ -15,8 +15,8 @@
 package org.eclipse.etrice.core.common.tests;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.common.BaseTestStandaloneSetup;
-import org.eclipse.etrice.core.common.validation.BaseJavaValidator;
+import org.eclipse.etrice.core.common.BaseStandaloneSetup;
+import org.eclipse.etrice.core.common.validation.BaseValidator;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
@@ -24,14 +24,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ValidatorAnnotationTests extends AbstractXtextTests {
-	protected ValidatorTester<BaseJavaValidator> tester;
+	protected ValidatorTester<BaseValidator> tester;
 	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		with(BaseTestStandaloneSetup.class);
-		BaseJavaValidator validator = get(BaseJavaValidator.class);
-		tester = new ValidatorTester<BaseJavaValidator>(validator, getInjector());
+		with(BaseStandaloneSetup.class);
+		BaseValidator validator = get(BaseValidator.class);
+		tester = new ValidatorTester<BaseValidator>(validator, getInjector());
 	}
 	
 	@Test
@@ -78,7 +78,7 @@ public class ValidatorAnnotationTests extends AbstractXtextTests {
 		getModelAndExpect(readFileIntoString("UnknownAnnotationType.etbase"), 1);
 	}
 
-	public ValidatorTester<BaseJavaValidator> getTester() {
+	public ValidatorTester<BaseValidator> getTester() {
 		return tester;
 	}
 }

@@ -3,12 +3,11 @@
  */
 package org.eclipse.etrice.core.etmap.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.etrice.core.etmap.ui.internal.EtmapActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.etrice.core.etmap.ui.internal.ETMapActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +17,13 @@ public class ETMapExecutableExtensionFactory extends AbstractGuiceAwareExecutabl
 
 	@Override
 	protected Bundle getBundle() {
-		return ETMapActivator.getInstance().getBundle();
+		return Platform.getBundle(EtmapActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return ETMapActivator.getInstance().getInjector(ETMapActivator.ORG_ECLIPSE_ETRICE_CORE_ETMAP_ETMAP);
+		EtmapActivator activator = EtmapActivator.getInstance();
+		return activator != null ? activator.getInjector(EtmapActivator.ORG_ECLIPSE_ETRICE_CORE_ETMAP_ETMAP) : null;
 	}
-	
+
 }

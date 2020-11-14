@@ -3,12 +3,11 @@
  */
 package org.eclipse.etrice.core.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.etrice.core.room.ui.internal.RoomActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +17,13 @@ public class RoomExecutableExtensionFactory extends AbstractGuiceAwareExecutable
 
 	@Override
 	protected Bundle getBundle() {
-		return RoomActivator.getInstance().getBundle();
+		return Platform.getBundle(RoomActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return RoomActivator.getInstance().getInjector(RoomActivator.ORG_ECLIPSE_ETRICE_CORE_ROOM);
+		RoomActivator activator = RoomActivator.getInstance();
+		return activator != null ? activator.getInjector(RoomActivator.ORG_ECLIPSE_ETRICE_CORE_ROOM) : null;
 	}
-	
+
 }

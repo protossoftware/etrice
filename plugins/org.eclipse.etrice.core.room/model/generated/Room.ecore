@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="room" nsURI="http://www.eclipse.org/etrice/Room" nsPrefix="room">
+  <eClassifiers xsi:type="ecore:EClass" name="RoomModel" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The root object for the ROOM model. It gives access to {@link Import imports} and&#xD;&#xA;the {@link SubSystemClass sub system},&#xD;&#xA;{@link ActorClass actor}, {@link ProtocolClass protocol} and&#xD;&#xA;{@link DataClass data} classes defined.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The model name is a dot separated fully qualified name and is&#xD;&#xA;used to provide a name space. The generators may use that also&#xD;&#xA;to place the generated code into separate directories.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Annotation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Import"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all imported models.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotationTypes" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//AnnotationType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomClasses" upperBound="-1"
+        eType="#//RoomClass" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all room classes defined by this model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomClass" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>This class is the super class of all classes&#xD;&#xA;of the ROOM class model:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link DataType}&lt;/li>&#xD;&#xA;  &lt;li>{@link ProtocolClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link StructureClass}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the actor class is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructureClass" eSuperTypes="#//RoomClass">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>This class is the super class of the structural classes&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link ActorContainerClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link LogicalSystem}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Annotation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of structure class annotations.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
+        eType="#//LayerConnection" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of structure class connections.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//Binding" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of structure class bindings.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorContainerClass" eSuperTypes="#//StructureClass">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>This class is the super class of the structural classes&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link ActorClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link SubSystemClass}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceProvisionPoints"
+        upperBound="-1" eType="#//SPP" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all interface SPPs.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode3" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorRefs" upperBound="-1"
+        eType="#//ActorRef" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all actor refs.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VarDecl" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A variable declaration consists of a name and a type.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the variable is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" eType="#//RefableType"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the data type of the variable.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varargs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageData" eSuperTypes="#//RoomElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecatedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" eType="#//RefableType"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefableType" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>This is a type with an optional reference attribute.&#xD;&#xA;If 'ref' is {@code true} then by reference semantic is chosen.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the data type.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>If {@code true} then by reference semantics is chosen, by value semantics else.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//RoomClass">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link PrimitiveType}&lt;/li>&#xD;&#xA;  &lt;li>{@link EnumerationType}&lt;/li>&#xD;&#xA;  &lt;li>{@link ComplexType}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//DataType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link DataClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link ExternalType}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//DataType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A primitive type describes a type like int, char, float&#xD;&#xA;and can represent the type with a certain precision&#xD;&#xA;in the target language&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//LiteralType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is one of the basic variable types.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the type name in the target language.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="castName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This (optional) name is used for casts to this type.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional default value literal.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationType" eSuperTypes="#//DataType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A sub type of {@link DataType} for enumerations.&#xD;&#xA;The EnumerationType can be associated with a {@link PrimitiveType} as value type for&#xD;&#xA;the {@link EnumLiteral}s. It has to contain at least one literal.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primitiveType" eType="#//PrimitiveType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The value type of the literals.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//EnumLiteral" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumLiteral" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A literal value of the enumeration.&#xD;&#xA;It can have a value associated.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getLiteralValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if (this.getLiteral() != null)&#xD;&#xA;&#x9;return this.getLiteral().getValue();&#xD;&#xA;&#xD;&#xA;// recursively from predecessor&#xD;&#xA;&lt;%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());&#xD;&#xA;int idx = et.getLiterals().indexOf(this);&#xD;&#xA;if (idx > 0)&#xD;&#xA;&#x9;return et.getLiterals().get(idx - 1).getLiteralValue() + 1;&#xD;&#xA;&#xD;&#xA;return 0;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getFullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="&lt;%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());&#xD;&#xA;return et.getName() + &quot;.&quot; + this.getName();&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The name of the literal.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//IntLiteral"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The value of the literal. It is associated with a target type which defaults to&#xD;&#xA;{@code int} and can be set explicitly using the {@link EnumerationType#getPrimitiveType()}&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalType" eSuperTypes="#//ComplexType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>An external type is not defined in the ROOM model&#xD;&#xA;but only referenced. It can not be instantiated.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the type name in the target language.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional default value literal.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataClass" eSuperTypes="#//ComplexType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Together with {@link ProtocolClass} and {@link ActorClass} one of&#xD;&#xA;the main class types of the ROOM language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;In ROOM this is the equivalent to a class in Java or C++.&#xD;&#xA;A data class can be derived from a base class (single&#xD;&#xA;inheritance), has {@link Attribute}s and {@link Operation}s.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Additionally it can be annotated with generator specific&#xD;&#xA;meaning and user ocde can be added in several places&#xD;&#xA;(again generator specific).&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//DataClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The base class from which all attributes and operations are inherited.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Annotation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of data class annotations.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode3" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+        eType="#//StandardOperation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>Operations are the methods of the data class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structors" upperBound="-1"
+        eType="#//ClassStructor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>Attributes are the data members of the data class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>An attribute is a named member of a&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link DataClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link ActorClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link PortClass}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;p>&#xD;&#xA;It can be of scalar or array type and is of a {@link RefableType}.&#xD;&#xA;It is possible to assign a default value literal.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The name of the attribute by which it is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The default is scalar ({@code size=1}), values {@code >1} indicate an array.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//RefableType"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the attribute's type.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional default value literal.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link StandardOperation}&lt;/li>&#xD;&#xA;  &lt;li>{@link PortOperation}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The name of the operation by which it is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//VarDecl" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of arguments for the operation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//RefableType"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional return type of the operation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the operation body written in code generator target language.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardOperation" eSuperTypes="#//Operation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The standard form of an operation as used by&#xD;&#xA;{@link ActorClass} and {@link DataClass}.&#xD;&#xA;&lt;p>&#xD;&#xA;The operation has a list of {@link VarDecl} arguments, an&#xD;&#xA;optional return {@link RefableType} and a body (specified&#xD;&#xA;as {@link DetailCode}).&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="override" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortOperation" eSuperTypes="#//Operation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The port operation is very similar to the {@link StandardOperation}&#xD;&#xA;and is used in the {@link PortClass}.&#xD;&#xA;&lt;p>&#xD;&#xA;Optionally a {@link Message} can be specified which is sent&#xD;&#xA;when the method is invoked. For this reason these operations&#xD;&#xA;are also shown in the 'messages' dialog of the behavior editor.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sendsMsg" eType="#//Message">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This optional reference to a message means that the operation sends a message.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassStructor" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Represents either the constructor (ctor) or destructor (dtor) of a ROOM class.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="isConstructor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return &quot;ctor&quot;.equals(this.getName());&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CommunicationType">
+    <eLiterals name="EVENT_DRIVEN" literal="eventdriven"/>
+    <eLiterals name="DATA_DRIVEN" value="1" literal="datadriven"/>
+    <eLiterals name="SYNCHRONOUS" value="2" literal="sync"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//RoomClass">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Together with {@link ActorClass} and {@link DataClass} one of&#xD;&#xA;the main class types of the ROOM language.&#xD;&#xA;&lt;p>&#xD;&#xA;A protocol class specifies a directed {@link Port} interface&#xD;&#xA;by two sets of {@link Message}s: incoming and outgoing.&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;A protocol class can derive from a base class (single inheritance).&#xD;&#xA;In this case it must only extend &lt;em>one&lt;/em> of the message sets:&#xD;&#xA;incoming &lt;em>or&lt;/em> outgoing.&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;Optionally {@link PortClass}es may be defined for regular and&#xD;&#xA;conjugate {@link Port}s. These classes can be used to add specific&#xD;&#xA;behavior e.g. by adding message handlers. This kind of felxibility&#xD;&#xA;can be used in particular for the efficient implementation of&#xD;&#xA;services (SAPs and SPPs).&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;Last not least a so called 'legal execution tree' can be specified&#xD;&#xA;using {@link ProtocolSemantics}.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commType" eType="#//CommunicationType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the communication type of the protocol.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ProtocolClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The base class from which all messages are inherited.&#xD;&#xA;The port classes and the semantics are not inherited.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Annotation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode3" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingMessages" upperBound="-1"
+        eType="#//Message" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the set of incoming messages of this protocol.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingMessages" upperBound="-1"
+        eType="#//Message" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the set of outgoing messages of this protocol.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="regular" eType="#//PortClass"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the optional regular port class specification.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conjugated" eType="#//PortClass"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the optional conjugate port class specification.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semantics" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//ProtocolSemantics"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the optional semantics specification for this protocol.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>This is a concrete sub class of an {@link AbstractMessage}.&#xD;&#xA;A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.&#xD;&#xA;For event driven protocols the message is an object that is deliverd using a message&#xD;&#xA;service of the runtime. For data driven systems only messages holding data are valid. In this&#xD;&#xA;case the conjugate port is the one holding (and writing) the data and the regular port is&#xD;&#xA;reading the data.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priv" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>If this flag is {@code true} then the message is treated as private for this protocol&#xD;&#xA;and can only be sent by a PortClass.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the message is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//MessageData"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a reference to optional message data.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Annotation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortClass" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A port class can be specified to customize the behavior of a {@link ProtocolClass}.&#xD;&#xA;There can be one for regular ports and another one for conjugate ports independently.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Port classes can be used to define attributes and operations and message handlers&#xD;&#xA;(or interceptors).&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msgHandlers" upperBound="-1"
+        eType="#//MessageHandler" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of message handlers.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+        eType="#//PortOperation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of operations of this nested class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of attributes of this nested class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageHandler" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link InMessageHandler}&lt;/li>&#xD;&#xA;  &lt;li>{@link OutMessageHandler}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="#//Message">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the message that is handled.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the handler code written in code generator target language.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InMessageHandler" eSuperTypes="#//MessageHandler">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Is a handler (or interceptor) for incoming messages. In the generated code the&#xD;&#xA;message is available. It is derived from {@link MessageHandler}.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutMessageHandler" eSuperTypes="#//MessageHandler">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Is a handler (or interceptor) for outgoing messages. In the generated code the&#xD;&#xA;message is available. It is derived from {@link MessageHandler}.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorClass" eSuperTypes="#//ActorContainerClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//ModelComponent">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Together with {@link ProtocolClass} and {@link DataClass} one of&#xD;&#xA;the main class types of the ROOM language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The actor class in ROOM has three compartments which aren't represented as separate model objects.&#xD;&#xA;To understand to which compartment an attribute or reference belongs to here is a list&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>Interface: everything which is visible from the outside from a model point of view&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getInterfacePorts}: a list of all interface {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link ActorContainerClass#getServiceProvisionPoints()}: a list of all interface {@link SPP}s&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Structure: all internal structural aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getUserCode1}-3: user defined code with generator dependent meaning&lt;/li>&#xD;&#xA;    &lt;li>{@link #getInternalPorts}: a list of all internal end {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getExternalPorts}: a list of all {@link ExternalPort}s (the interface ports that&#xD;&#xA;       are end ports, not relay ports&lt;/li>&#xD;&#xA;    &lt;li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getServiceAccessPoints}: a list of all {@link SAP}s used by this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getAttributes}: a list of all actor class {@link Attribute}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getActorRefs}: a list of all referenced actor classes (an {@link ActorRef}&#xD;&#xA;       has the meaning of a composition)&lt;/li>&#xD;&#xA;    &lt;li>{@link #getBindings}: a list of all port {@link Binding}s of this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getConnections}: a list of all {@link LayerConnection}s&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Behavior: the behavioral aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getOperations}: a list of {@link Operation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getStateMachine}: the {@link StateGraph state machine} definition&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getExternalEndPorts" upperBound="-1" eType="#//Port">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="EList&lt;Port> ports = new BasicEList&lt;Port>();&#xD;&#xA;for (ExternalPort ep : getExternalPorts()) {&#xD;&#xA;&#x9;if(ep.getInterfacePort() != null)&#xD;&#xA;&#x9;&#x9;ports.add(ep.getInterfacePort());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getRelayPorts" upperBound="-1" eType="#//Port">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="EList&lt;Port> ports = new BasicEList&lt;Port>(getInterfacePorts());&#xD;&#xA;for (ExternalPort ep : getExternalPorts()) {&#xD;&#xA;&#x9;if(ep.getInterfacePort() != null)&#xD;&#xA;&#x9;&#x9;ports.remove(ep.getInterfacePort());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getImplementedSPPs" upperBound="-1" eType="#//SPP">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="EList&lt;SPP> spps = new BasicEList&lt;SPP>();&#xD;&#xA;for (ServiceImplementation spp : getServiceImplementations()) {&#xD;&#xA;&#x9;if(spp.getSpp() != null)&#xD;&#xA;&#x9;&#x9;spps.add(spp.getSpp());&#xD;&#xA;}&#xD;&#xA;return spps;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getActorBase" eType="#//ActorClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return (ActorClass)getBase();&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getComponentName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getName();&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//AbstractInterfaceItem">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;AbstractInterfaceItem>(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%>().getInterfaceItems(this));&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//AbstractInterfaceItem">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;AbstractInterfaceItem>(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%>().getAllInterfaceItems(this));&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfacePorts" upperBound="-1"
+        eType="#//Port" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list containing all ports of the actor interface.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structureDocu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation of the actor structure.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceImplementations"
+        upperBound="-1" eType="#//ServiceImplementation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all service implementations.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all actor class private attributes.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceAccessPoints" upperBound="-1"
+        eType="#//SAP" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all SAPs.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="internalPorts" upperBound="-1"
+        eType="#//Port" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list containing all ports of the actor structure (internal end ports).&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalPorts" upperBound="-1"
+        eType="#//ExternalPort" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list containing all ports of the actor interface that are end ports.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDocu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation of the actor behavior.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorAnnotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Annotation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of annotations to the actor behavior.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+        eType="#//StandardOperation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all private operations of this actor class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structors" upperBound="-1"
+        eType="#//ClassStructor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfaceItem" eSuperTypes="platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem #//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>This is a concrete sub class of an {@link AbstractInterfaceItem}.&#xD;&#xA;&#xD;&#xA;It is the super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link Port}&lt;/li>&#xD;&#xA;  &lt;li>{@link SAP}&lt;/li>&#xD;&#xA;  &lt;li>{@link SPP}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getSemantics" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//ProtocolSemantics">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getProtocol().getSemantics();&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllIncomingAbstractMessages" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;EObject>(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getAllOutgoingAbstractMessages" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;EObject>(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isEventDriven" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getProtocol().getCommType() == &lt;%org.eclipse.etrice.core.room.CommunicationType%>.EVENT_DRIVEN;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the SAP's protocol class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//InterfaceItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A port defines a part of the interface of an {@link ActorClass} in a specific role.&#xD;&#xA;The port is associated with a {@link ProtocolClass}. If it is conjugated then the&#xD;&#xA;roles of incoming and outgoing messages of the protocol are inverted.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Ports can have a multiplicity. If it is greater one the port is called replicated.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Whether a port is a relay port or not is a property that is derived from how it is&#xD;&#xA;referenced by its {@link ActorClass}:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>ports contained in the actor structure are called &lt;em>internal end ports&lt;/em>&lt;/li>&#xD;&#xA;  &lt;li>ports contained in the actor interface and are also referenced by an {@link ExternalPort}&#xD;&#xA;     are called &lt;em>external end ports&lt;/em>&lt;/li>&#xD;&#xA;  &lt;li>ports contained in the actor interface only are called &lt;em>relay ports&lt;/em>&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;Relay ports delegate to sub actors and end ports are connected to the actor's state machine.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;@see org.eclipse.etrice.core.room.util.RoomHelpers#isRelay(Port) RoomHelpers.isRelay(Port)&#xD;&#xA;@see org.eclipse.etrice.core.room.util.RoomHelpers#isInternal(Port) RoomHelpers.isInternal(Port)&#xD;&#xA;@see org.eclipse.etrice.core.room.util.RoomHelpers#isExternal(Port) RoomHelpers.isExternal(Port)&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="isReplicated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return multiplicity>1 || multiplicity==-1;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conjugated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>If a port is conjugated then the roles of outgoing and incoming messages are interchanged.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>Ports with multiplicity >1 are called replicated ports. A multiplicity of {@code -1} means replicated&#xD;&#xA;port with arbitrary multiplicity.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Annotation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalPort" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>An external port is part of the actor structure and references an interface port.&#xD;&#xA;An interface port which is referenced by an external port is an external end port.&#xD;&#xA;If it is not referenced it is a relay port.&#xD;&#xA;&#xD;&#xA;@see Port&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfacePort" eType="#//Port">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the referenced interface port of the actor class which is now an external end port.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SAP" eSuperTypes="#//InterfaceItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A service access point is similar to a {@link Port} but is not explicitly bound to a peer.&#xD;&#xA;Rather, it is bound to a {@link ServiceImplementation} which is connected to one of the&#xD;&#xA;containing actors.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;An SAP is associated with a {@link ProtocolClass} and is conjugate to this protocol.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SPP" eSuperTypes="#//InterfaceItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A service provision point is used to connect an actor class with a {@link ServiceImplementation}.&#xD;&#xA;It can (similar to relay ports) delegate to another actor class (using a {@link LayerConnection})&#xD;&#xA;or connect to a {@link ServiceImplementation} of its actor class.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;An SPP is associated with a {@link ProtocolClass} and is regular to this protocol.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceImplementation" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A service implementation can be reagrded as the replicated peer port of all {@link SAP}s&#xD;&#xA;that are bound to it following the service resolution logic.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="#//SPP">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the SPP connected to the service.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalSystem" eSuperTypes="#//StructureClass">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The top level structural class. It can only contain sub systems using {@link SubSystemRef}s.&#xD;&#xA;This way the logical system is composed of sub system instances. It also defines&#xD;&#xA;{@link Binding}s and {@link LayerConnection}s between those sub systems.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The logical system is the root of the instance tree of the generator model.&#xD;&#xA;Each {@link SubSystemRef} is turned into a {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance} and each&#xD;&#xA;{@link ActorRef} is turned into an {@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance}.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystems" upperBound="-1"
+        eType="#//SubSystemRef" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The list of all sub systems contained in the logical system.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorContainerRef" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link SubSystemRef}&lt;/li>&#xD;&#xA;  &lt;li>{@link ActorRef}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;The reference designates a specific role of the referenced structure class.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getStructureClass" eType="#//StructureClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if (this instanceof &lt;%org.eclipse.etrice.core.room.ActorRef%>)&#xD;&#xA;&#x9;return ((ActorRef)this).getType();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.SubSystemRef%>)&#xD;&#xA;&#x9;return ((SubSystemRef)this).getType();&#xD;&#xA;else&#xD;&#xA;&#x9;return null;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the actor container reference is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/model/generated/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubSystemRef" eSuperTypes="#//ActorContainerRef">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A means to compose {@link LogicalSystem}s of {@link SubSystemClass}es. Each ref will&#xD;&#xA;be turned into a sub system instance of the referenced type.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//SubSystemClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The type of the reference.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubSystemClass" eSuperTypes="#//ActorContainerClass">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A sub system class corresponds to a process with a separate address space.&#xD;&#xA;It has no behavior of its own and is composed of {@link ActorClass}es.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Sub systems can be connected using {@link Port}s and {@link Binding}s.&#xD;&#xA;All ports of a sub system are relay ports.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Sub systems can define an arbitrary number of logical threads onto which their actor&#xD;&#xA;instances are mapped.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorInstanceMappings"
+        upperBound="-1" eType="#//ActorInstanceMapping" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of actor instance mappings.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="threads" upperBound="-1"
+        eType="#//LogicalThread" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all actor instance mappings of the sub system.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relayPorts" upperBound="-1"
+        eType="#//Port" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all relay ports of the sub system.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalThread" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A logical thread is addressed by the {@link ActorInstanceMapping}s of a {@link SubSystemClass}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the thread is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorInstanceMapping" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>An actor instance mapping maps an actor instances (described as a path of actor references)&#xD;&#xA;to a {@link LogicalThread}&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="path" eType="#//RefPath"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the path of references starting at this sub system that uniquely references an actor instance.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thread" eType="#//LogicalThread">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the logical thread to which the referenced actor instance and all of its contained instances&#xD;&#xA;are mapped.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorInstanceMappings"
+        upperBound="-1" eType="#//ActorInstanceMapping" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of nested mappings which override parent mappings.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefPath" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A path of strings that are interpreted as {@link org.eclipse.etrice.core.room.ActorRef}s starting at a {@link org.eclipse.etrice.core.room.SubSystemClass}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="StringBuilder sb = new StringBuilder();&#xD;&#xA;for (RefSegment ref : getRefs()) {&#xD;&#xA;&#x9;sb.append(&quot;/&quot;+ref.toString());&#xD;&#xA;}&#xD;&#xA;return sb.toString();&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refs" upperBound="-1" eType="#//RefSegment"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a path in the instance tree where each segment corresponds to the name of the&#xD;&#xA;corresponding {@link ActorContainerRef}.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefSegment" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A segment of a {@link RefPath}. It consists of a name and an optional index.&#xD;&#xA;If the index is not set it will be {@code -1}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getRef() + ((getIdx()>=0)? &quot;:&quot;+getIdx() : &quot;&quot;);&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The segment name corresponding to an actor reference.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idx" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="-1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The optional index of the reference (for replicated actors).&#xD;&#xA;If not set the index is {@code -1}.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Binding" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A binding connects two {@link Port}s.&#xD;&#xA;To be able to distinguish the ports of two {@link ActorContainerRef}s of the same type&#xD;&#xA;a {@link BindingEndPoint} is needed for disambiguation.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint1" eType="#//BindingEndPoint"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The first end point of a binding.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint2" eType="#//BindingEndPoint"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The second end point of a binding.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindingEndPoint" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A binding end point is a pair of an {@link ActorContainerRef} and a {@link Port} and is used&#xD;&#xA;to uniquely describe a port of a sub actor. If the actor container ref is {@code null} then&#xD;&#xA;a port of the actor class itself is addressed.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorRef" eType="#//ActorContainerRef">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The actor reference holding the bound port or {@code null} in case of a local port.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="#//Port">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the bound port.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LayerConnection" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Layer connections are used to connect {@link SAP}s and {@link ServiceImplementation}s.&#xD;&#xA;The source is described by a {@link SAPoint} and the target by a {@link SPPoint}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//SAPoint"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is source point of the layer connection.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//SPPoint"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is target point of the layer connection.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SAPoint" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link RefSAPoint}&lt;/li>&#xD;&#xA;  &lt;li>{@link RelaySAPoint}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefSAPoint" eSuperTypes="#//SAPoint">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Links from a {@link ActorContainerRef}, i.e. from a sub actor.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//ActorContainerRef">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the referenced actor container ref.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelaySAPoint" eSuperTypes="#//SAPoint">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Links from a relay {@link SPP} of the actor class.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relay" eType="#//SPP">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the referenced SPP.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SPPoint" eSuperTypes="#//RoomElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Links to a {@link SPP} of an {@link ActorContainerRef}, i.e. an SPP of a sub actor&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//ActorContainerRef">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the referenced actor container ref.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//SPP">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the referenced service.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorRef" eSuperTypes="#//ActorContainerRef">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A means to compose {@link SubSystemClass}es of {@link ActorClass}es. Each ref will&#xD;&#xA;be turned into an actor instance of the referenced type.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refType" eType="#//ReferenceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>If the size is >1 then this is a replicated actor.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ActorClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the type (i.e. actor class) of the actor ref.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ReferenceType">
+    <eLiterals name="FIXED" literal="fixed"/>
+    <eLiterals name="OPTIONAL" value="1" literal="optional"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RoomAnnotationTargetEnum">
+    <eLiterals name="DATA_CLASS" literal="DataClass"/>
+    <eLiterals name="ACTOR_CLASS" value="1" literal="ActorClass"/>
+    <eLiterals name="ACTOR_BEHAVIOR" value="2" literal="ActorBehavior"/>
+    <eLiterals name="PROTOCOL_CLASS" value="3" literal="ProtocolClass"/>
+    <eLiterals name="COMPOUND_PROTOCOL_CLASS" value="4" literal="CompoundProtocolClass"/>
+    <eLiterals name="SUBSYSTEM_CLASS" value="5" literal="SubSystemClass"/>
+    <eLiterals name="LOGICAL_SYSTEM_CLASS" value="6" literal="LogicalSystem"/>
+    <eLiterals name="PORT" value="7" literal="Port"/>
+    <eLiterals name="MESSAGE" value="8" literal="Message"/>
+    <eLiterals name="STATE" value="9" literal="State"/>
+    <eLiterals name="TRANSITION" value="10" literal="Transition"/>
+    <eLiterals name="ROOM_MODEL" value="11" literal="RoomModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomElement" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The marker interface for all classes belonging to the ROOM model.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

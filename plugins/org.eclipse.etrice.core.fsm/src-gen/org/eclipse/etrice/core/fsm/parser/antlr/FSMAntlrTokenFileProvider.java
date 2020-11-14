@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class FSMAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/etrice/core/fsm/parser/antlr/internal/InternalFSM.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/etrice/core/fsm/parser/antlr/internal/InternalFSM.tokens");
 	}
 }

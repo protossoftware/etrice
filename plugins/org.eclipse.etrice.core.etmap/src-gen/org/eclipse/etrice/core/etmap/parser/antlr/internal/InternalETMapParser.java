@@ -1,4 +1,4 @@
-package org.eclipse.etrice.core.etmap.parser.antlr.internal; 
+package org.eclipse.etrice.core.etmap.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -84,18 +84,18 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
      	private ETMapGrammarAccess grammarAccess;
-     	
+
         public InternalETMapParser(TokenStream input, ETMapGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "MappingModel";	
+        	return "MappingModel";
        	}
-       	
+
        	@Override
        	protected ETMapGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -103,8 +103,9 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
 
+
     // $ANTLR start "entryRuleMappingModel"
-    // InternalETMap.g:68:1: entryRuleMappingModel returns [EObject current=null] : iv_ruleMappingModel= ruleMappingModel EOF ;
+    // InternalETMap.g:65:1: entryRuleMappingModel returns [EObject current=null] : iv_ruleMappingModel= ruleMappingModel EOF ;
     public final EObject entryRuleMappingModel() throws RecognitionException {
         EObject current = null;
 
@@ -112,8 +113,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:69:2: (iv_ruleMappingModel= ruleMappingModel EOF )
-            // InternalETMap.g:70:2: iv_ruleMappingModel= ruleMappingModel EOF
+            // InternalETMap.g:65:53: (iv_ruleMappingModel= ruleMappingModel EOF )
+            // InternalETMap.g:66:2: iv_ruleMappingModel= ruleMappingModel EOF
             {
              newCompositeNode(grammarAccess.getMappingModelRule()); 
             pushFollow(FOLLOW_1);
@@ -127,11 +128,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -140,7 +141,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMappingModel"
-    // InternalETMap.g:77:1: ruleMappingModel returns [EObject current=null] : (otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}' ) ;
+    // InternalETMap.g:72:1: ruleMappingModel returns [EObject current=null] : (otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}' ) ;
     public final EObject ruleMappingModel() throws RecognitionException {
         EObject current = null;
 
@@ -154,44 +155,45 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         EObject lv_mappings_4_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:80:28: ( (otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}' ) )
-            // InternalETMap.g:81:1: (otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}' )
+            // InternalETMap.g:78:2: ( (otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}' ) )
+            // InternalETMap.g:79:2: (otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}' )
             {
-            // InternalETMap.g:81:1: (otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}' )
-            // InternalETMap.g:81:3: otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}'
+            // InternalETMap.g:79:2: (otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}' )
+            // InternalETMap.g:80:3: otherlv_0= 'MappingModel' ( (lv_name_1_0= ruleFQN ) ) otherlv_2= '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_mappings_4_0= ruleMapping ) )* otherlv_5= '}'
             {
             otherlv_0=(Token)match(input,13,FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getMappingModelAccess().getMappingModelKeyword_0());
-                
-            // InternalETMap.g:85:1: ( (lv_name_1_0= ruleFQN ) )
-            // InternalETMap.g:86:1: (lv_name_1_0= ruleFQN )
+            			newLeafNode(otherlv_0, grammarAccess.getMappingModelAccess().getMappingModelKeyword_0());
+            		
+            // InternalETMap.g:84:3: ( (lv_name_1_0= ruleFQN ) )
+            // InternalETMap.g:85:4: (lv_name_1_0= ruleFQN )
             {
-            // InternalETMap.g:86:1: (lv_name_1_0= ruleFQN )
-            // InternalETMap.g:87:3: lv_name_1_0= ruleFQN
+            // InternalETMap.g:85:4: (lv_name_1_0= ruleFQN )
+            // InternalETMap.g:86:5: lv_name_1_0= ruleFQN
             {
-             
-            	        newCompositeNode(grammarAccess.getMappingModelAccess().getNameFQNParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getMappingModelAccess().getNameFQNParserRuleCall_1_0());
+            				
             pushFollow(FOLLOW_4);
             lv_name_1_0=ruleFQN();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getMappingModelRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.etrice.core.common.Base.FQN");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getMappingModelRule());
+            					}
+            					set(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.etrice.core.common.Base.FQN");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -200,9 +202,9 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_2=(Token)match(input,14,FOLLOW_5); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getMappingModelAccess().getLeftCurlyBracketKeyword_2());
-                
-            // InternalETMap.g:107:1: ( (lv_imports_3_0= ruleImport ) )*
+            			newLeafNode(otherlv_2, grammarAccess.getMappingModelAccess().getLeftCurlyBracketKeyword_2());
+            		
+            // InternalETMap.g:107:3: ( (lv_imports_3_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -215,30 +217,30 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalETMap.g:108:1: (lv_imports_3_0= ruleImport )
+            	    // InternalETMap.g:108:4: (lv_imports_3_0= ruleImport )
             	    {
-            	    // InternalETMap.g:108:1: (lv_imports_3_0= ruleImport )
-            	    // InternalETMap.g:109:3: lv_imports_3_0= ruleImport
+            	    // InternalETMap.g:108:4: (lv_imports_3_0= ruleImport )
+            	    // InternalETMap.g:109:5: lv_imports_3_0= ruleImport
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getMappingModelAccess().getImportsImportParserRuleCall_3_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getMappingModelAccess().getImportsImportParserRuleCall_3_0());
+            	    				
             	    pushFollow(FOLLOW_5);
             	    lv_imports_3_0=ruleImport();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getMappingModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"imports",
-            	            		lv_imports_3_0, 
-            	            		"org.eclipse.etrice.core.common.Base.Import");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getMappingModelRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"imports",
+            	    						lv_imports_3_0,
+            	    						"org.eclipse.etrice.core.common.Base.Import");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -251,7 +253,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // InternalETMap.g:125:3: ( (lv_mappings_4_0= ruleMapping ) )*
+            // InternalETMap.g:126:3: ( (lv_mappings_4_0= ruleMapping ) )*
             loop2:
             do {
                 int alt2=2;
@@ -264,30 +266,30 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalETMap.g:126:1: (lv_mappings_4_0= ruleMapping )
+            	    // InternalETMap.g:127:4: (lv_mappings_4_0= ruleMapping )
             	    {
-            	    // InternalETMap.g:126:1: (lv_mappings_4_0= ruleMapping )
-            	    // InternalETMap.g:127:3: lv_mappings_4_0= ruleMapping
+            	    // InternalETMap.g:127:4: (lv_mappings_4_0= ruleMapping )
+            	    // InternalETMap.g:128:5: lv_mappings_4_0= ruleMapping
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getMappingModelAccess().getMappingsMappingParserRuleCall_4_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getMappingModelAccess().getMappingsMappingParserRuleCall_4_0());
+            	    				
             	    pushFollow(FOLLOW_6);
             	    lv_mappings_4_0=ruleMapping();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getMappingModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"mappings",
-            	            		lv_mappings_4_0, 
-            	            		"org.eclipse.etrice.core.etmap.ETMap.Mapping");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getMappingModelRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"mappings",
+            	    						lv_mappings_4_0,
+            	    						"org.eclipse.etrice.core.etmap.ETMap.Mapping");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -302,21 +304,23 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_5=(Token)match(input,15,FOLLOW_2); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getMappingModelAccess().getRightCurlyBracketKeyword_5());
-                
+            			newLeafNode(otherlv_5, grammarAccess.getMappingModelAccess().getRightCurlyBracketKeyword_5());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -325,7 +329,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMapping"
-    // InternalETMap.g:155:1: entryRuleMapping returns [EObject current=null] : iv_ruleMapping= ruleMapping EOF ;
+    // InternalETMap.g:153:1: entryRuleMapping returns [EObject current=null] : iv_ruleMapping= ruleMapping EOF ;
     public final EObject entryRuleMapping() throws RecognitionException {
         EObject current = null;
 
@@ -333,8 +337,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:156:2: (iv_ruleMapping= ruleMapping EOF )
-            // InternalETMap.g:157:2: iv_ruleMapping= ruleMapping EOF
+            // InternalETMap.g:153:48: (iv_ruleMapping= ruleMapping EOF )
+            // InternalETMap.g:154:2: iv_ruleMapping= ruleMapping EOF
             {
              newCompositeNode(grammarAccess.getMappingRule()); 
             pushFollow(FOLLOW_1);
@@ -348,11 +352,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -361,7 +365,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMapping"
-    // InternalETMap.g:164:1: ruleMapping returns [EObject current=null] : (otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}' ) ;
+    // InternalETMap.g:160:1: ruleMapping returns [EObject current=null] : (otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}' ) ;
     public final EObject ruleMapping() throws RecognitionException {
         EObject current = null;
 
@@ -372,41 +376,42 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         EObject lv_subsysMappings_5_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:167:28: ( (otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}' ) )
-            // InternalETMap.g:168:1: (otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}' )
+            // InternalETMap.g:166:2: ( (otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}' ) )
+            // InternalETMap.g:167:2: (otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}' )
             {
-            // InternalETMap.g:168:1: (otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}' )
+            // InternalETMap.g:167:2: (otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}' )
             // InternalETMap.g:168:3: otherlv_0= 'Mapping' ( ( ruleFQN ) ) otherlv_2= '->' ( ( ruleFQN ) ) otherlv_4= '{' ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )* otherlv_6= '}'
             {
             otherlv_0=(Token)match(input,16,FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getMappingAccess().getMappingKeyword_0());
-                
-            // InternalETMap.g:172:1: ( ( ruleFQN ) )
-            // InternalETMap.g:173:1: ( ruleFQN )
+            			newLeafNode(otherlv_0, grammarAccess.getMappingAccess().getMappingKeyword_0());
+            		
+            // InternalETMap.g:172:3: ( ( ruleFQN ) )
+            // InternalETMap.g:173:4: ( ruleFQN )
             {
-            // InternalETMap.g:173:1: ( ruleFQN )
-            // InternalETMap.g:174:3: ruleFQN
+            // InternalETMap.g:173:4: ( ruleFQN )
+            // InternalETMap.g:174:5: ruleFQN
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getMappingRule());
-            	        }
-                    
-             
-            	        newCompositeNode(grammarAccess.getMappingAccess().getLogicalSysLogicalSystemCrossReference_1_0()); 
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getMappingRule());
+            					}
+            				
+
+            					newCompositeNode(grammarAccess.getMappingAccess().getLogicalSysLogicalSystemCrossReference_1_0());
+            				
             pushFollow(FOLLOW_7);
             ruleFQN();
 
             state._fsp--;
 
-             
-            	        afterParserOrEnumRuleCall();
-            	    
+
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -415,30 +420,30 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_2=(Token)match(input,17,FOLLOW_3); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
-                
-            // InternalETMap.g:191:1: ( ( ruleFQN ) )
-            // InternalETMap.g:192:1: ( ruleFQN )
+            			newLeafNode(otherlv_2, grammarAccess.getMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
+            		
+            // InternalETMap.g:192:3: ( ( ruleFQN ) )
+            // InternalETMap.g:193:4: ( ruleFQN )
             {
-            // InternalETMap.g:192:1: ( ruleFQN )
-            // InternalETMap.g:193:3: ruleFQN
+            // InternalETMap.g:193:4: ( ruleFQN )
+            // InternalETMap.g:194:5: ruleFQN
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getMappingRule());
-            	        }
-                    
-             
-            	        newCompositeNode(grammarAccess.getMappingAccess().getPhysicalSysPhysicalSystemCrossReference_3_0()); 
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getMappingRule());
+            					}
+            				
+
+            					newCompositeNode(grammarAccess.getMappingAccess().getPhysicalSysPhysicalSystemCrossReference_3_0());
+            				
             pushFollow(FOLLOW_4);
             ruleFQN();
 
             state._fsp--;
 
-             
-            	        afterParserOrEnumRuleCall();
-            	    
+
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -447,9 +452,9 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_4=(Token)match(input,14,FOLLOW_8); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getMappingAccess().getLeftCurlyBracketKeyword_4());
-                
-            // InternalETMap.g:210:1: ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )*
+            			newLeafNode(otherlv_4, grammarAccess.getMappingAccess().getLeftCurlyBracketKeyword_4());
+            		
+            // InternalETMap.g:212:3: ( (lv_subsysMappings_5_0= ruleSubSystemMapping ) )*
             loop3:
             do {
                 int alt3=2;
@@ -462,30 +467,30 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalETMap.g:211:1: (lv_subsysMappings_5_0= ruleSubSystemMapping )
+            	    // InternalETMap.g:213:4: (lv_subsysMappings_5_0= ruleSubSystemMapping )
             	    {
-            	    // InternalETMap.g:211:1: (lv_subsysMappings_5_0= ruleSubSystemMapping )
-            	    // InternalETMap.g:212:3: lv_subsysMappings_5_0= ruleSubSystemMapping
+            	    // InternalETMap.g:213:4: (lv_subsysMappings_5_0= ruleSubSystemMapping )
+            	    // InternalETMap.g:214:5: lv_subsysMappings_5_0= ruleSubSystemMapping
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getMappingAccess().getSubsysMappingsSubSystemMappingParserRuleCall_5_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getMappingAccess().getSubsysMappingsSubSystemMappingParserRuleCall_5_0());
+            	    				
             	    pushFollow(FOLLOW_8);
             	    lv_subsysMappings_5_0=ruleSubSystemMapping();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getMappingRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"subsysMappings",
-            	            		lv_subsysMappings_5_0, 
-            	            		"org.eclipse.etrice.core.etmap.ETMap.SubSystemMapping");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getMappingRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"subsysMappings",
+            	    						lv_subsysMappings_5_0,
+            	    						"org.eclipse.etrice.core.etmap.ETMap.SubSystemMapping");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -500,21 +505,23 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_6=(Token)match(input,15,FOLLOW_2); 
 
-                	newLeafNode(otherlv_6, grammarAccess.getMappingAccess().getRightCurlyBracketKeyword_6());
-                
+            			newLeafNode(otherlv_6, grammarAccess.getMappingAccess().getRightCurlyBracketKeyword_6());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -523,7 +530,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSubSystemMapping"
-    // InternalETMap.g:240:1: entryRuleSubSystemMapping returns [EObject current=null] : iv_ruleSubSystemMapping= ruleSubSystemMapping EOF ;
+    // InternalETMap.g:239:1: entryRuleSubSystemMapping returns [EObject current=null] : iv_ruleSubSystemMapping= ruleSubSystemMapping EOF ;
     public final EObject entryRuleSubSystemMapping() throws RecognitionException {
         EObject current = null;
 
@@ -531,8 +538,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:241:2: (iv_ruleSubSystemMapping= ruleSubSystemMapping EOF )
-            // InternalETMap.g:242:2: iv_ruleSubSystemMapping= ruleSubSystemMapping EOF
+            // InternalETMap.g:239:57: (iv_ruleSubSystemMapping= ruleSubSystemMapping EOF )
+            // InternalETMap.g:240:2: iv_ruleSubSystemMapping= ruleSubSystemMapping EOF
             {
              newCompositeNode(grammarAccess.getSubSystemMappingRule()); 
             pushFollow(FOLLOW_1);
@@ -546,11 +553,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -559,7 +566,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSubSystemMapping"
-    // InternalETMap.g:249:1: ruleSubSystemMapping returns [EObject current=null] : (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? ) ;
+    // InternalETMap.g:246:1: ruleSubSystemMapping returns [EObject current=null] : (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? ) ;
     public final EObject ruleSubSystemMapping() throws RecognitionException {
         EObject current = null;
 
@@ -572,34 +579,35 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         EObject lv_threadMappings_5_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:252:28: ( (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? ) )
-            // InternalETMap.g:253:1: (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? )
+            // InternalETMap.g:252:2: ( (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? ) )
+            // InternalETMap.g:253:2: (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? )
             {
-            // InternalETMap.g:253:1: (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? )
-            // InternalETMap.g:253:3: otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )?
+            // InternalETMap.g:253:2: (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? )
+            // InternalETMap.g:254:3: otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )?
             {
             otherlv_0=(Token)match(input,18,FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getSubSystemMappingAccess().getSubSystemMappingKeyword_0());
-                
-            // InternalETMap.g:257:1: ( (otherlv_1= RULE_ID ) )
-            // InternalETMap.g:258:1: (otherlv_1= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getSubSystemMappingAccess().getSubSystemMappingKeyword_0());
+            		
+            // InternalETMap.g:258:3: ( (otherlv_1= RULE_ID ) )
+            // InternalETMap.g:259:4: (otherlv_1= RULE_ID )
             {
-            // InternalETMap.g:258:1: (otherlv_1= RULE_ID )
-            // InternalETMap.g:259:3: otherlv_1= RULE_ID
+            // InternalETMap.g:259:4: (otherlv_1= RULE_ID )
+            // InternalETMap.g:260:5: otherlv_1= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getSubSystemMappingRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSubSystemMappingRule());
+            					}
+            				
             otherlv_1=(Token)match(input,RULE_ID,FOLLOW_7); 
 
-            		newLeafNode(otherlv_1, grammarAccess.getSubSystemMappingAccess().getLogicalSubSysSubSystemRefCrossReference_1_0()); 
-            	
+            					newLeafNode(otherlv_1, grammarAccess.getSubSystemMappingAccess().getLogicalSubSysSubSystemRefCrossReference_1_0());
+            				
 
             }
 
@@ -608,30 +616,30 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_2=(Token)match(input,17,FOLLOW_3); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getSubSystemMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
-                
-            // InternalETMap.g:274:1: ( (otherlv_3= RULE_ID ) )
-            // InternalETMap.g:275:1: (otherlv_3= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getSubSystemMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
+            		
+            // InternalETMap.g:275:3: ( (otherlv_3= RULE_ID ) )
+            // InternalETMap.g:276:4: (otherlv_3= RULE_ID )
             {
-            // InternalETMap.g:275:1: (otherlv_3= RULE_ID )
-            // InternalETMap.g:276:3: otherlv_3= RULE_ID
+            // InternalETMap.g:276:4: (otherlv_3= RULE_ID )
+            // InternalETMap.g:277:5: otherlv_3= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getSubSystemMappingRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSubSystemMappingRule());
+            					}
+            				
             otherlv_3=(Token)match(input,RULE_ID,FOLLOW_9); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getSubSystemMappingAccess().getNodeNodeRefCrossReference_3_0()); 
-            	
+            					newLeafNode(otherlv_3, grammarAccess.getSubSystemMappingAccess().getNodeNodeRefCrossReference_3_0());
+            				
 
             }
 
 
             }
 
-            // InternalETMap.g:287:2: (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )?
+            // InternalETMap.g:288:3: (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -640,13 +648,13 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalETMap.g:287:4: otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}'
+                    // InternalETMap.g:289:4: otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}'
                     {
                     otherlv_4=(Token)match(input,14,FOLLOW_10); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getSubSystemMappingAccess().getLeftCurlyBracketKeyword_4_0());
-                        
-                    // InternalETMap.g:291:1: ( (lv_threadMappings_5_0= ruleThreadMapping ) )*
+                    				newLeafNode(otherlv_4, grammarAccess.getSubSystemMappingAccess().getLeftCurlyBracketKeyword_4_0());
+                    			
+                    // InternalETMap.g:293:4: ( (lv_threadMappings_5_0= ruleThreadMapping ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -659,30 +667,30 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalETMap.g:292:1: (lv_threadMappings_5_0= ruleThreadMapping )
+                    	    // InternalETMap.g:294:5: (lv_threadMappings_5_0= ruleThreadMapping )
                     	    {
-                    	    // InternalETMap.g:292:1: (lv_threadMappings_5_0= ruleThreadMapping )
-                    	    // InternalETMap.g:293:3: lv_threadMappings_5_0= ruleThreadMapping
+                    	    // InternalETMap.g:294:5: (lv_threadMappings_5_0= ruleThreadMapping )
+                    	    // InternalETMap.g:295:6: lv_threadMappings_5_0= ruleThreadMapping
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getSubSystemMappingAccess().getThreadMappingsThreadMappingParserRuleCall_4_1_0()); 
-                    	    	    
+
+                    	    						newCompositeNode(grammarAccess.getSubSystemMappingAccess().getThreadMappingsThreadMappingParserRuleCall_4_1_0());
+                    	    					
                     	    pushFollow(FOLLOW_10);
                     	    lv_threadMappings_5_0=ruleThreadMapping();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getSubSystemMappingRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"threadMappings",
-                    	            		lv_threadMappings_5_0, 
-                    	            		"org.eclipse.etrice.core.etmap.ETMap.ThreadMapping");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    						if (current==null) {
+                    	    							current = createModelElementForParent(grammarAccess.getSubSystemMappingRule());
+                    	    						}
+                    	    						add(
+                    	    							current,
+                    	    							"threadMappings",
+                    	    							lv_threadMappings_5_0,
+                    	    							"org.eclipse.etrice.core.etmap.ETMap.ThreadMapping");
+                    	    						afterParserOrEnumRuleCall();
+                    	    					
 
                     	    }
 
@@ -697,8 +705,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                     otherlv_6=(Token)match(input,15,FOLLOW_2); 
 
-                        	newLeafNode(otherlv_6, grammarAccess.getSubSystemMappingAccess().getRightCurlyBracketKeyword_4_2());
-                        
+                    				newLeafNode(otherlv_6, grammarAccess.getSubSystemMappingAccess().getRightCurlyBracketKeyword_4_2());
+                    			
 
                     }
                     break;
@@ -711,13 +719,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -734,8 +744,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:322:2: (iv_ruleThreadMapping= ruleThreadMapping EOF )
-            // InternalETMap.g:323:2: iv_ruleThreadMapping= ruleThreadMapping EOF
+            // InternalETMap.g:321:54: (iv_ruleThreadMapping= ruleThreadMapping EOF )
+            // InternalETMap.g:322:2: iv_ruleThreadMapping= ruleThreadMapping EOF
             {
              newCompositeNode(grammarAccess.getThreadMappingRule()); 
             pushFollow(FOLLOW_1);
@@ -749,11 +759,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -762,7 +772,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleThreadMapping"
-    // InternalETMap.g:330:1: ruleThreadMapping returns [EObject current=null] : (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) ) ;
+    // InternalETMap.g:328:1: ruleThreadMapping returns [EObject current=null] : (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) ) ;
     public final EObject ruleThreadMapping() throws RecognitionException {
         EObject current = null;
 
@@ -771,34 +781,35 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token otherlv_2=null;
         Token otherlv_3=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:333:28: ( (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) ) )
-            // InternalETMap.g:334:1: (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) )
+            // InternalETMap.g:334:2: ( (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) ) )
+            // InternalETMap.g:335:2: (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) )
             {
-            // InternalETMap.g:334:1: (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) )
-            // InternalETMap.g:334:3: otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) )
+            // InternalETMap.g:335:2: (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) )
+            // InternalETMap.g:336:3: otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,19,FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getThreadMappingAccess().getThreadMappingKeyword_0());
-                
-            // InternalETMap.g:338:1: ( (otherlv_1= RULE_ID ) )
-            // InternalETMap.g:339:1: (otherlv_1= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getThreadMappingAccess().getThreadMappingKeyword_0());
+            		
+            // InternalETMap.g:340:3: ( (otherlv_1= RULE_ID ) )
+            // InternalETMap.g:341:4: (otherlv_1= RULE_ID )
             {
-            // InternalETMap.g:339:1: (otherlv_1= RULE_ID )
-            // InternalETMap.g:340:3: otherlv_1= RULE_ID
+            // InternalETMap.g:341:4: (otherlv_1= RULE_ID )
+            // InternalETMap.g:342:5: otherlv_1= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getThreadMappingRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getThreadMappingRule());
+            					}
+            				
             otherlv_1=(Token)match(input,RULE_ID,FOLLOW_7); 
 
-            		newLeafNode(otherlv_1, grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadCrossReference_1_0()); 
-            	
+            					newLeafNode(otherlv_1, grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadCrossReference_1_0());
+            				
 
             }
 
@@ -807,23 +818,23 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_2=(Token)match(input,17,FOLLOW_3); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getThreadMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
-                
-            // InternalETMap.g:355:1: ( (otherlv_3= RULE_ID ) )
-            // InternalETMap.g:356:1: (otherlv_3= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getThreadMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
+            		
+            // InternalETMap.g:357:3: ( (otherlv_3= RULE_ID ) )
+            // InternalETMap.g:358:4: (otherlv_3= RULE_ID )
             {
-            // InternalETMap.g:356:1: (otherlv_3= RULE_ID )
-            // InternalETMap.g:357:3: otherlv_3= RULE_ID
+            // InternalETMap.g:358:4: (otherlv_3= RULE_ID )
+            // InternalETMap.g:359:5: otherlv_3= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getThreadMappingRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getThreadMappingRule());
+            					}
+            				
             otherlv_3=(Token)match(input,RULE_ID,FOLLOW_2); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysicalThreadCrossReference_3_0()); 
-            	
+            					newLeafNode(otherlv_3, grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysicalThreadCrossReference_3_0());
+            				
 
             }
 
@@ -836,13 +847,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -851,7 +864,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleKeyValue"
-    // InternalETMap.g:378:1: entryRuleKeyValue returns [EObject current=null] : iv_ruleKeyValue= ruleKeyValue EOF ;
+    // InternalETMap.g:374:1: entryRuleKeyValue returns [EObject current=null] : iv_ruleKeyValue= ruleKeyValue EOF ;
     public final EObject entryRuleKeyValue() throws RecognitionException {
         EObject current = null;
 
@@ -859,8 +872,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:379:2: (iv_ruleKeyValue= ruleKeyValue EOF )
-            // InternalETMap.g:380:2: iv_ruleKeyValue= ruleKeyValue EOF
+            // InternalETMap.g:374:49: (iv_ruleKeyValue= ruleKeyValue EOF )
+            // InternalETMap.g:375:2: iv_ruleKeyValue= ruleKeyValue EOF
             {
              newCompositeNode(grammarAccess.getKeyValueRule()); 
             pushFollow(FOLLOW_1);
@@ -874,11 +887,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -887,7 +900,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleKeyValue"
-    // InternalETMap.g:387:1: ruleKeyValue returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) ) ) ;
+    // InternalETMap.g:381:1: ruleKeyValue returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) ) ) ;
     public final EObject ruleKeyValue() throws RecognitionException {
         EObject current = null;
 
@@ -896,35 +909,36 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         EObject lv_value_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:390:28: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) ) ) )
-            // InternalETMap.g:391:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) ) )
+            // InternalETMap.g:387:2: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) ) ) )
+            // InternalETMap.g:388:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) ) )
             {
-            // InternalETMap.g:391:1: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) ) )
-            // InternalETMap.g:391:2: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) )
+            // InternalETMap.g:388:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) ) )
+            // InternalETMap.g:389:3: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= '=' ( (lv_value_2_0= ruleLiteral ) )
             {
-            // InternalETMap.g:391:2: ( (lv_key_0_0= RULE_ID ) )
-            // InternalETMap.g:392:1: (lv_key_0_0= RULE_ID )
+            // InternalETMap.g:389:3: ( (lv_key_0_0= RULE_ID ) )
+            // InternalETMap.g:390:4: (lv_key_0_0= RULE_ID )
             {
-            // InternalETMap.g:392:1: (lv_key_0_0= RULE_ID )
-            // InternalETMap.g:393:3: lv_key_0_0= RULE_ID
+            // InternalETMap.g:390:4: (lv_key_0_0= RULE_ID )
+            // InternalETMap.g:391:5: lv_key_0_0= RULE_ID
             {
             lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_11); 
 
-            			newLeafNode(lv_key_0_0, grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_key_0_0, grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getKeyValueRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"key",
-                    		lv_key_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getKeyValueRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"key",
+            						lv_key_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -933,33 +947,33 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_1=(Token)match(input,20,FOLLOW_12); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1());
-                
-            // InternalETMap.g:413:1: ( (lv_value_2_0= ruleLiteral ) )
-            // InternalETMap.g:414:1: (lv_value_2_0= ruleLiteral )
+            			newLeafNode(otherlv_1, grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1());
+            		
+            // InternalETMap.g:411:3: ( (lv_value_2_0= ruleLiteral ) )
+            // InternalETMap.g:412:4: (lv_value_2_0= ruleLiteral )
             {
-            // InternalETMap.g:414:1: (lv_value_2_0= ruleLiteral )
-            // InternalETMap.g:415:3: lv_value_2_0= ruleLiteral
+            // InternalETMap.g:412:4: (lv_value_2_0= ruleLiteral )
+            // InternalETMap.g:413:5: lv_value_2_0= ruleLiteral
             {
-             
-            	        newCompositeNode(grammarAccess.getKeyValueAccess().getValueLiteralParserRuleCall_2_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getKeyValueAccess().getValueLiteralParserRuleCall_2_0());
+            				
             pushFollow(FOLLOW_2);
             lv_value_2_0=ruleLiteral();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getKeyValueRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"value",
-                    		lv_value_2_0, 
-                    		"org.eclipse.etrice.core.common.Base.Literal");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getKeyValueRule());
+            					}
+            					set(
+            						current,
+            						"value",
+            						lv_value_2_0,
+            						"org.eclipse.etrice.core.common.Base.Literal");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -972,13 +986,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -987,7 +1003,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAnnotationTargetType"
-    // InternalETMap.g:441:1: entryRuleAnnotationTargetType returns [String current=null] : iv_ruleAnnotationTargetType= ruleAnnotationTargetType EOF ;
+    // InternalETMap.g:434:1: entryRuleAnnotationTargetType returns [String current=null] : iv_ruleAnnotationTargetType= ruleAnnotationTargetType EOF ;
     public final String entryRuleAnnotationTargetType() throws RecognitionException {
         String current = null;
 
@@ -995,8 +1011,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:442:2: (iv_ruleAnnotationTargetType= ruleAnnotationTargetType EOF )
-            // InternalETMap.g:443:2: iv_ruleAnnotationTargetType= ruleAnnotationTargetType EOF
+            // InternalETMap.g:434:60: (iv_ruleAnnotationTargetType= ruleAnnotationTargetType EOF )
+            // InternalETMap.g:435:2: iv_ruleAnnotationTargetType= ruleAnnotationTargetType EOF
             {
              newCompositeNode(grammarAccess.getAnnotationTargetTypeRule()); 
             pushFollow(FOLLOW_1);
@@ -1010,11 +1026,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1023,35 +1039,38 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAnnotationTargetType"
-    // InternalETMap.g:450:1: ruleAnnotationTargetType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // InternalETMap.g:441:1: ruleAnnotationTargetType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleAnnotationTargetType() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token this_ID_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:453:28: (this_ID_0= RULE_ID )
-            // InternalETMap.g:454:5: this_ID_0= RULE_ID
+            // InternalETMap.g:447:2: (this_ID_0= RULE_ID )
+            // InternalETMap.g:448:2: this_ID_0= RULE_ID
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
             		current.merge(this_ID_0);
-                
-             
-                newLeafNode(this_ID_0, grammarAccess.getAnnotationTargetTypeAccess().getIDTerminalRuleCall()); 
-                
+            	
+
+            		newLeafNode(this_ID_0, grammarAccess.getAnnotationTargetTypeAccess().getIDTerminalRuleCall());
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1060,7 +1079,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAnnotationAttribute"
-    // InternalETMap.g:469:1: entryRuleAnnotationAttribute returns [EObject current=null] : iv_ruleAnnotationAttribute= ruleAnnotationAttribute EOF ;
+    // InternalETMap.g:458:1: entryRuleAnnotationAttribute returns [EObject current=null] : iv_ruleAnnotationAttribute= ruleAnnotationAttribute EOF ;
     public final EObject entryRuleAnnotationAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1068,8 +1087,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:470:2: (iv_ruleAnnotationAttribute= ruleAnnotationAttribute EOF )
-            // InternalETMap.g:471:2: iv_ruleAnnotationAttribute= ruleAnnotationAttribute EOF
+            // InternalETMap.g:458:60: (iv_ruleAnnotationAttribute= ruleAnnotationAttribute EOF )
+            // InternalETMap.g:459:2: iv_ruleAnnotationAttribute= ruleAnnotationAttribute EOF
             {
              newCompositeNode(grammarAccess.getAnnotationAttributeRule()); 
             pushFollow(FOLLOW_1);
@@ -1083,11 +1102,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1096,7 +1115,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAnnotationAttribute"
-    // InternalETMap.g:478:1: ruleAnnotationAttribute returns [EObject current=null] : (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute ) ;
+    // InternalETMap.g:465:1: ruleAnnotationAttribute returns [EObject current=null] : (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute ) ;
     public final EObject ruleAnnotationAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1105,13 +1124,14 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         EObject this_EnumAnnotationAttribute_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:481:28: ( (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute ) )
-            // InternalETMap.g:482:1: (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute )
+            // InternalETMap.g:471:2: ( (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute ) )
+            // InternalETMap.g:472:2: (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute )
             {
-            // InternalETMap.g:482:1: (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute )
+            // InternalETMap.g:472:2: (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1215,38 +1235,38 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalETMap.g:483:5: this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute
+                    // InternalETMap.g:473:3: this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute
                     {
-                     
-                            newCompositeNode(grammarAccess.getAnnotationAttributeAccess().getSimpleAnnotationAttributeParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAnnotationAttributeAccess().getSimpleAnnotationAttributeParserRuleCall_0());
+                    		
                     pushFollow(FOLLOW_2);
                     this_SimpleAnnotationAttribute_0=ruleSimpleAnnotationAttribute();
 
                     state._fsp--;
 
-                     
-                            current = this_SimpleAnnotationAttribute_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_SimpleAnnotationAttribute_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:493:5: this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute
+                    // InternalETMap.g:482:3: this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute
                     {
-                     
-                            newCompositeNode(grammarAccess.getAnnotationAttributeAccess().getEnumAnnotationAttributeParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAnnotationAttributeAccess().getEnumAnnotationAttributeParserRuleCall_1());
+                    		
                     pushFollow(FOLLOW_2);
                     this_EnumAnnotationAttribute_1=ruleEnumAnnotationAttribute();
 
                     state._fsp--;
 
-                     
-                            current = this_EnumAnnotationAttribute_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_EnumAnnotationAttribute_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -1256,13 +1276,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1271,7 +1293,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSimpleAnnotationAttribute"
-    // InternalETMap.g:509:1: entryRuleSimpleAnnotationAttribute returns [EObject current=null] : iv_ruleSimpleAnnotationAttribute= ruleSimpleAnnotationAttribute EOF ;
+    // InternalETMap.g:494:1: entryRuleSimpleAnnotationAttribute returns [EObject current=null] : iv_ruleSimpleAnnotationAttribute= ruleSimpleAnnotationAttribute EOF ;
     public final EObject entryRuleSimpleAnnotationAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1279,8 +1301,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:510:2: (iv_ruleSimpleAnnotationAttribute= ruleSimpleAnnotationAttribute EOF )
-            // InternalETMap.g:511:2: iv_ruleSimpleAnnotationAttribute= ruleSimpleAnnotationAttribute EOF
+            // InternalETMap.g:494:66: (iv_ruleSimpleAnnotationAttribute= ruleSimpleAnnotationAttribute EOF )
+            // InternalETMap.g:495:2: iv_ruleSimpleAnnotationAttribute= ruleSimpleAnnotationAttribute EOF
             {
              newCompositeNode(grammarAccess.getSimpleAnnotationAttributeRule()); 
             pushFollow(FOLLOW_1);
@@ -1294,11 +1316,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1307,7 +1329,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSimpleAnnotationAttribute"
-    // InternalETMap.g:518:1: ruleSimpleAnnotationAttribute returns [EObject current=null] : ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) ) ) ;
+    // InternalETMap.g:501:1: ruleSimpleAnnotationAttribute returns [EObject current=null] : ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) ) ) ;
     public final EObject ruleSimpleAnnotationAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1319,16 +1341,17 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Enumerator lv_type_5_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:521:28: ( ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) ) ) )
-            // InternalETMap.g:522:1: ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) ) )
+            // InternalETMap.g:507:2: ( ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) ) ) )
+            // InternalETMap.g:508:2: ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) ) )
             {
-            // InternalETMap.g:522:1: ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) ) )
-            // InternalETMap.g:522:2: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) )
+            // InternalETMap.g:508:2: ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) ) )
+            // InternalETMap.g:509:3: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) )
             {
-            // InternalETMap.g:522:2: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' )
+            // InternalETMap.g:509:3: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1346,24 +1369,24 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalETMap.g:522:3: ( (lv_optional_0_0= 'optional' ) )
+                    // InternalETMap.g:510:4: ( (lv_optional_0_0= 'optional' ) )
                     {
-                    // InternalETMap.g:522:3: ( (lv_optional_0_0= 'optional' ) )
-                    // InternalETMap.g:523:1: (lv_optional_0_0= 'optional' )
+                    // InternalETMap.g:510:4: ( (lv_optional_0_0= 'optional' ) )
+                    // InternalETMap.g:511:5: (lv_optional_0_0= 'optional' )
                     {
-                    // InternalETMap.g:523:1: (lv_optional_0_0= 'optional' )
-                    // InternalETMap.g:524:3: lv_optional_0_0= 'optional'
+                    // InternalETMap.g:511:5: (lv_optional_0_0= 'optional' )
+                    // InternalETMap.g:512:6: lv_optional_0_0= 'optional'
                     {
                     lv_optional_0_0=(Token)match(input,21,FOLLOW_13); 
 
-                            newLeafNode(lv_optional_0_0, grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
-                        
+                    						newLeafNode(lv_optional_0_0, grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
-                    	        }
-                           		setWithLastConsumed(current, "optional", true, "optional");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
+                    						}
+                    						setWithLastConsumed(current, "optional", true, "optional");
+                    					
 
                     }
 
@@ -1374,12 +1397,12 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:538:7: otherlv_1= 'mandatory'
+                    // InternalETMap.g:525:4: otherlv_1= 'mandatory'
                     {
                     otherlv_1=(Token)match(input,22,FOLLOW_13); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1());
-                        
+                    				newLeafNode(otherlv_1, grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1());
+                    			
 
                     }
                     break;
@@ -1388,28 +1411,28 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_2=(Token)match(input,23,FOLLOW_3); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1());
-                
-            // InternalETMap.g:546:1: ( (lv_name_3_0= RULE_ID ) )
-            // InternalETMap.g:547:1: (lv_name_3_0= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1());
+            		
+            // InternalETMap.g:534:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalETMap.g:535:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalETMap.g:547:1: (lv_name_3_0= RULE_ID )
-            // InternalETMap.g:548:3: lv_name_3_0= RULE_ID
+            // InternalETMap.g:535:4: (lv_name_3_0= RULE_ID )
+            // InternalETMap.g:536:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_14); 
 
-            			newLeafNode(lv_name_3_0, grammarAccess.getSimpleAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_3_0, grammarAccess.getSimpleAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_3_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_3_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1418,33 +1441,33 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_4=(Token)match(input,24,FOLLOW_15); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3());
-                
-            // InternalETMap.g:568:1: ( (lv_type_5_0= ruleLiteralType ) )
-            // InternalETMap.g:569:1: (lv_type_5_0= ruleLiteralType )
+            			newLeafNode(otherlv_4, grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3());
+            		
+            // InternalETMap.g:556:3: ( (lv_type_5_0= ruleLiteralType ) )
+            // InternalETMap.g:557:4: (lv_type_5_0= ruleLiteralType )
             {
-            // InternalETMap.g:569:1: (lv_type_5_0= ruleLiteralType )
-            // InternalETMap.g:570:3: lv_type_5_0= ruleLiteralType
+            // InternalETMap.g:557:4: (lv_type_5_0= ruleLiteralType )
+            // InternalETMap.g:558:5: lv_type_5_0= ruleLiteralType
             {
-             
-            	        newCompositeNode(grammarAccess.getSimpleAnnotationAttributeAccess().getTypeLiteralTypeEnumRuleCall_4_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getSimpleAnnotationAttributeAccess().getTypeLiteralTypeEnumRuleCall_4_0());
+            				
             pushFollow(FOLLOW_2);
             lv_type_5_0=ruleLiteralType();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getSimpleAnnotationAttributeRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"type",
-                    		lv_type_5_0, 
-                    		"org.eclipse.etrice.core.common.Base.LiteralType");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getSimpleAnnotationAttributeRule());
+            					}
+            					set(
+            						current,
+            						"type",
+            						lv_type_5_0,
+            						"org.eclipse.etrice.core.common.Base.LiteralType");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -1457,13 +1480,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1472,7 +1497,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEnumAnnotationAttribute"
-    // InternalETMap.g:594:1: entryRuleEnumAnnotationAttribute returns [EObject current=null] : iv_ruleEnumAnnotationAttribute= ruleEnumAnnotationAttribute EOF ;
+    // InternalETMap.g:579:1: entryRuleEnumAnnotationAttribute returns [EObject current=null] : iv_ruleEnumAnnotationAttribute= ruleEnumAnnotationAttribute EOF ;
     public final EObject entryRuleEnumAnnotationAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1480,8 +1505,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:595:2: (iv_ruleEnumAnnotationAttribute= ruleEnumAnnotationAttribute EOF )
-            // InternalETMap.g:596:2: iv_ruleEnumAnnotationAttribute= ruleEnumAnnotationAttribute EOF
+            // InternalETMap.g:579:64: (iv_ruleEnumAnnotationAttribute= ruleEnumAnnotationAttribute EOF )
+            // InternalETMap.g:580:2: iv_ruleEnumAnnotationAttribute= ruleEnumAnnotationAttribute EOF
             {
              newCompositeNode(grammarAccess.getEnumAnnotationAttributeRule()); 
             pushFollow(FOLLOW_1);
@@ -1495,11 +1520,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1508,7 +1533,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEnumAnnotationAttribute"
-    // InternalETMap.g:603:1: ruleEnumAnnotationAttribute returns [EObject current=null] : ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}' ) ;
+    // InternalETMap.g:586:1: ruleEnumAnnotationAttribute returns [EObject current=null] : ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}' ) ;
     public final EObject ruleEnumAnnotationAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1523,16 +1548,17 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token lv_values_8_0=null;
         Token otherlv_9=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:606:28: ( ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}' ) )
-            // InternalETMap.g:607:1: ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}' )
+            // InternalETMap.g:592:2: ( ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}' ) )
+            // InternalETMap.g:593:2: ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}' )
             {
-            // InternalETMap.g:607:1: ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}' )
-            // InternalETMap.g:607:2: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}'
+            // InternalETMap.g:593:2: ( ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}' )
+            // InternalETMap.g:594:3: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}'
             {
-            // InternalETMap.g:607:2: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' )
+            // InternalETMap.g:594:3: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1550,24 +1576,24 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalETMap.g:607:3: ( (lv_optional_0_0= 'optional' ) )
+                    // InternalETMap.g:595:4: ( (lv_optional_0_0= 'optional' ) )
                     {
-                    // InternalETMap.g:607:3: ( (lv_optional_0_0= 'optional' ) )
-                    // InternalETMap.g:608:1: (lv_optional_0_0= 'optional' )
+                    // InternalETMap.g:595:4: ( (lv_optional_0_0= 'optional' ) )
+                    // InternalETMap.g:596:5: (lv_optional_0_0= 'optional' )
                     {
-                    // InternalETMap.g:608:1: (lv_optional_0_0= 'optional' )
-                    // InternalETMap.g:609:3: lv_optional_0_0= 'optional'
+                    // InternalETMap.g:596:5: (lv_optional_0_0= 'optional' )
+                    // InternalETMap.g:597:6: lv_optional_0_0= 'optional'
                     {
                     lv_optional_0_0=(Token)match(input,21,FOLLOW_13); 
 
-                            newLeafNode(lv_optional_0_0, grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
-                        
+                    						newLeafNode(lv_optional_0_0, grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
-                    	        }
-                           		setWithLastConsumed(current, "optional", true, "optional");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
+                    						}
+                    						setWithLastConsumed(current, "optional", true, "optional");
+                    					
 
                     }
 
@@ -1578,12 +1604,12 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:623:7: otherlv_1= 'mandatory'
+                    // InternalETMap.g:610:4: otherlv_1= 'mandatory'
                     {
                     otherlv_1=(Token)match(input,22,FOLLOW_13); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1());
-                        
+                    				newLeafNode(otherlv_1, grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1());
+                    			
 
                     }
                     break;
@@ -1592,28 +1618,28 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_2=(Token)match(input,23,FOLLOW_3); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1());
-                
-            // InternalETMap.g:631:1: ( (lv_name_3_0= RULE_ID ) )
-            // InternalETMap.g:632:1: (lv_name_3_0= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1());
+            		
+            // InternalETMap.g:619:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalETMap.g:620:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalETMap.g:632:1: (lv_name_3_0= RULE_ID )
-            // InternalETMap.g:633:3: lv_name_3_0= RULE_ID
+            // InternalETMap.g:620:4: (lv_name_3_0= RULE_ID )
+            // InternalETMap.g:621:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_14); 
 
-            			newLeafNode(lv_name_3_0, grammarAccess.getEnumAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_3_0, grammarAccess.getEnumAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_3_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_3_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1622,39 +1648,39 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_4=(Token)match(input,24,FOLLOW_4); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3());
-                
+            			newLeafNode(otherlv_4, grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3());
+            		
             otherlv_5=(Token)match(input,14,FOLLOW_16); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4());
-                
-            // InternalETMap.g:657:1: ( (lv_values_6_0= RULE_STRING ) )
-            // InternalETMap.g:658:1: (lv_values_6_0= RULE_STRING )
+            			newLeafNode(otherlv_5, grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4());
+            		
+            // InternalETMap.g:645:3: ( (lv_values_6_0= RULE_STRING ) )
+            // InternalETMap.g:646:4: (lv_values_6_0= RULE_STRING )
             {
-            // InternalETMap.g:658:1: (lv_values_6_0= RULE_STRING )
-            // InternalETMap.g:659:3: lv_values_6_0= RULE_STRING
+            // InternalETMap.g:646:4: (lv_values_6_0= RULE_STRING )
+            // InternalETMap.g:647:5: lv_values_6_0= RULE_STRING
             {
             lv_values_6_0=(Token)match(input,RULE_STRING,FOLLOW_17); 
 
-            			newLeafNode(lv_values_6_0, grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_5_0()); 
-            		
+            					newLeafNode(lv_values_6_0, grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_5_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"values",
-                    		lv_values_6_0, 
-                    		"org.eclipse.xtext.common.Terminals.STRING");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"values",
+            						lv_values_6_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
 
             }
 
-            // InternalETMap.g:675:2: (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )*
+
+            }
+
+            // InternalETMap.g:663:3: (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )*
             loop9:
             do {
                 int alt9=2;
@@ -1667,32 +1693,32 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalETMap.g:675:4: otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) )
+            	    // InternalETMap.g:664:4: otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) )
             	    {
             	    otherlv_7=(Token)match(input,25,FOLLOW_16); 
 
-            	        	newLeafNode(otherlv_7, grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0());
-            	        
-            	    // InternalETMap.g:679:1: ( (lv_values_8_0= RULE_STRING ) )
-            	    // InternalETMap.g:680:1: (lv_values_8_0= RULE_STRING )
+            	    				newLeafNode(otherlv_7, grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0());
+            	    			
+            	    // InternalETMap.g:668:4: ( (lv_values_8_0= RULE_STRING ) )
+            	    // InternalETMap.g:669:5: (lv_values_8_0= RULE_STRING )
             	    {
-            	    // InternalETMap.g:680:1: (lv_values_8_0= RULE_STRING )
-            	    // InternalETMap.g:681:3: lv_values_8_0= RULE_STRING
+            	    // InternalETMap.g:669:5: (lv_values_8_0= RULE_STRING )
+            	    // InternalETMap.g:670:6: lv_values_8_0= RULE_STRING
             	    {
             	    lv_values_8_0=(Token)match(input,RULE_STRING,FOLLOW_17); 
 
-            	    			newLeafNode(lv_values_8_0, grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_6_1_0()); 
-            	    		
+            	    						newLeafNode(lv_values_8_0, grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_6_1_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"values",
-            	            		lv_values_8_0, 
-            	            		"org.eclipse.xtext.common.Terminals.STRING");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
+            	    						}
+            	    						addWithLastConsumed(
+            	    							current,
+            	    							"values",
+            	    							lv_values_8_0,
+            	    							"org.eclipse.xtext.common.Terminals.STRING");
+            	    					
 
             	    }
 
@@ -1710,21 +1736,23 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_9=(Token)match(input,15,FOLLOW_2); 
 
-                	newLeafNode(otherlv_9, grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7());
-                
+            			newLeafNode(otherlv_9, grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1733,7 +1761,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalETMap.g:709:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // InternalETMap.g:695:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -1741,8 +1769,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:710:2: (iv_ruleImport= ruleImport EOF )
-            // InternalETMap.g:711:2: iv_ruleImport= ruleImport EOF
+            // InternalETMap.g:695:47: (iv_ruleImport= ruleImport EOF )
+            // InternalETMap.g:696:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
             pushFollow(FOLLOW_1);
@@ -1756,11 +1784,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1769,7 +1797,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImport"
-    // InternalETMap.g:718:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) ) ) ;
+    // InternalETMap.g:702:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -1781,20 +1809,21 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_importedNamespace_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:721:28: ( (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) ) ) )
-            // InternalETMap.g:722:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) ) )
+            // InternalETMap.g:708:2: ( (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) ) ) )
+            // InternalETMap.g:709:2: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) ) )
             {
-            // InternalETMap.g:722:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) ) )
-            // InternalETMap.g:722:3: otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) )
+            // InternalETMap.g:709:2: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) ) )
+            // InternalETMap.g:710:3: otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) )
             {
             otherlv_0=(Token)match(input,26,FOLLOW_18); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
-                
-            // InternalETMap.g:726:1: ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) )
+            			newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
+            		
+            // InternalETMap.g:714:3: ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? ) | (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1812,43 +1841,43 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt11) {
                 case 1 :
-                    // InternalETMap.g:726:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? )
+                    // InternalETMap.g:715:4: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? )
                     {
-                    // InternalETMap.g:726:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? )
-                    // InternalETMap.g:726:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )?
+                    // InternalETMap.g:715:4: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )? )
+                    // InternalETMap.g:716:5: ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )?
                     {
-                    // InternalETMap.g:726:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
-                    // InternalETMap.g:727:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+                    // InternalETMap.g:716:5: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
+                    // InternalETMap.g:717:6: (lv_importedNamespace_1_0= ruleImportedFQN )
                     {
-                    // InternalETMap.g:727:1: (lv_importedNamespace_1_0= ruleImportedFQN )
-                    // InternalETMap.g:728:3: lv_importedNamespace_1_0= ruleImportedFQN
+                    // InternalETMap.g:717:6: (lv_importedNamespace_1_0= ruleImportedFQN )
+                    // InternalETMap.g:718:7: lv_importedNamespace_1_0= ruleImportedFQN
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
-                    	    
+
+                    							newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0());
+                    						
                     pushFollow(FOLLOW_19);
                     lv_importedNamespace_1_0=ruleImportedFQN();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getImportRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"importedNamespace",
-                            		lv_importedNamespace_1_0, 
-                            		"org.eclipse.etrice.core.common.Base.ImportedFQN");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    							if (current==null) {
+                    								current = createModelElementForParent(grammarAccess.getImportRule());
+                    							}
+                    							set(
+                    								current,
+                    								"importedNamespace",
+                    								lv_importedNamespace_1_0,
+                    								"org.eclipse.etrice.core.common.Base.ImportedFQN");
+                    							afterParserOrEnumRuleCall();
+                    						
 
                     }
 
 
                     }
 
-                    // InternalETMap.g:744:2: (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )?
+                    // InternalETMap.g:735:5: (otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) ) )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1857,32 +1886,32 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt10) {
                         case 1 :
-                            // InternalETMap.g:744:4: otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) )
+                            // InternalETMap.g:736:6: otherlv_2= 'from' ( (lv_importURI_3_0= RULE_STRING ) )
                             {
                             otherlv_2=(Token)match(input,27,FOLLOW_16); 
 
-                                	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1_0());
-                                
-                            // InternalETMap.g:748:1: ( (lv_importURI_3_0= RULE_STRING ) )
-                            // InternalETMap.g:749:1: (lv_importURI_3_0= RULE_STRING )
+                            						newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1_0());
+                            					
+                            // InternalETMap.g:740:6: ( (lv_importURI_3_0= RULE_STRING ) )
+                            // InternalETMap.g:741:7: (lv_importURI_3_0= RULE_STRING )
                             {
-                            // InternalETMap.g:749:1: (lv_importURI_3_0= RULE_STRING )
-                            // InternalETMap.g:750:3: lv_importURI_3_0= RULE_STRING
+                            // InternalETMap.g:741:7: (lv_importURI_3_0= RULE_STRING )
+                            // InternalETMap.g:742:8: lv_importURI_3_0= RULE_STRING
                             {
                             lv_importURI_3_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
-                            			newLeafNode(lv_importURI_3_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0_1_1_0()); 
-                            		
+                            								newLeafNode(lv_importURI_3_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0_1_1_0());
+                            							
 
-                            	        if (current==null) {
-                            	            current = createModelElement(grammarAccess.getImportRule());
-                            	        }
-                                   		setWithLastConsumed(
-                                   			current, 
-                                   			"importURI",
-                                    		lv_importURI_3_0, 
-                                    		"org.eclipse.xtext.common.Terminals.STRING");
-                            	    
+                            								if (current==null) {
+                            									current = createModelElement(grammarAccess.getImportRule());
+                            								}
+                            								setWithLastConsumed(
+                            									current,
+                            									"importURI",
+                            									lv_importURI_3_0,
+                            									"org.eclipse.xtext.common.Terminals.STRING");
+                            							
 
                             }
 
@@ -1902,35 +1931,35 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:767:6: (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) )
+                    // InternalETMap.g:761:4: (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) )
                     {
-                    // InternalETMap.g:767:6: (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) )
-                    // InternalETMap.g:767:8: otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) )
+                    // InternalETMap.g:761:4: (otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) ) )
+                    // InternalETMap.g:762:5: otherlv_4= 'model' ( (lv_importURI_5_0= RULE_STRING ) )
                     {
                     otherlv_4=(Token)match(input,28,FOLLOW_16); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getImportAccess().getModelKeyword_1_1_0());
-                        
-                    // InternalETMap.g:771:1: ( (lv_importURI_5_0= RULE_STRING ) )
-                    // InternalETMap.g:772:1: (lv_importURI_5_0= RULE_STRING )
+                    					newLeafNode(otherlv_4, grammarAccess.getImportAccess().getModelKeyword_1_1_0());
+                    				
+                    // InternalETMap.g:766:5: ( (lv_importURI_5_0= RULE_STRING ) )
+                    // InternalETMap.g:767:6: (lv_importURI_5_0= RULE_STRING )
                     {
-                    // InternalETMap.g:772:1: (lv_importURI_5_0= RULE_STRING )
-                    // InternalETMap.g:773:3: lv_importURI_5_0= RULE_STRING
+                    // InternalETMap.g:767:6: (lv_importURI_5_0= RULE_STRING )
+                    // InternalETMap.g:768:7: lv_importURI_5_0= RULE_STRING
                     {
                     lv_importURI_5_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
-                    			newLeafNode(lv_importURI_5_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_1_1_0()); 
-                    		
+                    							newLeafNode(lv_importURI_5_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_1_1_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getImportRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"importURI",
-                            		lv_importURI_5_0, 
-                            		"org.eclipse.xtext.common.Terminals.STRING");
-                    	    
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getImportRule());
+                    							}
+                    							setWithLastConsumed(
+                    								current,
+                    								"importURI",
+                    								lv_importURI_5_0,
+                    								"org.eclipse.xtext.common.Terminals.STRING");
+                    						
 
                     }
 
@@ -1952,13 +1981,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1967,7 +1998,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImportedFQN"
-    // InternalETMap.g:797:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
+    // InternalETMap.g:790:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
     public final String entryRuleImportedFQN() throws RecognitionException {
         String current = null;
 
@@ -1975,8 +2006,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:798:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
-            // InternalETMap.g:799:2: iv_ruleImportedFQN= ruleImportedFQN EOF
+            // InternalETMap.g:790:51: (iv_ruleImportedFQN= ruleImportedFQN EOF )
+            // InternalETMap.g:791:2: iv_ruleImportedFQN= ruleImportedFQN EOF
             {
              newCompositeNode(grammarAccess.getImportedFQNRule()); 
             pushFollow(FOLLOW_1);
@@ -1990,11 +2021,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2003,7 +2034,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImportedFQN"
-    // InternalETMap.g:806:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
+    // InternalETMap.g:797:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
     public final AntlrDatatypeRuleToken ruleImportedFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2011,30 +2042,31 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken this_FQN_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:809:28: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
-            // InternalETMap.g:810:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // InternalETMap.g:803:2: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
+            // InternalETMap.g:804:2: (this_FQN_0= ruleFQN (kw= '.*' )? )
             {
-            // InternalETMap.g:810:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
-            // InternalETMap.g:811:5: this_FQN_0= ruleFQN (kw= '.*' )?
+            // InternalETMap.g:804:2: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // InternalETMap.g:805:3: this_FQN_0= ruleFQN (kw= '.*' )?
             {
-             
-                    newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0());
+            		
             pushFollow(FOLLOW_20);
             this_FQN_0=ruleFQN();
 
             state._fsp--;
 
 
-            		current.merge(this_FQN_0);
-                
-             
-                    afterParserOrEnumRuleCall();
-                
-            // InternalETMap.g:821:1: (kw= '.*' )?
+            			current.merge(this_FQN_0);
+            		
+
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalETMap.g:815:3: (kw= '.*' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -2043,13 +2075,13 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt12) {
                 case 1 :
-                    // InternalETMap.g:822:2: kw= '.*'
+                    // InternalETMap.g:816:4: kw= '.*'
                     {
                     kw=(Token)match(input,29,FOLLOW_2); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1());
+                    			
 
                     }
                     break;
@@ -2062,13 +2094,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2077,7 +2111,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDocumentation"
-    // InternalETMap.g:835:1: entryRuleDocumentation returns [EObject current=null] : iv_ruleDocumentation= ruleDocumentation EOF ;
+    // InternalETMap.g:826:1: entryRuleDocumentation returns [EObject current=null] : iv_ruleDocumentation= ruleDocumentation EOF ;
     public final EObject entryRuleDocumentation() throws RecognitionException {
         EObject current = null;
 
@@ -2085,8 +2119,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:836:2: (iv_ruleDocumentation= ruleDocumentation EOF )
-            // InternalETMap.g:837:2: iv_ruleDocumentation= ruleDocumentation EOF
+            // InternalETMap.g:826:54: (iv_ruleDocumentation= ruleDocumentation EOF )
+            // InternalETMap.g:827:2: iv_ruleDocumentation= ruleDocumentation EOF
             {
              newCompositeNode(grammarAccess.getDocumentationRule()); 
             pushFollow(FOLLOW_1);
@@ -2100,11 +2134,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2113,7 +2147,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDocumentation"
-    // InternalETMap.g:844:1: ruleDocumentation returns [EObject current=null] : ( () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']' ) ;
+    // InternalETMap.g:833:1: ruleDocumentation returns [EObject current=null] : ( () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']' ) ;
     public final EObject ruleDocumentation() throws RecognitionException {
         EObject current = null;
 
@@ -2121,31 +2155,32 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token lv_lines_2_0=null;
         Token otherlv_3=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:847:28: ( ( () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']' ) )
-            // InternalETMap.g:848:1: ( () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']' )
+            // InternalETMap.g:839:2: ( ( () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']' ) )
+            // InternalETMap.g:840:2: ( () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']' )
             {
-            // InternalETMap.g:848:1: ( () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']' )
-            // InternalETMap.g:848:2: () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']'
+            // InternalETMap.g:840:2: ( () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']' )
+            // InternalETMap.g:841:3: () otherlv_1= '[' ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= ']'
             {
-            // InternalETMap.g:848:2: ()
-            // InternalETMap.g:849:5: 
+            // InternalETMap.g:841:3: ()
+            // InternalETMap.g:842:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getDocumentationAccess().getDocumentationAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getDocumentationAccess().getDocumentationAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,30,FOLLOW_21); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1());
-                
-            // InternalETMap.g:858:1: ( (lv_lines_2_0= RULE_STRING ) )*
+            			newLeafNode(otherlv_1, grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1());
+            		
+            // InternalETMap.g:852:3: ( (lv_lines_2_0= RULE_STRING ) )*
             loop13:
             do {
                 int alt13=2;
@@ -2158,25 +2193,25 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalETMap.g:859:1: (lv_lines_2_0= RULE_STRING )
+            	    // InternalETMap.g:853:4: (lv_lines_2_0= RULE_STRING )
             	    {
-            	    // InternalETMap.g:859:1: (lv_lines_2_0= RULE_STRING )
-            	    // InternalETMap.g:860:3: lv_lines_2_0= RULE_STRING
+            	    // InternalETMap.g:853:4: (lv_lines_2_0= RULE_STRING )
+            	    // InternalETMap.g:854:5: lv_lines_2_0= RULE_STRING
             	    {
             	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_21); 
 
-            	    			newLeafNode(lv_lines_2_0, grammarAccess.getDocumentationAccess().getLinesSTRINGTerminalRuleCall_2_0()); 
-            	    		
+            	    					newLeafNode(lv_lines_2_0, grammarAccess.getDocumentationAccess().getLinesSTRINGTerminalRuleCall_2_0());
+            	    				
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getDocumentationRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"lines",
-            	            		lv_lines_2_0, 
-            	            		"org.eclipse.xtext.common.Terminals.STRING");
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElement(grammarAccess.getDocumentationRule());
+            	    					}
+            	    					addWithLastConsumed(
+            	    						current,
+            	    						"lines",
+            	    						lv_lines_2_0,
+            	    						"org.eclipse.xtext.common.Terminals.STRING");
+            	    				
 
             	    }
 
@@ -2191,21 +2226,23 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             otherlv_3=(Token)match(input,31,FOLLOW_2); 
 
-                	newLeafNode(otherlv_3, grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3());
-                
+            			newLeafNode(otherlv_3, grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2214,7 +2251,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLiteral"
-    // InternalETMap.g:892:1: entryRuleLiteral returns [EObject current=null] : iv_ruleLiteral= ruleLiteral EOF ;
+    // InternalETMap.g:878:1: entryRuleLiteral returns [EObject current=null] : iv_ruleLiteral= ruleLiteral EOF ;
     public final EObject entryRuleLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2222,8 +2259,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:893:2: (iv_ruleLiteral= ruleLiteral EOF )
-            // InternalETMap.g:894:2: iv_ruleLiteral= ruleLiteral EOF
+            // InternalETMap.g:878:48: (iv_ruleLiteral= ruleLiteral EOF )
+            // InternalETMap.g:879:2: iv_ruleLiteral= ruleLiteral EOF
             {
              newCompositeNode(grammarAccess.getLiteralRule()); 
             pushFollow(FOLLOW_1);
@@ -2237,11 +2274,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2250,7 +2287,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLiteral"
-    // InternalETMap.g:901:1: ruleLiteral returns [EObject current=null] : (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral ) ;
+    // InternalETMap.g:885:1: ruleLiteral returns [EObject current=null] : (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral ) ;
     public final EObject ruleLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2261,13 +2298,14 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         EObject this_StringLiteral_2 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:904:28: ( (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral ) )
-            // InternalETMap.g:905:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
+            // InternalETMap.g:891:2: ( (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral ) )
+            // InternalETMap.g:892:2: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
             {
-            // InternalETMap.g:905:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
+            // InternalETMap.g:892:2: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
             int alt14=3;
             switch ( input.LA(1) ) {
             case 32:
@@ -2298,56 +2336,56 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             switch (alt14) {
                 case 1 :
-                    // InternalETMap.g:906:5: this_BooleanLiteral_0= ruleBooleanLiteral
+                    // InternalETMap.g:893:3: this_BooleanLiteral_0= ruleBooleanLiteral
                     {
-                     
-                            newCompositeNode(grammarAccess.getLiteralAccess().getBooleanLiteralParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getLiteralAccess().getBooleanLiteralParserRuleCall_0());
+                    		
                     pushFollow(FOLLOW_2);
                     this_BooleanLiteral_0=ruleBooleanLiteral();
 
                     state._fsp--;
 
-                     
-                            current = this_BooleanLiteral_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_BooleanLiteral_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:916:5: this_NumberLiteral_1= ruleNumberLiteral
+                    // InternalETMap.g:902:3: this_NumberLiteral_1= ruleNumberLiteral
                     {
-                     
-                            newCompositeNode(grammarAccess.getLiteralAccess().getNumberLiteralParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getLiteralAccess().getNumberLiteralParserRuleCall_1());
+                    		
                     pushFollow(FOLLOW_2);
                     this_NumberLiteral_1=ruleNumberLiteral();
 
                     state._fsp--;
 
-                     
-                            current = this_NumberLiteral_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_NumberLiteral_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalETMap.g:926:5: this_StringLiteral_2= ruleStringLiteral
+                    // InternalETMap.g:911:3: this_StringLiteral_2= ruleStringLiteral
                     {
-                     
-                            newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_2());
+                    		
                     pushFollow(FOLLOW_2);
                     this_StringLiteral_2=ruleStringLiteral();
 
                     state._fsp--;
 
-                     
-                            current = this_StringLiteral_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_StringLiteral_2;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -2357,13 +2395,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2372,7 +2412,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBooleanLiteral"
-    // InternalETMap.g:942:1: entryRuleBooleanLiteral returns [EObject current=null] : iv_ruleBooleanLiteral= ruleBooleanLiteral EOF ;
+    // InternalETMap.g:923:1: entryRuleBooleanLiteral returns [EObject current=null] : iv_ruleBooleanLiteral= ruleBooleanLiteral EOF ;
     public final EObject entryRuleBooleanLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2380,8 +2420,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:943:2: (iv_ruleBooleanLiteral= ruleBooleanLiteral EOF )
-            // InternalETMap.g:944:2: iv_ruleBooleanLiteral= ruleBooleanLiteral EOF
+            // InternalETMap.g:923:55: (iv_ruleBooleanLiteral= ruleBooleanLiteral EOF )
+            // InternalETMap.g:924:2: iv_ruleBooleanLiteral= ruleBooleanLiteral EOF
             {
              newCompositeNode(grammarAccess.getBooleanLiteralRule()); 
             pushFollow(FOLLOW_1);
@@ -2395,11 +2435,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2408,34 +2448,35 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBooleanLiteral"
-    // InternalETMap.g:951:1: ruleBooleanLiteral returns [EObject current=null] : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
+    // InternalETMap.g:930:1: ruleBooleanLiteral returns [EObject current=null] : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
     public final EObject ruleBooleanLiteral() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token lv_isTrue_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:954:28: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
-            // InternalETMap.g:955:1: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
+            // InternalETMap.g:936:2: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
+            // InternalETMap.g:937:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
             {
-            // InternalETMap.g:955:1: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
-            // InternalETMap.g:955:2: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
+            // InternalETMap.g:937:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
+            // InternalETMap.g:938:3: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             {
-            // InternalETMap.g:955:2: ()
-            // InternalETMap.g:956:5: 
+            // InternalETMap.g:938:3: ()
+            // InternalETMap.g:939:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getBooleanLiteralAccess().getBooleanLiteralAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getBooleanLiteralAccess().getBooleanLiteralAction_0(),
+            					current);
+            			
 
             }
 
-            // InternalETMap.g:961:2: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
+            // InternalETMap.g:945:3: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2453,34 +2494,34 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalETMap.g:961:4: otherlv_1= 'false'
+                    // InternalETMap.g:946:4: otherlv_1= 'false'
                     {
                     otherlv_1=(Token)match(input,32,FOLLOW_2); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_0());
-                        
+                    				newLeafNode(otherlv_1, grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:966:6: ( (lv_isTrue_2_0= 'true' ) )
+                    // InternalETMap.g:951:4: ( (lv_isTrue_2_0= 'true' ) )
                     {
-                    // InternalETMap.g:966:6: ( (lv_isTrue_2_0= 'true' ) )
-                    // InternalETMap.g:967:1: (lv_isTrue_2_0= 'true' )
+                    // InternalETMap.g:951:4: ( (lv_isTrue_2_0= 'true' ) )
+                    // InternalETMap.g:952:5: (lv_isTrue_2_0= 'true' )
                     {
-                    // InternalETMap.g:967:1: (lv_isTrue_2_0= 'true' )
-                    // InternalETMap.g:968:3: lv_isTrue_2_0= 'true'
+                    // InternalETMap.g:952:5: (lv_isTrue_2_0= 'true' )
+                    // InternalETMap.g:953:6: lv_isTrue_2_0= 'true'
                     {
                     lv_isTrue_2_0=(Token)match(input,33,FOLLOW_2); 
 
-                            newLeafNode(lv_isTrue_2_0, grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0());
-                        
+                    						newLeafNode(lv_isTrue_2_0, grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getBooleanLiteralRule());
-                    	        }
-                           		setWithLastConsumed(current, "isTrue", true, "true");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getBooleanLiteralRule());
+                    						}
+                    						setWithLastConsumed(current, "isTrue", true, "true");
+                    					
 
                     }
 
@@ -2499,13 +2540,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2514,7 +2557,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNumberLiteral"
-    // InternalETMap.g:989:1: entryRuleNumberLiteral returns [EObject current=null] : iv_ruleNumberLiteral= ruleNumberLiteral EOF ;
+    // InternalETMap.g:970:1: entryRuleNumberLiteral returns [EObject current=null] : iv_ruleNumberLiteral= ruleNumberLiteral EOF ;
     public final EObject entryRuleNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2522,8 +2565,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:990:2: (iv_ruleNumberLiteral= ruleNumberLiteral EOF )
-            // InternalETMap.g:991:2: iv_ruleNumberLiteral= ruleNumberLiteral EOF
+            // InternalETMap.g:970:54: (iv_ruleNumberLiteral= ruleNumberLiteral EOF )
+            // InternalETMap.g:971:2: iv_ruleNumberLiteral= ruleNumberLiteral EOF
             {
              newCompositeNode(grammarAccess.getNumberLiteralRule()); 
             pushFollow(FOLLOW_1);
@@ -2537,11 +2580,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2550,7 +2593,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNumberLiteral"
-    // InternalETMap.g:998:1: ruleNumberLiteral returns [EObject current=null] : (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral ) ;
+    // InternalETMap.g:977:1: ruleNumberLiteral returns [EObject current=null] : (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral ) ;
     public final EObject ruleNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2559,13 +2602,14 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         EObject this_RealLiteral_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:1001:28: ( (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral ) )
-            // InternalETMap.g:1002:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
+            // InternalETMap.g:983:2: ( (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral ) )
+            // InternalETMap.g:984:2: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
             {
-            // InternalETMap.g:1002:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
+            // InternalETMap.g:984:2: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
             int alt16=2;
             switch ( input.LA(1) ) {
             case 34:
@@ -2656,38 +2700,38 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             switch (alt16) {
                 case 1 :
-                    // InternalETMap.g:1003:5: this_IntLiteral_0= ruleIntLiteral
+                    // InternalETMap.g:985:3: this_IntLiteral_0= ruleIntLiteral
                     {
-                     
-                            newCompositeNode(grammarAccess.getNumberLiteralAccess().getIntLiteralParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getNumberLiteralAccess().getIntLiteralParserRuleCall_0());
+                    		
                     pushFollow(FOLLOW_2);
                     this_IntLiteral_0=ruleIntLiteral();
 
                     state._fsp--;
 
-                     
-                            current = this_IntLiteral_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_IntLiteral_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1013:5: this_RealLiteral_1= ruleRealLiteral
+                    // InternalETMap.g:994:3: this_RealLiteral_1= ruleRealLiteral
                     {
-                     
-                            newCompositeNode(grammarAccess.getNumberLiteralAccess().getRealLiteralParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getNumberLiteralAccess().getRealLiteralParserRuleCall_1());
+                    		
                     pushFollow(FOLLOW_2);
                     this_RealLiteral_1=ruleRealLiteral();
 
                     state._fsp--;
 
-                     
-                            current = this_RealLiteral_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_RealLiteral_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -2697,13 +2741,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2712,7 +2758,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRealLiteral"
-    // InternalETMap.g:1029:1: entryRuleRealLiteral returns [EObject current=null] : iv_ruleRealLiteral= ruleRealLiteral EOF ;
+    // InternalETMap.g:1006:1: entryRuleRealLiteral returns [EObject current=null] : iv_ruleRealLiteral= ruleRealLiteral EOF ;
     public final EObject entryRuleRealLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2720,8 +2766,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:1030:2: (iv_ruleRealLiteral= ruleRealLiteral EOF )
-            // InternalETMap.g:1031:2: iv_ruleRealLiteral= ruleRealLiteral EOF
+            // InternalETMap.g:1006:52: (iv_ruleRealLiteral= ruleRealLiteral EOF )
+            // InternalETMap.g:1007:2: iv_ruleRealLiteral= ruleRealLiteral EOF
             {
              newCompositeNode(grammarAccess.getRealLiteralRule()); 
             pushFollow(FOLLOW_1);
@@ -2735,11 +2781,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2748,58 +2794,59 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRealLiteral"
-    // InternalETMap.g:1038:1: ruleRealLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleReal ) ) ) ;
+    // InternalETMap.g:1013:1: ruleRealLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleReal ) ) ) ;
     public final EObject ruleRealLiteral() throws RecognitionException {
         EObject current = null;
 
         AntlrDatatypeRuleToken lv_value_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:1041:28: ( ( () ( (lv_value_1_0= ruleReal ) ) ) )
-            // InternalETMap.g:1042:1: ( () ( (lv_value_1_0= ruleReal ) ) )
+            // InternalETMap.g:1019:2: ( ( () ( (lv_value_1_0= ruleReal ) ) ) )
+            // InternalETMap.g:1020:2: ( () ( (lv_value_1_0= ruleReal ) ) )
             {
-            // InternalETMap.g:1042:1: ( () ( (lv_value_1_0= ruleReal ) ) )
-            // InternalETMap.g:1042:2: () ( (lv_value_1_0= ruleReal ) )
+            // InternalETMap.g:1020:2: ( () ( (lv_value_1_0= ruleReal ) ) )
+            // InternalETMap.g:1021:3: () ( (lv_value_1_0= ruleReal ) )
             {
-            // InternalETMap.g:1042:2: ()
-            // InternalETMap.g:1043:5: 
+            // InternalETMap.g:1021:3: ()
+            // InternalETMap.g:1022:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getRealLiteralAccess().getRealLiteralAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getRealLiteralAccess().getRealLiteralAction_0(),
+            					current);
+            			
 
             }
 
-            // InternalETMap.g:1048:2: ( (lv_value_1_0= ruleReal ) )
-            // InternalETMap.g:1049:1: (lv_value_1_0= ruleReal )
+            // InternalETMap.g:1028:3: ( (lv_value_1_0= ruleReal ) )
+            // InternalETMap.g:1029:4: (lv_value_1_0= ruleReal )
             {
-            // InternalETMap.g:1049:1: (lv_value_1_0= ruleReal )
-            // InternalETMap.g:1050:3: lv_value_1_0= ruleReal
+            // InternalETMap.g:1029:4: (lv_value_1_0= ruleReal )
+            // InternalETMap.g:1030:5: lv_value_1_0= ruleReal
             {
-             
-            	        newCompositeNode(grammarAccess.getRealLiteralAccess().getValueRealParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getRealLiteralAccess().getValueRealParserRuleCall_1_0());
+            				
             pushFollow(FOLLOW_2);
             lv_value_1_0=ruleReal();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getRealLiteralRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"value",
-                    		lv_value_1_0, 
-                    		"org.eclipse.etrice.core.common.Base.Real");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getRealLiteralRule());
+            					}
+            					set(
+            						current,
+            						"value",
+            						lv_value_1_0,
+            						"org.eclipse.etrice.core.common.Base.Real");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -2812,13 +2859,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2827,7 +2876,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIntLiteral"
-    // InternalETMap.g:1074:1: entryRuleIntLiteral returns [EObject current=null] : iv_ruleIntLiteral= ruleIntLiteral EOF ;
+    // InternalETMap.g:1051:1: entryRuleIntLiteral returns [EObject current=null] : iv_ruleIntLiteral= ruleIntLiteral EOF ;
     public final EObject entryRuleIntLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2835,8 +2884,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:1075:2: (iv_ruleIntLiteral= ruleIntLiteral EOF )
-            // InternalETMap.g:1076:2: iv_ruleIntLiteral= ruleIntLiteral EOF
+            // InternalETMap.g:1051:51: (iv_ruleIntLiteral= ruleIntLiteral EOF )
+            // InternalETMap.g:1052:2: iv_ruleIntLiteral= ruleIntLiteral EOF
             {
              newCompositeNode(grammarAccess.getIntLiteralRule()); 
             pushFollow(FOLLOW_1);
@@ -2850,11 +2899,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2863,58 +2912,59 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIntLiteral"
-    // InternalETMap.g:1083:1: ruleIntLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleInteger ) ) ) ;
+    // InternalETMap.g:1058:1: ruleIntLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleInteger ) ) ) ;
     public final EObject ruleIntLiteral() throws RecognitionException {
         EObject current = null;
 
         AntlrDatatypeRuleToken lv_value_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:1086:28: ( ( () ( (lv_value_1_0= ruleInteger ) ) ) )
-            // InternalETMap.g:1087:1: ( () ( (lv_value_1_0= ruleInteger ) ) )
+            // InternalETMap.g:1064:2: ( ( () ( (lv_value_1_0= ruleInteger ) ) ) )
+            // InternalETMap.g:1065:2: ( () ( (lv_value_1_0= ruleInteger ) ) )
             {
-            // InternalETMap.g:1087:1: ( () ( (lv_value_1_0= ruleInteger ) ) )
-            // InternalETMap.g:1087:2: () ( (lv_value_1_0= ruleInteger ) )
+            // InternalETMap.g:1065:2: ( () ( (lv_value_1_0= ruleInteger ) ) )
+            // InternalETMap.g:1066:3: () ( (lv_value_1_0= ruleInteger ) )
             {
-            // InternalETMap.g:1087:2: ()
-            // InternalETMap.g:1088:5: 
+            // InternalETMap.g:1066:3: ()
+            // InternalETMap.g:1067:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getIntLiteralAccess().getIntLiteralAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getIntLiteralAccess().getIntLiteralAction_0(),
+            					current);
+            			
 
             }
 
-            // InternalETMap.g:1093:2: ( (lv_value_1_0= ruleInteger ) )
-            // InternalETMap.g:1094:1: (lv_value_1_0= ruleInteger )
+            // InternalETMap.g:1073:3: ( (lv_value_1_0= ruleInteger ) )
+            // InternalETMap.g:1074:4: (lv_value_1_0= ruleInteger )
             {
-            // InternalETMap.g:1094:1: (lv_value_1_0= ruleInteger )
-            // InternalETMap.g:1095:3: lv_value_1_0= ruleInteger
+            // InternalETMap.g:1074:4: (lv_value_1_0= ruleInteger )
+            // InternalETMap.g:1075:5: lv_value_1_0= ruleInteger
             {
-             
-            	        newCompositeNode(grammarAccess.getIntLiteralAccess().getValueIntegerParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getIntLiteralAccess().getValueIntegerParserRuleCall_1_0());
+            				
             pushFollow(FOLLOW_2);
             lv_value_1_0=ruleInteger();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getIntLiteralRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"value",
-                    		lv_value_1_0, 
-                    		"org.eclipse.etrice.core.common.Base.Integer");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getIntLiteralRule());
+            					}
+            					set(
+            						current,
+            						"value",
+            						lv_value_1_0,
+            						"org.eclipse.etrice.core.common.Base.Integer");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -2927,13 +2977,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2942,7 +2994,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStringLiteral"
-    // InternalETMap.g:1119:1: entryRuleStringLiteral returns [EObject current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
+    // InternalETMap.g:1096:1: entryRuleStringLiteral returns [EObject current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
     public final EObject entryRuleStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2950,8 +3002,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:1120:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
-            // InternalETMap.g:1121:2: iv_ruleStringLiteral= ruleStringLiteral EOF
+            // InternalETMap.g:1096:54: (iv_ruleStringLiteral= ruleStringLiteral EOF )
+            // InternalETMap.g:1097:2: iv_ruleStringLiteral= ruleStringLiteral EOF
             {
              newCompositeNode(grammarAccess.getStringLiteralRule()); 
             pushFollow(FOLLOW_1);
@@ -2965,11 +3017,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2978,55 +3030,53 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStringLiteral"
-    // InternalETMap.g:1128:1: ruleStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
+    // InternalETMap.g:1103:1: ruleStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleStringLiteral() throws RecognitionException {
         EObject current = null;
 
         Token lv_value_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:1131:28: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // InternalETMap.g:1132:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalETMap.g:1109:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
+            // InternalETMap.g:1110:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // InternalETMap.g:1132:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
-            // InternalETMap.g:1132:2: () ( (lv_value_1_0= RULE_STRING ) )
+            // InternalETMap.g:1110:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalETMap.g:1111:3: () ( (lv_value_1_0= RULE_STRING ) )
             {
-            // InternalETMap.g:1132:2: ()
-            // InternalETMap.g:1133:5: 
+            // InternalETMap.g:1111:3: ()
+            // InternalETMap.g:1112:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getStringLiteralAccess().getStringLiteralAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getStringLiteralAccess().getStringLiteralAction_0(),
+            					current);
+            			
 
             }
 
-            // InternalETMap.g:1138:2: ( (lv_value_1_0= RULE_STRING ) )
-            // InternalETMap.g:1139:1: (lv_value_1_0= RULE_STRING )
+            // InternalETMap.g:1118:3: ( (lv_value_1_0= RULE_STRING ) )
+            // InternalETMap.g:1119:4: (lv_value_1_0= RULE_STRING )
             {
-            // InternalETMap.g:1139:1: (lv_value_1_0= RULE_STRING )
-            // InternalETMap.g:1140:3: lv_value_1_0= RULE_STRING
+            // InternalETMap.g:1119:4: (lv_value_1_0= RULE_STRING )
+            // InternalETMap.g:1120:5: lv_value_1_0= RULE_STRING
             {
             lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
-            			newLeafNode(lv_value_1_0, grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_value_1_0, grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getStringLiteralRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.STRING");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getStringLiteralRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"value",
+            						lv_value_1_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
 
             }
 
@@ -3036,13 +3086,18 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3051,7 +3106,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInteger"
-    // InternalETMap.g:1164:1: entryRuleInteger returns [String current=null] : iv_ruleInteger= ruleInteger EOF ;
+    // InternalETMap.g:1140:1: entryRuleInteger returns [String current=null] : iv_ruleInteger= ruleInteger EOF ;
     public final String entryRuleInteger() throws RecognitionException {
         String current = null;
 
@@ -3059,8 +3114,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:1165:2: (iv_ruleInteger= ruleInteger EOF )
-            // InternalETMap.g:1166:2: iv_ruleInteger= ruleInteger EOF
+            // InternalETMap.g:1140:47: (iv_ruleInteger= ruleInteger EOF )
+            // InternalETMap.g:1141:2: iv_ruleInteger= ruleInteger EOF
             {
              newCompositeNode(grammarAccess.getIntegerRule()); 
             pushFollow(FOLLOW_1);
@@ -3074,11 +3129,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3087,7 +3142,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInteger"
-    // InternalETMap.g:1173:1: ruleInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX ) ;
+    // InternalETMap.g:1147:1: ruleInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX ) ;
     public final AntlrDatatypeRuleToken ruleInteger() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3095,13 +3150,14 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token this_INT_2=null;
         Token this_HEX_3=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:1176:28: ( ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX ) )
-            // InternalETMap.g:1177:1: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX )
+            // InternalETMap.g:1153:2: ( ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX ) )
+            // InternalETMap.g:1154:2: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX )
             {
-            // InternalETMap.g:1177:1: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX )
+            // InternalETMap.g:1154:2: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX )
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -3119,12 +3175,12 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt18) {
                 case 1 :
-                    // InternalETMap.g:1177:2: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
+                    // InternalETMap.g:1155:3: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
                     {
-                    // InternalETMap.g:1177:2: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
-                    // InternalETMap.g:1177:3: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT
+                    // InternalETMap.g:1155:3: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
+                    // InternalETMap.g:1156:4: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT
                     {
-                    // InternalETMap.g:1177:3: (kw= '+' | kw= '-' )?
+                    // InternalETMap.g:1156:4: (kw= '+' | kw= '-' )?
                     int alt17=3;
                     int LA17_0 = input.LA(1);
 
@@ -3136,24 +3192,24 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt17) {
                         case 1 :
-                            // InternalETMap.g:1178:2: kw= '+'
+                            // InternalETMap.g:1157:5: kw= '+'
                             {
                             kw=(Token)match(input,34,FOLLOW_22); 
 
-                                    current.merge(kw);
-                                    newLeafNode(kw, grammarAccess.getIntegerAccess().getPlusSignKeyword_0_0_0()); 
-                                
+                            					current.merge(kw);
+                            					newLeafNode(kw, grammarAccess.getIntegerAccess().getPlusSignKeyword_0_0_0());
+                            				
 
                             }
                             break;
                         case 2 :
-                            // InternalETMap.g:1185:2: kw= '-'
+                            // InternalETMap.g:1163:5: kw= '-'
                             {
                             kw=(Token)match(input,35,FOLLOW_22); 
 
-                                    current.merge(kw);
-                                    newLeafNode(kw, grammarAccess.getIntegerAccess().getHyphenMinusKeyword_0_0_1()); 
-                                
+                            					current.merge(kw);
+                            					newLeafNode(kw, grammarAccess.getIntegerAccess().getHyphenMinusKeyword_0_0_1());
+                            				
 
                             }
                             break;
@@ -3162,11 +3218,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                     this_INT_2=(Token)match(input,RULE_INT,FOLLOW_2); 
 
-                    		current.merge(this_INT_2);
-                        
-                     
-                        newLeafNode(this_INT_2, grammarAccess.getIntegerAccess().getINTTerminalRuleCall_0_1()); 
-                        
+                    				current.merge(this_INT_2);
+                    			
+
+                    				newLeafNode(this_INT_2, grammarAccess.getIntegerAccess().getINTTerminalRuleCall_0_1());
+                    			
 
                     }
 
@@ -3174,15 +3230,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1198:10: this_HEX_3= RULE_HEX
+                    // InternalETMap.g:1178:3: this_HEX_3= RULE_HEX
                     {
                     this_HEX_3=(Token)match(input,RULE_HEX,FOLLOW_2); 
 
-                    		current.merge(this_HEX_3);
-                        
-                     
-                        newLeafNode(this_HEX_3, grammarAccess.getIntegerAccess().getHEXTerminalRuleCall_1()); 
-                        
+                    			current.merge(this_HEX_3);
+                    		
+
+                    			newLeafNode(this_HEX_3, grammarAccess.getIntegerAccess().getHEXTerminalRuleCall_1());
+                    		
 
                     }
                     break;
@@ -3192,13 +3248,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3207,7 +3265,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleReal"
-    // InternalETMap.g:1213:1: entryRuleReal returns [String current=null] : iv_ruleReal= ruleReal EOF ;
+    // InternalETMap.g:1189:1: entryRuleReal returns [String current=null] : iv_ruleReal= ruleReal EOF ;
     public final String entryRuleReal() throws RecognitionException {
         String current = null;
 
@@ -3215,8 +3273,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:1214:2: (iv_ruleReal= ruleReal EOF )
-            // InternalETMap.g:1215:2: iv_ruleReal= ruleReal EOF
+            // InternalETMap.g:1189:44: (iv_ruleReal= ruleReal EOF )
+            // InternalETMap.g:1190:2: iv_ruleReal= ruleReal EOF
             {
              newCompositeNode(grammarAccess.getRealRule()); 
             pushFollow(FOLLOW_1);
@@ -3230,11 +3288,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3243,7 +3301,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleReal"
-    // InternalETMap.g:1222:1: ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp ) ;
+    // InternalETMap.g:1196:1: ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp ) ;
     public final AntlrDatatypeRuleToken ruleReal() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3252,13 +3310,14 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken this_DecimalExp_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:1225:28: ( (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp ) )
-            // InternalETMap.g:1226:1: (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp )
+            // InternalETMap.g:1202:2: ( (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp ) )
+            // InternalETMap.g:1203:2: (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp )
             {
-            // InternalETMap.g:1226:1: (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp )
+            // InternalETMap.g:1203:2: (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp )
             int alt19=2;
             switch ( input.LA(1) ) {
             case 34:
@@ -3404,42 +3463,42 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             switch (alt19) {
                 case 1 :
-                    // InternalETMap.g:1227:5: this_Decimal_0= ruleDecimal
+                    // InternalETMap.g:1204:3: this_Decimal_0= ruleDecimal
                     {
-                     
-                            newCompositeNode(grammarAccess.getRealAccess().getDecimalParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getRealAccess().getDecimalParserRuleCall_0());
+                    		
                     pushFollow(FOLLOW_2);
                     this_Decimal_0=ruleDecimal();
 
                     state._fsp--;
 
 
-                    		current.merge(this_Decimal_0);
-                        
-                     
-                            afterParserOrEnumRuleCall();
-                        
+                    			current.merge(this_Decimal_0);
+                    		
+
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1239:5: this_DecimalExp_1= ruleDecimalExp
+                    // InternalETMap.g:1215:3: this_DecimalExp_1= ruleDecimalExp
                     {
-                     
-                            newCompositeNode(grammarAccess.getRealAccess().getDecimalExpParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getRealAccess().getDecimalExpParserRuleCall_1());
+                    		
                     pushFollow(FOLLOW_2);
                     this_DecimalExp_1=ruleDecimalExp();
 
                     state._fsp--;
 
 
-                    		current.merge(this_DecimalExp_1);
-                        
-                     
-                            afterParserOrEnumRuleCall();
-                        
+                    			current.merge(this_DecimalExp_1);
+                    		
+
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -3449,13 +3508,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3464,19 +3525,19 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDecimal"
-    // InternalETMap.g:1257:1: entryRuleDecimal returns [String current=null] : iv_ruleDecimal= ruleDecimal EOF ;
+    // InternalETMap.g:1229:1: entryRuleDecimal returns [String current=null] : iv_ruleDecimal= ruleDecimal EOF ;
     public final String entryRuleDecimal() throws RecognitionException {
         String current = null;
 
         AntlrDatatypeRuleToken iv_ruleDecimal = null;
 
 
-         
-        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-        	
+
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
         try {
-            // InternalETMap.g:1261:2: (iv_ruleDecimal= ruleDecimal EOF )
-            // InternalETMap.g:1262:2: iv_ruleDecimal= ruleDecimal EOF
+            // InternalETMap.g:1231:2: (iv_ruleDecimal= ruleDecimal EOF )
+            // InternalETMap.g:1232:2: iv_ruleDecimal= ruleDecimal EOF
             {
              newCompositeNode(grammarAccess.getDecimalRule()); 
             pushFollow(FOLLOW_1);
@@ -3490,11 +3551,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myHiddenTokenState.restore();
@@ -3506,7 +3567,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDecimal"
-    // InternalETMap.g:1272:1: ruleDecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT ) ;
+    // InternalETMap.g:1241:1: ruleDecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleDecimal() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3514,17 +3575,18 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token this_INT_2=null;
         Token this_INT_4=null;
 
-         enterRule(); 
-        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-            
+
+        	enterRule();
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
         try {
-            // InternalETMap.g:1276:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT ) )
-            // InternalETMap.g:1277:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT )
+            // InternalETMap.g:1248:2: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT ) )
+            // InternalETMap.g:1249:2: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT )
             {
-            // InternalETMap.g:1277:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT )
-            // InternalETMap.g:1277:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT
+            // InternalETMap.g:1249:2: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT )
+            // InternalETMap.g:1250:3: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT
             {
-            // InternalETMap.g:1277:2: (kw= '+' | kw= '-' )?
+            // InternalETMap.g:1250:3: (kw= '+' | kw= '-' )?
             int alt20=3;
             int LA20_0 = input.LA(1);
 
@@ -3536,24 +3598,24 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt20) {
                 case 1 :
-                    // InternalETMap.g:1278:2: kw= '+'
+                    // InternalETMap.g:1251:4: kw= '+'
                     {
                     kw=(Token)match(input,34,FOLLOW_22); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDecimalAccess().getPlusSignKeyword_0_0()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getDecimalAccess().getPlusSignKeyword_0_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1285:2: kw= '-'
+                    // InternalETMap.g:1257:4: kw= '-'
                     {
                     kw=(Token)match(input,35,FOLLOW_22); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDecimalAccess().getHyphenMinusKeyword_0_1()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getDecimalAccess().getHyphenMinusKeyword_0_1());
+                    			
 
                     }
                     break;
@@ -3562,36 +3624,38 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             this_INT_2=(Token)match(input,RULE_INT,FOLLOW_23); 
 
-            		current.merge(this_INT_2);
-                
-             
-                newLeafNode(this_INT_2, grammarAccess.getDecimalAccess().getINTTerminalRuleCall_1()); 
-                
+            			current.merge(this_INT_2);
+            		
+
+            			newLeafNode(this_INT_2, grammarAccess.getDecimalAccess().getINTTerminalRuleCall_1());
+            		
             kw=(Token)match(input,36,FOLLOW_22); 
 
-                    current.merge(kw);
-                    newLeafNode(kw, grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
-                
+            			current.merge(kw);
+            			newLeafNode(kw, grammarAccess.getDecimalAccess().getFullStopKeyword_2());
+            		
             this_INT_4=(Token)match(input,RULE_INT,FOLLOW_2); 
 
-            		current.merge(this_INT_4);
-                
-             
-                newLeafNode(this_INT_4, grammarAccess.getDecimalAccess().getINTTerminalRuleCall_3()); 
-                
+            			current.merge(this_INT_4);
+            		
+
+            			newLeafNode(this_INT_4, grammarAccess.getDecimalAccess().getINTTerminalRuleCall_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myHiddenTokenState.restore();
@@ -3603,19 +3667,19 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDecimalExp"
-    // InternalETMap.g:1321:1: entryRuleDecimalExp returns [String current=null] : iv_ruleDecimalExp= ruleDecimalExp EOF ;
+    // InternalETMap.g:1289:1: entryRuleDecimalExp returns [String current=null] : iv_ruleDecimalExp= ruleDecimalExp EOF ;
     public final String entryRuleDecimalExp() throws RecognitionException {
         String current = null;
 
         AntlrDatatypeRuleToken iv_ruleDecimalExp = null;
 
 
-         
-        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-        	
+
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
         try {
-            // InternalETMap.g:1325:2: (iv_ruleDecimalExp= ruleDecimalExp EOF )
-            // InternalETMap.g:1326:2: iv_ruleDecimalExp= ruleDecimalExp EOF
+            // InternalETMap.g:1291:2: (iv_ruleDecimalExp= ruleDecimalExp EOF )
+            // InternalETMap.g:1292:2: iv_ruleDecimalExp= ruleDecimalExp EOF
             {
              newCompositeNode(grammarAccess.getDecimalExpRule()); 
             pushFollow(FOLLOW_1);
@@ -3629,11 +3693,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myHiddenTokenState.restore();
@@ -3645,7 +3709,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDecimalExp"
-    // InternalETMap.g:1336:1: ruleDecimalExp returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT ) ;
+    // InternalETMap.g:1301:1: ruleDecimalExp returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleDecimalExp() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3654,17 +3718,18 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token this_INT_4=null;
         Token this_INT_9=null;
 
-         enterRule(); 
-        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-            
+
+        	enterRule();
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
         try {
-            // InternalETMap.g:1340:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT ) )
-            // InternalETMap.g:1341:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT )
+            // InternalETMap.g:1308:2: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT ) )
+            // InternalETMap.g:1309:2: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT )
             {
-            // InternalETMap.g:1341:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT )
-            // InternalETMap.g:1341:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT
+            // InternalETMap.g:1309:2: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT )
+            // InternalETMap.g:1310:3: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT
             {
-            // InternalETMap.g:1341:2: (kw= '+' | kw= '-' )?
+            // InternalETMap.g:1310:3: (kw= '+' | kw= '-' )?
             int alt21=3;
             int LA21_0 = input.LA(1);
 
@@ -3676,24 +3741,24 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt21) {
                 case 1 :
-                    // InternalETMap.g:1342:2: kw= '+'
+                    // InternalETMap.g:1311:4: kw= '+'
                     {
                     kw=(Token)match(input,34,FOLLOW_22); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_0_0()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_0_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1349:2: kw= '-'
+                    // InternalETMap.g:1317:4: kw= '-'
                     {
                     kw=(Token)match(input,35,FOLLOW_22); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_0_1()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_0_1());
+                    			
 
                     }
                     break;
@@ -3702,24 +3767,24 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             this_INT_2=(Token)match(input,RULE_INT,FOLLOW_23); 
 
-            		current.merge(this_INT_2);
-                
-             
-                newLeafNode(this_INT_2, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_1()); 
-                
+            			current.merge(this_INT_2);
+            		
+
+            			newLeafNode(this_INT_2, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_1());
+            		
             kw=(Token)match(input,36,FOLLOW_22); 
 
-                    current.merge(kw);
-                    newLeafNode(kw, grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
-                
+            			current.merge(kw);
+            			newLeafNode(kw, grammarAccess.getDecimalExpAccess().getFullStopKeyword_2());
+            		
             this_INT_4=(Token)match(input,RULE_INT,FOLLOW_24); 
 
-            		current.merge(this_INT_4);
-                
-             
-                newLeafNode(this_INT_4, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
-                
-            // InternalETMap.g:1374:1: (kw= 'e' | kw= 'E' )
+            			current.merge(this_INT_4);
+            		
+
+            			newLeafNode(this_INT_4, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3());
+            		
+            // InternalETMap.g:1342:3: (kw= 'e' | kw= 'E' )
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -3737,31 +3802,31 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt22) {
                 case 1 :
-                    // InternalETMap.g:1375:2: kw= 'e'
+                    // InternalETMap.g:1343:4: kw= 'e'
                     {
                     kw=(Token)match(input,37,FOLLOW_25); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_0()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1382:2: kw= 'E'
+                    // InternalETMap.g:1349:4: kw= 'E'
                     {
                     kw=(Token)match(input,38,FOLLOW_25); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_1()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_1());
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalETMap.g:1387:2: (kw= '+' | kw= '-' )?
+            // InternalETMap.g:1355:3: (kw= '+' | kw= '-' )?
             int alt23=3;
             int LA23_0 = input.LA(1);
 
@@ -3773,24 +3838,24 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt23) {
                 case 1 :
-                    // InternalETMap.g:1388:2: kw= '+'
+                    // InternalETMap.g:1356:4: kw= '+'
                     {
                     kw=(Token)match(input,34,FOLLOW_22); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1395:2: kw= '-'
+                    // InternalETMap.g:1362:4: kw= '-'
                     {
                     kw=(Token)match(input,35,FOLLOW_22); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1()); 
-                        
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1());
+                    			
 
                     }
                     break;
@@ -3799,24 +3864,26 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             this_INT_9=(Token)match(input,RULE_INT,FOLLOW_2); 
 
-            		current.merge(this_INT_9);
-                
-             
-                newLeafNode(this_INT_9, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_6()); 
-                
+            			current.merge(this_INT_9);
+            		
+
+            			newLeafNode(this_INT_9, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_6());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myHiddenTokenState.restore();
@@ -3828,7 +3895,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalETMap.g:1418:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // InternalETMap.g:1382:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -3836,8 +3903,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalETMap.g:1419:2: (iv_ruleFQN= ruleFQN EOF )
-            // InternalETMap.g:1420:2: iv_ruleFQN= ruleFQN EOF
+            // InternalETMap.g:1382:43: (iv_ruleFQN= ruleFQN EOF )
+            // InternalETMap.g:1383:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
             pushFollow(FOLLOW_1);
@@ -3851,11 +3918,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3864,7 +3931,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFQN"
-    // InternalETMap.g:1427:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalETMap.g:1389:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3872,23 +3939,24 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token kw=null;
         Token this_ID_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:1430:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // InternalETMap.g:1431:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalETMap.g:1395:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalETMap.g:1396:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // InternalETMap.g:1431:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // InternalETMap.g:1431:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalETMap.g:1396:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalETMap.g:1397:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_26); 
 
-            		current.merge(this_ID_0);
-                
-             
-                newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
-                
-            // InternalETMap.g:1438:1: (kw= '.' this_ID_2= RULE_ID )*
+            			current.merge(this_ID_0);
+            		
+
+            			newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0());
+            		
+            // InternalETMap.g:1404:3: (kw= '.' this_ID_2= RULE_ID )*
             loop24:
             do {
                 int alt24=2;
@@ -3901,20 +3969,20 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                 switch (alt24) {
             	case 1 :
-            	    // InternalETMap.g:1439:2: kw= '.' this_ID_2= RULE_ID
+            	    // InternalETMap.g:1405:4: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,36,FOLLOW_3); 
 
-            	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            	        
+            	    				current.merge(kw);
+            	    				newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0());
+            	    			
             	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_26); 
 
-            	    		current.merge(this_ID_2);
-            	        
-            	     
-            	        newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
-            	        
+            	    				current.merge(this_ID_2);
+            	    			
+
+            	    				newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1());
+            	    			
 
             	    }
             	    break;
@@ -3930,13 +3998,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3945,7 +4015,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLiteralType"
-    // InternalETMap.g:1459:1: ruleLiteralType returns [Enumerator current=null] : ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) ) ;
+    // InternalETMap.g:1422:1: ruleLiteralType returns [Enumerator current=null] : ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) ) ;
     public final Enumerator ruleLiteralType() throws RecognitionException {
         Enumerator current = null;
 
@@ -3954,12 +4024,14 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token enumLiteral_2=null;
         Token enumLiteral_3=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalETMap.g:1461:28: ( ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) ) )
-            // InternalETMap.g:1462:1: ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) )
+            // InternalETMap.g:1428:2: ( ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) ) )
+            // InternalETMap.g:1429:2: ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) )
             {
-            // InternalETMap.g:1462:1: ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) )
+            // InternalETMap.g:1429:2: ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) )
             int alt25=4;
             switch ( input.LA(1) ) {
             case 39:
@@ -3991,16 +4063,16 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             switch (alt25) {
                 case 1 :
-                    // InternalETMap.g:1462:2: (enumLiteral_0= 'ptBoolean' )
+                    // InternalETMap.g:1430:3: (enumLiteral_0= 'ptBoolean' )
                     {
-                    // InternalETMap.g:1462:2: (enumLiteral_0= 'ptBoolean' )
-                    // InternalETMap.g:1462:4: enumLiteral_0= 'ptBoolean'
+                    // InternalETMap.g:1430:3: (enumLiteral_0= 'ptBoolean' )
+                    // InternalETMap.g:1431:4: enumLiteral_0= 'ptBoolean'
                     {
                     enumLiteral_0=(Token)match(input,39,FOLLOW_2); 
 
-                            current = grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_0, grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0()); 
-                        
+                    				current = grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_0, grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0());
+                    			
 
                     }
 
@@ -4008,16 +4080,16 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1468:6: (enumLiteral_1= 'ptInteger' )
+                    // InternalETMap.g:1438:3: (enumLiteral_1= 'ptInteger' )
                     {
-                    // InternalETMap.g:1468:6: (enumLiteral_1= 'ptInteger' )
-                    // InternalETMap.g:1468:8: enumLiteral_1= 'ptInteger'
+                    // InternalETMap.g:1438:3: (enumLiteral_1= 'ptInteger' )
+                    // InternalETMap.g:1439:4: enumLiteral_1= 'ptInteger'
                     {
                     enumLiteral_1=(Token)match(input,40,FOLLOW_2); 
 
-                            current = grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_1, grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1()); 
-                        
+                    				current = grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_1, grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1());
+                    			
 
                     }
 
@@ -4025,16 +4097,16 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalETMap.g:1474:6: (enumLiteral_2= 'ptReal' )
+                    // InternalETMap.g:1446:3: (enumLiteral_2= 'ptReal' )
                     {
-                    // InternalETMap.g:1474:6: (enumLiteral_2= 'ptReal' )
-                    // InternalETMap.g:1474:8: enumLiteral_2= 'ptReal'
+                    // InternalETMap.g:1446:3: (enumLiteral_2= 'ptReal' )
+                    // InternalETMap.g:1447:4: enumLiteral_2= 'ptReal'
                     {
                     enumLiteral_2=(Token)match(input,41,FOLLOW_2); 
 
-                            current = grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_2, grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2()); 
-                        
+                    				current = grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_2, grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2());
+                    			
 
                     }
 
@@ -4042,16 +4114,16 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalETMap.g:1480:6: (enumLiteral_3= 'ptCharacter' )
+                    // InternalETMap.g:1454:3: (enumLiteral_3= 'ptCharacter' )
                     {
-                    // InternalETMap.g:1480:6: (enumLiteral_3= 'ptCharacter' )
-                    // InternalETMap.g:1480:8: enumLiteral_3= 'ptCharacter'
+                    // InternalETMap.g:1454:3: (enumLiteral_3= 'ptCharacter' )
+                    // InternalETMap.g:1455:4: enumLiteral_3= 'ptCharacter'
                     {
                     enumLiteral_3=(Token)match(input,42,FOLLOW_2); 
 
-                            current = grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_3, grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3()); 
-                        
+                    				current = grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_3, grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3());
+                    			
 
                     }
 
@@ -4064,13 +4136,15 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

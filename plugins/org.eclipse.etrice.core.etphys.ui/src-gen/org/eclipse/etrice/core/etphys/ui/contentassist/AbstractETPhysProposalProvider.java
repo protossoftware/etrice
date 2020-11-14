@@ -4,18 +4,20 @@
 package org.eclipse.etrice.core.etphys.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.etrice.core.common.ui.contentassist.BaseProposalProvider;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
- * Represents a generated, default implementation of superclass {@link org.eclipse.etrice.core.common.ui.contentassist.BaseProposalProvider}.
+ * Represents a generated, default implementation of superclass {@link BaseProposalProvider}.
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-@SuppressWarnings("all")
-public class AbstractETPhysProposalProvider extends org.eclipse.etrice.core.common.ui.contentassist.BaseProposalProvider {
-		
+public abstract class AbstractETPhysProposalProvider extends BaseProposalProvider {
+
 	public void completePhysicalModel_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
@@ -100,7 +102,7 @@ public class AbstractETPhysProposalProvider extends org.eclipse.etrice.core.comm
 	public void completeRuntimeClass_ThreadModel(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-    
+
 	public void complete_PhysicalModel(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}

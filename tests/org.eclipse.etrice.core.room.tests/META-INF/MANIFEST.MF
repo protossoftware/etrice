@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.etrice.core.room.tests
 Bundle-Version: 0.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse eTrice
-Require-Bundle:  org.eclipse.etrice.core.room,
+Require-Bundle: org.eclipse.etrice.core.room,
   org.eclipse.etrice.core.common,
   org.eclipse.etrice.core.fsm,
  org.junit,
@@ -15,8 +15,11 @@ Require-Bundle:  org.eclipse.etrice.core.room,
  org.eclipse.xtext,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
- org.eclipse.xtext.testing
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.xbase.testing
 Bundle-Activator: org.eclipse.etrice.core.CoreTestsActivator
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.etrice.core
+Export-Package: org.eclipse.etrice.core,
+ org.eclipse.etrice.core.tests;x-internal=true
 Automatic-Module-Name: org.eclipse.etrice.core.room.tests

@@ -3,21 +3,31 @@
  */
 package org.eclipse.etrice.core.fsm.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 import org.eclipse.etrice.core.common.services.BaseGrammarAccess;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class FSMGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class FSMModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.FSMModel");
@@ -27,14 +37,13 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//FSMModel:
 		//	components+=ModelComponent*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//components+=ModelComponent*
 		public Assignment getComponentsAssignment() { return cComponentsAssignment; }
-
+		
 		//ModelComponent
 		public RuleCall getComponentsModelComponentParserRuleCall_0() { return cComponentsModelComponentParserRuleCall_0; }
 	}
-
 	public class ModelComponentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.ModelComponent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -60,57 +69,56 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	'ModelComponent' componentName=ID ('extends' base=[ModelComponent|FQN])?
 		//	stateMachine=StateMachine;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//(abstract?='abstract'? & commType=ComponentCommunicationType?) 'ModelComponent' componentName=ID ('extends'
 		//base=[ModelComponent|FQN])? stateMachine=StateMachine
 		public Group getGroup() { return cGroup; }
-
+		
 		//abstract?='abstract'? & commType=ComponentCommunicationType?
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
-
+		
 		//abstract?='abstract'?
 		public Assignment getAbstractAssignment_0_0() { return cAbstractAssignment_0_0; }
-
+		
 		//'abstract'
 		public Keyword getAbstractAbstractKeyword_0_0_0() { return cAbstractAbstractKeyword_0_0_0; }
-
+		
 		//commType=ComponentCommunicationType?
 		public Assignment getCommTypeAssignment_0_1() { return cCommTypeAssignment_0_1; }
-
+		
 		//ComponentCommunicationType
 		public RuleCall getCommTypeComponentCommunicationTypeEnumRuleCall_0_1_0() { return cCommTypeComponentCommunicationTypeEnumRuleCall_0_1_0; }
-
+		
 		//'ModelComponent'
 		public Keyword getModelComponentKeyword_1() { return cModelComponentKeyword_1; }
-
+		
 		//componentName=ID
 		public Assignment getComponentNameAssignment_2() { return cComponentNameAssignment_2; }
-
+		
 		//ID
 		public RuleCall getComponentNameIDTerminalRuleCall_2_0() { return cComponentNameIDTerminalRuleCall_2_0; }
-
+		
 		//('extends' base=[ModelComponent|FQN])?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//'extends'
 		public Keyword getExtendsKeyword_3_0() { return cExtendsKeyword_3_0; }
-
+		
 		//base=[ModelComponent|FQN]
 		public Assignment getBaseAssignment_3_1() { return cBaseAssignment_3_1; }
-
+		
 		//[ModelComponent|FQN]
 		public CrossReference getBaseModelComponentCrossReference_3_1_0() { return cBaseModelComponentCrossReference_3_1_0; }
-
+		
 		//FQN
 		public RuleCall getBaseModelComponentFQNParserRuleCall_3_1_0_1() { return cBaseModelComponentFQNParserRuleCall_3_1_0_1; }
-
+		
 		//stateMachine=StateMachine
 		public Assignment getStateMachineAssignment_4() { return cStateMachineAssignment_4; }
-
+		
 		//StateMachine
 		public RuleCall getStateMachineStateMachineParserRuleCall_4_0() { return cStateMachineStateMachineParserRuleCall_4_0; }
 	}
-
 	public class StateGraphNodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.StateGraphNode");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -125,20 +133,19 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//StateGraphNode:
 		//	State | ChoicePoint | TrPoint;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//State | ChoicePoint | TrPoint
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//State
 		public RuleCall getStateParserRuleCall_0() { return cStateParserRuleCall_0; }
-
+		
 		//ChoicePoint
 		public RuleCall getChoicePointParserRuleCall_1() { return cChoicePointParserRuleCall_1; }
-
+		
 		//TrPoint
 		public RuleCall getTrPointParserRuleCall_2() { return cTrPointParserRuleCall_2; }
 	}
-
 	public class StateGraphItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.StateGraphItem");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -148,17 +155,16 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//StateGraphItem:
 		//	StateGraphNode | TransitionBase;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//StateGraphNode | TransitionBase
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//StateGraphNode
 		public RuleCall getStateGraphNodeParserRuleCall_0() { return cStateGraphNodeParserRuleCall_0; }
-
+		
 		//TransitionBase
 		public RuleCall getTransitionBaseParserRuleCall_1() { return cTransitionBaseParserRuleCall_1; }
 	}
-
 	public class StateGraphElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.StateGraph");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -184,55 +190,54 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	refinedTransitions+=RefinedTransition)*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{StateGraph} '{' (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
 		//refinedTransitions+=RefinedTransition)* '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//{StateGraph}
 		public Action getStateGraphAction_0() { return cStateGraphAction_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-
+		
 		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
 		//refinedTransitions+=RefinedTransition)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
-
+		
 		//states+=State
 		public Assignment getStatesAssignment_2_0() { return cStatesAssignment_2_0; }
-
+		
 		//State
 		public RuleCall getStatesStateParserRuleCall_2_0_0() { return cStatesStateParserRuleCall_2_0_0; }
-
+		
 		//trPoints+=TrPoint
 		public Assignment getTrPointsAssignment_2_1() { return cTrPointsAssignment_2_1; }
-
+		
 		//TrPoint
 		public RuleCall getTrPointsTrPointParserRuleCall_2_1_0() { return cTrPointsTrPointParserRuleCall_2_1_0; }
-
+		
 		//chPoints+=ChoicePoint
 		public Assignment getChPointsAssignment_2_2() { return cChPointsAssignment_2_2; }
-
+		
 		//ChoicePoint
 		public RuleCall getChPointsChoicePointParserRuleCall_2_2_0() { return cChPointsChoicePointParserRuleCall_2_2_0; }
-
+		
 		//transitions+=Transition
 		public Assignment getTransitionsAssignment_2_3() { return cTransitionsAssignment_2_3; }
-
+		
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_2_3_0() { return cTransitionsTransitionParserRuleCall_2_3_0; }
-
+		
 		//refinedTransitions+=RefinedTransition
 		public Assignment getRefinedTransitionsAssignment_2_4() { return cRefinedTransitionsAssignment_2_4; }
-
+		
 		//RefinedTransition
 		public RuleCall getRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0() { return cRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
-
 	public class StateMachineElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.StateMachine");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -258,58 +263,57 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	refinedTransitions+=RefinedTransition)*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{StateGraph} 'StateMachine' '{' (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
 		//refinedTransitions+=RefinedTransition)* '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//{StateGraph}
 		public Action getStateGraphAction_0() { return cStateGraphAction_0; }
-
+		
 		//'StateMachine'
 		public Keyword getStateMachineKeyword_1() { return cStateMachineKeyword_1; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
 		//refinedTransitions+=RefinedTransition)*
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
-
+		
 		//states+=State
 		public Assignment getStatesAssignment_3_0() { return cStatesAssignment_3_0; }
-
+		
 		//State
 		public RuleCall getStatesStateParserRuleCall_3_0_0() { return cStatesStateParserRuleCall_3_0_0; }
-
+		
 		//trPoints+=TrPoint
 		public Assignment getTrPointsAssignment_3_1() { return cTrPointsAssignment_3_1; }
-
+		
 		//TrPoint
 		public RuleCall getTrPointsTrPointParserRuleCall_3_1_0() { return cTrPointsTrPointParserRuleCall_3_1_0; }
-
+		
 		//chPoints+=ChoicePoint
 		public Assignment getChPointsAssignment_3_2() { return cChPointsAssignment_3_2; }
-
+		
 		//ChoicePoint
 		public RuleCall getChPointsChoicePointParserRuleCall_3_2_0() { return cChPointsChoicePointParserRuleCall_3_2_0; }
-
+		
 		//transitions+=Transition
 		public Assignment getTransitionsAssignment_3_3() { return cTransitionsAssignment_3_3; }
-
+		
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_3_3_0() { return cTransitionsTransitionParserRuleCall_3_3_0; }
-
+		
 		//refinedTransitions+=RefinedTransition
 		public Assignment getRefinedTransitionsAssignment_3_4() { return cRefinedTransitionsAssignment_3_4; }
-
+		
 		//RefinedTransition
 		public RuleCall getRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0() { return cRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
-
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.State");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -322,17 +326,16 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//State:
 		//	SimpleState | RefinedState;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//SimpleState | RefinedState
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//SimpleState
 		public RuleCall getSimpleStateParserRuleCall_0() { return cSimpleStateParserRuleCall_0; }
-
+		
 		//RefinedState
 		public RuleCall getRefinedStateParserRuleCall_1() { return cRefinedStateParserRuleCall_1; }
 	}
-
 	public class SimpleStateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.SimpleState");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -369,91 +372,90 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	('subgraph' subgraph=StateGraph)?
 		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'State' name=ID docu=Documentation? ('{' annotations+=Annotation* ('entry' entryCode=DetailCode)? ('exit'
 		//exitCode=DetailCode)? ('do' doCode=DetailCode)? ('subgraph' subgraph=StateGraph)? '}')?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'State'
 		public Keyword getStateKeyword_0() { return cStateKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
-
+		
 		//('{' annotations+=Annotation* ('entry' entryCode=DetailCode)? ('exit' exitCode=DetailCode)? ('do' doCode=DetailCode)?
 		//('subgraph' subgraph=StateGraph)? '}')?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
-
+		
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_3_1() { return cAnnotationsAssignment_3_1; }
-
+		
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_3_1_0() { return cAnnotationsAnnotationParserRuleCall_3_1_0; }
-
+		
 		//('entry' entryCode=DetailCode)?
 		public Group getGroup_3_2() { return cGroup_3_2; }
-
+		
 		//'entry'
 		public Keyword getEntryKeyword_3_2_0() { return cEntryKeyword_3_2_0; }
-
+		
 		//entryCode=DetailCode
 		public Assignment getEntryCodeAssignment_3_2_1() { return cEntryCodeAssignment_3_2_1; }
-
+		
 		//DetailCode
 		public RuleCall getEntryCodeDetailCodeParserRuleCall_3_2_1_0() { return cEntryCodeDetailCodeParserRuleCall_3_2_1_0; }
-
+		
 		//('exit' exitCode=DetailCode)?
 		public Group getGroup_3_3() { return cGroup_3_3; }
-
+		
 		//'exit'
 		public Keyword getExitKeyword_3_3_0() { return cExitKeyword_3_3_0; }
-
+		
 		//exitCode=DetailCode
 		public Assignment getExitCodeAssignment_3_3_1() { return cExitCodeAssignment_3_3_1; }
-
+		
 		//DetailCode
 		public RuleCall getExitCodeDetailCodeParserRuleCall_3_3_1_0() { return cExitCodeDetailCodeParserRuleCall_3_3_1_0; }
-
+		
 		//('do' doCode=DetailCode)?
 		public Group getGroup_3_4() { return cGroup_3_4; }
-
+		
 		//'do'
 		public Keyword getDoKeyword_3_4_0() { return cDoKeyword_3_4_0; }
-
+		
 		//doCode=DetailCode
 		public Assignment getDoCodeAssignment_3_4_1() { return cDoCodeAssignment_3_4_1; }
-
+		
 		//DetailCode
 		public RuleCall getDoCodeDetailCodeParserRuleCall_3_4_1_0() { return cDoCodeDetailCodeParserRuleCall_3_4_1_0; }
-
+		
 		//('subgraph' subgraph=StateGraph)?
 		public Group getGroup_3_5() { return cGroup_3_5; }
-
+		
 		//'subgraph'
 		public Keyword getSubgraphKeyword_3_5_0() { return cSubgraphKeyword_3_5_0; }
-
+		
 		//subgraph=StateGraph
 		public Assignment getSubgraphAssignment_3_5_1() { return cSubgraphAssignment_3_5_1; }
-
+		
 		//StateGraph
 		public RuleCall getSubgraphStateGraphParserRuleCall_3_5_1_0() { return cSubgraphStateGraphParserRuleCall_3_5_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_6() { return cRightCurlyBracketKeyword_3_6; }
 	}
-
 	public class RefinedStateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.RefinedState");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -490,90 +492,89 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	('subgraph' subgraph=StateGraph)?
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'RefinedState' target=[State|FQN] docu=Documentation? '{' annotations+=Annotation* ('entry' entryCode=DetailCode)?
 		//('exit' exitCode=DetailCode)? ('do' doCode=DetailCode)? ('subgraph' subgraph=StateGraph)? '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'RefinedState'
 		public Keyword getRefinedStateKeyword_0() { return cRefinedStateKeyword_0; }
-
+		
 		//target=[State|FQN]
 		public Assignment getTargetAssignment_1() { return cTargetAssignment_1; }
-
+		
 		//[State|FQN]
 		public CrossReference getTargetStateCrossReference_1_0() { return cTargetStateCrossReference_1_0; }
-
+		
 		//FQN
 		public RuleCall getTargetStateFQNParserRuleCall_1_0_1() { return cTargetStateFQNParserRuleCall_1_0_1; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
+		
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_4() { return cAnnotationsAssignment_4; }
-
+		
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_4_0() { return cAnnotationsAnnotationParserRuleCall_4_0; }
-
+		
 		//('entry' entryCode=DetailCode)?
 		public Group getGroup_5() { return cGroup_5; }
-
+		
 		//'entry'
 		public Keyword getEntryKeyword_5_0() { return cEntryKeyword_5_0; }
-
+		
 		//entryCode=DetailCode
 		public Assignment getEntryCodeAssignment_5_1() { return cEntryCodeAssignment_5_1; }
-
+		
 		//DetailCode
 		public RuleCall getEntryCodeDetailCodeParserRuleCall_5_1_0() { return cEntryCodeDetailCodeParserRuleCall_5_1_0; }
-
+		
 		//('exit' exitCode=DetailCode)?
 		public Group getGroup_6() { return cGroup_6; }
-
+		
 		//'exit'
 		public Keyword getExitKeyword_6_0() { return cExitKeyword_6_0; }
-
+		
 		//exitCode=DetailCode
 		public Assignment getExitCodeAssignment_6_1() { return cExitCodeAssignment_6_1; }
-
+		
 		//DetailCode
 		public RuleCall getExitCodeDetailCodeParserRuleCall_6_1_0() { return cExitCodeDetailCodeParserRuleCall_6_1_0; }
-
+		
 		//('do' doCode=DetailCode)?
 		public Group getGroup_7() { return cGroup_7; }
-
+		
 		//'do'
 		public Keyword getDoKeyword_7_0() { return cDoKeyword_7_0; }
-
+		
 		//doCode=DetailCode
 		public Assignment getDoCodeAssignment_7_1() { return cDoCodeAssignment_7_1; }
-
+		
 		//DetailCode
 		public RuleCall getDoCodeDetailCodeParserRuleCall_7_1_0() { return cDoCodeDetailCodeParserRuleCall_7_1_0; }
-
+		
 		//('subgraph' subgraph=StateGraph)?
 		public Group getGroup_8() { return cGroup_8; }
-
+		
 		//'subgraph'
 		public Keyword getSubgraphKeyword_8_0() { return cSubgraphKeyword_8_0; }
-
+		
 		//subgraph=StateGraph
 		public Assignment getSubgraphAssignment_8_1() { return cSubgraphAssignment_8_1; }
-
+		
 		//StateGraph
 		public RuleCall getSubgraphStateGraphParserRuleCall_8_1_0() { return cSubgraphStateGraphParserRuleCall_8_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
 	}
-
 	public class DetailCodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.DetailCode");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -593,41 +594,40 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//DetailCode:
 		//	{DetailCode} lines+=CC_STRING? | used?='{' lines+=STRING* '}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{DetailCode} lines+=CC_STRING? | used?='{' lines+=STRING* '}'
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//{DetailCode} lines+=CC_STRING?
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//{DetailCode}
 		public Action getDetailCodeAction_0_0() { return cDetailCodeAction_0_0; }
-
+		
 		//lines+=CC_STRING?
 		public Assignment getLinesAssignment_0_1() { return cLinesAssignment_0_1; }
-
+		
 		//CC_STRING
 		public RuleCall getLinesCC_STRINGTerminalRuleCall_0_1_0() { return cLinesCC_STRINGTerminalRuleCall_0_1_0; }
-
+		
 		//used?='{' lines+=STRING* '}'
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//used?='{'
 		public Assignment getUsedAssignment_1_0() { return cUsedAssignment_1_0; }
-
+		
 		//'{'
 		public Keyword getUsedLeftCurlyBracketKeyword_1_0_0() { return cUsedLeftCurlyBracketKeyword_1_0_0; }
-
+		
 		//lines+=STRING*
 		public Assignment getLinesAssignment_1_1() { return cLinesAssignment_1_1; }
-
+		
 		//STRING
 		public RuleCall getLinesSTRINGTerminalRuleCall_1_1_0() { return cLinesSTRINGTerminalRuleCall_1_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
 	}
-
 	public class TrPointElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.TrPoint");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -641,20 +641,19 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//TrPoint:
 		//	TransitionPoint | EntryPoint | ExitPoint;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//TransitionPoint | EntryPoint | ExitPoint
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//TransitionPoint
 		public RuleCall getTransitionPointParserRuleCall_0() { return cTransitionPointParserRuleCall_0; }
-
+		
 		//EntryPoint
 		public RuleCall getEntryPointParserRuleCall_1() { return cEntryPointParserRuleCall_1; }
-
+		
 		//ExitPoint
 		public RuleCall getExitPointParserRuleCall_2() { return cExitPointParserRuleCall_2; }
 	}
-
 	public class TransitionPointElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.TransitionPoint");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -667,26 +666,25 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//TransitionPoint:
 		//	handler?='handler'? 'TransitionPoint' name=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//handler?='handler'? 'TransitionPoint' name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//handler?='handler'?
 		public Assignment getHandlerAssignment_0() { return cHandlerAssignment_0; }
-
+		
 		//'handler'
 		public Keyword getHandlerHandlerKeyword_0_0() { return cHandlerHandlerKeyword_0_0; }
-
+		
 		//'TransitionPoint'
 		public Keyword getTransitionPointKeyword_1() { return cTransitionPointKeyword_1; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
-
 	public class EntryPointElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.EntryPoint");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -697,20 +695,19 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//EntryPoint:
 		//	'EntryPoint' name=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'EntryPoint' name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//'EntryPoint'
 		public Keyword getEntryPointKeyword_0() { return cEntryPointKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
-
 	public class ExitPointElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.ExitPoint");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -721,20 +718,19 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//ExitPoint:
 		//	'ExitPoint' name=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'ExitPoint' name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//'ExitPoint'
 		public Keyword getExitPointKeyword_0() { return cExitPointKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
-
 	public class ChoicePointElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.ChoicePoint");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -750,26 +746,25 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//ChoicePoint:
 		//	'ChoicePoint' name=ID docu=Documentation?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'ChoicePoint' name=ID docu=Documentation?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'ChoicePoint'
 		public Keyword getChoicePointKeyword_0() { return cChoicePointKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 	}
-
 	public class TransitionBaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.TransitionBase");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -782,17 +777,16 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//TransitionBase:
 		//	Transition | RefinedTransition;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Transition | RefinedTransition
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//Transition
 		public RuleCall getTransitionParserRuleCall_0() { return cTransitionParserRuleCall_0; }
-
+		
 		//RefinedTransition
 		public RuleCall getRefinedTransitionParserRuleCall_1() { return cRefinedTransitionParserRuleCall_1; }
 	}
-
 	public class TransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.Transition");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -802,17 +796,16 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//Transition:
 		//	InitialTransition | NonInitialTransition;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//InitialTransition | NonInitialTransition
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//InitialTransition
 		public RuleCall getInitialTransitionParserRuleCall_0() { return cInitialTransitionParserRuleCall_0; }
-
+		
 		//NonInitialTransition
 		public RuleCall getNonInitialTransitionParserRuleCall_1() { return cNonInitialTransitionParserRuleCall_1; }
 	}
-
 	public class NonInitialTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.NonInitialTransition");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -823,20 +816,19 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//NonInitialTransition:
 		//	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//TransitionChainStartTransition | ContinuationTransition | CPBranchTransition
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//TransitionChainStartTransition
 		public RuleCall getTransitionChainStartTransitionParserRuleCall_0() { return cTransitionChainStartTransitionParserRuleCall_0; }
-
+		
 		//ContinuationTransition
 		public RuleCall getContinuationTransitionParserRuleCall_1() { return cContinuationTransitionParserRuleCall_1; }
-
+		
 		//CPBranchTransition
 		public RuleCall getCPBranchTransitionParserRuleCall_2() { return cCPBranchTransitionParserRuleCall_2; }
 	}
-
 	public class TransitionChainStartTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.TransitionChainStartTransition");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -846,17 +838,16 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//TransitionChainStartTransition:
 		//	TriggeredTransition | GuardedTransition;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//TriggeredTransition | GuardedTransition
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//TriggeredTransition
 		public RuleCall getTriggeredTransitionParserRuleCall_0() { return cTriggeredTransitionParserRuleCall_0; }
-
+		
 		//GuardedTransition
 		public RuleCall getGuardedTransitionParserRuleCall_1() { return cGuardedTransitionParserRuleCall_1; }
 	}
-
 	public class InitialTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.InitialTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -886,69 +877,68 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	annotations+=Annotation* ('action' action=DetailCode)?
 		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Transition' name=ID? ':' 'initial' '->' to=TransitionTerminal docu=Documentation? ('{' annotations+=Annotation*
 		//('action' action=DetailCode)? '}')?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Transition'
 		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
-
+		
 		//name=ID?
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
-
+		
 		//'initial'
 		public Keyword getInitialKeyword_3() { return cInitialKeyword_3; }
-
+		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
-
+		
 		//to=TransitionTerminal
 		public Assignment getToAssignment_5() { return cToAssignment_5; }
-
+		
 		//TransitionTerminal
 		public RuleCall getToTransitionTerminalParserRuleCall_5_0() { return cToTransitionTerminalParserRuleCall_5_0; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
-
+		
 		//('{' annotations+=Annotation* ('action' action=DetailCode)? '}')?
 		public Group getGroup_7() { return cGroup_7; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7_0() { return cLeftCurlyBracketKeyword_7_0; }
-
+		
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_7_1() { return cAnnotationsAssignment_7_1; }
-
+		
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_7_1_0() { return cAnnotationsAnnotationParserRuleCall_7_1_0; }
-
+		
 		//('action' action=DetailCode)?
 		public Group getGroup_7_2() { return cGroup_7_2; }
-
+		
 		//'action'
 		public Keyword getActionKeyword_7_2_0() { return cActionKeyword_7_2_0; }
-
+		
 		//action=DetailCode
 		public Assignment getActionAssignment_7_2_1() { return cActionAssignment_7_2_1; }
-
+		
 		//DetailCode
 		public RuleCall getActionDetailCodeParserRuleCall_7_2_1_0() { return cActionDetailCodeParserRuleCall_7_2_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_7_3() { return cRightCurlyBracketKeyword_7_3; }
 	}
-
 	public class ContinuationTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.ContinuationTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -979,72 +969,71 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	annotations+=Annotation* ('action' action=DetailCode)?
 		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal docu=Documentation? ('{'
 		//annotations+=Annotation* ('action' action=DetailCode)? '}')?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Transition'
 		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
-
+		
 		//name=ID?
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
-
+		
 		//from=TransitionTerminal
 		public Assignment getFromAssignment_3() { return cFromAssignment_3; }
-
+		
 		//TransitionTerminal
 		public RuleCall getFromTransitionTerminalParserRuleCall_3_0() { return cFromTransitionTerminalParserRuleCall_3_0; }
-
+		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
-
+		
 		//to=TransitionTerminal
 		public Assignment getToAssignment_5() { return cToAssignment_5; }
-
+		
 		//TransitionTerminal
 		public RuleCall getToTransitionTerminalParserRuleCall_5_0() { return cToTransitionTerminalParserRuleCall_5_0; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
-
+		
 		//('{' annotations+=Annotation* ('action' action=DetailCode)? '}')?
 		public Group getGroup_7() { return cGroup_7; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7_0() { return cLeftCurlyBracketKeyword_7_0; }
-
+		
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_7_1() { return cAnnotationsAssignment_7_1; }
-
+		
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_7_1_0() { return cAnnotationsAnnotationParserRuleCall_7_1_0; }
-
+		
 		//('action' action=DetailCode)?
 		public Group getGroup_7_2() { return cGroup_7_2; }
-
+		
 		//'action'
 		public Keyword getActionKeyword_7_2_0() { return cActionKeyword_7_2_0; }
-
+		
 		//action=DetailCode
 		public Assignment getActionAssignment_7_2_1() { return cActionAssignment_7_2_1; }
-
+		
 		//DetailCode
 		public RuleCall getActionDetailCodeParserRuleCall_7_2_1_0() { return cActionDetailCodeParserRuleCall_7_2_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_7_3() { return cRightCurlyBracketKeyword_7_3; }
 	}
-
 	public class TriggeredTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.TriggeredTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1087,96 +1076,95 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	'}' ('action' action=DetailCode)?
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal docu=Documentation? '{' 'triggers' '{'
 		//annotations+=Annotation* triggers+=Trigger ('or' triggers+=Trigger)* '}' ('action' action=DetailCode)? '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Transition'
 		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
-
+		
 		//name=ID?
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
-
+		
 		//from=TransitionTerminal
 		public Assignment getFromAssignment_3() { return cFromAssignment_3; }
-
+		
 		//TransitionTerminal
 		public RuleCall getFromTransitionTerminalParserRuleCall_3_0() { return cFromTransitionTerminalParserRuleCall_3_0; }
-
+		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
-
+		
 		//to=TransitionTerminal
 		public Assignment getToAssignment_5() { return cToAssignment_5; }
-
+		
 		//TransitionTerminal
 		public RuleCall getToTransitionTerminalParserRuleCall_5_0() { return cToTransitionTerminalParserRuleCall_5_0; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
-
+		
 		//'triggers'
 		public Keyword getTriggersKeyword_8() { return cTriggersKeyword_8; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_9() { return cLeftCurlyBracketKeyword_9; }
-
+		
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_10() { return cAnnotationsAssignment_10; }
-
+		
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_10_0() { return cAnnotationsAnnotationParserRuleCall_10_0; }
-
+		
 		//triggers+=Trigger
 		public Assignment getTriggersAssignment_11() { return cTriggersAssignment_11; }
-
+		
 		//Trigger
 		public RuleCall getTriggersTriggerParserRuleCall_11_0() { return cTriggersTriggerParserRuleCall_11_0; }
-
+		
 		//('or' triggers+=Trigger)*
 		public Group getGroup_12() { return cGroup_12; }
-
+		
 		//'or'
 		public Keyword getOrKeyword_12_0() { return cOrKeyword_12_0; }
-
+		
 		//triggers+=Trigger
 		public Assignment getTriggersAssignment_12_1() { return cTriggersAssignment_12_1; }
-
+		
 		//Trigger
 		public RuleCall getTriggersTriggerParserRuleCall_12_1_0() { return cTriggersTriggerParserRuleCall_12_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_13() { return cRightCurlyBracketKeyword_13; }
-
+		
 		//('action' action=DetailCode)?
 		public Group getGroup_14() { return cGroup_14; }
-
+		
 		//'action'
 		public Keyword getActionKeyword_14_0() { return cActionKeyword_14_0; }
-
+		
 		//action=DetailCode
 		public Assignment getActionAssignment_14_1() { return cActionAssignment_14_1; }
-
+		
 		//DetailCode
 		public RuleCall getActionDetailCodeParserRuleCall_14_1_0() { return cActionDetailCodeParserRuleCall_14_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_15() { return cRightCurlyBracketKeyword_15; }
 	}
-
 	public class GuardedTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.GuardedTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1211,78 +1199,77 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	'guard' guard=DetailCode ('action' action=DetailCode)?
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal docu=Documentation? '{'
 		//annotations+=Annotation* 'guard' guard=DetailCode ('action' action=DetailCode)? '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Transition'
 		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
-
+		
 		//name=ID?
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
-
+		
 		//from=TransitionTerminal
 		public Assignment getFromAssignment_3() { return cFromAssignment_3; }
-
+		
 		//TransitionTerminal
 		public RuleCall getFromTransitionTerminalParserRuleCall_3_0() { return cFromTransitionTerminalParserRuleCall_3_0; }
-
+		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
-
+		
 		//to=TransitionTerminal
 		public Assignment getToAssignment_5() { return cToAssignment_5; }
-
+		
 		//TransitionTerminal
 		public RuleCall getToTransitionTerminalParserRuleCall_5_0() { return cToTransitionTerminalParserRuleCall_5_0; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
-
+		
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_8() { return cAnnotationsAssignment_8; }
-
+		
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_8_0() { return cAnnotationsAnnotationParserRuleCall_8_0; }
-
+		
 		//'guard'
 		public Keyword getGuardKeyword_9() { return cGuardKeyword_9; }
-
+		
 		//guard=DetailCode
 		public Assignment getGuardAssignment_10() { return cGuardAssignment_10; }
-
+		
 		//DetailCode
 		public RuleCall getGuardDetailCodeParserRuleCall_10_0() { return cGuardDetailCodeParserRuleCall_10_0; }
-
+		
 		//('action' action=DetailCode)?
 		public Group getGroup_11() { return cGroup_11; }
-
+		
 		//'action'
 		public Keyword getActionKeyword_11_0() { return cActionKeyword_11_0; }
-
+		
 		//action=DetailCode
 		public Assignment getActionAssignment_11_1() { return cActionAssignment_11_1; }
-
+		
 		//DetailCode
 		public RuleCall getActionDetailCodeParserRuleCall_11_1_0() { return cActionDetailCodeParserRuleCall_11_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
 	}
-
 	public class CPBranchTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.CPBranchTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1317,78 +1304,77 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	'cond' condition=DetailCode ('action' action=DetailCode)?
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal docu=Documentation? '{'
 		//annotations+=Annotation* 'cond' condition=DetailCode ('action' action=DetailCode)? '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Transition'
 		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
-
+		
 		//name=ID?
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
-
+		
 		//from=TransitionTerminal
 		public Assignment getFromAssignment_3() { return cFromAssignment_3; }
-
+		
 		//TransitionTerminal
 		public RuleCall getFromTransitionTerminalParserRuleCall_3_0() { return cFromTransitionTerminalParserRuleCall_3_0; }
-
+		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
-
+		
 		//to=TransitionTerminal
 		public Assignment getToAssignment_5() { return cToAssignment_5; }
-
+		
 		//TransitionTerminal
 		public RuleCall getToTransitionTerminalParserRuleCall_5_0() { return cToTransitionTerminalParserRuleCall_5_0; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
-
+		
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_8() { return cAnnotationsAssignment_8; }
-
+		
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_8_0() { return cAnnotationsAnnotationParserRuleCall_8_0; }
-
+		
 		//'cond'
 		public Keyword getCondKeyword_9() { return cCondKeyword_9; }
-
+		
 		//condition=DetailCode
 		public Assignment getConditionAssignment_10() { return cConditionAssignment_10; }
-
+		
 		//DetailCode
 		public RuleCall getConditionDetailCodeParserRuleCall_10_0() { return cConditionDetailCodeParserRuleCall_10_0; }
-
+		
 		//('action' action=DetailCode)?
 		public Group getGroup_11() { return cGroup_11; }
-
+		
 		//'action'
 		public Keyword getActionKeyword_11_0() { return cActionKeyword_11_0; }
-
+		
 		//action=DetailCode
 		public Assignment getActionAssignment_11_1() { return cActionAssignment_11_1; }
-
+		
 		//DetailCode
 		public RuleCall getActionDetailCodeParserRuleCall_11_1_0() { return cActionDetailCodeParserRuleCall_11_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
 	}
-
 	public class RefinedTransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.RefinedTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1414,51 +1400,50 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	'action' action=DetailCode
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'RefinedTransition' target=[Transition|FQN] docu=Documentation? '{' annotations+=Annotation* 'action' action=DetailCode
 		//'}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'RefinedTransition'
 		public Keyword getRefinedTransitionKeyword_0() { return cRefinedTransitionKeyword_0; }
-
+		
 		//target=[Transition|FQN]
 		public Assignment getTargetAssignment_1() { return cTargetAssignment_1; }
-
+		
 		//[Transition|FQN]
 		public CrossReference getTargetTransitionCrossReference_1_0() { return cTargetTransitionCrossReference_1_0; }
-
+		
 		//FQN
 		public RuleCall getTargetTransitionFQNParserRuleCall_1_0_1() { return cTargetTransitionFQNParserRuleCall_1_0_1; }
-
+		
 		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
-
+		
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
+		
 		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_4() { return cAnnotationsAssignment_4; }
-
+		
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_4_0() { return cAnnotationsAnnotationParserRuleCall_4_0; }
-
+		
 		//'action'
 		public Keyword getActionKeyword_5() { return cActionKeyword_5; }
-
+		
 		//action=DetailCode
 		public Assignment getActionAssignment_6() { return cActionAssignment_6; }
-
+		
 		//DetailCode
 		public RuleCall getActionDetailCodeParserRuleCall_6_0() { return cActionDetailCodeParserRuleCall_6_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
-
 	public class TransitionTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.TransitionTerminal");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1473,23 +1458,22 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//TransitionTerminal:
 		//	StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//StateTerminal
 		public RuleCall getStateTerminalParserRuleCall_0() { return cStateTerminalParserRuleCall_0; }
-
+		
 		//TrPointTerminal
 		public RuleCall getTrPointTerminalParserRuleCall_1() { return cTrPointTerminalParserRuleCall_1; }
-
+		
 		//SubStateTrPointTerminal
 		public RuleCall getSubStateTrPointTerminalParserRuleCall_2() { return cSubStateTrPointTerminalParserRuleCall_2; }
-
+		
 		//ChoicepointTerminal
 		public RuleCall getChoicepointTerminalParserRuleCall_3() { return cChoicepointTerminalParserRuleCall_3; }
 	}
-
 	public class StateTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.StateTerminal");
 		private final Assignment cStateAssignment = (Assignment)rule.eContents().get(1);
@@ -1499,17 +1483,16 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//StateTerminal:
 		//	state=[State];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//state=[State]
 		public Assignment getStateAssignment() { return cStateAssignment; }
-
+		
 		//[State]
 		public CrossReference getStateStateCrossReference_0() { return cStateStateCrossReference_0; }
-
+		
 		//ID
 		public RuleCall getStateStateIDTerminalRuleCall_0_1() { return cStateStateIDTerminalRuleCall_0_1; }
 	}
-
 	public class TrPointTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.TrPointTerminal");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1521,23 +1504,22 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//TrPointTerminal:
 		//	'my' trPoint=[TrPoint];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'my' trPoint=[TrPoint]
 		public Group getGroup() { return cGroup; }
-
+		
 		//'my'
 		public Keyword getMyKeyword_0() { return cMyKeyword_0; }
-
+		
 		//trPoint=[TrPoint]
 		public Assignment getTrPointAssignment_1() { return cTrPointAssignment_1; }
-
+		
 		//[TrPoint]
 		public CrossReference getTrPointTrPointCrossReference_1_0() { return cTrPointTrPointCrossReference_1_0; }
-
+		
 		//ID
 		public RuleCall getTrPointTrPointIDTerminalRuleCall_1_0_1() { return cTrPointTrPointIDTerminalRuleCall_1_0_1; }
 	}
-
 	public class SubStateTrPointTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.SubStateTrPointTerminal");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1552,32 +1534,31 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//SubStateTrPointTerminal:
 		//	trPoint=[TrPoint] 'of' state=[State];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//trPoint=[TrPoint] 'of' state=[State]
 		public Group getGroup() { return cGroup; }
-
+		
 		//trPoint=[TrPoint]
 		public Assignment getTrPointAssignment_0() { return cTrPointAssignment_0; }
-
+		
 		//[TrPoint]
 		public CrossReference getTrPointTrPointCrossReference_0_0() { return cTrPointTrPointCrossReference_0_0; }
-
+		
 		//ID
 		public RuleCall getTrPointTrPointIDTerminalRuleCall_0_0_1() { return cTrPointTrPointIDTerminalRuleCall_0_0_1; }
-
+		
 		//'of'
 		public Keyword getOfKeyword_1() { return cOfKeyword_1; }
-
+		
 		//state=[State]
 		public Assignment getStateAssignment_2() { return cStateAssignment_2; }
-
+		
 		//[State]
 		public CrossReference getStateStateCrossReference_2_0() { return cStateStateCrossReference_2_0; }
-
+		
 		//ID
 		public RuleCall getStateStateIDTerminalRuleCall_2_0_1() { return cStateStateIDTerminalRuleCall_2_0_1; }
 	}
-
 	public class ChoicepointTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.ChoicepointTerminal");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1589,23 +1570,22 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//ChoicepointTerminal:
 		//	'cp' cp=[ChoicePoint];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'cp' cp=[ChoicePoint]
 		public Group getGroup() { return cGroup; }
-
+		
 		//'cp'
 		public Keyword getCpKeyword_0() { return cCpKeyword_0; }
-
+		
 		//cp=[ChoicePoint]
 		public Assignment getCpAssignment_1() { return cCpAssignment_1; }
-
+		
 		//[ChoicePoint]
 		public CrossReference getCpChoicePointCrossReference_1_0() { return cCpChoicePointCrossReference_1_0; }
-
+		
 		//ID
 		public RuleCall getCpChoicePointIDTerminalRuleCall_1_0_1() { return cCpChoicePointIDTerminalRuleCall_1_0_1; }
 	}
-
 	public class TriggerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.Trigger");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1627,41 +1607,40 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	'<' msgFromIfPairs+=MessageFromIf ('|' msgFromIfPairs+=MessageFromIf)*
 		//	guard=Guard? '>';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'<' msgFromIfPairs+=MessageFromIf ('|' msgFromIfPairs+=MessageFromIf)* guard=Guard? '>'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'<'
 		public Keyword getLessThanSignKeyword_0() { return cLessThanSignKeyword_0; }
-
+		
 		//msgFromIfPairs+=MessageFromIf
 		public Assignment getMsgFromIfPairsAssignment_1() { return cMsgFromIfPairsAssignment_1; }
-
+		
 		//MessageFromIf
 		public RuleCall getMsgFromIfPairsMessageFromIfParserRuleCall_1_0() { return cMsgFromIfPairsMessageFromIfParserRuleCall_1_0; }
-
+		
 		//('|' msgFromIfPairs+=MessageFromIf)*
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'|'
 		public Keyword getVerticalLineKeyword_2_0() { return cVerticalLineKeyword_2_0; }
-
+		
 		//msgFromIfPairs+=MessageFromIf
 		public Assignment getMsgFromIfPairsAssignment_2_1() { return cMsgFromIfPairsAssignment_2_1; }
-
+		
 		//MessageFromIf
 		public RuleCall getMsgFromIfPairsMessageFromIfParserRuleCall_2_1_0() { return cMsgFromIfPairsMessageFromIfParserRuleCall_2_1_0; }
-
+		
 		//guard=Guard?
 		public Assignment getGuardAssignment_3() { return cGuardAssignment_3; }
-
+		
 		//Guard
 		public RuleCall getGuardGuardParserRuleCall_3_0() { return cGuardGuardParserRuleCall_3_0; }
-
+		
 		//'>'
 		public Keyword getGreaterThanSignKeyword_4() { return cGreaterThanSignKeyword_4; }
 	}
-
 	public class MessageFromIfElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.MessageFromIf");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1679,32 +1658,31 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//MessageFromIf:
 		//	message=[ecore::EObject] ':' from=[AbstractInterfaceItem];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//message=[ecore::EObject] ':' from=[AbstractInterfaceItem]
 		public Group getGroup() { return cGroup; }
-
+		
 		//message=[ecore::EObject]
 		public Assignment getMessageAssignment_0() { return cMessageAssignment_0; }
-
+		
 		//[ecore::EObject]
 		public CrossReference getMessageEObjectCrossReference_0_0() { return cMessageEObjectCrossReference_0_0; }
-
+		
 		//ID
 		public RuleCall getMessageEObjectIDTerminalRuleCall_0_0_1() { return cMessageEObjectIDTerminalRuleCall_0_0_1; }
-
+		
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
-
+		
 		//from=[AbstractInterfaceItem]
 		public Assignment getFromAssignment_2() { return cFromAssignment_2; }
-
+		
 		//[AbstractInterfaceItem]
 		public CrossReference getFromAbstractInterfaceItemCrossReference_2_0() { return cFromAbstractInterfaceItemCrossReference_2_0; }
-
+		
 		//ID
 		public RuleCall getFromAbstractInterfaceItemIDTerminalRuleCall_2_0_1() { return cFromAbstractInterfaceItemIDTerminalRuleCall_2_0_1; }
 	}
-
 	public class AbstractInterfaceItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.AbstractInterfaceItem");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
@@ -1714,14 +1692,13 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//AbstractInterfaceItem:
 		//	name=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
-
 	public class GuardElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.Guard");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1732,20 +1709,19 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//Guard:
 		//	'guard' guard=DetailCode;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'guard' guard=DetailCode
 		public Group getGroup() { return cGroup; }
-
+		
 		//'guard'
 		public Keyword getGuardKeyword_0() { return cGuardKeyword_0; }
-
+		
 		//guard=DetailCode
 		public Assignment getGuardAssignment_1() { return cGuardAssignment_1; }
-
+		
 		//DetailCode
 		public RuleCall getGuardDetailCodeParserRuleCall_1_0() { return cGuardDetailCodeParserRuleCall_1_0; }
 	}
-
 	public class ProtocolSemanticsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.ProtocolSemantics");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1765,29 +1741,28 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	rules+=SemanticsRule*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{ProtocolSemantics} 'semantics' '{' rules+=SemanticsRule* '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//{ProtocolSemantics}
 		public Action getProtocolSemanticsAction_0() { return cProtocolSemanticsAction_0; }
-
+		
 		//'semantics'
 		public Keyword getSemanticsKeyword_1() { return cSemanticsKeyword_1; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//rules+=SemanticsRule*
 		public Assignment getRulesAssignment_3() { return cRulesAssignment_3; }
-
+		
 		//SemanticsRule
 		public RuleCall getRulesSemanticsRuleParserRuleCall_3_0() { return cRulesSemanticsRuleParserRuleCall_3_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
-
 	public class SemanticsRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.SemanticsRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1797,17 +1772,16 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//SemanticsRule:
 		//	InSemanticsRule | OutSemanticsRule;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//InSemanticsRule | OutSemanticsRule
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//InSemanticsRule
 		public RuleCall getInSemanticsRuleParserRuleCall_0() { return cInSemanticsRuleParserRuleCall_0; }
-
+		
 		//OutSemanticsRule
 		public RuleCall getOutSemanticsRuleParserRuleCall_1() { return cOutSemanticsRuleParserRuleCall_1; }
 	}
-
 	public class InSemanticsRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.InSemanticsRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1835,69 +1809,68 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	'in' ':' msg=[ecore::EObject] ('->' (followUps+=SemanticsRule
 		//	| '(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'))?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'in' ':' msg=[ecore::EObject] ('->' (followUps+=SemanticsRule | '(' followUps+=SemanticsRule (','
 		//followUps+=SemanticsRule)+ ')'))?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'in'
 		public Keyword getInKeyword_0() { return cInKeyword_0; }
-
+		
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
-
+		
 		//msg=[ecore::EObject]
 		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
-
+		
 		//[ecore::EObject]
 		public CrossReference getMsgEObjectCrossReference_2_0() { return cMsgEObjectCrossReference_2_0; }
-
+		
 		//ID
 		public RuleCall getMsgEObjectIDTerminalRuleCall_2_0_1() { return cMsgEObjectIDTerminalRuleCall_2_0_1; }
-
+		
 		//('->' (followUps+=SemanticsRule | '(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'))?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_3_0() { return cHyphenMinusGreaterThanSignKeyword_3_0; }
-
+		
 		//followUps+=SemanticsRule | '(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'
 		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
-
+		
 		//followUps+=SemanticsRule
 		public Assignment getFollowUpsAssignment_3_1_0() { return cFollowUpsAssignment_3_1_0; }
-
+		
 		//SemanticsRule
 		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0; }
-
+		
 		//'(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'
 		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_3_1_1_0() { return cLeftParenthesisKeyword_3_1_1_0; }
-
+		
 		//followUps+=SemanticsRule
 		public Assignment getFollowUpsAssignment_3_1_1_1() { return cFollowUpsAssignment_3_1_1_1; }
-
+		
 		//SemanticsRule
 		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0; }
-
+		
 		//(',' followUps+=SemanticsRule)+
 		public Group getGroup_3_1_1_2() { return cGroup_3_1_1_2; }
-
+		
 		//','
 		public Keyword getCommaKeyword_3_1_1_2_0() { return cCommaKeyword_3_1_1_2_0; }
-
+		
 		//followUps+=SemanticsRule
 		public Assignment getFollowUpsAssignment_3_1_1_2_1() { return cFollowUpsAssignment_3_1_1_2_1; }
-
+		
 		//SemanticsRule
 		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_3_1_1_3() { return cRightParenthesisKeyword_3_1_1_3; }
 	}
-
 	public class OutSemanticsRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.OutSemanticsRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1925,69 +1898,68 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	'out' ':' msg=[ecore::EObject] ('->' (followUps+=SemanticsRule
 		//	| '(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'))?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'out' ':' msg=[ecore::EObject] ('->' (followUps+=SemanticsRule | '(' followUps+=SemanticsRule (','
 		//followUps+=SemanticsRule)+ ')'))?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'out'
 		public Keyword getOutKeyword_0() { return cOutKeyword_0; }
-
+		
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
-
+		
 		//msg=[ecore::EObject]
 		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
-
+		
 		//[ecore::EObject]
 		public CrossReference getMsgEObjectCrossReference_2_0() { return cMsgEObjectCrossReference_2_0; }
-
+		
 		//ID
 		public RuleCall getMsgEObjectIDTerminalRuleCall_2_0_1() { return cMsgEObjectIDTerminalRuleCall_2_0_1; }
-
+		
 		//('->' (followUps+=SemanticsRule | '(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'))?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_3_0() { return cHyphenMinusGreaterThanSignKeyword_3_0; }
-
+		
 		//followUps+=SemanticsRule | '(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'
 		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
-
+		
 		//followUps+=SemanticsRule
 		public Assignment getFollowUpsAssignment_3_1_0() { return cFollowUpsAssignment_3_1_0; }
-
+		
 		//SemanticsRule
 		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0; }
-
+		
 		//'(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'
 		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_3_1_1_0() { return cLeftParenthesisKeyword_3_1_1_0; }
-
+		
 		//followUps+=SemanticsRule
 		public Assignment getFollowUpsAssignment_3_1_1_1() { return cFollowUpsAssignment_3_1_1_1; }
-
+		
 		//SemanticsRule
 		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0; }
-
+		
 		//(',' followUps+=SemanticsRule)+
 		public Group getGroup_3_1_1_2() { return cGroup_3_1_1_2; }
-
+		
 		//','
 		public Keyword getCommaKeyword_3_1_1_2_0() { return cCommaKeyword_3_1_1_2_0; }
-
+		
 		//followUps+=SemanticsRule
 		public Assignment getFollowUpsAssignment_3_1_1_2_1() { return cFollowUpsAssignment_3_1_1_2_1; }
-
+		
 		//SemanticsRule
 		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_3_1_1_3() { return cRightParenthesisKeyword_3_1_1_3; }
 	}
-	
 	
 	public class ComponentCommunicationTypeElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.ComponentCommunicationType");
@@ -2007,31 +1979,31 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//	ASYNCHRONOUS='async' |
 		//	SYNCHRONOUS='sync';
 		public EnumRule getRule() { return rule; }
-
+		
 		//EVENT_DRIVEN='eventdriven' | DATA_DRIVEN='datadriven' | ASYNCHRONOUS='async' | SYNCHRONOUS='sync'
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//EVENT_DRIVEN='eventdriven'
 		public EnumLiteralDeclaration getEVENT_DRIVENEnumLiteralDeclaration_0() { return cEVENT_DRIVENEnumLiteralDeclaration_0; }
-
+		
 		//'eventdriven'
 		public Keyword getEVENT_DRIVENEventdrivenKeyword_0_0() { return cEVENT_DRIVENEventdrivenKeyword_0_0; }
-
+		
 		//DATA_DRIVEN='datadriven'
 		public EnumLiteralDeclaration getDATA_DRIVENEnumLiteralDeclaration_1() { return cDATA_DRIVENEnumLiteralDeclaration_1; }
-
+		
 		//'datadriven'
 		public Keyword getDATA_DRIVENDatadrivenKeyword_1_0() { return cDATA_DRIVENDatadrivenKeyword_1_0; }
-
+		
 		//ASYNCHRONOUS='async'
 		public EnumLiteralDeclaration getASYNCHRONOUSEnumLiteralDeclaration_2() { return cASYNCHRONOUSEnumLiteralDeclaration_2; }
-
+		
 		//'async'
 		public Keyword getASYNCHRONOUSAsyncKeyword_2_0() { return cASYNCHRONOUSAsyncKeyword_2_0; }
-
+		
 		//SYNCHRONOUS='sync'
 		public EnumLiteralDeclaration getSYNCHRONOUSEnumLiteralDeclaration_3() { return cSYNCHRONOUSEnumLiteralDeclaration_3; }
-
+		
 		//'sync'
 		public Keyword getSYNCHRONOUSSyncKeyword_3_0() { return cSYNCHRONOUSSyncKeyword_3_0; }
 	}
@@ -2077,15 +2049,15 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	private final OutSemanticsRuleElements pOutSemanticsRule;
 	
 	private final Grammar grammar;
-
+	
 	private final BaseGrammarAccess gaBase;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public FSMGrammarAccess(GrammarProvider grammarProvider,
-		BaseGrammarAccess gaBase,
-		TerminalsGrammarAccess gaTerminals) {
+			BaseGrammarAccess gaBase,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBase = gaBase;
 		this.gaTerminals = gaTerminals;
@@ -2151,11 +2123,11 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-
+	
 	public BaseGrammarAccess getBaseGrammarAccess() {
 		return gaBase;
 	}
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -2170,7 +2142,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFSMModelRule() {
 		return getFSMModelAccess().getRule();
 	}
-
+	
 	//enum ComponentCommunicationType:
 	//	EVENT_DRIVEN='eventdriven' |
 	//	DATA_DRIVEN='datadriven' |
@@ -2183,7 +2155,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public EnumRule getComponentCommunicationTypeRule() {
 		return getComponentCommunicationTypeAccess().getRule();
 	}
-
+	
 	//// the owner of a state machine. It also implements inheritance
 	//ModelComponent:
 	//	(abstract?='abstract'? & commType=ComponentCommunicationType?)
@@ -2196,7 +2168,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getModelComponentRule() {
 		return getModelComponentAccess().getRule();
 	}
-
+	
 	////
 	//// state machine
 	////
@@ -2210,7 +2182,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStateGraphNodeRule() {
 		return getStateGraphNodeAccess().getRule();
 	}
-
+	
 	//StateGraphItem:
 	//	StateGraphNode | TransitionBase;
 	public StateGraphItemElements getStateGraphItemAccess() {
@@ -2220,7 +2192,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStateGraphItemRule() {
 		return getStateGraphItemAccess().getRule();
 	}
-
+	
 	//// state graph and state machine are two rules for the same model class
 	//StateGraph:
 	//	{StateGraph}
@@ -2234,7 +2206,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStateGraphRule() {
 		return getStateGraphAccess().getRule();
 	}
-
+	
 	//StateMachine StateGraph:
 	//	{StateGraph}
 	//	'StateMachine' '{' (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
@@ -2247,7 +2219,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStateMachineRule() {
 		return getStateMachineAccess().getRule();
 	}
-
+	
 	////
 	//// states
 	////
@@ -2260,7 +2232,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStateRule() {
 		return getStateAccess().getRule();
 	}
-
+	
 	//SimpleState:
 	//	'State' name=ID docu=Documentation? ('{'
 	//	annotations+=Annotation* ('entry' entryCode=DetailCode)? ('exit' exitCode=DetailCode)? ('do' doCode=DetailCode)?
@@ -2273,7 +2245,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getSimpleStateRule() {
 		return getSimpleStateAccess().getRule();
 	}
-
+	
 	//RefinedState:
 	//	'RefinedState' target=[State|FQN] docu=Documentation? '{'
 	//	annotations+=Annotation* ('entry' entryCode=DetailCode)? ('exit' exitCode=DetailCode)? ('do' doCode=DetailCode)?
@@ -2286,7 +2258,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRefinedStateRule() {
 		return getRefinedStateAccess().getRule();
 	}
-
+	
 	//// the detail level (or target language) code
 	//// the used flag might be used when overriding in derived grammars
 	//DetailCode:
@@ -2298,7 +2270,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDetailCodeRule() {
 		return getDetailCodeAccess().getRule();
 	}
-
+	
 	////
 	//// transition points
 	////
@@ -2311,7 +2283,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTrPointRule() {
 		return getTrPointAccess().getRule();
 	}
-
+	
 	//TransitionPoint:
 	//	handler?='handler'? 'TransitionPoint' name=ID;
 	public TransitionPointElements getTransitionPointAccess() {
@@ -2321,7 +2293,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTransitionPointRule() {
 		return getTransitionPointAccess().getRule();
 	}
-
+	
 	//EntryPoint:
 	//	'EntryPoint' name=ID;
 	public EntryPointElements getEntryPointAccess() {
@@ -2331,7 +2303,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getEntryPointRule() {
 		return getEntryPointAccess().getRule();
 	}
-
+	
 	//ExitPoint:
 	//	'ExitPoint' name=ID;
 	public ExitPointElements getExitPointAccess() {
@@ -2341,7 +2313,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getExitPointRule() {
 		return getExitPointAccess().getRule();
 	}
-
+	
 	////
 	//// choice point
 	////
@@ -2354,7 +2326,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getChoicePointRule() {
 		return getChoicePointAccess().getRule();
 	}
-
+	
 	////
 	//// transitions
 	////
@@ -2367,7 +2339,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTransitionBaseRule() {
 		return getTransitionBaseAccess().getRule();
 	}
-
+	
 	//Transition:
 	//	InitialTransition | NonInitialTransition;
 	public TransitionElements getTransitionAccess() {
@@ -2377,7 +2349,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTransitionRule() {
 		return getTransitionAccess().getRule();
 	}
-
+	
 	//NonInitialTransition:
 	//	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
 	public NonInitialTransitionElements getNonInitialTransitionAccess() {
@@ -2387,7 +2359,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getNonInitialTransitionRule() {
 		return getNonInitialTransitionAccess().getRule();
 	}
-
+	
 	//TransitionChainStartTransition:
 	//	TriggeredTransition | GuardedTransition;
 	public TransitionChainStartTransitionElements getTransitionChainStartTransitionAccess() {
@@ -2397,7 +2369,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTransitionChainStartTransitionRule() {
 		return getTransitionChainStartTransitionAccess().getRule();
 	}
-
+	
 	//InitialTransition:
 	//	'Transition' name=ID? ':' 'initial' '->' to=TransitionTerminal
 	//	docu=Documentation? ('{'
@@ -2410,7 +2382,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getInitialTransitionRule() {
 		return getInitialTransitionAccess().getRule();
 	}
-
+	
 	//ContinuationTransition:
 	//	'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	//	docu=Documentation? ('{'
@@ -2423,7 +2395,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getContinuationTransitionRule() {
 		return getContinuationTransitionAccess().getRule();
 	}
-
+	
 	//TriggeredTransition:
 	//	'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	//	docu=Documentation?
@@ -2440,7 +2412,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTriggeredTransitionRule() {
 		return getTriggeredTransitionAccess().getRule();
 	}
-
+	
 	//GuardedTransition:
 	//	'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	//	docu=Documentation?
@@ -2455,7 +2427,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getGuardedTransitionRule() {
 		return getGuardedTransitionAccess().getRule();
 	}
-
+	
 	//CPBranchTransition:
 	//	'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	//	docu=Documentation?
@@ -2470,7 +2442,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getCPBranchTransitionRule() {
 		return getCPBranchTransitionAccess().getRule();
 	}
-
+	
 	//// by validation RefinedTransition can only be contained in the top level state graph
 	//RefinedTransition:
 	//	'RefinedTransition' target=[Transition|FQN] docu=Documentation?
@@ -2485,7 +2457,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRefinedTransitionRule() {
 		return getRefinedTransitionAccess().getRule();
 	}
-
+	
 	////
 	//// transition terminals: start and end points of transitions
 	////
@@ -2498,7 +2470,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTransitionTerminalRule() {
 		return getTransitionTerminalAccess().getRule();
 	}
-
+	
 	//StateTerminal:
 	//	state=[State];
 	public StateTerminalElements getStateTerminalAccess() {
@@ -2508,7 +2480,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStateTerminalRule() {
 		return getStateTerminalAccess().getRule();
 	}
-
+	
 	//TrPointTerminal:
 	//	'my' trPoint=[TrPoint];
 	public TrPointTerminalElements getTrPointTerminalAccess() {
@@ -2518,7 +2490,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTrPointTerminalRule() {
 		return getTrPointTerminalAccess().getRule();
 	}
-
+	
 	//SubStateTrPointTerminal:
 	//	trPoint=[TrPoint] 'of' state=[State];
 	public SubStateTrPointTerminalElements getSubStateTrPointTerminalAccess() {
@@ -2528,7 +2500,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getSubStateTrPointTerminalRule() {
 		return getSubStateTrPointTerminalAccess().getRule();
 	}
-
+	
 	//ChoicepointTerminal:
 	//	'cp' cp=[ChoicePoint];
 	public ChoicepointTerminalElements getChoicepointTerminalAccess() {
@@ -2538,7 +2510,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getChoicepointTerminalRule() {
 		return getChoicepointTerminalAccess().getRule();
 	}
-
+	
 	////
 	//// transition triggers
 	////
@@ -2552,7 +2524,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTriggerRule() {
 		return getTriggerAccess().getRule();
 	}
-
+	
 	////
 	//// pairs of (message, interface) are triggering events
 	////
@@ -2565,7 +2537,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getMessageFromIfRule() {
 		return getMessageFromIfAccess().getRule();
 	}
-
+	
 	//// AbstractMessage: name=ID; --> ecore::EObject
 	//AbstractInterfaceItem:
 	//	name=ID;
@@ -2576,7 +2548,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAbstractInterfaceItemRule() {
 		return getAbstractInterfaceItemAccess().getRule();
 	}
-
+	
 	//Guard:
 	//	'guard' guard=DetailCode;
 	public GuardElements getGuardAccess() {
@@ -2586,7 +2558,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getGuardRule() {
 		return getGuardAccess().getRule();
 	}
-
+	
 	////
 	//// semantics for state machine validation
 	////
@@ -2602,7 +2574,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getProtocolSemanticsRule() {
 		return getProtocolSemanticsAccess().getRule();
 	}
-
+	
 	//SemanticsRule:
 	//	InSemanticsRule | OutSemanticsRule;
 	public SemanticsRuleElements getSemanticsRuleAccess() {
@@ -2612,7 +2584,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getSemanticsRuleRule() {
 		return getSemanticsRuleAccess().getRule();
 	}
-
+	
 	//InSemanticsRule:
 	//	'in' ':' msg=[ecore::EObject] ('->' (followUps+=SemanticsRule
 	//	| '(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'))?;
@@ -2623,7 +2595,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getInSemanticsRuleRule() {
 		return getInSemanticsRuleAccess().getRule();
 	}
-
+	
 	//OutSemanticsRule:
 	//	'out' ':' msg=[ecore::EObject] ('->' (followUps+=SemanticsRule
 	//	| '(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')'))?;
@@ -2634,7 +2606,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getOutSemanticsRuleRule() {
 		return getOutSemanticsRuleAccess().getRule();
 	}
-
+	
 	//// **************************************************************
 	//// AnnotationType and Annotation Rules
 	//Annotation:
@@ -2646,7 +2618,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnnotationRule() {
 		return getAnnotationAccess().getRule();
 	}
-
+	
 	//KeyValue:
 	//	key=ID '=' value=Literal;
 	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
@@ -2656,7 +2628,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getKeyValueRule() {
 		return getKeyValueAccess().getRule();
 	}
-
+	
 	//AnnotationType:
 	//	'AnnotationType' name=ID docu=Documentation? '{'
 	//	'target' '=' (targets+=AnnotationTargetType | '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)*
@@ -2669,7 +2641,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnnotationTypeRule() {
 		return getAnnotationTypeAccess().getRule();
 	}
-
+	
 	////
 	//// Sub-grammars should use AnnotationTargetType to refer to 
 	//// specific sub-grammar targets. For example, valid values for 
@@ -2687,7 +2659,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnnotationTargetTypeRule() {
 		return getAnnotationTargetTypeAccess().getRule();
 	}
-
+	
 	//AnnotationAttribute:
 	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
@@ -2697,7 +2669,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnnotationAttributeRule() {
 		return getAnnotationAttributeAccess().getRule();
 	}
-
+	
 	//SimpleAnnotationAttribute:
 	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType;
 	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
@@ -2707,7 +2679,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getSimpleAnnotationAttributeRule() {
 		return getSimpleAnnotationAttributeAccess().getRule();
 	}
-
+	
 	//EnumAnnotationAttribute:
 	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}';
 	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
@@ -2717,7 +2689,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getEnumAnnotationAttributeRule() {
 		return getEnumAnnotationAttributeAccess().getRule();
 	}
-
+	
 	//// **************************************************************
 	//// Import rules
 	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
@@ -2747,7 +2719,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getImportRule() {
 		return getImportAccess().getRule();
 	}
-
+	
 	//ImportedFQN:
 	//	FQN '.*'?;
 	public BaseGrammarAccess.ImportedFQNElements getImportedFQNAccess() {
@@ -2757,7 +2729,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getImportedFQNRule() {
 		return getImportedFQNAccess().getRule();
 	}
-
+	
 	//// **************************************************************
 	//// Documentation Rule
 	//Documentation:
@@ -2772,7 +2744,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDocumentationRule() {
 		return getDocumentationAccess().getRule();
 	}
-
+	
 	//// **************************************************************
 	//// Time Rule
 	//TIME ecore::ELong:
@@ -2784,7 +2756,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTIMERule() {
 		return getTIMEAccess().getRule();
 	}
-
+	
 	//enum LiteralType:
 	//	BOOL='ptBoolean' |
 	//	INT='ptInteger' |
@@ -2797,7 +2769,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public EnumRule getLiteralTypeRule() {
 		return getLiteralTypeAccess().getRule();
 	}
-
+	
 	//LiteralArray:
 	//	literals+=Literal (',' literals+=Literal)*;
 	public BaseGrammarAccess.LiteralArrayElements getLiteralArrayAccess() {
@@ -2807,7 +2779,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getLiteralArrayRule() {
 		return getLiteralArrayAccess().getRule();
 	}
-
+	
 	//// Value Types for Attributes
 	//Literal:
 	//	BooleanLiteral | NumberLiteral | StringLiteral;
@@ -2818,7 +2790,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getLiteralRule() {
 		return getLiteralAccess().getRule();
 	}
-
+	
 	//BooleanLiteral:
 	//	{BooleanLiteral} ('false' | isTrue?='true');
 	public BaseGrammarAccess.BooleanLiteralElements getBooleanLiteralAccess() {
@@ -2828,7 +2800,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getBooleanLiteralRule() {
 		return getBooleanLiteralAccess().getRule();
 	}
-
+	
 	//NumberLiteral:
 	//	IntLiteral | RealLiteral;
 	public BaseGrammarAccess.NumberLiteralElements getNumberLiteralAccess() {
@@ -2838,7 +2810,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getNumberLiteralRule() {
 		return getNumberLiteralAccess().getRule();
 	}
-
+	
 	//RealLiteral:
 	//	{RealLiteral} value=Real;
 	public BaseGrammarAccess.RealLiteralElements getRealLiteralAccess() {
@@ -2848,7 +2820,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRealLiteralRule() {
 		return getRealLiteralAccess().getRule();
 	}
-
+	
 	//IntLiteral:
 	//	{IntLiteral} value=Integer;
 	public BaseGrammarAccess.IntLiteralElements getIntLiteralAccess() {
@@ -2858,7 +2830,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getIntLiteralRule() {
 		return getIntLiteralAccess().getRule();
 	}
-
+	
 	//StringLiteral:
 	//	{StringLiteral} value=STRING;
 	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
@@ -2868,7 +2840,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStringLiteralRule() {
 		return getStringLiteralAccess().getRule();
 	}
-
+	
 	//Integer ecore::ELong:
 	//	('+' | '-')? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
@@ -2878,7 +2850,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getIntegerRule() {
 		return getIntegerAccess().getRule();
 	}
-
+	
 	//Real ecore::EDouble:
 	//	Decimal | DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
@@ -2888,7 +2860,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRealRule() {
 		return getRealAccess().getRule();
 	}
-
+	
 	//Decimal hidden():
 	//	('+' | '-')? INT '.' INT;
 	public BaseGrammarAccess.DecimalElements getDecimalAccess() {
@@ -2898,7 +2870,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDecimalRule() {
 		return getDecimalAccess().getRule();
 	}
-
+	
 	////DotDecimal hidden():
 	////	('+' | '-')? '.' INT;
 	////
@@ -2913,7 +2885,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDecimalExpRule() {
 		return getDecimalExpAccess().getRule();
 	}
-
+	
 	//FQN:
 	//	ID ('.' ID)*;
 	public BaseGrammarAccess.FQNElements getFQNAccess() {
@@ -2923,58 +2895,58 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
+	
 	//terminal HEX:
 	//	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return gaBase.getHEXRule();
-	} 
-
+	}
+	
 	//terminal CC_STRING:
 	//	"'''"->"'''";
 	public TerminalRule getCC_STRINGRule() {
 		return gaBase.getCC_STRINGRule();
-	} 
-
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

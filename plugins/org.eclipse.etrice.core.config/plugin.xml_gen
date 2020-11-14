@@ -1,17 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="windows-1252"?>
 <?eclipse version="3.0"?>
-
 <plugin>
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/etrice/core/Config" 
-       class = "org.eclipse.etrice.core.config.ConfigPackage"
-       genModel = "org/eclipse/etrice/core/Config.genmodel" /> 
-	
-  </extension>
-
-
-
-
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.eclipse.org/etrice/core/Config"
+			class = "org.eclipse.etrice.core.config.ConfigPackage"
+			genModel = "model/generated/Config.genmodel" />
+	</extension>
 </plugin>

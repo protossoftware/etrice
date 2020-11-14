@@ -3,12 +3,11 @@
  */
 package org.eclipse.etrice.core.etphys.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.etrice.core.etphys.ui.internal.EtphysActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.etrice.core.etphys.ui.internal.ETPhysActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +17,13 @@ public class ETPhysExecutableExtensionFactory extends AbstractGuiceAwareExecutab
 
 	@Override
 	protected Bundle getBundle() {
-		return ETPhysActivator.getInstance().getBundle();
+		return Platform.getBundle(EtphysActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return ETPhysActivator.getInstance().getInjector(ETPhysActivator.ORG_ECLIPSE_ETRICE_CORE_ETPHYS_ETPHYS);
+		EtphysActivator activator = EtphysActivator.getInstance();
+		return activator != null ? activator.getInjector(EtphysActivator.ORG_ECLIPSE_ETRICE_CORE_ETPHYS_ETPHYS) : null;
 	}
-	
+
 }

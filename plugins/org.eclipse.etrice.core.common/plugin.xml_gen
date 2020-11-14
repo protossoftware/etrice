@@ -1,26 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="windows-1252"?>
 <?eclipse version="3.0"?>
-
 <plugin>
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/etrice/core/common/Base" 
-       class = "org.eclipse.etrice.core.common.base.BasePackage"
-       genModel = "org/eclipse/etrice/core/common/Base.genmodel" /> 
-	
-  </extension>
-
-
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/etrice/core/common/BaseTest" 
-       class = "org.eclipse.etrice.core.common.basetest.BasetestPackage"
-       genModel = "org/eclipse/etrice/core/common/BaseTest.genmodel" /> 
-	
-  </extension>
-
-
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.eclipse.org/etrice/core/common/Base"
+			class = "org.eclipse.etrice.core.common.base.BasePackage"
+			genModel = "model/generated/Base.genmodel" />
+	</extension>
 </plugin>

@@ -576,10 +576,10 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1181:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // InternalBase.g:1181:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalBase.g:1153:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // InternalBase.g:1153:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
-            // InternalBase.g:1181:12: ( '0x' | '0X' )
+            // InternalBase.g:1153:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -607,7 +607,7 @@ public class InternalBaseLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBase.g:1181:13: '0x'
+                    // InternalBase.g:1153:13: '0x'
                     {
                     match("0x"); 
 
@@ -615,7 +615,7 @@ public class InternalBaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBase.g:1181:18: '0X'
+                    // InternalBase.g:1153:18: '0X'
                     {
                     match("0X"); 
 
@@ -625,7 +625,7 @@ public class InternalBaseLexer extends Lexer {
 
             }
 
-            // InternalBase.g:1181:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalBase.g:1153:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt2=0;
             loop2:
             do {
@@ -679,12 +679,12 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_CC_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1183:16: ( '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\'' )
-            // InternalBase.g:1183:18: '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\''
+            // InternalBase.g:1155:16: ( '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\'' )
+            // InternalBase.g:1155:18: '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\''
             {
             match("'''"); 
 
-            // InternalBase.g:1183:27: ( options {greedy=false; } : . )*
+            // InternalBase.g:1155:27: ( options {greedy=false; } : . )*
             loop3:
             do {
                 int alt3=2;
@@ -718,7 +718,7 @@ public class InternalBaseLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalBase.g:1183:55: .
+            	    // InternalBase.g:1155:55: .
             	    {
             	    matchAny(); 
 
@@ -748,10 +748,10 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1185:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalBase.g:1185:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBase.g:1157:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalBase.g:1157:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalBase.g:1185:11: ( '^' )?
+            // InternalBase.g:1157:11: ( '^' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -760,7 +760,7 @@ public class InternalBaseLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalBase.g:1185:11: '^'
+                    // InternalBase.g:1157:11: '^'
                     {
                     match('^'); 
 
@@ -778,7 +778,7 @@ public class InternalBaseLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalBase.g:1185:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBase.g:1157:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop5:
             do {
                 int alt5=2;
@@ -827,10 +827,10 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1187:10: ( ( '0' .. '9' )+ )
-            // InternalBase.g:1187:12: ( '0' .. '9' )+
+            // InternalBase.g:1159:10: ( ( '0' .. '9' )+ )
+            // InternalBase.g:1159:12: ( '0' .. '9' )+
             {
-            // InternalBase.g:1187:12: ( '0' .. '9' )+
+            // InternalBase.g:1159:12: ( '0' .. '9' )+
             int cnt6=0;
             loop6:
             do {
@@ -844,7 +844,7 @@ public class InternalBaseLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalBase.g:1187:13: '0' .. '9'
+            	    // InternalBase.g:1159:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -876,10 +876,10 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1189:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalBase.g:1189:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBase.g:1161:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalBase.g:1161:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalBase.g:1189:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBase.g:1161:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -897,10 +897,10 @@ public class InternalBaseLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalBase.g:1189:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalBase.g:1161:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalBase.g:1189:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalBase.g:1161:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -916,7 +916,7 @@ public class InternalBaseLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // InternalBase.g:1189:21: '\\\\' .
+                    	    // InternalBase.g:1161:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -924,7 +924,7 @@ public class InternalBaseLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBase.g:1189:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalBase.g:1161:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -949,10 +949,10 @@ public class InternalBaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBase.g:1189:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalBase.g:1161:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalBase.g:1189:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalBase.g:1161:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -968,7 +968,7 @@ public class InternalBaseLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // InternalBase.g:1189:54: '\\\\' .
+                    	    // InternalBase.g:1161:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -976,7 +976,7 @@ public class InternalBaseLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBase.g:1189:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalBase.g:1161:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1019,12 +1019,12 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1191:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalBase.g:1191:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalBase.g:1163:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalBase.g:1163:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalBase.g:1191:24: ( options {greedy=false; } : . )*
+            // InternalBase.g:1163:24: ( options {greedy=false; } : . )*
             loop10:
             do {
                 int alt10=2;
@@ -1049,7 +1049,7 @@ public class InternalBaseLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalBase.g:1191:52: .
+            	    // InternalBase.g:1163:52: .
             	    {
             	    matchAny(); 
 
@@ -1079,12 +1079,12 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1193:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalBase.g:1193:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalBase.g:1165:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalBase.g:1165:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalBase.g:1193:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalBase.g:1165:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop11:
             do {
                 int alt11=2;
@@ -1097,7 +1097,7 @@ public class InternalBaseLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalBase.g:1193:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalBase.g:1165:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1117,7 +1117,7 @@ public class InternalBaseLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalBase.g:1193:40: ( ( '\\r' )? '\\n' )?
+            // InternalBase.g:1165:40: ( ( '\\r' )? '\\n' )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1126,9 +1126,9 @@ public class InternalBaseLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // InternalBase.g:1193:41: ( '\\r' )? '\\n'
+                    // InternalBase.g:1165:41: ( '\\r' )? '\\n'
                     {
-                    // InternalBase.g:1193:41: ( '\\r' )?
+                    // InternalBase.g:1165:41: ( '\\r' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1137,7 +1137,7 @@ public class InternalBaseLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalBase.g:1193:41: '\\r'
+                            // InternalBase.g:1165:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1169,10 +1169,10 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1195:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalBase.g:1195:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBase.g:1167:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalBase.g:1167:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalBase.g:1195:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBase.g:1167:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt14=0;
             loop14:
             do {
@@ -1226,8 +1226,8 @@ public class InternalBaseLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBase.g:1197:16: ( . )
-            // InternalBase.g:1197:18: .
+            // InternalBase.g:1169:16: ( . )
+            // InternalBase.g:1169:18: .
             {
             matchAny(); 
 

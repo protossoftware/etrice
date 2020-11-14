@@ -3,12 +3,11 @@
  */
 package org.eclipse.etrice.core.fsm.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.etrice.core.fsm.ui.internal.FsmActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.etrice.core.fsm.ui.internal.FSMActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +17,13 @@ public class FSMExecutableExtensionFactory extends AbstractGuiceAwareExecutableE
 
 	@Override
 	protected Bundle getBundle() {
-		return FSMActivator.getInstance().getBundle();
+		return Platform.getBundle(FsmActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return FSMActivator.getInstance().getInjector(FSMActivator.ORG_ECLIPSE_ETRICE_CORE_FSM_FSM);
+		FsmActivator activator = FsmActivator.getInstance();
+		return activator != null ? activator.getInjector(FsmActivator.ORG_ECLIPSE_ETRICE_CORE_FSM_FSM) : null;
 	}
-	
+
 }

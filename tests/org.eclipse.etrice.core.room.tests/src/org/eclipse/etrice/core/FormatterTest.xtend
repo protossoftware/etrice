@@ -7,7 +7,6 @@ import java.util.Map
 import java.util.regex.Pattern
 import org.eclipse.core.runtime.FileLocator
 import org.eclipse.emf.common.util.URI
-import org.eclipse.etrice.core.room.tests.RoomInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.formatter.FormatterTestHelper
@@ -16,6 +15,7 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 import static org.junit.Assert.assertNotEquals
+import org.eclipse.etrice.core.tests.RoomInjectorProvider
 
 @RunWith(XtextRunner)
 @InjectWith(RoomInjectorProvider)

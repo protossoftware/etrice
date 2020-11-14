@@ -207,7 +207,15 @@
             </activeWhen>
         </handler>
     </extension>   
-
+    <extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="fsm"
+			id="org.eclipse.etrice.core.fsm.FSM.contenttype"
+			name="FSM File"
+			priority="normal">
+		</content-type>
+	</extension>
 <!-- adding resource factories -->
 
 	<extension
@@ -248,16 +256,12 @@
 	    <persistent value="true"/>
 	</extension>
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
+   <extension point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.eclipse.etrice.core.fsm.ui.FSMExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-            fileExtensions="fsm"
-            >
-      </participant>
+			class="org.eclipse.etrice.core.fsm.ui.FSMExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="fsm"/>
    </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
+   <extension point="org.eclipse.ui.preferencePages">
         <page
             category="org.eclipse.etrice.core.fsm.FSM"
             class="org.eclipse.etrice.core.fsm.ui.FSMExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
@@ -266,8 +270,7 @@
             <keywordReference id="org.eclipse.etrice.core.fsm.ui.keyword_FSM"/>
         </page>
     </extension>
-    <extension
-            point="org.eclipse.ui.propertyPages">
+    <extension point="org.eclipse.ui.propertyPages">
         <page
             category="org.eclipse.etrice.core.fsm.FSM"
             class="org.eclipse.etrice.core.fsm.ui.FSMExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
@@ -382,12 +385,18 @@
             class="org.eclipse.etrice.core.fsm.ui.FSMExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="fsm">
     </viewer>
+    <contentTypeBinding
+        contentTypeId="org.eclipse.etrice.core.fsm.FSM.contenttype"
+        contentViewerId="org.eclipse.etrice.core.fsm.FSM.compare.contentViewers" />
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.etrice.core.fsm.FSM.compare.contentMergeViewers"
             class="org.eclipse.etrice.core.fsm.ui.FSMExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="fsm" label="FSM Compare">
      </viewer>
+     <contentTypeBinding
+        contentTypeId="org.eclipse.etrice.core.fsm.FSM.contenttype"
+        contentMergeViewerId="org.eclipse.etrice.core.fsm.FSM.compare.contentMergeViewers" />
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.etrice.core.fsm.FSM.editors.documentProviders"
@@ -395,5 +404,10 @@
             extensions="fsm">
     </provider>
   </extension>
-
+    <extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="fsm"
+			type="text">
+		</fileTypes>
+	</extension>
 </plugin>

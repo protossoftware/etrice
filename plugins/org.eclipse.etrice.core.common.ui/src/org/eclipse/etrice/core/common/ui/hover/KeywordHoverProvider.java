@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.common.ui.internal.BaseActivator;
+import org.eclipse.etrice.core.common.ui.internal.CommonActivator;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -78,7 +78,7 @@ public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 					url = plugin.getBundle().getEntry(styleSheetFileName);
 				}
 				else {
-					url = BaseActivator.getInstance().getBundle().getEntry("/eTriceKeywordHoverStyle.css");
+					url = CommonActivator.getInstance().getBundle().getEntry("/eTriceKeywordHoverStyle.css");
 				}
 				styleSheet = Files.readStreamIntoString(url.openStream());
 			}

@@ -4,36 +4,37 @@
 package org.eclipse.etrice.core.etmap.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.etrice.core.etmap.parser.antlr.internal.InternalETMapParser;
 import org.eclipse.etrice.core.etmap.services.ETMapGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class ETMapParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class ETMapParser extends AbstractAntlrParser {
+
 	@Inject
 	private ETMapGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.etrice.core.etmap.parser.antlr.internal.InternalETMapParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.etrice.core.etmap.parser.antlr.internal.InternalETMapParser(stream, getGrammarAccess());
+	protected InternalETMapParser createParser(XtextTokenStream stream) {
+		return new InternalETMapParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "MappingModel";
 	}
-	
+
 	public ETMapGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(ETMapGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

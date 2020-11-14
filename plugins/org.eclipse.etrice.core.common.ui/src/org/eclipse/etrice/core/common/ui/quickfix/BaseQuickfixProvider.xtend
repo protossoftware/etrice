@@ -17,7 +17,6 @@ import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Path
 import org.eclipse.etrice.core.common.base.Import
 import org.eclipse.etrice.core.common.ui.modelpath.ModelPathManager
-import org.eclipse.etrice.core.common.validation.BaseJavaValidator
 import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.ide.IDE
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
@@ -26,6 +25,7 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.etrice.core.common.base.Documentation
+import org.eclipse.etrice.core.common.validation.BaseValidator
 
 //import org.eclipse.xtext.ui.editor.quickfix.Fix
 //import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
@@ -38,7 +38,7 @@ import org.eclipse.etrice.core.common.base.Documentation
  */
 class BaseQuickfixProvider extends DefaultQuickfixProvider {
 
-	@Fix(BaseJavaValidator.DEPRECATED_IMPORT_URI)
+	@Fix(BaseValidator.DEPRECATED_IMPORT_URI)
 	def removeImportUri(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Remove import uri', 'Remove the import uri', null) [ element, context |
 			val imp = element as Import
@@ -46,8 +46,8 @@ class BaseQuickfixProvider extends DefaultQuickfixProvider {
 		]
 	}
 	
-	@Fix(BaseJavaValidator.MODELPATH_DESCRIPTION_MISSING)
-	@Fix(BaseJavaValidator.IMPORTED_NAMESPACE_MISSING)
+	@Fix(BaseValidator.MODELPATH_DESCRIPTION_MISSING)
+	@Fix(BaseValidator.IMPORTED_NAMESPACE_MISSING)
 	def editModelpathDescription(Issue issue, IssueResolutionAcceptor acceptor) {
 		val resourceUri = issue.uriToProblem.trimFragment
 		if(resourceUri.platform) {
@@ -77,7 +77,7 @@ class BaseQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 	
-	@Fix(BaseJavaValidator.DEPRECATED_DOCUMENTATION)
+	@Fix(BaseValidator.DEPRECATED_DOCUMENTATION)
 	def void removeDeprecatedDocStrings(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.acceptMulti(issue, "Remove documentation string", "Remove deprecated documentation string", null, [Documentation doc |
 			doc.eContainer.eSet(doc.eContainingFeature, null)

@@ -37,7 +37,7 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.validation.RoomJavaValidator;
+import org.eclipse.etrice.core.validation.RoomValidator;
 import org.eclipse.etrice.core.validation.WiringValidator;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
@@ -96,14 +96,14 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		return super.hasResolutionFor(issueCode) || QuickfixExtensionManager.getInstance().hasResolutionFor(issueCode);
 	}
 	
-	@Fix(RoomJavaValidator.WRONG_MODEL_NAME)
+	@Fix(RoomValidator.WRONG_MODEL_NAME)
 	public void renameModel(final Issue issue, IssueResolutionAcceptor acceptor) {
 		String replacement = fqnConverter.toString(issue.getData()[1]);
 		acceptor.accept(issue, "Rename model", "Replace model name with its location on the modelpath \nfollowed by its file name",
 				"correction_change.gif", new ReplaceModification(issue, replacement));
 	}
 	
-	@Fix(RoomJavaValidator.THREAD_MISSING)
+	@Fix(RoomValidator.THREAD_MISSING)
 	public void fixMissingThread(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add a default thread", issue.getData()[0], "add.gif", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
@@ -115,7 +115,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 
-	@Fix(RoomJavaValidator.DUPLICATE_ACTOR_INSTANCE_MAPPING)
+	@Fix(RoomValidator.DUPLICATE_ACTOR_INSTANCE_MAPPING)
 	public void removeDuplicateThreadMapping(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove duplicate mapping", "remove this mapping", "remove.gif", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
@@ -125,7 +125,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.WRONG_NAMESPACE)
+	@Fix(RoomValidator.WRONG_NAMESPACE)
 	public void fixWrongNamespace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Replace with root namespace", issue.getData()[0], "add.gif", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
@@ -136,7 +136,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.CIRCULAR_CONTAINMENT)
+	@Fix(RoomValidator.CIRCULAR_CONTAINMENT)
 	public void fixCircularContainment(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Make attribute a reference", "add 'ref' keyword", "add.gif", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
@@ -158,7 +158,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.INVALID_ANNOTATION_TARGET)
+	@Fix(RoomValidator.INVALID_ANNOTATION_TARGET)
 	public void fixInvalidAnnotationTarget(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove this annotation", "remove @"+issue.getData()[0]+"...", "add.gif", new ISemanticModification() {
 			@SuppressWarnings("unchecked")
@@ -179,7 +179,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.DUPLICATE_ANNOTATION_TARGETS)
+	@Fix(RoomValidator.DUPLICATE_ANNOTATION_TARGETS)
 	public void fixDuplicateAnnotationTarget(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove the duplicate target", "remove "+issue.getData()[0], "add.gif", new ISemanticModification() {
 			@Override
@@ -196,7 +196,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.MANDATORY_ATTRIBUTE_MISSING)
+	@Fix(RoomValidator.MANDATORY_ATTRIBUTE_MISSING)
 	public void fixMissingAttribute(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add missing attribute", "add "+issue.getData()[0], "add.gif", new ISemanticModification() {
 			@Override
@@ -249,7 +249,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.UNDEFINED_ANNOTATION_ATTRIBUTE)
+	@Fix(RoomValidator.UNDEFINED_ANNOTATION_ATTRIBUTE)
 	public void fixUndefinedAnnotationAttribute(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove undefined attribute", "remove "+issue.getData()[0], "add.gif", new ISemanticModification() {
 			@Override
@@ -267,7 +267,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE)
+	@Fix(RoomValidator.UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE)
 	public void fixUndefinedAnnotationAttributeValue(final Issue issue, IssueResolutionAcceptor acceptor) {
 		for (int i=0; i<issue.getData().length; ++i) {
 			acceptor.accept(issue, "Change attribute value to "+issue.getData()[i], "... = "+issue.getData()[i], "add.gif",
@@ -275,7 +275,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		}
 	}
 	
-	@Fix(RoomJavaValidator.DUPLICATE_ANNOTATION_ATTRIBUTE)
+	@Fix(RoomValidator.DUPLICATE_ANNOTATION_ATTRIBUTE)
 	public void fixDuplicateAnnotationAttribute(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove duplicate attribute "+issue.getData()[0], "remove "+issue.getData()[0], "add.gif", new ISemanticModification() {
 			@Override
@@ -293,7 +293,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 
 	}
 	
-	@Fix(RoomJavaValidator.OPERATION_MISSING_OVERRIDE)
+	@Fix(RoomValidator.OPERATION_MISSING_OVERRIDE)
 	public void fixOperationMissingOverride(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Mark operation as override", "add 'override' keyword", "add.gif", new ISemanticModification() {
 
@@ -304,7 +304,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.OPERATION_EXTRANEOUS_OVERRIDE)
+	@Fix(RoomValidator.OPERATION_EXTRANEOUS_OVERRIDE)
 	public void fixOperationExtraneousOverride(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove 'override' keyword", "", "remove.gif", new ISemanticModification() {
 
@@ -315,7 +315,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.INCONSISTENT_COMMUNICATION_TYPE)
+	@Fix(RoomValidator.INCONSISTENT_COMMUNICATION_TYPE)
 	public void makeActorClassCommTypeLikeBaseClass(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Set communication type as for base class.", issue.getData()[0]+" ActorClass "+issue.getData()[1]+" ...", "correction_change.gif", new ISemanticModification() {
 			@Override
@@ -326,7 +326,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.DEPRECATED_MESSAGE_DATA_NAME)
+	@Fix(RoomValidator.DEPRECATED_MESSAGE_DATA_NAME)
 	public void removeDeprecatedMessageDataName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Omit message data name.", "Remove the deprecated name for the message data.", "correction_change.gif", new ISemanticModification() {
 			@Override

@@ -18,8 +18,10 @@ import org.eclipse.etrice.core.common.scoping.CompoundGlobalScopeProvider;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider.IModelPathFileFilter;
 import org.eclipse.etrice.core.converter.ConfigValueConverterService;
+import org.eclipse.etrice.core.formatting.ConfigFormatter;
 import org.eclipse.etrice.core.scoping.RoomModelPathFileExtensionFilter;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
@@ -47,6 +49,11 @@ public class ConfigRuntimeModule extends
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return ConfigValueConverterService.class;
+	}
+	
+	@Override
+	public Class<? extends IFormatter> bindIFormatter() {
+		return ConfigFormatter.class;
 	}
 
 }

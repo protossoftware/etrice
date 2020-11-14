@@ -30,18 +30,24 @@
 		<!-- Plugins -->
 		<module>plugins/org.eclipse.etrice.abstractexec.behavior</module>
 		<module>plugins/org.eclipse.etrice.core.common</module>
+		<module>plugins/org.eclipse.etrice.core.common.ide</module>
 		<module>plugins/org.eclipse.etrice.core.common.ui</module>
 		<module>plugins/org.eclipse.etrice.core.config</module>
+		<module>plugins/org.eclipse.etrice.core.config.ide</module>
 		<module>plugins/org.eclipse.etrice.core.config.ui</module>
 		<module>plugins/org.eclipse.etrice.core.etmap</module>
+		<module>plugins/org.eclipse.etrice.core.etmap.ide</module>
 		<module>plugins/org.eclipse.etrice.core.etmap.ui</module>
 		<module>plugins/org.eclipse.etrice.core.etphys</module>
+		<module>plugins/org.eclipse.etrice.core.etphys.ide</module>
 		<module>plugins/org.eclipse.etrice.core.etphys.ui</module>
 		<module>plugins/org.eclipse.etrice.core.fsm</module>
+		<module>plugins/org.eclipse.etrice.core.fsm.ide</module>
 		<module>plugins/org.eclipse.etrice.core.fsm.ui</module>
 		<module>plugins/org.eclipse.etrice.core.genmodel</module>
 		<module>plugins/org.eclipse.etrice.core.genmodel.fsm</module>
 		<module>plugins/org.eclipse.etrice.core.room</module>
+		<module>plugins/org.eclipse.etrice.core.room.ide</module>
 		<module>plugins/org.eclipse.etrice.core.room.ui</module>
 		<module>plugins/org.eclipse.etrice.dctools.fsm</module>
 		<module>plugins/org.eclipse.etrice.dctools</module>

@@ -3,22 +3,22 @@
  */
 package org.eclipse.etrice.core.etphys;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ISetup;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.common.BaseStandaloneSetup;
+import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class ETPhysStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.etrice.core.common.BaseStandaloneSetup.doSetup();
+		BaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -26,21 +26,17 @@ public class ETPhysStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.etrice.core.etphys.ETPhysRuntimeModule());
+		return Guice.createInjector(new ETPhysRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/etrice/core/etphys/ETPhys")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/etrice/core/etphys/ETPhys", org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage.eINSTANCE);
-	}
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("etphys", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("etphys", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/etrice/core/etphys/ETPhys")) {
+			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/etrice/core/etphys/ETPhys", ETPhysPackage.eINSTANCE);
+		}
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
-
-
-
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("etphys", resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("etphys", serviceProvider);
 	}
 }

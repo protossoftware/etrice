@@ -689,10 +689,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1489:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // InternalETMap.g:1489:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalETMap.g:1464:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // InternalETMap.g:1464:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
-            // InternalETMap.g:1489:12: ( '0x' | '0X' )
+            // InternalETMap.g:1464:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -720,7 +720,7 @@ public class InternalETMapLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalETMap.g:1489:13: '0x'
+                    // InternalETMap.g:1464:13: '0x'
                     {
                     match("0x"); 
 
@@ -728,7 +728,7 @@ public class InternalETMapLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1489:18: '0X'
+                    // InternalETMap.g:1464:18: '0X'
                     {
                     match("0X"); 
 
@@ -738,7 +738,7 @@ public class InternalETMapLexer extends Lexer {
 
             }
 
-            // InternalETMap.g:1489:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalETMap.g:1464:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt2=0;
             loop2:
             do {
@@ -792,12 +792,12 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_CC_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1491:16: ( '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\'' )
-            // InternalETMap.g:1491:18: '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\''
+            // InternalETMap.g:1466:16: ( '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\'' )
+            // InternalETMap.g:1466:18: '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\''
             {
             match("'''"); 
 
-            // InternalETMap.g:1491:27: ( options {greedy=false; } : . )*
+            // InternalETMap.g:1466:27: ( options {greedy=false; } : . )*
             loop3:
             do {
                 int alt3=2;
@@ -831,7 +831,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalETMap.g:1491:55: .
+            	    // InternalETMap.g:1466:55: .
             	    {
             	    matchAny(); 
 
@@ -861,10 +861,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1493:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalETMap.g:1493:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalETMap.g:1468:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalETMap.g:1468:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalETMap.g:1493:11: ( '^' )?
+            // InternalETMap.g:1468:11: ( '^' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -873,7 +873,7 @@ public class InternalETMapLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalETMap.g:1493:11: '^'
+                    // InternalETMap.g:1468:11: '^'
                     {
                     match('^'); 
 
@@ -891,7 +891,7 @@ public class InternalETMapLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalETMap.g:1493:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalETMap.g:1468:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop5:
             do {
                 int alt5=2;
@@ -940,10 +940,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1495:10: ( ( '0' .. '9' )+ )
-            // InternalETMap.g:1495:12: ( '0' .. '9' )+
+            // InternalETMap.g:1470:10: ( ( '0' .. '9' )+ )
+            // InternalETMap.g:1470:12: ( '0' .. '9' )+
             {
-            // InternalETMap.g:1495:12: ( '0' .. '9' )+
+            // InternalETMap.g:1470:12: ( '0' .. '9' )+
             int cnt6=0;
             loop6:
             do {
@@ -957,7 +957,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalETMap.g:1495:13: '0' .. '9'
+            	    // InternalETMap.g:1470:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -989,10 +989,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1497:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalETMap.g:1497:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalETMap.g:1472:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalETMap.g:1472:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalETMap.g:1497:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalETMap.g:1472:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1010,10 +1010,10 @@ public class InternalETMapLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalETMap.g:1497:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalETMap.g:1472:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalETMap.g:1497:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalETMap.g:1472:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -1029,7 +1029,7 @@ public class InternalETMapLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // InternalETMap.g:1497:21: '\\\\' .
+                    	    // InternalETMap.g:1472:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1037,7 +1037,7 @@ public class InternalETMapLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalETMap.g:1497:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalETMap.g:1472:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1062,10 +1062,10 @@ public class InternalETMapLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1497:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalETMap.g:1472:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalETMap.g:1497:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalETMap.g:1472:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -1081,7 +1081,7 @@ public class InternalETMapLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // InternalETMap.g:1497:54: '\\\\' .
+                    	    // InternalETMap.g:1472:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1089,7 +1089,7 @@ public class InternalETMapLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalETMap.g:1497:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalETMap.g:1472:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1132,12 +1132,12 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1499:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalETMap.g:1499:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalETMap.g:1474:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalETMap.g:1474:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalETMap.g:1499:24: ( options {greedy=false; } : . )*
+            // InternalETMap.g:1474:24: ( options {greedy=false; } : . )*
             loop10:
             do {
                 int alt10=2;
@@ -1162,7 +1162,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalETMap.g:1499:52: .
+            	    // InternalETMap.g:1474:52: .
             	    {
             	    matchAny(); 
 
@@ -1192,12 +1192,12 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1501:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalETMap.g:1501:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalETMap.g:1476:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalETMap.g:1476:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalETMap.g:1501:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalETMap.g:1476:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop11:
             do {
                 int alt11=2;
@@ -1210,7 +1210,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalETMap.g:1501:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalETMap.g:1476:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1230,7 +1230,7 @@ public class InternalETMapLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalETMap.g:1501:40: ( ( '\\r' )? '\\n' )?
+            // InternalETMap.g:1476:40: ( ( '\\r' )? '\\n' )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1239,9 +1239,9 @@ public class InternalETMapLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // InternalETMap.g:1501:41: ( '\\r' )? '\\n'
+                    // InternalETMap.g:1476:41: ( '\\r' )? '\\n'
                     {
-                    // InternalETMap.g:1501:41: ( '\\r' )?
+                    // InternalETMap.g:1476:41: ( '\\r' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1250,7 +1250,7 @@ public class InternalETMapLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalETMap.g:1501:41: '\\r'
+                            // InternalETMap.g:1476:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1282,10 +1282,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1503:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalETMap.g:1503:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalETMap.g:1478:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalETMap.g:1478:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalETMap.g:1503:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalETMap.g:1478:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt14=0;
             loop14:
             do {
@@ -1339,8 +1339,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalETMap.g:1505:16: ( . )
-            // InternalETMap.g:1505:18: .
+            // InternalETMap.g:1480:16: ( . )
+            // InternalETMap.g:1480:18: .
             {
             matchAny(); 
 

@@ -5,8 +5,9 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 0.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.etphys.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle:  org.eclipse.etrice.core.room.ui,
-  org.eclipse.etrice.core.etphys;visibility:=reexport,
+Require-Bundle: org.eclipse.etrice.core.room.ui,
+ org.eclipse.etrice.core.etphys;visibility:=reexport,
+ org.eclipse.etrice.core.etphys.ide,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
@@ -16,13 +17,11 @@ Require-Bundle:  org.eclipse.etrice.core.room.ui,
  org.antlr.runtime,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare,
-  org.eclipse.etrice.core.common.ui
+ org.eclipse.etrice.core.common.ui
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.core.etphys.ui.contentassist,
- org.eclipse.etrice.core.etphys.ui.contentassist.antlr,
  org.eclipse.etrice.core.etphys.ui.internal,
- org.eclipse.etrice.core.etphys.ui.quickfix,
- org.eclipse.etrice.core.etphys.ui.contentassist.antlr.internal
-Bundle-Activator: org.eclipse.etrice.core.etphys.ui.internal.ETPhysActivator
+ org.eclipse.etrice.core.etphys.ui.quickfix
+Bundle-Activator: org.eclipse.etrice.core.etphys.ui.internal.EtphysActivator
 Automatic-Module-Name: org.eclipse.etrice.core.etphys.ui

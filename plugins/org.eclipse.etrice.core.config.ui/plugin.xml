@@ -35,6 +35,26 @@
             </reference>
          </activeWhen>
       </handler>
+      <!-- copy qualified name -->
+		<handler
+			class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+			<activeWhen>
+				<reference definitionId="org.eclipse.etrice.core.Config.Editor.opened" />
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+			<activeWhen>
+				<and>
+					<reference definitionId="org.eclipse.etrice.core.Config.XtextEditor.opened" />
+					<iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+			</activeWhen>
+		</handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
         <definition id="org.eclipse.etrice.core.Config.Editor.opened">
@@ -47,6 +67,16 @@
                 </with>        
             </and>
         </definition>
+        <definition id="org.eclipse.etrice.core.Config.XtextEditor.opened">
+			<and>
+				<reference definitionId="isXtextEditorActive"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.etrice.core.Config"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
     </extension>
     <extension
             point="org.eclipse.ui.preferencePages">
@@ -100,6 +130,19 @@
             id="org.eclipse.etrice.core.Config.validate"
             name="Validate">
       </command>
+      <!-- copy qualified name -->
+        <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+        </command>
+        <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+        </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
         <menuContribution
@@ -115,6 +158,36 @@
             </visibleWhen>
          </command>  
          </menuContribution>
+         <!-- copy qualified name -->
+		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.etrice.core.Config.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="menu:edit?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.etrice.core.Config.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<and>
+						<reference definitionId="org.eclipse.etrice.core.Config.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
     </extension>
     <extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
@@ -137,7 +210,15 @@
             </activeWhen>
         </handler>
     </extension>   
-
+    <extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="config"
+			id="org.eclipse.etrice.core.Config.contenttype"
+			name="Config File"
+			priority="normal">
+		</content-type>
+	</extension>
 <!-- adding resource factories -->
 
 	<extension
@@ -153,7 +234,33 @@
             uriExtension="config">
         </resourceServiceProvider>
     </extension>
-
+    <!-- marker definitions for org.eclipse.etrice.core.Config -->
+	<extension
+			id="config.check.fast"
+			name="Config Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="config.check.normal"
+			name="Config Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="config.check.expensive"
+			name="Config Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
+	</extension>
+	<extension point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="config"/>
+	</extension>
 
 
    <!--
@@ -216,17 +323,38 @@
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
+   <!-- quickfix marker resolution generator for org.eclipse.etrice.core.Config -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.etrice.core.config.ui.config.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.etrice.core.config.ui.config.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.etrice.core.config.ui.config.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
    </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -264,12 +392,18 @@
             class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="config">
     </viewer>
+    <contentTypeBinding
+        contentTypeId="org.eclipse.etrice.core.Config.contenttype"
+        contentViewerId="org.eclipse.etrice.core.Config.compare.contentViewers" />
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.etrice.core.Config.compare.contentMergeViewers"
             class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="config" label="Config Compare">
      </viewer>
+     <contentTypeBinding
+        contentTypeId="org.eclipse.etrice.core.Config.contenttype"
+        contentMergeViewerId="org.eclipse.etrice.core.Config.compare.contentMergeViewers" />
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.etrice.core.Config.editors.documentProviders"
@@ -277,5 +411,10 @@
             extensions="config">
     </provider>
   </extension>
-
+    <extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="config"
+			type="text">
+		</fileTypes>
+	</extension>
 </plugin>

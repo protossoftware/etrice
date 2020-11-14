@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class ETMapAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.tokens");
 	}
 }

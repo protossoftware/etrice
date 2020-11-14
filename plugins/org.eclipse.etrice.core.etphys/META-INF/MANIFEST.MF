@@ -5,21 +5,15 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 0.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.etphys; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle:  org.eclipse.etrice.core.room,
+Require-Bundle: org.eclipse.etrice.core.room,
  org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
- org.antlr.runtime,
- org.apache.commons.logging;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
-  org.eclipse.etrice.core.common,
- org.eclipse.xtext.xbase.lib
-Import-Package: org.apache.log4j,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.etrice.core.common,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
+Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.core.etphys,
  org.eclipse.etrice.core.etphys.converters,
@@ -27,7 +21,6 @@ Export-Package: org.eclipse.etrice.core.etphys,
  org.eclipse.etrice.core.etphys.eTPhys.impl,
  org.eclipse.etrice.core.etphys.eTPhys.util,
  org.eclipse.etrice.core.etphys.formatting,
- org.eclipse.etrice.core.etphys.generator,
  org.eclipse.etrice.core.etphys.parser.antlr,
  org.eclipse.etrice.core.etphys.parser.antlr.internal,
  org.eclipse.etrice.core.etphys.scoping,
@@ -35,4 +28,3 @@ Export-Package: org.eclipse.etrice.core.etphys,
  org.eclipse.etrice.core.etphys.services,
  org.eclipse.etrice.core.etphys.validation
 Automatic-Module-Name: org.eclipse.etrice.core.etphys
-

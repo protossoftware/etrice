@@ -4,36 +4,37 @@
 package org.eclipse.etrice.core.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.etrice.core.parser.antlr.internal.InternalRoomParser;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class RoomParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class RoomParser extends AbstractAntlrParser {
+
 	@Inject
 	private RoomGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.etrice.core.parser.antlr.internal.InternalRoomParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.etrice.core.parser.antlr.internal.InternalRoomParser(stream, getGrammarAccess());
+	protected InternalRoomParser createParser(XtextTokenStream stream) {
+		return new InternalRoomParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "RoomModel";
 	}
-	
+
 	public RoomGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(RoomGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

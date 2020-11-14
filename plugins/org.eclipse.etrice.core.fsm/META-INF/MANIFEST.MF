@@ -5,31 +5,22 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 0.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.fsm; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle:  org.eclipse.etrice.core.common,
+Require-Bundle: org.eclipse.etrice.core.common,
  org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.xtext.util,
- org.eclipse.xtext.common.types,
- org.apache.commons.logging;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime,
- org.objectweb.asm;resolution:=optional,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  com.google.guava,
- org.eclipse.xtext.xbase.lib
-Import-Package: org.apache.log4j,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
+Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.core.fsm,
  org.eclipse.etrice.core.fsm.fSM,
  org.eclipse.etrice.core.fsm.fSM.impl,
  org.eclipse.etrice.core.fsm.fSM.util,
  org.eclipse.etrice.core.fsm.formatting2,
- org.eclipse.etrice.core.fsm.generator,
  org.eclipse.etrice.core.fsm.naming,
  org.eclipse.etrice.core.fsm.parser.antlr,
  org.eclipse.etrice.core.fsm.parser.antlr.internal,
@@ -39,4 +30,3 @@ Export-Package: org.eclipse.etrice.core.fsm,
  org.eclipse.etrice.core.fsm.util,
  org.eclipse.etrice.core.fsm.validation
 Automatic-Module-Name: org.eclipse.etrice.core.fsm
-

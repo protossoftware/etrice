@@ -5,12 +5,13 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 0.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.room.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle:  org.eclipse.etrice.core.fsm.ui,
-  org.eclipse.etrice.core.common.ui,
-  org.eclipse.etrice.core.room;visibility:=reexport,
-  org.eclipse.etrice.core.genmodel,
-  org.eclipse.etrice.ui.common.base,
-  org.eclipse.etrice.doc,
+Require-Bundle: org.eclipse.etrice.core.fsm.ui,
+ org.eclipse.etrice.core.common.ui,
+ org.eclipse.etrice.core.room;visibility:=reexport,
+ org.eclipse.etrice.core.room.ide,
+ org.eclipse.etrice.core.genmodel,
+ org.eclipse.etrice.ui.common.base,
+ org.eclipse.etrice.doc,
  org.eclipse.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
@@ -24,16 +25,15 @@ Require-Bundle:  org.eclipse.etrice.core.fsm.ui,
  org.eclipse.help,
  com.google.inject,
  org.eclipse.etrice.expressions.ui,
-  org.eclipse.etrice.ui.behavior.fsm,
-  org.eclipse.etrice.generator.base
+ org.eclipse.etrice.ui.behavior.fsm,
+ org.eclipse.etrice.generator.base,
+ org.eclipse.xtext.ui.codetemplates.ui
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.etrice.core.ui,
+Export-Package: org.eclipse.etrice.core.room.ui.internal,
+ org.eclipse.etrice.core.ui,
  org.eclipse.etrice.core.ui.contentassist,
- org.eclipse.etrice.core.ui.contentassist.antlr,
- org.eclipse.etrice.core.ui.contentassist.antlr.internal,
  org.eclipse.etrice.core.ui.editor,
- org.eclipse.etrice.core.ui.internal,
  org.eclipse.etrice.core.ui.linking,
  org.eclipse.etrice.core.ui.preferences,
  org.eclipse.etrice.core.ui.quickfix,

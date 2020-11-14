@@ -3,12 +3,11 @@
  */
 package org.eclipse.etrice.core.common.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.etrice.core.common.ui.internal.CommonActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.etrice.core.common.ui.internal.BaseActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +17,13 @@ public class BaseExecutableExtensionFactory extends AbstractGuiceAwareExecutable
 
 	@Override
 	protected Bundle getBundle() {
-		return BaseActivator.getInstance().getBundle();
+		return Platform.getBundle(CommonActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return BaseActivator.getInstance().getInjector(BaseActivator.ORG_ECLIPSE_ETRICE_CORE_COMMON_BASE);
+		CommonActivator activator = CommonActivator.getInstance();
+		return activator != null ? activator.getInjector(CommonActivator.ORG_ECLIPSE_ETRICE_CORE_COMMON_BASE) : null;
 	}
-	
+
 }

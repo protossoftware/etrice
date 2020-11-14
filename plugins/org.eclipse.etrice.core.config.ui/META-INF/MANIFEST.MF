@@ -5,11 +5,12 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 0.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.config.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle:  org.eclipse.etrice.core.room.ui,
-  org.eclipse.etrice.core.common.ui,
-  org.eclipse.etrice.core.fsm,
-  org.eclipse.etrice.core.room,
-  org.eclipse.etrice.core.config;visibility:=reexport,
+Require-Bundle: org.eclipse.etrice.core.room.ui,
+ org.eclipse.etrice.core.common.ui,
+ org.eclipse.etrice.core.fsm,
+ org.eclipse.etrice.core.room,
+ org.eclipse.etrice.core.config;visibility:=reexport,
+ org.eclipse.etrice.core.config.ide,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
@@ -24,10 +25,8 @@ Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.etrice.core.genmodel.etricegen
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.etrice.core.ui.contentassist.antlr,
- org.eclipse.etrice.core.ui.internal,
+Export-Package: org.eclipse.etrice.core.config.ui.internal,
  org.eclipse.etrice.core.ui.contentassist,
- org.eclipse.etrice.core.ui.quickfix,
- org.eclipse.etrice.core.ui.contentassist.antlr.internal
-Bundle-Activator: org.eclipse.etrice.core.ui.internal.ConfigActivator
+ org.eclipse.etrice.core.ui.quickfix
+Bundle-Activator: org.eclipse.etrice.core.config.ui.internal.ConfigActivator
 Automatic-Module-Name: org.eclipse.etrice.core.config.ui

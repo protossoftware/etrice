@@ -15,7 +15,6 @@
 package org.eclipse.etrice.core.common.tests
 
 import com.google.inject.Inject
-import org.eclipse.etrice.core.common.BaseTestInjectorProvider
 import org.eclipse.etrice.core.common.converter.BaseConverterService
 import org.eclipse.etrice.core.common.converter.CCStringIndentation
 import org.eclipse.xtext.testing.InjectWith
@@ -29,7 +28,7 @@ import org.junit.runner.RunWith
 import static org.junit.Assert.*
 
 @RunWith(XtextRunner)
-@InjectWith(BaseTestInjectorProvider)
+@InjectWith(BaseInjectorProvider)
 class CCStringTest {
 
 	val JAVA_NL = Strings.newLine

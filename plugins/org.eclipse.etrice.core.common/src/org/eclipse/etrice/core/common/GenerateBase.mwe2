@@ -13,166 +13,55 @@
  *******************************************************************************/
 module org.eclipse.etrice.core.common.GenerateBase
 
-import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
-import org.eclipse.xtext.resource.XtextResourceSet
-
-var grammarURI = "classpath:/org/eclipse/etrice/core/common/Base.xtext"
-var fileExtensions = "__etbase"
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
 
 var projectName = "org.eclipse.etrice.core.common"
-var runtimeProject = "../${projectName}"
-var generateXtendStub = true
-
-var testgrammarURI = "classpath:/org/eclipse/etrice/core/common/BaseTest.xtext"
-var testgrammarFileExtensions = "etbase"
 
 Workflow {
-    bean = StandaloneSetup {
-    	scanClassPath = true
-    	platformUri = "${runtimeProject}/.."
-    	// The following two lines can be removed, if Xbase is not used.
-    	// registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-    	// registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-    }
-    
-    
-	/*bean = StandaloneSetup {
-		resourceSet = XtextResourceSet : baseTestGrammarResourceSet {}
-		registerEcoreFile = "platform:/resource/${projectName}/model/Base.ecore"
-	}*/
-    
-    component = DirectoryCleaner {
-    	directory = "${runtimeProject}/src-gen"
-    }
-    
-    component = DirectoryCleaner {
-    	directory = "${runtimeProject}.ui/src-gen"
-    }
-    
-    component = DirectoryCleaner {
-    	directory = "../../tests/${projectName}.tests/src-gen"
-    }
-    
-    component = Generator {
-    	pathRtProject = runtimeProject
-    	pathUiProject = "${runtimeProject}.ui"
-    	pathTestProject = "../../tests/${projectName}.tests"
-    	projectNameRt = projectName
-    	projectNameUi = "${projectName}.ui"
-    	language = auto-inject {
-    		uri = grammarURI
-    
-    		// Java API to access grammar elements (required by several other fragments)
-    		fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-    
-    		// generates Java API for the generated EPackages
-    		fragment = ecore.EcoreGeneratorFragment auto-inject {
-    		// referencedGenModels = "
-    		//  platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,
-    		//  platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel
-    		// "
+    component = XtextGenerator {
+    	configuration = {
+    		project = StandardProjectConfig {
+    			baseName = projectName
+    			rootPath = ".."
+    			runtimeTest = {
+    				enabled = true
+    				root = "../../tests/${projectName}.tests"
+    			}
+    			eclipsePlugin = {
+    				enabled = true
+    			}
+    			createEclipseMetaData = true
     		}
-    
-    		// the old serialization component
-    		// fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}    
-    
-    		// serializer 2.0
-    		fragment = serializer.SerializerFragment auto-inject {
-    			generateStub = false
+    		code = {
+				preferXtendStubs = false
     		}
-    
-    		// a custom ResourceFactory for use with EMF
-    		fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
-    
-    		// The antlr parser generator fragment.
-    		fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
-    		//  options = {
-    		//      backtrack = true
-    		//  }
-    		}
-    
-//			JavaValidatorFragment is used by the eTrice subgrammars instead of xtend-based Validation 
-//    		// Xtend-based API for validation
-//    		fragment = validation.ValidatorFragment auto-inject {
-//    		//    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-//    		//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-//    		}
-    		
-    		// Added for compatibility with existing eTrice subgrammars
-    		fragment = validation.JavaValidatorFragment {}
-    
-    		// old scoping and exporting API
-    		// fragment = scoping.ImportURIScopingFragment auto-inject {}
-    		// fragment = exporting.SimpleNamesFragment auto-inject {}
-    
-    		// scoping and exporting API
-    		fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
-    		fragment = exporting.QualifiedNamesFragment auto-inject {}
-    		fragment = builder.BuilderIntegrationFragment auto-inject {}
-    
-    		// generator API
-    		fragment = generator.GeneratorFragment auto-inject {}
-    
-    		// formatter API
-    		fragment = formatting2.Formatter2Fragment auto-inject {}
-    
-    		// labeling API
-    		fragment = labeling.LabelProviderFragment auto-inject {}
-    
-    		// outline API
-    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
-    		fragment = outline.QuickOutlineFragment auto-inject {}
-    
-    		// quickfix API
-    		fragment = quickfix.QuickfixProviderFragment auto-inject {}
-
-//			JavaBasedContentAssistFragment used by eTrice sub-grammars instead of ContentAssistFragment
-//    		// content assist API
-//    		fragment = contentAssist.ContentAssistFragment auto-inject {}
-    
-    		// content assist API
-            fragment = contentAssist.JavaBasedContentAssistFragment {}
-            
-    		// generates a more lightweight Antlr parser and lexer tailored for content assist
-    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
-    		
-    		// rename refactoring
-    		fragment = refactoring.RefactorElementNameFragment auto-inject {}
     	}
-    	
-    	language = auto-inject {
-    		uri = testgrammarURI
-    		fileExtensions = testgrammarFileExtensions
-    
-    		// Java API to access grammar elements (required by several other fragments)
-    		fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-    
-    		// generates Java API for the generated EPackages
-    		fragment = ecore.EcoreGeneratorFragment auto-inject {}
-    		
-    		// serializer 2.0
-    		fragment = serializer.SerializerFragment auto-inject {
+    	language = StandardLanguage {
+    		name = "org.eclipse.etrice.core.common.Base"
+    		fileExtensions = "__etbase"
+    		serializer = {
     			generateStub = false
     		}
-    		
-    		// scoping and exporting API
-    		fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
-    		fragment = exporting.QualifiedNamesFragment auto-inject {}
-    		fragment = builder.BuilderIntegrationFragment auto-inject {}
-    
-    		// a custom ResourceFactory for use with EMF
-    		fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
-    
-    		// The antlr parser generator fragment.
-    		fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {}
-    		
-    		// generates junit test support classes into Generator#pathTestProject
-    		fragment = junit.Junit4Fragment auto-inject {
-    			useDeprecatedClasses = false
-    		}
+    		generator = {
+				generateStub = false
+			}
+			scopeProvider = {
+				generateXtendStub = true
+			}
+			labelProvider = {
+				generateXtendStub = true
+			}
+			quickFixProvider = {
+				generateXtendStub = true
+			}
+			formatter = {
+				generateStub = true
+				generateXtendStub = true
+			}
+			junitSupport = {
+				generateStub = false
+			}
     	}
     }
 }
-

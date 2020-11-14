@@ -14,9 +14,9 @@
 
 package org.eclipse.etrice.generator.ui.wizard.deprecated;
 
-import org.eclipse.etrice.core.etmap.ui.internal.ETMapActivator;
-import org.eclipse.etrice.core.etphys.ui.internal.ETPhysActivator;
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.etmap.ui.internal.EtmapActivator;
+import org.eclipse.etrice.core.etphys.ui.internal.EtphysActivator;
+import org.eclipse.etrice.core.room.ui.internal.RoomActivator;
 import org.eclipse.etrice.generator.ui.wizard.ProjectCreator;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -41,10 +41,10 @@ public class MappingWizard extends Wizard implements INewWizard {
 		super.addPages();
 
 		Injector roomInjector = RoomActivator.getInstance().getInjector(RoomActivator.ORG_ECLIPSE_ETRICE_CORE_ROOM);
-		Injector etMapInjector = ETMapActivator.getInstance().getInjector(
-				ETMapActivator.ORG_ECLIPSE_ETRICE_CORE_ETMAP_ETMAP);
-		Injector etPhysInjector = ETPhysActivator.getInstance().getInjector(
-				ETPhysActivator.ORG_ECLIPSE_ETRICE_CORE_ETPHYS_ETPHYS);
+		Injector etMapInjector = EtmapActivator.getInstance().getInjector(
+				EtmapActivator.ORG_ECLIPSE_ETRICE_CORE_ETMAP_ETMAP);
+		Injector etPhysInjector = EtphysActivator.getInstance().getInjector(
+				EtphysActivator.ORG_ECLIPSE_ETRICE_CORE_ETPHYS_ETPHYS);
 
 		roomPage = new SelectRoomPage(initialSelection, roomInjector);
 		roomPage.setTitle(title);

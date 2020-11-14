@@ -3,7 +3,7 @@
  */
 package org.eclipse.etrice.core.fsm.ui;
 
-import org.eclipse.etrice.core.fsm.ui.internal.FSMActivator;
+import org.eclipse.etrice.core.fsm.ui.internal.FsmActivator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import com.google.inject.Injector;
@@ -17,6 +17,6 @@ public class FSMUiModule extends org.eclipse.etrice.core.fsm.ui.AbstractFSMUiMod
 	}
 	
 	public static Injector getInjector() {
-		return FSMActivator.getInstance().getInjector(FSMActivator.ORG_ECLIPSE_ETRICE_CORE_FSM_FSM);
+		return FsmActivator.getInstance().getInjector(FsmActivator.ORG_ECLIPSE_ETRICE_CORE_FSM_FSM);
 	}
 }

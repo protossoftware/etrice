@@ -18,6 +18,8 @@ import org.eclipse.etrice.core.common.scoping.CompoundGlobalScopeProvider;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.core.common.scoping.ModelPathFileExtensionFilter;
 import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider.IModelPathFileFilter;
+import org.eclipse.etrice.core.etmap.formatting.ETMapFormatter;
+import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
@@ -38,6 +40,11 @@ public class ETMapRuntimeModule extends org.eclipse.etrice.core.etmap.AbstractET
 	// HOWTO: use URI imports - need special URI resolver
 	public Class<? extends ImportUriResolver> bindImportUriResolver() {
 		return ModelLocatorUriResolver.class;
+	}
+	
+	@Override
+	public Class<? extends IFormatter> bindIFormatter() {
+		return ETMapFormatter.class;
 	}
 
 }

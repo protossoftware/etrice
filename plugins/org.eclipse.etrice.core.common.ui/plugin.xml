@@ -9,7 +9,7 @@
             class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="etbase"
+            extensions="__etbase"
             id="org.eclipse.etrice.core.common.Base"
             name="Base Editor">
         </editor>
@@ -206,20 +206,28 @@
             </activeWhen>
         </handler>
     </extension>   
-
+    <extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="__etbase"
+			id="org.eclipse.etrice.core.common.Base.contenttype"
+			name="Base File"
+			priority="normal">
+		</content-type>
+	</extension>
 <!-- adding resource factories -->
 
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="etbase">
+			type="__etbase">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="etbase">
+            uriExtension="__etbase">
         </resourceServiceProvider>
     </extension>
 
@@ -247,14 +255,12 @@
         <persistent value="true"/>
     </extension>
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
+   <extension point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
+			class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="__etbase"/>
    </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
+   <extension point="org.eclipse.ui.preferencePages">
         <page
             category="org.eclipse.etrice.core.common.Base"
             class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
@@ -263,8 +269,7 @@
             <keywordReference id="org.eclipse.etrice.core.common.ui.keyword_Base"/>
         </page>
     </extension>
-    <extension
-            point="org.eclipse.ui.propertyPages">
+    <extension point="org.eclipse.ui.propertyPages">
         <page
             category="org.eclipse.etrice.core.common.Base"
             class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
@@ -377,26 +382,38 @@
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.etrice.core.common.Base.compare.contentViewers"
             class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="etbase">
+            extensions="__etbase">
     </viewer>
+    <contentTypeBinding
+		contentTypeId="org.eclipse.etrice.core.common.Base.contenttype"
+		contentViewerId="org.eclipse.etrice.core.common.Base.compare.contentViewers" />
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.etrice.core.common.Base.compare.contentMergeViewers"
             class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="etbase" label="Base Compare">
+            extensions="__etbase" label="Base Compare">
      </viewer>
+     <contentTypeBinding
+		contentTypeId="org.eclipse.etrice.core.common.Base.contenttype"
+		contentMergeViewerId="org.eclipse.etrice.core.common.Base.compare.contentMergeViewers" />
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.etrice.core.common.Base.editors.documentProviders"
             class="org.eclipse.etrice.core.common.ui.BaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="etbase">
+            extensions="__etbase">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="__etbase"
+			type="text">
+		</fileTypes>
+	</extension>
   <extension
         point="org.eclipse.xtext.ui.shared.sharedStateContributingModule">
      <module
            class="org.eclipse.etrice.core.common.ui.SharedContributionModule">
      </module>
- org.eclipse.etrice.core.common.ui.SharedContributionModule </extension>
+    </extension>
 
 </plugin>

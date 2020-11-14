@@ -3,21 +3,29 @@
  */
 package org.eclipse.etrice.core.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 import org.eclipse.etrice.core.common.services.BaseGrammarAccess;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ConfigModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.ConfigModel");
@@ -38,38 +46,37 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	configElements+=ConfigElement*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'ConfigModel' name=FQN '{' imports+=Import* configElements+=ConfigElement* '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'ConfigModel'
 		public Keyword getConfigModelKeyword_0() { return cConfigModelKeyword_0; }
-
+		
 		//name=FQN
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//imports+=Import*
 		public Assignment getImportsAssignment_3() { return cImportsAssignment_3; }
-
+		
 		//Import
 		public RuleCall getImportsImportParserRuleCall_3_0() { return cImportsImportParserRuleCall_3_0; }
-
+		
 		//configElements+=ConfigElement*
 		public Assignment getConfigElementsAssignment_4() { return cConfigElementsAssignment_4; }
-
+		
 		//ConfigElement
 		public RuleCall getConfigElementsConfigElementParserRuleCall_4_0() { return cConfigElementsConfigElementParserRuleCall_4_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-
 	public class ConfigElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.ConfigElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -81,23 +88,22 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ConfigElement:
 		//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//SubSystemConfig
 		public RuleCall getSubSystemConfigParserRuleCall_0() { return cSubSystemConfigParserRuleCall_0; }
-
+		
 		//ActorClassConfig
 		public RuleCall getActorClassConfigParserRuleCall_1() { return cActorClassConfigParserRuleCall_1; }
-
+		
 		//ActorInstanceConfig
 		public RuleCall getActorInstanceConfigParserRuleCall_2() { return cActorInstanceConfigParserRuleCall_2; }
-
+		
 		//ProtocolClassConfig
 		public RuleCall getProtocolClassConfigParserRuleCall_3() { return cProtocolClassConfigParserRuleCall_3; }
 	}
-
 	public class SubSystemConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.SubSystemConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -119,47 +125,46 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	dynConfig=DynamicConfig
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '{' dynConfig=DynamicConfig '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'SubSystemConfig'
 		public Keyword getSubSystemConfigKeyword_0() { return cSubSystemConfigKeyword_0; }
-
+		
 		//root=[room::LogicalSystem|FQN]
 		public Assignment getRootAssignment_1() { return cRootAssignment_1; }
-
+		
 		//[room::LogicalSystem|FQN]
 		public CrossReference getRootLogicalSystemCrossReference_1_0() { return cRootLogicalSystemCrossReference_1_0; }
-
+		
 		//FQN
 		public RuleCall getRootLogicalSystemFQNParserRuleCall_1_0_1() { return cRootLogicalSystemFQNParserRuleCall_1_0_1; }
-
+		
 		//'/'
 		public Keyword getSolidusKeyword_2() { return cSolidusKeyword_2; }
-
+		
 		//subSystem=[room::SubSystemRef]
 		public Assignment getSubSystemAssignment_3() { return cSubSystemAssignment_3; }
-
+		
 		//[room::SubSystemRef]
 		public CrossReference getSubSystemSubSystemRefCrossReference_3_0() { return cSubSystemSubSystemRefCrossReference_3_0; }
-
+		
 		//ID
 		public RuleCall getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1() { return cSubSystemSubSystemRefIDTerminalRuleCall_3_0_1; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
-
+		
 		//dynConfig=DynamicConfig
 		public Assignment getDynConfigAssignment_5() { return cDynConfigAssignment_5; }
-
+		
 		//DynamicConfig
 		public RuleCall getDynConfigDynamicConfigParserRuleCall_5_0() { return cDynConfigDynamicConfigParserRuleCall_5_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
-
 	public class DynamicConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.DynamicConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -191,79 +196,78 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	userCode2=STRING)) & ('polling interval' polling=TIME)?)
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'dynamic configuration' '{' (('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor'
 		//userCode2=STRING)) & ('polling interval' polling=TIME)?) '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'dynamic configuration'
 		public Keyword getDynamicConfigurationKeyword_0() { return cDynamicConfigurationKeyword_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-
+		
 		//('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor' userCode2=STRING)) &
 		//('polling interval' polling=TIME)?
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
-
+		
 		//('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor' userCode2=STRING))
 		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
-
+		
 		//'file path' filePath=STRING
 		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
-
+		
 		//'file path'
 		public Keyword getFilePathKeyword_2_0_0_0() { return cFilePathKeyword_2_0_0_0; }
-
+		
 		//filePath=STRING
 		public Assignment getFilePathAssignment_2_0_0_1() { return cFilePathAssignment_2_0_0_1; }
-
+		
 		//STRING
 		public RuleCall getFilePathSTRINGTerminalRuleCall_2_0_0_1_0() { return cFilePathSTRINGTerminalRuleCall_2_0_0_1_0; }
-
+		
 		//('user import' userCode1=STRING) ('user constructor' userCode2=STRING)
 		public Group getGroup_2_0_1() { return cGroup_2_0_1; }
-
+		
 		//'user import' userCode1=STRING
 		public Group getGroup_2_0_1_0() { return cGroup_2_0_1_0; }
-
+		
 		//'user import'
 		public Keyword getUserImportKeyword_2_0_1_0_0() { return cUserImportKeyword_2_0_1_0_0; }
-
+		
 		//userCode1=STRING
 		public Assignment getUserCode1Assignment_2_0_1_0_1() { return cUserCode1Assignment_2_0_1_0_1; }
-
+		
 		//STRING
 		public RuleCall getUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0() { return cUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0; }
-
+		
 		//'user constructor' userCode2=STRING
 		public Group getGroup_2_0_1_1() { return cGroup_2_0_1_1; }
-
+		
 		//'user constructor'
 		public Keyword getUserConstructorKeyword_2_0_1_1_0() { return cUserConstructorKeyword_2_0_1_1_0; }
-
+		
 		//userCode2=STRING
 		public Assignment getUserCode2Assignment_2_0_1_1_1() { return cUserCode2Assignment_2_0_1_1_1; }
-
+		
 		//STRING
 		public RuleCall getUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0() { return cUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0; }
-
+		
 		//('polling interval' polling=TIME)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
-
+		
 		//'polling interval'
 		public Keyword getPollingIntervalKeyword_2_1_0() { return cPollingIntervalKeyword_2_1_0; }
-
+		
 		//polling=TIME
 		public Assignment getPollingAssignment_2_1_1() { return cPollingAssignment_2_1_1; }
-
+		
 		//TIME
 		public RuleCall getPollingTIMEParserRuleCall_2_1_1_0() { return cPollingTIMEParserRuleCall_2_1_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
-
 	public class ActorClassConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.ActorClassConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -281,35 +285,34 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	attributes+=AttrClassConfig*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'ActorClassConfig' actor=[room::ActorClass|FQN] '{' attributes+=AttrClassConfig* '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'ActorClassConfig'
 		public Keyword getActorClassConfigKeyword_0() { return cActorClassConfigKeyword_0; }
-
+		
 		//actor=[room::ActorClass|FQN]
 		public Assignment getActorAssignment_1() { return cActorAssignment_1; }
-
+		
 		//[room::ActorClass|FQN]
 		public CrossReference getActorActorClassCrossReference_1_0() { return cActorActorClassCrossReference_1_0; }
-
+		
 		//FQN
 		public RuleCall getActorActorClassFQNParserRuleCall_1_0_1() { return cActorActorClassFQNParserRuleCall_1_0_1; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//attributes+=AttrClassConfig*
 		public Assignment getAttributesAssignment_3() { return cAttributesAssignment_3; }
-
+		
 		//AttrClassConfig
 		public RuleCall getAttributesAttrClassConfigParserRuleCall_3_0() { return cAttributesAttrClassConfigParserRuleCall_3_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
-
 	public class ActorInstanceConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.ActorInstanceConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -337,66 +340,65 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*)
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '/' path=RefPath '{'
 		//(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'ActorInstanceConfig'
 		public Keyword getActorInstanceConfigKeyword_0() { return cActorInstanceConfigKeyword_0; }
-
+		
 		//root=[room::LogicalSystem|FQN]
 		public Assignment getRootAssignment_1() { return cRootAssignment_1; }
-
+		
 		//[room::LogicalSystem|FQN]
 		public CrossReference getRootLogicalSystemCrossReference_1_0() { return cRootLogicalSystemCrossReference_1_0; }
-
+		
 		//FQN
 		public RuleCall getRootLogicalSystemFQNParserRuleCall_1_0_1() { return cRootLogicalSystemFQNParserRuleCall_1_0_1; }
-
+		
 		//'/'
 		public Keyword getSolidusKeyword_2() { return cSolidusKeyword_2; }
-
+		
 		//subSystem=[room::SubSystemRef]
 		public Assignment getSubSystemAssignment_3() { return cSubSystemAssignment_3; }
-
+		
 		//[room::SubSystemRef]
 		public CrossReference getSubSystemSubSystemRefCrossReference_3_0() { return cSubSystemSubSystemRefCrossReference_3_0; }
-
+		
 		//ID
 		public RuleCall getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1() { return cSubSystemSubSystemRefIDTerminalRuleCall_3_0_1; }
-
+		
 		//'/'
 		public Keyword getSolidusKeyword_4() { return cSolidusKeyword_4; }
-
+		
 		//path=RefPath
 		public Assignment getPathAssignment_5() { return cPathAssignment_5; }
-
+		
 		//RefPath
 		public RuleCall getPathRefPathParserRuleCall_5_0() { return cPathRefPathParserRuleCall_5_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
-
+		
 		//attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*
 		public UnorderedGroup getUnorderedGroup_7() { return cUnorderedGroup_7; }
-
+		
 		//attributes+=AttrInstanceConfig*
 		public Assignment getAttributesAssignment_7_0() { return cAttributesAssignment_7_0; }
-
+		
 		//AttrInstanceConfig
 		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_7_0_0() { return cAttributesAttrInstanceConfigParserRuleCall_7_0_0; }
-
+		
 		//ports+=PortInstanceConfig*
 		public Assignment getPortsAssignment_7_1() { return cPortsAssignment_7_1; }
-
+		
 		//PortInstanceConfig
 		public RuleCall getPortsPortInstanceConfigParserRuleCall_7_1_0() { return cPortsPortInstanceConfigParserRuleCall_7_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
-
 	public class ProtocolClassConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.ProtocolClassConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -423,63 +425,62 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	'conjugated') conjugated=PortClassConfig)?)
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{' (('regular' regular=PortClassConfig)? & (('conjugate' |
 		//'conjugated') conjugated=PortClassConfig)?) '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'ProtocolClassConfig'
 		public Keyword getProtocolClassConfigKeyword_0() { return cProtocolClassConfigKeyword_0; }
-
+		
 		//protocol=[room::ProtocolClass|FQN]
 		public Assignment getProtocolAssignment_1() { return cProtocolAssignment_1; }
-
+		
 		//[room::ProtocolClass|FQN]
 		public CrossReference getProtocolProtocolClassCrossReference_1_0() { return cProtocolProtocolClassCrossReference_1_0; }
-
+		
 		//FQN
 		public RuleCall getProtocolProtocolClassFQNParserRuleCall_1_0_1() { return cProtocolProtocolClassFQNParserRuleCall_1_0_1; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//('regular' regular=PortClassConfig)? & (('conjugate' | 'conjugated') conjugated=PortClassConfig)?
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
-
+		
 		//('regular' regular=PortClassConfig)?
 		public Group getGroup_3_0() { return cGroup_3_0; }
-
+		
 		//'regular'
 		public Keyword getRegularKeyword_3_0_0() { return cRegularKeyword_3_0_0; }
-
+		
 		//regular=PortClassConfig
 		public Assignment getRegularAssignment_3_0_1() { return cRegularAssignment_3_0_1; }
-
+		
 		//PortClassConfig
 		public RuleCall getRegularPortClassConfigParserRuleCall_3_0_1_0() { return cRegularPortClassConfigParserRuleCall_3_0_1_0; }
-
+		
 		//(('conjugate' | 'conjugated') conjugated=PortClassConfig)?
 		public Group getGroup_3_1() { return cGroup_3_1; }
-
+		
 		//'conjugate' | 'conjugated'
 		public Alternatives getAlternatives_3_1_0() { return cAlternatives_3_1_0; }
-
+		
 		//'conjugate'
 		public Keyword getConjugateKeyword_3_1_0_0() { return cConjugateKeyword_3_1_0_0; }
-
+		
 		//'conjugated'
 		public Keyword getConjugatedKeyword_3_1_0_1() { return cConjugatedKeyword_3_1_0_1; }
-
+		
 		//conjugated=PortClassConfig
 		public Assignment getConjugatedAssignment_3_1_1() { return cConjugatedAssignment_3_1_1; }
-
+		
 		//PortClassConfig
 		public RuleCall getConjugatedPortClassConfigParserRuleCall_3_1_1_0() { return cConjugatedPortClassConfigParserRuleCall_3_1_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
-
 	public class PortClassConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.PortClassConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -495,29 +496,28 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	attributes+=AttrClassConfig*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{PortClassConfig} 'Port' '{' attributes+=AttrClassConfig* '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//{PortClassConfig}
 		public Action getPortClassConfigAction_0() { return cPortClassConfigAction_0; }
-
+		
 		//'Port'
 		public Keyword getPortKeyword_1() { return cPortKeyword_1; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//attributes+=AttrClassConfig*
 		public Assignment getAttributesAssignment_3() { return cAttributesAssignment_3; }
-
+		
 		//AttrClassConfig
 		public RuleCall getAttributesAttrClassConfigParserRuleCall_3_0() { return cAttributesAttrClassConfigParserRuleCall_3_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
-
 	public class PortInstanceConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.PortInstanceConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -535,35 +535,34 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	attributes+=AttrInstanceConfig*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'InterfaceItem' item=[room::InterfaceItem] '{' attributes+=AttrInstanceConfig* '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'InterfaceItem'
 		public Keyword getInterfaceItemKeyword_0() { return cInterfaceItemKeyword_0; }
-
+		
 		//item=[room::InterfaceItem]
 		public Assignment getItemAssignment_1() { return cItemAssignment_1; }
-
+		
 		//[room::InterfaceItem]
 		public CrossReference getItemInterfaceItemCrossReference_1_0() { return cItemInterfaceItemCrossReference_1_0; }
-
+		
 		//ID
 		public RuleCall getItemInterfaceItemIDTerminalRuleCall_1_0_1() { return cItemInterfaceItemIDTerminalRuleCall_1_0_1; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//attributes+=AttrInstanceConfig*
 		public Assignment getAttributesAssignment_3() { return cAttributesAssignment_3; }
-
+		
 		//AttrInstanceConfig
 		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_3_0() { return cAttributesAttrInstanceConfigParserRuleCall_3_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
-
 	public class AttrConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.AttrConfig");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -573,17 +572,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//AttrConfig:
 		//	AttrClassConfig | AttrInstanceConfig;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//AttrClassConfig | AttrInstanceConfig
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//AttrClassConfig
 		public RuleCall getAttrClassConfigParserRuleCall_0() { return cAttrClassConfigParserRuleCall_0; }
-
+		
 		//AttrInstanceConfig
 		public RuleCall getAttrInstanceConfigParserRuleCall_1() { return cAttrInstanceConfigParserRuleCall_1; }
 	}
-
 	public class AttrClassConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.AttrClassConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -618,84 +616,83 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	attributes+=AttrClassConfig*)
 		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' (('min' '=' min=NumberLiteral)? ('max' '='
 		//max=NumberLiteral)? attributes+=AttrClassConfig*) '}')?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Attr'
 		public Keyword getAttrKeyword_0() { return cAttrKeyword_0; }
-
+		
 		//attribute=[room::Attribute]
 		public Assignment getAttributeAssignment_1() { return cAttributeAssignment_1; }
-
+		
 		//[room::Attribute]
 		public CrossReference getAttributeAttributeCrossReference_1_0() { return cAttributeAttributeCrossReference_1_0; }
-
+		
 		//ID
 		public RuleCall getAttributeAttributeIDTerminalRuleCall_1_0_1() { return cAttributeAttributeIDTerminalRuleCall_1_0_1; }
-
+		
 		//('=' value=ConfigValueArray)?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'='
 		public Keyword getEqualsSignKeyword_2_0() { return cEqualsSignKeyword_2_0; }
-
+		
 		//value=ConfigValueArray
 		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
-
+		
 		//ConfigValueArray
 		public RuleCall getValueConfigValueArrayParserRuleCall_2_1_0() { return cValueConfigValueArrayParserRuleCall_2_1_0; }
-
+		
 		//('{' (('min' '=' min=NumberLiteral)? ('max' '=' max=NumberLiteral)? attributes+=AttrClassConfig*) '}')?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
-
+		
 		//('min' '=' min=NumberLiteral)? ('max' '=' max=NumberLiteral)? attributes+=AttrClassConfig*
 		public Group getGroup_3_1() { return cGroup_3_1; }
-
+		
 		//('min' '=' min=NumberLiteral)?
 		public Group getGroup_3_1_0() { return cGroup_3_1_0; }
-
+		
 		//'min'
 		public Keyword getMinKeyword_3_1_0_0() { return cMinKeyword_3_1_0_0; }
-
+		
 		//'='
 		public Keyword getEqualsSignKeyword_3_1_0_1() { return cEqualsSignKeyword_3_1_0_1; }
-
+		
 		//min=NumberLiteral
 		public Assignment getMinAssignment_3_1_0_2() { return cMinAssignment_3_1_0_2; }
-
+		
 		//NumberLiteral
 		public RuleCall getMinNumberLiteralParserRuleCall_3_1_0_2_0() { return cMinNumberLiteralParserRuleCall_3_1_0_2_0; }
-
+		
 		//('max' '=' max=NumberLiteral)?
 		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
-
+		
 		//'max'
 		public Keyword getMaxKeyword_3_1_1_0() { return cMaxKeyword_3_1_1_0; }
-
+		
 		//'='
 		public Keyword getEqualsSignKeyword_3_1_1_1() { return cEqualsSignKeyword_3_1_1_1; }
-
+		
 		//max=NumberLiteral
 		public Assignment getMaxAssignment_3_1_1_2() { return cMaxAssignment_3_1_1_2; }
-
+		
 		//NumberLiteral
 		public RuleCall getMaxNumberLiteralParserRuleCall_3_1_1_2_0() { return cMaxNumberLiteralParserRuleCall_3_1_1_2_0; }
-
+		
 		//attributes+=AttrClassConfig*
 		public Assignment getAttributesAssignment_3_1_2() { return cAttributesAssignment_3_1_2; }
-
+		
 		//AttrClassConfig
 		public RuleCall getAttributesAttrClassConfigParserRuleCall_3_1_2_0() { return cAttributesAttrClassConfigParserRuleCall_3_1_2_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
-
 	public class AttrInstanceConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.AttrInstanceConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -727,75 +724,74 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	attributes+=AttrInstanceConfig*)
 		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' ((dynConfig?='dynamic configuration'
 		//(readOnly?='read' | 'write'))? attributes+=AttrInstanceConfig*) '}')?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Attr'
 		public Keyword getAttrKeyword_0() { return cAttrKeyword_0; }
-
+		
 		//attribute=[room::Attribute]
 		public Assignment getAttributeAssignment_1() { return cAttributeAssignment_1; }
-
+		
 		//[room::Attribute]
 		public CrossReference getAttributeAttributeCrossReference_1_0() { return cAttributeAttributeCrossReference_1_0; }
-
+		
 		//ID
 		public RuleCall getAttributeAttributeIDTerminalRuleCall_1_0_1() { return cAttributeAttributeIDTerminalRuleCall_1_0_1; }
-
+		
 		//('=' value=ConfigValueArray)?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'='
 		public Keyword getEqualsSignKeyword_2_0() { return cEqualsSignKeyword_2_0; }
-
+		
 		//value=ConfigValueArray
 		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
-
+		
 		//ConfigValueArray
 		public RuleCall getValueConfigValueArrayParserRuleCall_2_1_0() { return cValueConfigValueArrayParserRuleCall_2_1_0; }
-
+		
 		//('{' ((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))? attributes+=AttrInstanceConfig*) '}')?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
-
+		
 		//(dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))? attributes+=AttrInstanceConfig*
 		public Group getGroup_3_1() { return cGroup_3_1; }
-
+		
 		//(dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
 		public Group getGroup_3_1_0() { return cGroup_3_1_0; }
-
+		
 		//dynConfig?='dynamic configuration'
 		public Assignment getDynConfigAssignment_3_1_0_0() { return cDynConfigAssignment_3_1_0_0; }
-
+		
 		//'dynamic configuration'
 		public Keyword getDynConfigDynamicConfigurationKeyword_3_1_0_0_0() { return cDynConfigDynamicConfigurationKeyword_3_1_0_0_0; }
-
+		
 		//readOnly?='read' | 'write'
 		public Alternatives getAlternatives_3_1_0_1() { return cAlternatives_3_1_0_1; }
-
+		
 		//readOnly?='read'
 		public Assignment getReadOnlyAssignment_3_1_0_1_0() { return cReadOnlyAssignment_3_1_0_1_0; }
-
+		
 		//'read'
 		public Keyword getReadOnlyReadKeyword_3_1_0_1_0_0() { return cReadOnlyReadKeyword_3_1_0_1_0_0; }
-
+		
 		//'write'
 		public Keyword getWriteKeyword_3_1_0_1_1() { return cWriteKeyword_3_1_0_1_1; }
-
+		
 		//attributes+=AttrInstanceConfig*
 		public Assignment getAttributesAssignment_3_1_1() { return cAttributesAssignment_3_1_1; }
-
+		
 		//AttrInstanceConfig
 		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_3_1_1_0() { return cAttributesAttrInstanceConfigParserRuleCall_3_1_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
-
 	public class ConfigValueArrayElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.ConfigValueArray");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -809,29 +805,28 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ConfigValueArray:
 		//	values+=ConfigValue (',' values+=ConfigValue)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//values+=ConfigValue (',' values+=ConfigValue)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//values+=ConfigValue
 		public Assignment getValuesAssignment_0() { return cValuesAssignment_0; }
-
+		
 		//ConfigValue
 		public RuleCall getValuesConfigValueParserRuleCall_0_0() { return cValuesConfigValueParserRuleCall_0_0; }
-
+		
 		//(',' values+=ConfigValue)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//','
 		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
-
+		
 		//values+=ConfigValue
 		public Assignment getValuesAssignment_1_1() { return cValuesAssignment_1_1; }
-
+		
 		//ConfigValue
 		public RuleCall getValuesConfigValueParserRuleCall_1_1_0() { return cValuesConfigValueParserRuleCall_1_1_0; }
 	}
-
 	public class ConfigValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.ConfigValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -841,17 +836,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ConfigValue:
 		//	LiteralConfigValue | EnumConfigValue;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//LiteralConfigValue | EnumConfigValue
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//LiteralConfigValue
 		public RuleCall getLiteralConfigValueParserRuleCall_0() { return cLiteralConfigValueParserRuleCall_0; }
-
+		
 		//EnumConfigValue
 		public RuleCall getEnumConfigValueParserRuleCall_1() { return cEnumConfigValueParserRuleCall_1; }
 	}
-
 	public class LiteralConfigValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.LiteralConfigValue");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
@@ -860,14 +854,13 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//LiteralConfigValue:
 		//	value=Literal;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//value=Literal
 		public Assignment getValueAssignment() { return cValueAssignment; }
-
+		
 		//Literal
 		public RuleCall getValueLiteralParserRuleCall_0() { return cValueLiteralParserRuleCall_0; }
 	}
-
 	public class EnumConfigValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.EnumConfigValue");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -882,32 +875,31 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//EnumConfigValue:
 		//	type=[room::EnumerationType] '.' value=[room::EnumLiteral];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//type=[room::EnumerationType] '.' value=[room::EnumLiteral]
 		public Group getGroup() { return cGroup; }
-
+		
 		//type=[room::EnumerationType]
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
-
+		
 		//[room::EnumerationType]
 		public CrossReference getTypeEnumerationTypeCrossReference_0_0() { return cTypeEnumerationTypeCrossReference_0_0; }
-
+		
 		//ID
 		public RuleCall getTypeEnumerationTypeIDTerminalRuleCall_0_0_1() { return cTypeEnumerationTypeIDTerminalRuleCall_0_0_1; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
-
+		
 		//value=[room::EnumLiteral]
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
-
+		
 		//[room::EnumLiteral]
 		public CrossReference getValueEnumLiteralCrossReference_2_0() { return cValueEnumLiteralCrossReference_2_0; }
-
+		
 		//ID
 		public RuleCall getValueEnumLiteralIDTerminalRuleCall_2_0_1() { return cValueEnumLiteralIDTerminalRuleCall_2_0_1; }
 	}
-
 	public class RefPathElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.RefPath");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -921,29 +913,28 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//RefPath:
 		//	refs+=RefSegment ('/' refs+=RefSegment)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//refs+=RefSegment ('/' refs+=RefSegment)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//refs+=RefSegment
 		public Assignment getRefsAssignment_0() { return cRefsAssignment_0; }
-
+		
 		//RefSegment
 		public RuleCall getRefsRefSegmentParserRuleCall_0_0() { return cRefsRefSegmentParserRuleCall_0_0; }
-
+		
 		//('/' refs+=RefSegment)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'/'
 		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
-
+		
 		//refs+=RefSegment
 		public Assignment getRefsAssignment_1_1() { return cRefsAssignment_1_1; }
-
+		
 		//RefSegment
 		public RuleCall getRefsRefSegmentParserRuleCall_1_1_0() { return cRefsRefSegmentParserRuleCall_1_1_0; }
 	}
-
 	public class RefSegmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.RefSegment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -957,25 +948,25 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//RefSegment:
 		//	ref=ID (':' idx=INT)?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ref=ID (':' idx=INT)?
 		public Group getGroup() { return cGroup; }
-
+		
 		//ref=ID
 		public Assignment getRefAssignment_0() { return cRefAssignment_0; }
-
+		
 		//ID
 		public RuleCall getRefIDTerminalRuleCall_0_0() { return cRefIDTerminalRuleCall_0_0; }
-
+		
 		//(':' idx=INT)?
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//':'
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
-
+		
 		//idx=INT
 		public Assignment getIdxAssignment_1_1() { return cIdxAssignment_1_1; }
-
+		
 		//INT
 		public RuleCall getIdxINTTerminalRuleCall_1_1_0() { return cIdxINTTerminalRuleCall_1_1_0; }
 	}
@@ -1001,15 +992,15 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	private final RefSegmentElements pRefSegment;
 	
 	private final Grammar grammar;
-
+	
 	private final BaseGrammarAccess gaBase;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ConfigGrammarAccess(GrammarProvider grammarProvider,
-		BaseGrammarAccess gaBase,
-		TerminalsGrammarAccess gaTerminals) {
+			BaseGrammarAccess gaBase,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBase = gaBase;
 		this.gaTerminals = gaTerminals;
@@ -1054,11 +1045,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-
+	
 	public BaseGrammarAccess getBaseGrammarAccess() {
 		return gaBase;
 	}
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -1076,7 +1067,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getConfigModelRule() {
 		return getConfigModelAccess().getRule();
 	}
-
+	
 	//ConfigElement:
 	//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 	public ConfigElementElements getConfigElementAccess() {
@@ -1086,7 +1077,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getConfigElementRule() {
 		return getConfigElementAccess().getRule();
 	}
-
+	
 	//SubSystemConfig:
 	//	'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '{'
 	//	dynConfig=DynamicConfig
@@ -1098,7 +1089,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getSubSystemConfigRule() {
 		return getSubSystemConfigAccess().getRule();
 	}
-
+	
 	//DynamicConfig:
 	//	'dynamic configuration' '{' (('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor'
 	//	userCode2=STRING)) & ('polling interval' polling=TIME)?)
@@ -1110,7 +1101,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDynamicConfigRule() {
 		return getDynamicConfigAccess().getRule();
 	}
-
+	
 	//ActorClassConfig:
 	//	'ActorClassConfig' actor=[room::ActorClass|FQN] '{'
 	//	attributes+=AttrClassConfig*
@@ -1122,7 +1113,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getActorClassConfigRule() {
 		return getActorClassConfigAccess().getRule();
 	}
-
+	
 	//ActorInstanceConfig:
 	//	'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '/' path=RefPath '{'
 	//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*)
@@ -1134,7 +1125,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getActorInstanceConfigRule() {
 		return getActorInstanceConfigAccess().getRule();
 	}
-
+	
 	//ProtocolClassConfig:
 	//	'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{' (('regular' regular=PortClassConfig)? & (('conjugate' |
 	//	'conjugated') conjugated=PortClassConfig)?)
@@ -1146,7 +1137,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getProtocolClassConfigRule() {
 		return getProtocolClassConfigAccess().getRule();
 	}
-
+	
 	//PortClassConfig:
 	//	{PortClassConfig} 'Port' '{'
 	//	attributes+=AttrClassConfig*
@@ -1158,7 +1149,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getPortClassConfigRule() {
 		return getPortClassConfigAccess().getRule();
 	}
-
+	
 	//PortInstanceConfig:
 	//	'InterfaceItem' item=[room::InterfaceItem] '{'
 	//	attributes+=AttrInstanceConfig*
@@ -1170,7 +1161,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getPortInstanceConfigRule() {
 		return getPortInstanceConfigAccess().getRule();
 	}
-
+	
 	//AttrConfig:
 	//	AttrClassConfig | AttrInstanceConfig;
 	public AttrConfigElements getAttrConfigAccess() {
@@ -1180,7 +1171,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAttrConfigRule() {
 		return getAttrConfigAccess().getRule();
 	}
-
+	
 	//AttrClassConfig:
 	//	'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' (('min' '=' min=NumberLiteral)? ('max' '='
 	//	max=NumberLiteral)?
@@ -1193,7 +1184,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAttrClassConfigRule() {
 		return getAttrClassConfigAccess().getRule();
 	}
-
+	
 	//AttrInstanceConfig:
 	//	'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' ((dynConfig?='dynamic configuration'
 	//	(readOnly?='read' | 'write'))?
@@ -1206,7 +1197,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAttrInstanceConfigRule() {
 		return getAttrInstanceConfigAccess().getRule();
 	}
-
+	
 	//ConfigValueArray:
 	//	values+=ConfigValue (',' values+=ConfigValue)*;
 	public ConfigValueArrayElements getConfigValueArrayAccess() {
@@ -1216,7 +1207,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getConfigValueArrayRule() {
 		return getConfigValueArrayAccess().getRule();
 	}
-
+	
 	//ConfigValue:
 	//	LiteralConfigValue | EnumConfigValue;
 	public ConfigValueElements getConfigValueAccess() {
@@ -1226,7 +1217,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getConfigValueRule() {
 		return getConfigValueAccess().getRule();
 	}
-
+	
 	//LiteralConfigValue:
 	//	value=Literal;
 	public LiteralConfigValueElements getLiteralConfigValueAccess() {
@@ -1236,7 +1227,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getLiteralConfigValueRule() {
 		return getLiteralConfigValueAccess().getRule();
 	}
-
+	
 	//EnumConfigValue:
 	//	type=[room::EnumerationType] '.' value=[room::EnumLiteral];
 	public EnumConfigValueElements getEnumConfigValueAccess() {
@@ -1246,7 +1237,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getEnumConfigValueRule() {
 		return getEnumConfigValueAccess().getRule();
 	}
-
+	
 	//RefPath:
 	//	refs+=RefSegment ('/' refs+=RefSegment)*;
 	public RefPathElements getRefPathAccess() {
@@ -1256,7 +1247,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRefPathRule() {
 		return getRefPathAccess().getRule();
 	}
-
+	
 	//RefSegment:
 	//	ref=ID (':' idx=INT)?;
 	public RefSegmentElements getRefSegmentAccess() {
@@ -1266,7 +1257,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRefSegmentRule() {
 		return getRefSegmentAccess().getRule();
 	}
-
+	
 	//// **************************************************************
 	//// AnnotationType and Annotation Rules
 	//Annotation:
@@ -1278,7 +1269,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnnotationRule() {
 		return getAnnotationAccess().getRule();
 	}
-
+	
 	//KeyValue:
 	//	key=ID '=' value=Literal;
 	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
@@ -1288,7 +1279,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getKeyValueRule() {
 		return getKeyValueAccess().getRule();
 	}
-
+	
 	//AnnotationType:
 	//	'AnnotationType' name=ID docu=Documentation? '{'
 	//	'target' '=' (targets+=AnnotationTargetType | '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)*
@@ -1301,7 +1292,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnnotationTypeRule() {
 		return getAnnotationTypeAccess().getRule();
 	}
-
+	
 	////
 	//// Sub-grammars should use AnnotationTargetType to refer to 
 	//// specific sub-grammar targets. For example, valid values for 
@@ -1319,7 +1310,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnnotationTargetTypeRule() {
 		return getAnnotationTargetTypeAccess().getRule();
 	}
-
+	
 	//AnnotationAttribute:
 	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
@@ -1329,7 +1320,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnnotationAttributeRule() {
 		return getAnnotationAttributeAccess().getRule();
 	}
-
+	
 	//SimpleAnnotationAttribute:
 	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType;
 	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
@@ -1339,7 +1330,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getSimpleAnnotationAttributeRule() {
 		return getSimpleAnnotationAttributeAccess().getRule();
 	}
-
+	
 	//EnumAnnotationAttribute:
 	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}';
 	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
@@ -1349,7 +1340,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getEnumAnnotationAttributeRule() {
 		return getEnumAnnotationAttributeAccess().getRule();
 	}
-
+	
 	//// **************************************************************
 	//// Import rules
 	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
@@ -1379,7 +1370,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getImportRule() {
 		return getImportAccess().getRule();
 	}
-
+	
 	//ImportedFQN:
 	//	FQN '.*'?;
 	public BaseGrammarAccess.ImportedFQNElements getImportedFQNAccess() {
@@ -1389,7 +1380,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getImportedFQNRule() {
 		return getImportedFQNAccess().getRule();
 	}
-
+	
 	//// **************************************************************
 	//// Documentation Rule
 	//Documentation:
@@ -1404,7 +1395,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDocumentationRule() {
 		return getDocumentationAccess().getRule();
 	}
-
+	
 	//// **************************************************************
 	//// Time Rule
 	//TIME ecore::ELong:
@@ -1416,7 +1407,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getTIMERule() {
 		return getTIMEAccess().getRule();
 	}
-
+	
 	//enum LiteralType:
 	//	BOOL='ptBoolean' |
 	//	INT='ptInteger' |
@@ -1429,7 +1420,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public EnumRule getLiteralTypeRule() {
 		return getLiteralTypeAccess().getRule();
 	}
-
+	
 	//LiteralArray:
 	//	literals+=Literal (',' literals+=Literal)*;
 	public BaseGrammarAccess.LiteralArrayElements getLiteralArrayAccess() {
@@ -1439,7 +1430,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getLiteralArrayRule() {
 		return getLiteralArrayAccess().getRule();
 	}
-
+	
 	//// Value Types for Attributes
 	//Literal:
 	//	BooleanLiteral | NumberLiteral | StringLiteral;
@@ -1450,7 +1441,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getLiteralRule() {
 		return getLiteralAccess().getRule();
 	}
-
+	
 	//BooleanLiteral:
 	//	{BooleanLiteral} ('false' | isTrue?='true');
 	public BaseGrammarAccess.BooleanLiteralElements getBooleanLiteralAccess() {
@@ -1460,7 +1451,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getBooleanLiteralRule() {
 		return getBooleanLiteralAccess().getRule();
 	}
-
+	
 	//NumberLiteral:
 	//	IntLiteral | RealLiteral;
 	public BaseGrammarAccess.NumberLiteralElements getNumberLiteralAccess() {
@@ -1470,7 +1461,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getNumberLiteralRule() {
 		return getNumberLiteralAccess().getRule();
 	}
-
+	
 	//RealLiteral:
 	//	{RealLiteral} value=Real;
 	public BaseGrammarAccess.RealLiteralElements getRealLiteralAccess() {
@@ -1480,7 +1471,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRealLiteralRule() {
 		return getRealLiteralAccess().getRule();
 	}
-
+	
 	//IntLiteral:
 	//	{IntLiteral} value=Integer;
 	public BaseGrammarAccess.IntLiteralElements getIntLiteralAccess() {
@@ -1490,7 +1481,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getIntLiteralRule() {
 		return getIntLiteralAccess().getRule();
 	}
-
+	
 	//StringLiteral:
 	//	{StringLiteral} value=STRING;
 	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
@@ -1500,7 +1491,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStringLiteralRule() {
 		return getStringLiteralAccess().getRule();
 	}
-
+	
 	//Integer ecore::ELong:
 	//	('+' | '-')? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
@@ -1510,7 +1501,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getIntegerRule() {
 		return getIntegerAccess().getRule();
 	}
-
+	
 	//Real ecore::EDouble:
 	//	Decimal | DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
@@ -1520,7 +1511,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRealRule() {
 		return getRealAccess().getRule();
 	}
-
+	
 	//Decimal hidden():
 	//	('+' | '-')? INT '.' INT;
 	public BaseGrammarAccess.DecimalElements getDecimalAccess() {
@@ -1530,7 +1521,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDecimalRule() {
 		return getDecimalAccess().getRule();
 	}
-
+	
 	////DotDecimal hidden():
 	////	('+' | '-')? '.' INT;
 	////
@@ -1545,7 +1536,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDecimalExpRule() {
 		return getDecimalExpAccess().getRule();
 	}
-
+	
 	//FQN:
 	//	ID ('.' ID)*;
 	public BaseGrammarAccess.FQNElements getFQNAccess() {
@@ -1555,58 +1546,58 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
+	
 	//terminal HEX:
 	//	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return gaBase.getHEXRule();
-	} 
-
+	}
+	
 	//terminal CC_STRING:
 	//	"'''"->"'''";
 	public TerminalRule getCC_STRINGRule() {
 		return gaBase.getCC_STRINGRule();
-	} 
-
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

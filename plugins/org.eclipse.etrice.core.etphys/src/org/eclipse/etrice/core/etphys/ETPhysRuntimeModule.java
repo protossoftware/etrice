@@ -16,8 +16,10 @@ package org.eclipse.etrice.core.etphys;
 
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.core.etphys.converters.ETPhysConverter;
+import org.eclipse.etrice.core.etphys.formatting.ETPhysFormatter;
 import org.eclipse.etrice.core.etphys.serializer.ETPhysTransientValueService;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
@@ -40,5 +42,10 @@ public class ETPhysRuntimeModule extends org.eclipse.etrice.core.etphys.Abstract
 
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return ETPhysConverter.class;
+	}
+	
+	@Override
+	public Class<? extends IFormatter> bindIFormatter() {
+		return ETPhysFormatter.class;
 	}
 }

@@ -5,8 +5,9 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 0.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.fsm.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle:  org.eclipse.etrice.core.common.ui,
+Require-Bundle: org.eclipse.etrice.core.common.ui,
  org.eclipse.etrice.core.fsm;visibility:=reexport,
+ org.eclipse.etrice.core.fsm.ide,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
@@ -23,10 +24,8 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.core.fsm.ui,
  org.eclipse.etrice.core.fsm.ui.contentassist,
- org.eclipse.etrice.core.fsm.ui.contentassist.antlr,
- org.eclipse.etrice.core.fsm.ui.contentassist.antlr.internal,
  org.eclipse.etrice.core.fsm.ui.internal,
  org.eclipse.etrice.core.fsm.ui.labeling,
  org.eclipse.etrice.core.fsm.ui.quickfix
-Bundle-Activator: org.eclipse.etrice.core.fsm.ui.internal.FSMActivator
+Bundle-Activator: org.eclipse.etrice.core.fsm.ui.internal.FsmActivator
 Automatic-Module-Name: org.eclipse.etrice.core.fsm.ui
