@@ -18,24 +18,24 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class OutMessageHandlerImpl extends MessageHandlerImpl implements OutMessageHandler
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected OutMessageHandlerImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.OUT_MESSAGE_HANDLER;
-  }
+		return RoomPackage.Literals.OUT_MESSAGE_HANDLER;
+	}
 
 } //OutMessageHandlerImpl

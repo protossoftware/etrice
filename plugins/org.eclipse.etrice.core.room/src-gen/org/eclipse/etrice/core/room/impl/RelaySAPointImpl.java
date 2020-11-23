@@ -30,144 +30,140 @@ import org.eclipse.etrice.core.room.SPP;
 public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
 {
   /**
-   * The cached value of the '{@link #getRelay() <em>Relay</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRelay() <em>Relay</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRelay()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRelay()
+	 * @generated
+	 * @ordered
+	 */
   protected SPP relay;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected RelaySAPointImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.RELAY_SA_POINT;
-  }
+		return RoomPackage.Literals.RELAY_SA_POINT;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SPP getRelay()
+	 * @generated
+	 */
+  @Override
+		public SPP getRelay()
   {
-    if (relay != null && relay.eIsProxy())
-    {
-      InternalEObject oldRelay = (InternalEObject)relay;
-      relay = (SPP)eResolveProxy(oldRelay);
-      if (relay != oldRelay)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.RELAY_SA_POINT__RELAY, oldRelay, relay));
-      }
-    }
-    return relay;
-  }
+		if (relay != null && relay.eIsProxy()) {
+			InternalEObject oldRelay = (InternalEObject)relay;
+			relay = (SPP)eResolveProxy(oldRelay);
+			if (relay != oldRelay) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.RELAY_SA_POINT__RELAY, oldRelay, relay));
+			}
+		}
+		return relay;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public SPP basicGetRelay()
   {
-    return relay;
-  }
+		return relay;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRelay(SPP newRelay)
+	 * @generated
+	 */
+  @Override
+		public void setRelay(SPP newRelay)
   {
-    SPP oldRelay = relay;
-    relay = newRelay;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.RELAY_SA_POINT__RELAY, oldRelay, relay));
-  }
+		SPP oldRelay = relay;
+		relay = newRelay;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.RELAY_SA_POINT__RELAY, oldRelay, relay));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.RELAY_SA_POINT__RELAY:
-        if (resolve) return getRelay();
-        return basicGetRelay();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.RELAY_SA_POINT__RELAY:
+				if (resolve) return getRelay();
+				return basicGetRelay();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.RELAY_SA_POINT__RELAY:
-        setRelay((SPP)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.RELAY_SA_POINT__RELAY:
+				setRelay((SPP)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.RELAY_SA_POINT__RELAY:
-        setRelay((SPP)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.RELAY_SA_POINT__RELAY:
+				setRelay((SPP)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.RELAY_SA_POINT__RELAY:
-        return relay != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.RELAY_SA_POINT__RELAY:
+				return relay != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //RelaySAPointImpl

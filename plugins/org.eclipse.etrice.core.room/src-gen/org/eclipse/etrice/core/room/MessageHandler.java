@@ -34,55 +34,55 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 public interface MessageHandler extends RoomElement
 {
   /**
-   * Returns the value of the '<em><b>Msg</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Msg</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the message that is handled.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Msg</em>' reference.
-   * @see #setMsg(Message)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getMessageHandler_Msg()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is the message that is handled.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Msg</em>' reference.
+	 * @see #setMsg(Message)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getMessageHandler_Msg()
+	 * @model
+	 * @generated
+	 */
   Message getMsg();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.MessageHandler#getMsg <em>Msg</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.MessageHandler#getMsg <em>Msg</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Msg</em>' reference.
-   * @see #getMsg()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Msg</em>' reference.
+	 * @see #getMsg()
+	 * @generated
+	 */
   void setMsg(Message value);
 
   /**
-   * Returns the value of the '<em><b>Detail Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Detail Code</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the handler code written in code generator target language.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Detail Code</em>' containment reference.
-   * @see #setDetailCode(DetailCode)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getMessageHandler_DetailCode()
-   * @model containment="true"
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is the handler code written in code generator target language.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Detail Code</em>' containment reference.
+	 * @see #setDetailCode(DetailCode)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getMessageHandler_DetailCode()
+	 * @model containment="true"
+	 * @generated
+	 */
   DetailCode getDetailCode();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.MessageHandler#getDetailCode <em>Detail Code</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.MessageHandler#getDetailCode <em>Detail Code</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Detail Code</em>' containment reference.
-   * @see #getDetailCode()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Detail Code</em>' containment reference.
+	 * @see #getDetailCode()
+	 * @generated
+	 */
   void setDetailCode(DetailCode value);
 
 } // MessageHandler

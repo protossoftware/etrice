@@ -29,29 +29,29 @@ package org.eclipse.etrice.core.room;
 public interface ServiceImplementation extends RoomElement
 {
   /**
-   * Returns the value of the '<em><b>Spp</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Spp</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the SPP connected to the service.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Spp</em>' reference.
-   * @see #setSpp(SPP)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getServiceImplementation_Spp()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is the SPP connected to the service.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Spp</em>' reference.
+	 * @see #setSpp(SPP)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getServiceImplementation_Spp()
+	 * @model
+	 * @generated
+	 */
   SPP getSpp();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ServiceImplementation#getSpp <em>Spp</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.ServiceImplementation#getSpp <em>Spp</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Spp</em>' reference.
-   * @see #getSpp()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Spp</em>' reference.
+	 * @see #getSpp()
+	 * @generated
+	 */
   void setSpp(SPP value);
 
 } // ServiceImplementation

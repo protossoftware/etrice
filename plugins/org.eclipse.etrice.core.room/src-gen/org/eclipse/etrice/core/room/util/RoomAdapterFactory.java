@@ -27,1131 +27,1074 @@ import org.eclipse.etrice.core.room.*;
 public class RoomAdapterFactory extends AdapterFactoryImpl
 {
   /**
-   * The cached model package.
-   * <!-- begin-user-doc -->
+	 * The cached model package.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected static RoomPackage modelPackage;
 
   /**
-   * Creates an instance of the adapter factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public RoomAdapterFactory()
   {
-    if (modelPackage == null)
-    {
-      modelPackage = RoomPackage.eINSTANCE;
-    }
-  }
+		if (modelPackage == null) {
+			modelPackage = RoomPackage.eINSTANCE;
+		}
+	}
 
   /**
-   * Returns whether this factory is applicable for the type of the object.
-   * <!-- begin-user-doc -->
+	 * Returns whether this factory is applicable for the type of the object.
+	 * <!-- begin-user-doc -->
    * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
    * <!-- end-user-doc -->
-   * @return whether this factory is applicable for the type of the object.
-   * @generated
-   */
+	 * @return whether this factory is applicable for the type of the object.
+	 * @generated
+	 */
   @Override
   public boolean isFactoryForType(Object object)
   {
-    if (object == modelPackage)
-    {
-      return true;
-    }
-    if (object instanceof EObject)
-    {
-      return ((EObject)object).eClass().getEPackage() == modelPackage;
-    }
-    return false;
-  }
+		if (object == modelPackage) {
+			return true;
+		}
+		if (object instanceof EObject) {
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
+		}
+		return false;
+	}
 
   /**
-   * The switch that delegates to the <code>createXXX</code> methods.
-   * <!-- begin-user-doc -->
+	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected RoomSwitch<Adapter> modelSwitch =
-    new RoomSwitch<Adapter>()
-    {
-      @Override
-      public Adapter caseRoomModel(RoomModel object)
-      {
-        return createRoomModelAdapter();
-      }
-      @Override
-      public Adapter caseRoomClass(RoomClass object)
-      {
-        return createRoomClassAdapter();
-      }
-      @Override
-      public Adapter caseStructureClass(StructureClass object)
-      {
-        return createStructureClassAdapter();
-      }
-      @Override
-      public Adapter caseActorContainerClass(ActorContainerClass object)
-      {
-        return createActorContainerClassAdapter();
-      }
-      @Override
-      public Adapter caseVarDecl(VarDecl object)
-      {
-        return createVarDeclAdapter();
-      }
-      @Override
-      public Adapter caseMessageData(MessageData object)
-      {
-        return createMessageDataAdapter();
-      }
-      @Override
-      public Adapter caseRefableType(RefableType object)
-      {
-        return createRefableTypeAdapter();
-      }
-      @Override
-      public Adapter caseDataType(DataType object)
-      {
-        return createDataTypeAdapter();
-      }
-      @Override
-      public Adapter caseComplexType(ComplexType object)
-      {
-        return createComplexTypeAdapter();
-      }
-      @Override
-      public Adapter casePrimitiveType(PrimitiveType object)
-      {
-        return createPrimitiveTypeAdapter();
-      }
-      @Override
-      public Adapter caseEnumerationType(EnumerationType object)
-      {
-        return createEnumerationTypeAdapter();
-      }
-      @Override
-      public Adapter caseEnumLiteral(EnumLiteral object)
-      {
-        return createEnumLiteralAdapter();
-      }
-      @Override
-      public Adapter caseExternalType(ExternalType object)
-      {
-        return createExternalTypeAdapter();
-      }
-      @Override
-      public Adapter caseDataClass(DataClass object)
-      {
-        return createDataClassAdapter();
-      }
-      @Override
-      public Adapter caseAttribute(Attribute object)
-      {
-        return createAttributeAdapter();
-      }
-      @Override
-      public Adapter caseOperation(Operation object)
-      {
-        return createOperationAdapter();
-      }
-      @Override
-      public Adapter caseStandardOperation(StandardOperation object)
-      {
-        return createStandardOperationAdapter();
-      }
-      @Override
-      public Adapter casePortOperation(PortOperation object)
-      {
-        return createPortOperationAdapter();
-      }
-      @Override
-      public Adapter caseClassStructor(ClassStructor object)
-      {
-        return createClassStructorAdapter();
-      }
-      @Override
-      public Adapter caseProtocolClass(ProtocolClass object)
-      {
-        return createProtocolClassAdapter();
-      }
-      @Override
-      public Adapter caseMessage(Message object)
-      {
-        return createMessageAdapter();
-      }
-      @Override
-      public Adapter casePortClass(PortClass object)
-      {
-        return createPortClassAdapter();
-      }
-      @Override
-      public Adapter caseMessageHandler(MessageHandler object)
-      {
-        return createMessageHandlerAdapter();
-      }
-      @Override
-      public Adapter caseInMessageHandler(InMessageHandler object)
-      {
-        return createInMessageHandlerAdapter();
-      }
-      @Override
-      public Adapter caseOutMessageHandler(OutMessageHandler object)
-      {
-        return createOutMessageHandlerAdapter();
-      }
-      @Override
-      public Adapter caseActorClass(ActorClass object)
-      {
-        return createActorClassAdapter();
-      }
-      @Override
-      public Adapter caseInterfaceItem(InterfaceItem object)
-      {
-        return createInterfaceItemAdapter();
-      }
-      @Override
-      public Adapter casePort(Port object)
-      {
-        return createPortAdapter();
-      }
-      @Override
-      public Adapter caseExternalPort(ExternalPort object)
-      {
-        return createExternalPortAdapter();
-      }
-      @Override
-      public Adapter caseSAP(SAP object)
-      {
-        return createSAPAdapter();
-      }
-      @Override
-      public Adapter caseSPP(SPP object)
-      {
-        return createSPPAdapter();
-      }
-      @Override
-      public Adapter caseServiceImplementation(ServiceImplementation object)
-      {
-        return createServiceImplementationAdapter();
-      }
-      @Override
-      public Adapter caseLogicalSystem(LogicalSystem object)
-      {
-        return createLogicalSystemAdapter();
-      }
-      @Override
-      public Adapter caseActorContainerRef(ActorContainerRef object)
-      {
-        return createActorContainerRefAdapter();
-      }
-      @Override
-      public Adapter caseSubSystemRef(SubSystemRef object)
-      {
-        return createSubSystemRefAdapter();
-      }
-      @Override
-      public Adapter caseSubSystemClass(SubSystemClass object)
-      {
-        return createSubSystemClassAdapter();
-      }
-      @Override
-      public Adapter caseLogicalThread(LogicalThread object)
-      {
-        return createLogicalThreadAdapter();
-      }
-      @Override
-      public Adapter caseActorInstanceMapping(ActorInstanceMapping object)
-      {
-        return createActorInstanceMappingAdapter();
-      }
-      @Override
-      public Adapter caseRefPath(RefPath object)
-      {
-        return createRefPathAdapter();
-      }
-      @Override
-      public Adapter caseRefSegment(RefSegment object)
-      {
-        return createRefSegmentAdapter();
-      }
-      @Override
-      public Adapter caseBinding(Binding object)
-      {
-        return createBindingAdapter();
-      }
-      @Override
-      public Adapter caseBindingEndPoint(BindingEndPoint object)
-      {
-        return createBindingEndPointAdapter();
-      }
-      @Override
-      public Adapter caseLayerConnection(LayerConnection object)
-      {
-        return createLayerConnectionAdapter();
-      }
-      @Override
-      public Adapter caseSAPoint(SAPoint object)
-      {
-        return createSAPointAdapter();
-      }
-      @Override
-      public Adapter caseRefSAPoint(RefSAPoint object)
-      {
-        return createRefSAPointAdapter();
-      }
-      @Override
-      public Adapter caseRelaySAPoint(RelaySAPoint object)
-      {
-        return createRelaySAPointAdapter();
-      }
-      @Override
-      public Adapter caseSPPoint(SPPoint object)
-      {
-        return createSPPointAdapter();
-      }
-      @Override
-      public Adapter caseActorRef(ActorRef object)
-      {
-        return createActorRefAdapter();
-      }
-      @Override
-      public Adapter caseRoomElement(RoomElement object)
-      {
-        return createRoomElementAdapter();
-      }
-      @Override
-      public Adapter caseIInterfaceItemOwner(IInterfaceItemOwner object)
-      {
-        return createIInterfaceItemOwnerAdapter();
-      }
-      @Override
-      public Adapter caseModelComponent(ModelComponent object)
-      {
-        return createModelComponentAdapter();
-      }
-      @Override
-      public Adapter caseAbstractInterfaceItem(AbstractInterfaceItem object)
-      {
-        return createAbstractInterfaceItemAdapter();
-      }
-      @Override
-      public Adapter defaultCase(EObject object)
-      {
-        return createEObjectAdapter();
-      }
-    };
+    new RoomSwitch<Adapter>() {
+			@Override
+			public Adapter caseRoomModel(RoomModel object) {
+				return createRoomModelAdapter();
+			}
+			@Override
+			public Adapter caseRoomClass(RoomClass object) {
+				return createRoomClassAdapter();
+			}
+			@Override
+			public Adapter caseStructureClass(StructureClass object) {
+				return createStructureClassAdapter();
+			}
+			@Override
+			public Adapter caseActorContainerClass(ActorContainerClass object) {
+				return createActorContainerClassAdapter();
+			}
+			@Override
+			public Adapter caseVarDecl(VarDecl object) {
+				return createVarDeclAdapter();
+			}
+			@Override
+			public Adapter caseMessageData(MessageData object) {
+				return createMessageDataAdapter();
+			}
+			@Override
+			public Adapter caseRefableType(RefableType object) {
+				return createRefableTypeAdapter();
+			}
+			@Override
+			public Adapter caseDataType(DataType object) {
+				return createDataTypeAdapter();
+			}
+			@Override
+			public Adapter caseComplexType(ComplexType object) {
+				return createComplexTypeAdapter();
+			}
+			@Override
+			public Adapter casePrimitiveType(PrimitiveType object) {
+				return createPrimitiveTypeAdapter();
+			}
+			@Override
+			public Adapter caseEnumerationType(EnumerationType object) {
+				return createEnumerationTypeAdapter();
+			}
+			@Override
+			public Adapter caseEnumLiteral(EnumLiteral object) {
+				return createEnumLiteralAdapter();
+			}
+			@Override
+			public Adapter caseExternalType(ExternalType object) {
+				return createExternalTypeAdapter();
+			}
+			@Override
+			public Adapter caseDataClass(DataClass object) {
+				return createDataClassAdapter();
+			}
+			@Override
+			public Adapter caseAttribute(Attribute object) {
+				return createAttributeAdapter();
+			}
+			@Override
+			public Adapter caseOperation(Operation object) {
+				return createOperationAdapter();
+			}
+			@Override
+			public Adapter caseStandardOperation(StandardOperation object) {
+				return createStandardOperationAdapter();
+			}
+			@Override
+			public Adapter casePortOperation(PortOperation object) {
+				return createPortOperationAdapter();
+			}
+			@Override
+			public Adapter caseClassStructor(ClassStructor object) {
+				return createClassStructorAdapter();
+			}
+			@Override
+			public Adapter caseProtocolClass(ProtocolClass object) {
+				return createProtocolClassAdapter();
+			}
+			@Override
+			public Adapter caseMessage(Message object) {
+				return createMessageAdapter();
+			}
+			@Override
+			public Adapter casePortClass(PortClass object) {
+				return createPortClassAdapter();
+			}
+			@Override
+			public Adapter caseMessageHandler(MessageHandler object) {
+				return createMessageHandlerAdapter();
+			}
+			@Override
+			public Adapter caseInMessageHandler(InMessageHandler object) {
+				return createInMessageHandlerAdapter();
+			}
+			@Override
+			public Adapter caseOutMessageHandler(OutMessageHandler object) {
+				return createOutMessageHandlerAdapter();
+			}
+			@Override
+			public Adapter caseActorClass(ActorClass object) {
+				return createActorClassAdapter();
+			}
+			@Override
+			public Adapter caseInterfaceItem(InterfaceItem object) {
+				return createInterfaceItemAdapter();
+			}
+			@Override
+			public Adapter casePort(Port object) {
+				return createPortAdapter();
+			}
+			@Override
+			public Adapter caseExternalPort(ExternalPort object) {
+				return createExternalPortAdapter();
+			}
+			@Override
+			public Adapter caseSAP(SAP object) {
+				return createSAPAdapter();
+			}
+			@Override
+			public Adapter caseSPP(SPP object) {
+				return createSPPAdapter();
+			}
+			@Override
+			public Adapter caseServiceImplementation(ServiceImplementation object) {
+				return createServiceImplementationAdapter();
+			}
+			@Override
+			public Adapter caseLogicalSystem(LogicalSystem object) {
+				return createLogicalSystemAdapter();
+			}
+			@Override
+			public Adapter caseActorContainerRef(ActorContainerRef object) {
+				return createActorContainerRefAdapter();
+			}
+			@Override
+			public Adapter caseSubSystemRef(SubSystemRef object) {
+				return createSubSystemRefAdapter();
+			}
+			@Override
+			public Adapter caseSubSystemClass(SubSystemClass object) {
+				return createSubSystemClassAdapter();
+			}
+			@Override
+			public Adapter caseLogicalThread(LogicalThread object) {
+				return createLogicalThreadAdapter();
+			}
+			@Override
+			public Adapter caseActorInstanceMapping(ActorInstanceMapping object) {
+				return createActorInstanceMappingAdapter();
+			}
+			@Override
+			public Adapter caseRefPath(RefPath object) {
+				return createRefPathAdapter();
+			}
+			@Override
+			public Adapter caseRefSegment(RefSegment object) {
+				return createRefSegmentAdapter();
+			}
+			@Override
+			public Adapter caseBinding(Binding object) {
+				return createBindingAdapter();
+			}
+			@Override
+			public Adapter caseBindingEndPoint(BindingEndPoint object) {
+				return createBindingEndPointAdapter();
+			}
+			@Override
+			public Adapter caseLayerConnection(LayerConnection object) {
+				return createLayerConnectionAdapter();
+			}
+			@Override
+			public Adapter caseSAPoint(SAPoint object) {
+				return createSAPointAdapter();
+			}
+			@Override
+			public Adapter caseRefSAPoint(RefSAPoint object) {
+				return createRefSAPointAdapter();
+			}
+			@Override
+			public Adapter caseRelaySAPoint(RelaySAPoint object) {
+				return createRelaySAPointAdapter();
+			}
+			@Override
+			public Adapter caseSPPoint(SPPoint object) {
+				return createSPPointAdapter();
+			}
+			@Override
+			public Adapter caseActorRef(ActorRef object) {
+				return createActorRefAdapter();
+			}
+			@Override
+			public Adapter caseRoomElement(RoomElement object) {
+				return createRoomElementAdapter();
+			}
+			@Override
+			public Adapter caseIInterfaceItemOwner(IInterfaceItemOwner object) {
+				return createIInterfaceItemOwnerAdapter();
+			}
+			@Override
+			public Adapter caseModelComponent(ModelComponent object) {
+				return createModelComponentAdapter();
+			}
+			@Override
+			public Adapter caseAbstractInterfaceItem(AbstractInterfaceItem object) {
+				return createAbstractInterfaceItemAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
   /**
-   * Creates an adapter for the <code>target</code>.
-   * <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param target the object to adapt.
-   * @return the adapter for the <code>target</code>.
-   * @generated
-   */
+	 * @param target the object to adapt.
+	 * @return the adapter for the <code>target</code>.
+	 * @generated
+	 */
   @Override
   public Adapter createAdapter(Notifier target)
   {
-    return modelSwitch.doSwitch((EObject)target);
-  }
+		return modelSwitch.doSwitch((EObject)target);
+	}
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RoomModel <em>Model</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RoomModel <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.RoomModel
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.RoomModel
+	 * @generated
+	 */
   public Adapter createRoomModelAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RoomClass <em>Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RoomClass <em>Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.RoomClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.RoomClass
+	 * @generated
+	 */
   public Adapter createRoomClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StructureClass <em>Structure Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StructureClass <em>Structure Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.StructureClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.StructureClass
+	 * @generated
+	 */
   public Adapter createStructureClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorContainerClass <em>Actor Container Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorContainerClass <em>Actor Container Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ActorContainerClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ActorContainerClass
+	 * @generated
+	 */
   public Adapter createActorContainerClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.VarDecl <em>Var Decl</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.VarDecl <em>Var Decl</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.VarDecl
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.VarDecl
+	 * @generated
+	 */
   public Adapter createVarDeclAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.MessageData <em>Message Data</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.MessageData <em>Message Data</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.MessageData
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.MessageData
+	 * @generated
+	 */
   public Adapter createMessageDataAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefableType <em>Refable Type</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefableType <em>Refable Type</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.RefableType
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.RefableType
+	 * @generated
+	 */
   public Adapter createRefableTypeAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.DataType <em>Data Type</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.DataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.DataType
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.DataType
+	 * @generated
+	 */
   public Adapter createDataTypeAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ComplexType <em>Complex Type</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ComplexType <em>Complex Type</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ComplexType
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ComplexType
+	 * @generated
+	 */
   public Adapter createComplexTypeAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PrimitiveType <em>Primitive Type</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PrimitiveType <em>Primitive Type</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.PrimitiveType
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.PrimitiveType
+	 * @generated
+	 */
   public Adapter createPrimitiveTypeAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.EnumerationType <em>Enumeration Type</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.EnumerationType <em>Enumeration Type</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.EnumerationType
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.EnumerationType
+	 * @generated
+	 */
   public Adapter createEnumerationTypeAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.EnumLiteral <em>Enum Literal</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.EnumLiteral <em>Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.EnumLiteral
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.EnumLiteral
+	 * @generated
+	 */
   public Adapter createEnumLiteralAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ExternalType <em>External Type</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ExternalType <em>External Type</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ExternalType
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ExternalType
+	 * @generated
+	 */
   public Adapter createExternalTypeAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.DataClass <em>Data Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.DataClass <em>Data Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.DataClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.DataClass
+	 * @generated
+	 */
   public Adapter createDataClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Attribute <em>Attribute</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Attribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.Attribute
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.Attribute
+	 * @generated
+	 */
   public Adapter createAttributeAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Operation <em>Operation</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Operation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.Operation
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.Operation
+	 * @generated
+	 */
   public Adapter createOperationAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StandardOperation <em>Standard Operation</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StandardOperation <em>Standard Operation</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.StandardOperation
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.StandardOperation
+	 * @generated
+	 */
   public Adapter createStandardOperationAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PortOperation <em>Port Operation</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PortOperation <em>Port Operation</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.PortOperation
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.PortOperation
+	 * @generated
+	 */
   public Adapter createPortOperationAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ClassStructor <em>Class Structor</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ClassStructor <em>Class Structor</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ClassStructor
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ClassStructor
+	 * @generated
+	 */
   public Adapter createClassStructorAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ProtocolClass <em>Protocol Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ProtocolClass <em>Protocol Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ProtocolClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ProtocolClass
+	 * @generated
+	 */
   public Adapter createProtocolClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Message <em>Message</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Message <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.Message
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.Message
+	 * @generated
+	 */
   public Adapter createMessageAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PortClass <em>Port Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.PortClass <em>Port Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.PortClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.PortClass
+	 * @generated
+	 */
   public Adapter createPortClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.MessageHandler <em>Message Handler</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.MessageHandler <em>Message Handler</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.MessageHandler
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.MessageHandler
+	 * @generated
+	 */
   public Adapter createMessageHandlerAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.InMessageHandler <em>In Message Handler</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.InMessageHandler <em>In Message Handler</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.InMessageHandler
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.InMessageHandler
+	 * @generated
+	 */
   public Adapter createInMessageHandlerAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.OutMessageHandler <em>Out Message Handler</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.OutMessageHandler <em>Out Message Handler</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.OutMessageHandler
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.OutMessageHandler
+	 * @generated
+	 */
   public Adapter createOutMessageHandlerAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorClass <em>Actor Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorClass <em>Actor Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ActorClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ActorClass
+	 * @generated
+	 */
   public Adapter createActorClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.InterfaceItem <em>Interface Item</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.InterfaceItem <em>Interface Item</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.InterfaceItem
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.InterfaceItem
+	 * @generated
+	 */
   public Adapter createInterfaceItemAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Port <em>Port</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Port <em>Port</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.Port
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.Port
+	 * @generated
+	 */
   public Adapter createPortAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ExternalPort <em>External Port</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ExternalPort <em>External Port</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ExternalPort
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ExternalPort
+	 * @generated
+	 */
   public Adapter createExternalPortAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SAP <em>SAP</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SAP <em>SAP</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SAP
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.SAP
+	 * @generated
+	 */
   public Adapter createSAPAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SPP <em>SPP</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SPP <em>SPP</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SPP
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.SPP
+	 * @generated
+	 */
   public Adapter createSPPAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ServiceImplementation <em>Service Implementation</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ServiceImplementation <em>Service Implementation</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ServiceImplementation
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ServiceImplementation
+	 * @generated
+	 */
   public Adapter createServiceImplementationAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.LogicalSystem <em>Logical System</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.LogicalSystem <em>Logical System</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.LogicalSystem
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.LogicalSystem
+	 * @generated
+	 */
   public Adapter createLogicalSystemAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorContainerRef <em>Actor Container Ref</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorContainerRef <em>Actor Container Ref</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ActorContainerRef
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ActorContainerRef
+	 * @generated
+	 */
   public Adapter createActorContainerRefAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SubSystemRef <em>Sub System Ref</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SubSystemRef <em>Sub System Ref</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SubSystemRef
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.SubSystemRef
+	 * @generated
+	 */
   public Adapter createSubSystemRefAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SubSystemClass <em>Sub System Class</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SubSystemClass <em>Sub System Class</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SubSystemClass
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.SubSystemClass
+	 * @generated
+	 */
   public Adapter createSubSystemClassAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.LogicalThread <em>Logical Thread</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.LogicalThread <em>Logical Thread</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.LogicalThread
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.LogicalThread
+	 * @generated
+	 */
   public Adapter createLogicalThreadAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorInstanceMapping <em>Actor Instance Mapping</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorInstanceMapping <em>Actor Instance Mapping</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ActorInstanceMapping
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ActorInstanceMapping
+	 * @generated
+	 */
   public Adapter createActorInstanceMappingAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefPath <em>Ref Path</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefPath <em>Ref Path</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.RefPath
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.RefPath
+	 * @generated
+	 */
   public Adapter createRefPathAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefSegment <em>Ref Segment</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefSegment <em>Ref Segment</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.RefSegment
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.RefSegment
+	 * @generated
+	 */
   public Adapter createRefSegmentAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Binding <em>Binding</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.Binding <em>Binding</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.Binding
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.Binding
+	 * @generated
+	 */
   public Adapter createBindingAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.BindingEndPoint <em>Binding End Point</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.BindingEndPoint <em>Binding End Point</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.BindingEndPoint
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.BindingEndPoint
+	 * @generated
+	 */
   public Adapter createBindingEndPointAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.LayerConnection <em>Layer Connection</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.LayerConnection <em>Layer Connection</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.LayerConnection
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.LayerConnection
+	 * @generated
+	 */
   public Adapter createLayerConnectionAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SAPoint <em>SA Point</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SAPoint <em>SA Point</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SAPoint
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.SAPoint
+	 * @generated
+	 */
   public Adapter createSAPointAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefSAPoint <em>Ref SA Point</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefSAPoint <em>Ref SA Point</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.RefSAPoint
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.RefSAPoint
+	 * @generated
+	 */
   public Adapter createRefSAPointAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RelaySAPoint <em>Relay SA Point</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RelaySAPoint <em>Relay SA Point</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.RelaySAPoint
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.RelaySAPoint
+	 * @generated
+	 */
   public Adapter createRelaySAPointAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SPPoint <em>SP Point</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SPPoint <em>SP Point</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SPPoint
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.SPPoint
+	 * @generated
+	 */
   public Adapter createSPPointAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorRef <em>Actor Ref</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorRef <em>Actor Ref</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ActorRef
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.ActorRef
+	 * @generated
+	 */
   public Adapter createActorRefAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RoomElement <em>Element</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RoomElement <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.RoomElement
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.RoomElement
+	 * @generated
+	 */
   public Adapter createRoomElementAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner <em>IInterface Item Owner</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner <em>IInterface Item Owner</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner
+	 * @generated
+	 */
   public Adapter createIInterfaceItemOwnerAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.ModelComponent <em>Model Component</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.ModelComponent <em>Model Component</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.fsm.fSM.ModelComponent
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.fsm.fSM.ModelComponent
+	 * @generated
+	 */
   public Adapter createModelComponentAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem <em>Abstract Interface Item</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem <em>Abstract Interface Item</em>}'.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem
+	 * @generated
+	 */
   public Adapter createAbstractInterfaceItemAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * Creates a new adapter for the default case.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc -->
    * This default implementation returns null.
    * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @generated
+	 */
   public Adapter createEObjectAdapter()
   {
-    return null;
-  }
+		return null;
+	}
 
 } //RoomAdapterFactory

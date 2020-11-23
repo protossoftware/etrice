@@ -45,272 +45,271 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements InterfaceItem
 {
   /**
-   * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getProtocol()
-   * @generated
-   * @ordered
-   */
+	 * @see #getProtocol()
+	 * @generated
+	 * @ordered
+	 */
   protected ProtocolClass protocol;
 
   /**
-   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDocu()
-   * @generated
-   * @ordered
-   */
+	 * @see #getDocu()
+	 * @generated
+	 * @ordered
+	 */
   protected Documentation docu;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected InterfaceItemImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.INTERFACE_ITEM;
-  }
+		return RoomPackage.Literals.INTERFACE_ITEM;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ProtocolClass getProtocol()
+	 * @generated
+	 */
+  @Override
+		public ProtocolClass getProtocol()
   {
-    if (protocol != null && protocol.eIsProxy())
-    {
-      InternalEObject oldProtocol = (InternalEObject)protocol;
-      protocol = (ProtocolClass)eResolveProxy(oldProtocol);
-      if (protocol != oldProtocol)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.INTERFACE_ITEM__PROTOCOL, oldProtocol, protocol));
-      }
-    }
-    return protocol;
-  }
+		if (protocol != null && protocol.eIsProxy()) {
+			InternalEObject oldProtocol = (InternalEObject)protocol;
+			protocol = (ProtocolClass)eResolveProxy(oldProtocol);
+			if (protocol != oldProtocol) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.INTERFACE_ITEM__PROTOCOL, oldProtocol, protocol));
+			}
+		}
+		return protocol;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ProtocolClass basicGetProtocol()
   {
-    return protocol;
-  }
+		return protocol;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setProtocol(ProtocolClass newProtocol)
+	 * @generated
+	 */
+  @Override
+		public void setProtocol(ProtocolClass newProtocol)
   {
-    ProtocolClass oldProtocol = protocol;
-    protocol = newProtocol;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__PROTOCOL, oldProtocol, protocol));
-  }
+		ProtocolClass oldProtocol = protocol;
+		protocol = newProtocol;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__PROTOCOL, oldProtocol, protocol));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Documentation getDocu()
+	 * @generated
+	 */
+  @Override
+		public Documentation getDocu()
   {
-    return docu;
-  }
+		return docu;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
   {
-    Documentation oldDocu = docu;
-    docu = newDocu;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__DOCU, oldDocu, newDocu);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		Documentation oldDocu = docu;
+		docu = newDocu;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__DOCU, oldDocu, newDocu);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setDocu(Documentation newDocu)
+	 * @generated
+	 */
+  @Override
+		public void setDocu(Documentation newDocu)
   {
-    if (newDocu != docu)
-    {
-      NotificationChain msgs = null;
-      if (docu != null)
-        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.INTERFACE_ITEM__DOCU, null, msgs);
-      if (newDocu != null)
-        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.INTERFACE_ITEM__DOCU, null, msgs);
-      msgs = basicSetDocu(newDocu, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__DOCU, newDocu, newDocu));
-  }
+		if (newDocu != docu) {
+			NotificationChain msgs = null;
+			if (docu != null)
+				msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.INTERFACE_ITEM__DOCU, null, msgs);
+			if (newDocu != null)
+				msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.INTERFACE_ITEM__DOCU, null, msgs);
+			msgs = basicSetDocu(newDocu, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__DOCU, newDocu, newDocu));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ProtocolSemantics getSemantics()
+	 * @generated
+	 */
+  @Override
+		public ProtocolSemantics getSemantics()
   {
-    return getProtocol().getSemantics();
-    
-  }
+		return getProtocol().getSemantics();
+		
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<EObject> getAllIncomingAbstractMessages()
+	 * @generated
+	 */
+  @Override
+		public EList<EObject> getAllIncomingAbstractMessages()
   {
-    return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, false));
-    
-  }
+		return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, false));
+		
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<EObject> getAllOutgoingAbstractMessages()
+	 * @generated
+	 */
+  @Override
+		public EList<EObject> getAllOutgoingAbstractMessages()
   {
-    return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, true));
-    
-  }
+		return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, true));
+		
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isEventDriven()
+	 * @generated
+	 */
+  @Override
+		public boolean isEventDriven()
   {
-    return getProtocol().getCommType() == CommunicationType.EVENT_DRIVEN;
-    
-  }
+		return getProtocol().getCommType() == CommunicationType.EVENT_DRIVEN;
+		
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case RoomPackage.INTERFACE_ITEM__DOCU:
-        return basicSetDocu(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RoomPackage.INTERFACE_ITEM__DOCU:
+				return basicSetDocu(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.INTERFACE_ITEM__PROTOCOL:
-        if (resolve) return getProtocol();
-        return basicGetProtocol();
-      case RoomPackage.INTERFACE_ITEM__DOCU:
-        return getDocu();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.INTERFACE_ITEM__PROTOCOL:
+				if (resolve) return getProtocol();
+				return basicGetProtocol();
+			case RoomPackage.INTERFACE_ITEM__DOCU:
+				return getDocu();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.INTERFACE_ITEM__PROTOCOL:
-        setProtocol((ProtocolClass)newValue);
-        return;
-      case RoomPackage.INTERFACE_ITEM__DOCU:
-        setDocu((Documentation)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.INTERFACE_ITEM__PROTOCOL:
+				setProtocol((ProtocolClass)newValue);
+				return;
+			case RoomPackage.INTERFACE_ITEM__DOCU:
+				setDocu((Documentation)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.INTERFACE_ITEM__PROTOCOL:
-        setProtocol((ProtocolClass)null);
-        return;
-      case RoomPackage.INTERFACE_ITEM__DOCU:
-        setDocu((Documentation)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.INTERFACE_ITEM__PROTOCOL:
+				setProtocol((ProtocolClass)null);
+				return;
+			case RoomPackage.INTERFACE_ITEM__DOCU:
+				setDocu((Documentation)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.INTERFACE_ITEM__PROTOCOL:
-        return protocol != null;
-      case RoomPackage.INTERFACE_ITEM__DOCU:
-        return docu != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.INTERFACE_ITEM__PROTOCOL:
+				return protocol != null;
+			case RoomPackage.INTERFACE_ITEM__DOCU:
+				return docu != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //InterfaceItemImpl

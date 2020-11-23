@@ -29,28 +29,28 @@ import org.eclipse.emf.common.util.EList;
 public interface RefPath extends RoomElement
 {
   /**
-   * Returns the value of the '<em><b>Refs</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.RefSegment}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Refs</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.room.RefSegment}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is a path in the instance tree where each segment corresponds to the name of the
-   * corresponding {@link ActorContainerRef}.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Refs</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getRefPath_Refs()
-   * @model containment="true"
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is a path in the instance tree where each segment corresponds to the name of the
+	 * corresponding {@link ActorContainerRef}.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Refs</em>' containment reference list.
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getRefPath_Refs()
+	 * @model containment="true"
+	 * @generated
+	 */
   EList<RefSegment> getRefs();
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='StringBuilder sb = new StringBuilder();\r\nfor (RefSegment ref : getRefs()) {\r\n\tsb.append(\"/\"+ref.toString());\r\n}\r\nreturn sb.toString();\r\n'"
-   * @generated
-   */
+	 * @model
+	 * @generated
+	 */
   String toString();
 
 } // RefPath

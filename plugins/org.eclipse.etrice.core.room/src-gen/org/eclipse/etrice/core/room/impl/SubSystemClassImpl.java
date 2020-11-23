@@ -39,206 +39,201 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSystemClass
 {
   /**
-   * The cached value of the '{@link #getActorInstanceMappings() <em>Actor Instance Mappings</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getActorInstanceMappings() <em>Actor Instance Mappings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getActorInstanceMappings()
-   * @generated
-   * @ordered
-   */
+	 * @see #getActorInstanceMappings()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<ActorInstanceMapping> actorInstanceMappings;
 
   /**
-   * The cached value of the '{@link #getThreads() <em>Threads</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getThreads() <em>Threads</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getThreads()
-   * @generated
-   * @ordered
-   */
+	 * @see #getThreads()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<LogicalThread> threads;
 
   /**
-   * The cached value of the '{@link #getRelayPorts() <em>Relay Ports</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRelayPorts() <em>Relay Ports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRelayPorts()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRelayPorts()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<Port> relayPorts;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected SubSystemClassImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.SUB_SYSTEM_CLASS;
-  }
+		return RoomPackage.Literals.SUB_SYSTEM_CLASS;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<ActorInstanceMapping> getActorInstanceMappings()
+	 * @generated
+	 */
+  @Override
+		public EList<ActorInstanceMapping> getActorInstanceMappings()
   {
-    if (actorInstanceMappings == null)
-    {
-      actorInstanceMappings = new EObjectContainmentEList<ActorInstanceMapping>(ActorInstanceMapping.class, this, RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS);
-    }
-    return actorInstanceMappings;
-  }
+		if (actorInstanceMappings == null) {
+			actorInstanceMappings = new EObjectContainmentEList<ActorInstanceMapping>(ActorInstanceMapping.class, this, RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS);
+		}
+		return actorInstanceMappings;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<LogicalThread> getThreads()
+	 * @generated
+	 */
+  @Override
+		public EList<LogicalThread> getThreads()
   {
-    if (threads == null)
-    {
-      threads = new EObjectContainmentEList<LogicalThread>(LogicalThread.class, this, RoomPackage.SUB_SYSTEM_CLASS__THREADS);
-    }
-    return threads;
-  }
+		if (threads == null) {
+			threads = new EObjectContainmentEList<LogicalThread>(LogicalThread.class, this, RoomPackage.SUB_SYSTEM_CLASS__THREADS);
+		}
+		return threads;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Port> getRelayPorts()
+	 * @generated
+	 */
+  @Override
+		public EList<Port> getRelayPorts()
   {
-    if (relayPorts == null)
-    {
-      relayPorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS);
-    }
-    return relayPorts;
-  }
+		if (relayPorts == null) {
+			relayPorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS);
+		}
+		return relayPorts;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
-        return ((InternalEList<?>)getActorInstanceMappings()).basicRemove(otherEnd, msgs);
-      case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
-        return ((InternalEList<?>)getThreads()).basicRemove(otherEnd, msgs);
-      case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
-        return ((InternalEList<?>)getRelayPorts()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+				return ((InternalEList<?>)getActorInstanceMappings()).basicRemove(otherEnd, msgs);
+			case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
+				return ((InternalEList<?>)getThreads()).basicRemove(otherEnd, msgs);
+			case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
+				return ((InternalEList<?>)getRelayPorts()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
-        return getActorInstanceMappings();
-      case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
-        return getThreads();
-      case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
-        return getRelayPorts();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+				return getActorInstanceMappings();
+			case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
+				return getThreads();
+			case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
+				return getRelayPorts();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
-        getActorInstanceMappings().clear();
-        getActorInstanceMappings().addAll((Collection<? extends ActorInstanceMapping>)newValue);
-        return;
-      case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
-        getThreads().clear();
-        getThreads().addAll((Collection<? extends LogicalThread>)newValue);
-        return;
-      case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
-        getRelayPorts().clear();
-        getRelayPorts().addAll((Collection<? extends Port>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+				getActorInstanceMappings().clear();
+				getActorInstanceMappings().addAll((Collection<? extends ActorInstanceMapping>)newValue);
+				return;
+			case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
+				getThreads().clear();
+				getThreads().addAll((Collection<? extends LogicalThread>)newValue);
+				return;
+			case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
+				getRelayPorts().clear();
+				getRelayPorts().addAll((Collection<? extends Port>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
-        getActorInstanceMappings().clear();
-        return;
-      case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
-        getThreads().clear();
-        return;
-      case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
-        getRelayPorts().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+				getActorInstanceMappings().clear();
+				return;
+			case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
+				getThreads().clear();
+				return;
+			case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
+				getRelayPorts().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
-        return actorInstanceMappings != null && !actorInstanceMappings.isEmpty();
-      case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
-        return threads != null && !threads.isEmpty();
-      case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
-        return relayPorts != null && !relayPorts.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+				return actorInstanceMappings != null && !actorInstanceMappings.isEmpty();
+			case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
+				return threads != null && !threads.isEmpty();
+			case RoomPackage.SUB_SYSTEM_CLASS__RELAY_PORTS:
+				return relayPorts != null && !relayPorts.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //SubSystemClassImpl

@@ -28,150 +28,148 @@ import org.eclipse.etrice.core.room.StandardOperation;
 public class StandardOperationImpl extends OperationImpl implements StandardOperation
 {
   /**
-   * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isOverride()
-   * @generated
-   * @ordered
-   */
+	 * @see #isOverride()
+	 * @generated
+	 * @ordered
+	 */
   protected static final boolean OVERRIDE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isOverride() <em>Override</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isOverride() <em>Override</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isOverride()
-   * @generated
-   * @ordered
-   */
+	 * @see #isOverride()
+	 * @generated
+	 * @ordered
+	 */
   protected boolean override = OVERRIDE_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StandardOperationImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.STANDARD_OPERATION;
-  }
+		return RoomPackage.Literals.STANDARD_OPERATION;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isOverride()
+	 * @generated
+	 */
+  @Override
+		public boolean isOverride()
   {
-    return override;
-  }
+		return override;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOverride(boolean newOverride)
+	 * @generated
+	 */
+  @Override
+		public void setOverride(boolean newOverride)
   {
-    boolean oldOverride = override;
-    override = newOverride;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.STANDARD_OPERATION__OVERRIDE, oldOverride, override));
-  }
+		boolean oldOverride = override;
+		override = newOverride;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.STANDARD_OPERATION__OVERRIDE, oldOverride, override));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STANDARD_OPERATION__OVERRIDE:
-        return isOverride();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.STANDARD_OPERATION__OVERRIDE:
+				return isOverride();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STANDARD_OPERATION__OVERRIDE:
-        setOverride((Boolean)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.STANDARD_OPERATION__OVERRIDE:
+				setOverride((Boolean)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STANDARD_OPERATION__OVERRIDE:
-        setOverride(OVERRIDE_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.STANDARD_OPERATION__OVERRIDE:
+				setOverride(OVERRIDE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STANDARD_OPERATION__OVERRIDE:
-        return override != OVERRIDE_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.STANDARD_OPERATION__OVERRIDE:
+				return override != OVERRIDE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (override: ");
-    result.append(override);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (override: ");
+		result.append(override);
+		result.append(')');
+		return result.toString();
+	}
 
 } //StandardOperationImpl

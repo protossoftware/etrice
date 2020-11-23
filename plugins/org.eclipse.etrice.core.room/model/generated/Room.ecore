@@ -565,12 +565,12 @@
         <details key="body" value="return getName();&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//AbstractInterfaceItem">
+    <eOperations name="getAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;AbstractInterfaceItem>(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%>().getInterfaceItems(this));&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getAllAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//AbstractInterfaceItem">
+    <eOperations name="getAllAbstractInterfaceItems" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;AbstractInterfaceItem>(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%>().getAllInterfaceItems(this));&#xD;&#xA;"/>
       </eAnnotations>
@@ -643,7 +643,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This is a concrete sub class of an {@link AbstractInterfaceItem}.&#xD;&#xA;&#xD;&#xA;It is the super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link Port}&lt;/li>&#xD;&#xA;  &lt;li>{@link SAP}&lt;/li>&#xD;&#xA;  &lt;li>{@link SPP}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
     </eAnnotations>
-    <eOperations name="getSemantics" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//ProtocolSemantics">
+    <eOperations name="getSemantics" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//ProtocolSemantics">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return getProtocol().getSemantics();&#xD;&#xA;"/>
       </eAnnotations>

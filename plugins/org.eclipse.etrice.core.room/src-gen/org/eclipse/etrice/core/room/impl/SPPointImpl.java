@@ -33,208 +33,204 @@ import org.eclipse.etrice.core.room.SPPoint;
 public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
 {
   /**
-   * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRef()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
   protected ActorContainerRef ref;
 
   /**
-   * The cached value of the '{@link #getService() <em>Service</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getService() <em>Service</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getService()
-   * @generated
-   * @ordered
-   */
+	 * @see #getService()
+	 * @generated
+	 * @ordered
+	 */
   protected SPP service;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected SPPointImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.SP_POINT;
-  }
+		return RoomPackage.Literals.SP_POINT;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActorContainerRef getRef()
+	 * @generated
+	 */
+  @Override
+		public ActorContainerRef getRef()
   {
-    if (ref != null && ref.eIsProxy())
-    {
-      InternalEObject oldRef = (InternalEObject)ref;
-      ref = (ActorContainerRef)eResolveProxy(oldRef);
-      if (ref != oldRef)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SP_POINT__REF, oldRef, ref));
-      }
-    }
-    return ref;
-  }
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (ActorContainerRef)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SP_POINT__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ActorContainerRef basicGetRef()
   {
-    return ref;
-  }
+		return ref;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRef(ActorContainerRef newRef)
+	 * @generated
+	 */
+  @Override
+		public void setRef(ActorContainerRef newRef)
   {
-    ActorContainerRef oldRef = ref;
-    ref = newRef;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SP_POINT__REF, oldRef, ref));
-  }
+		ActorContainerRef oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SP_POINT__REF, oldRef, ref));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SPP getService()
+	 * @generated
+	 */
+  @Override
+		public SPP getService()
   {
-    if (service != null && service.eIsProxy())
-    {
-      InternalEObject oldService = (InternalEObject)service;
-      service = (SPP)eResolveProxy(oldService);
-      if (service != oldService)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SP_POINT__SERVICE, oldService, service));
-      }
-    }
-    return service;
-  }
+		if (service != null && service.eIsProxy()) {
+			InternalEObject oldService = (InternalEObject)service;
+			service = (SPP)eResolveProxy(oldService);
+			if (service != oldService) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SP_POINT__SERVICE, oldService, service));
+			}
+		}
+		return service;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public SPP basicGetService()
   {
-    return service;
-  }
+		return service;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setService(SPP newService)
+	 * @generated
+	 */
+  @Override
+		public void setService(SPP newService)
   {
-    SPP oldService = service;
-    service = newService;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SP_POINT__SERVICE, oldService, service));
-  }
+		SPP oldService = service;
+		service = newService;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SP_POINT__SERVICE, oldService, service));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SP_POINT__REF:
-        if (resolve) return getRef();
-        return basicGetRef();
-      case RoomPackage.SP_POINT__SERVICE:
-        if (resolve) return getService();
-        return basicGetService();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.SP_POINT__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
+			case RoomPackage.SP_POINT__SERVICE:
+				if (resolve) return getService();
+				return basicGetService();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SP_POINT__REF:
-        setRef((ActorContainerRef)newValue);
-        return;
-      case RoomPackage.SP_POINT__SERVICE:
-        setService((SPP)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.SP_POINT__REF:
+				setRef((ActorContainerRef)newValue);
+				return;
+			case RoomPackage.SP_POINT__SERVICE:
+				setService((SPP)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SP_POINT__REF:
-        setRef((ActorContainerRef)null);
-        return;
-      case RoomPackage.SP_POINT__SERVICE:
-        setService((SPP)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.SP_POINT__REF:
+				setRef((ActorContainerRef)null);
+				return;
+			case RoomPackage.SP_POINT__SERVICE:
+				setService((SPP)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SP_POINT__REF:
-        return ref != null;
-      case RoomPackage.SP_POINT__SERVICE:
-        return service != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.SP_POINT__REF:
+				return ref != null;
+			case RoomPackage.SP_POINT__SERVICE:
+				return service != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //SPPointImpl

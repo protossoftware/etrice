@@ -31,55 +31,55 @@ package org.eclipse.etrice.core.room;
 public interface BindingEndPoint extends RoomElement
 {
   /**
-   * Returns the value of the '<em><b>Actor Ref</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Actor Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>The actor reference holding the bound port or {@code null} in case of a local port.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Actor Ref</em>' reference.
-   * @see #setActorRef(ActorContainerRef)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint_ActorRef()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>The actor reference holding the bound port or {@code null} in case of a local port.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Actor Ref</em>' reference.
+	 * @see #setActorRef(ActorContainerRef)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint_ActorRef()
+	 * @model
+	 * @generated
+	 */
   ActorContainerRef getActorRef();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.BindingEndPoint#getActorRef <em>Actor Ref</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.BindingEndPoint#getActorRef <em>Actor Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Actor Ref</em>' reference.
-   * @see #getActorRef()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Actor Ref</em>' reference.
+	 * @see #getActorRef()
+	 * @generated
+	 */
   void setActorRef(ActorContainerRef value);
 
   /**
-   * Returns the value of the '<em><b>Port</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the bound port.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Port</em>' reference.
-   * @see #setPort(Port)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint_Port()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is the bound port.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Port</em>' reference.
+	 * @see #setPort(Port)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint_Port()
+	 * @model
+	 * @generated
+	 */
   Port getPort();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.BindingEndPoint#getPort <em>Port</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.BindingEndPoint#getPort <em>Port</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Port</em>' reference.
-   * @see #getPort()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Port</em>' reference.
+	 * @see #getPort()
+	 * @generated
+	 */
   void setPort(Port value);
 
 } // BindingEndPoint

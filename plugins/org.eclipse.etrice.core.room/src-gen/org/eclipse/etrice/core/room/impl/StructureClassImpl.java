@@ -40,206 +40,201 @@ import org.eclipse.etrice.core.room.StructureClass;
 public class StructureClassImpl extends RoomClassImpl implements StructureClass
 {
   /**
-   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAnnotations()
-   * @generated
-   * @ordered
-   */
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<Annotation> annotations;
 
   /**
-   * The cached value of the '{@link #getConnections() <em>Connections</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getConnections() <em>Connections</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getConnections()
-   * @generated
-   * @ordered
-   */
+	 * @see #getConnections()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<LayerConnection> connections;
 
   /**
-   * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBindings()
-   * @generated
-   * @ordered
-   */
+	 * @see #getBindings()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<Binding> bindings;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StructureClassImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.STRUCTURE_CLASS;
-  }
+		return RoomPackage.Literals.STRUCTURE_CLASS;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Annotation> getAnnotations()
+	 * @generated
+	 */
+  @Override
+		public EList<Annotation> getAnnotations()
   {
-    if (annotations == null)
-    {
-      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.STRUCTURE_CLASS__ANNOTATIONS);
-    }
-    return annotations;
-  }
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.STRUCTURE_CLASS__ANNOTATIONS);
+		}
+		return annotations;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<LayerConnection> getConnections()
+	 * @generated
+	 */
+  @Override
+		public EList<LayerConnection> getConnections()
   {
-    if (connections == null)
-    {
-      connections = new EObjectContainmentEList<LayerConnection>(LayerConnection.class, this, RoomPackage.STRUCTURE_CLASS__CONNECTIONS);
-    }
-    return connections;
-  }
+		if (connections == null) {
+			connections = new EObjectContainmentEList<LayerConnection>(LayerConnection.class, this, RoomPackage.STRUCTURE_CLASS__CONNECTIONS);
+		}
+		return connections;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Binding> getBindings()
+	 * @generated
+	 */
+  @Override
+		public EList<Binding> getBindings()
   {
-    if (bindings == null)
-    {
-      bindings = new EObjectContainmentEList<Binding>(Binding.class, this, RoomPackage.STRUCTURE_CLASS__BINDINGS);
-    }
-    return bindings;
-  }
+		if (bindings == null) {
+			bindings = new EObjectContainmentEList<Binding>(Binding.class, this, RoomPackage.STRUCTURE_CLASS__BINDINGS);
+		}
+		return bindings;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
-        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-      case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
-        return ((InternalEList<?>)getConnections()).basicRemove(otherEnd, msgs);
-      case RoomPackage.STRUCTURE_CLASS__BINDINGS:
-        return ((InternalEList<?>)getBindings()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+			case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
+				return ((InternalEList<?>)getConnections()).basicRemove(otherEnd, msgs);
+			case RoomPackage.STRUCTURE_CLASS__BINDINGS:
+				return ((InternalEList<?>)getBindings()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
-        return getAnnotations();
-      case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
-        return getConnections();
-      case RoomPackage.STRUCTURE_CLASS__BINDINGS:
-        return getBindings();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+				return getAnnotations();
+			case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
+				return getConnections();
+			case RoomPackage.STRUCTURE_CLASS__BINDINGS:
+				return getBindings();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
-        getAnnotations().clear();
-        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-        return;
-      case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
-        getConnections().clear();
-        getConnections().addAll((Collection<? extends LayerConnection>)newValue);
-        return;
-      case RoomPackage.STRUCTURE_CLASS__BINDINGS:
-        getBindings().clear();
-        getBindings().addAll((Collection<? extends Binding>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
+				getConnections().clear();
+				getConnections().addAll((Collection<? extends LayerConnection>)newValue);
+				return;
+			case RoomPackage.STRUCTURE_CLASS__BINDINGS:
+				getBindings().clear();
+				getBindings().addAll((Collection<? extends Binding>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
-        getAnnotations().clear();
-        return;
-      case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
-        getConnections().clear();
-        return;
-      case RoomPackage.STRUCTURE_CLASS__BINDINGS:
-        getBindings().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+				getAnnotations().clear();
+				return;
+			case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
+				getConnections().clear();
+				return;
+			case RoomPackage.STRUCTURE_CLASS__BINDINGS:
+				getBindings().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
-        return annotations != null && !annotations.isEmpty();
-      case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
-        return connections != null && !connections.isEmpty();
-      case RoomPackage.STRUCTURE_CLASS__BINDINGS:
-        return bindings != null && !bindings.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
+			case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
+				return connections != null && !connections.isEmpty();
+			case RoomPackage.STRUCTURE_CLASS__BINDINGS:
+				return bindings != null && !bindings.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //StructureClassImpl

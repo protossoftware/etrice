@@ -37,147 +37,143 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
 {
   /**
-   * The cached value of the '{@link #getRefs() <em>Refs</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRefs() <em>Refs</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRefs()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRefs()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<RefSegment> refs;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected RefPathImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.REF_PATH;
-  }
+		return RoomPackage.Literals.REF_PATH;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<RefSegment> getRefs()
+	 * @generated
+	 */
+  @Override
+		public EList<RefSegment> getRefs()
   {
-    if (refs == null)
-    {
-      refs = new EObjectContainmentEList<RefSegment>(RefSegment.class, this, RoomPackage.REF_PATH__REFS);
-    }
-    return refs;
-  }
+		if (refs == null) {
+			refs = new EObjectContainmentEList<RefSegment>(RefSegment.class, this, RoomPackage.REF_PATH__REFS);
+		}
+		return refs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public String toString()
+	 * @generated
+	 */
+  @Override
+		public String toString()
   {
-    StringBuilder sb = new StringBuilder();
-    for (RefSegment ref : getRefs()) {
-      sb.append("/"+ref.toString());
-    }
-    return sb.toString();
-    
-  }
+		StringBuilder sb = new StringBuilder();
+		for (RefSegment ref : getRefs()) {
+			sb.append("/"+ref.toString());
+		}
+		return sb.toString();
+		
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case RoomPackage.REF_PATH__REFS:
-        return ((InternalEList<?>)getRefs()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RoomPackage.REF_PATH__REFS:
+				return ((InternalEList<?>)getRefs()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.REF_PATH__REFS:
-        return getRefs();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.REF_PATH__REFS:
+				return getRefs();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.REF_PATH__REFS:
-        getRefs().clear();
-        getRefs().addAll((Collection<? extends RefSegment>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.REF_PATH__REFS:
+				getRefs().clear();
+				getRefs().addAll((Collection<? extends RefSegment>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.REF_PATH__REFS:
-        getRefs().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.REF_PATH__REFS:
+				getRefs().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.REF_PATH__REFS:
-        return refs != null && !refs.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.REF_PATH__REFS:
+				return refs != null && !refs.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //RefPathImpl

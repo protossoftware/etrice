@@ -34,29 +34,29 @@ package org.eclipse.etrice.core.room;
 public interface PortOperation extends Operation
 {
   /**
-   * Returns the value of the '<em><b>Sends Msg</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Sends Msg</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This optional reference to a message means that the operation sends a message.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Sends Msg</em>' reference.
-   * @see #setSendsMsg(Message)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getPortOperation_SendsMsg()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This optional reference to a message means that the operation sends a message.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Sends Msg</em>' reference.
+	 * @see #setSendsMsg(Message)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getPortOperation_SendsMsg()
+	 * @model
+	 * @generated
+	 */
   Message getSendsMsg();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.PortOperation#getSendsMsg <em>Sends Msg</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.PortOperation#getSendsMsg <em>Sends Msg</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Sends Msg</em>' reference.
-   * @see #getSendsMsg()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Sends Msg</em>' reference.
+	 * @see #getSendsMsg()
+	 * @generated
+	 */
   void setSendsMsg(Message value);
 
 } // PortOperation

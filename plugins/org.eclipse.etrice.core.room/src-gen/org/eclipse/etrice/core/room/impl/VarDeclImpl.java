@@ -34,289 +34,288 @@ import org.eclipse.etrice.core.room.VarDecl;
 public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getRefType() <em>Ref Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRefType() <em>Ref Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRefType()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRefType()
+	 * @generated
+	 * @ordered
+	 */
   protected RefableType refType;
 
   /**
-   * The default value of the '{@link #isVarargs() <em>Varargs</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isVarargs() <em>Varargs</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isVarargs()
-   * @generated
-   * @ordered
-   */
+	 * @see #isVarargs()
+	 * @generated
+	 * @ordered
+	 */
   protected static final boolean VARARGS_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isVarargs() <em>Varargs</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isVarargs() <em>Varargs</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isVarargs()
-   * @generated
-   * @ordered
-   */
+	 * @see #isVarargs()
+	 * @generated
+	 * @ordered
+	 */
   protected boolean varargs = VARARGS_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected VarDeclImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.VAR_DECL;
-  }
+		return RoomPackage.Literals.VAR_DECL;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
+	 * @generated
+	 */
+  @Override
+		public String getName()
   {
-    return name;
-  }
+		return name;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
+	 * @generated
+	 */
+  @Override
+		public void setName(String newName)
   {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__NAME, oldName, name));
-  }
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__NAME, oldName, name));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RefableType getRefType()
+	 * @generated
+	 */
+  @Override
+		public RefableType getRefType()
   {
-    return refType;
-  }
+		return refType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetRefType(RefableType newRefType, NotificationChain msgs)
   {
-    RefableType oldRefType = refType;
-    refType = newRefType;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__REF_TYPE, oldRefType, newRefType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		RefableType oldRefType = refType;
+		refType = newRefType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__REF_TYPE, oldRefType, newRefType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRefType(RefableType newRefType)
+	 * @generated
+	 */
+  @Override
+		public void setRefType(RefableType newRefType)
   {
-    if (newRefType != refType)
-    {
-      NotificationChain msgs = null;
-      if (refType != null)
-        msgs = ((InternalEObject)refType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.VAR_DECL__REF_TYPE, null, msgs);
-      if (newRefType != null)
-        msgs = ((InternalEObject)newRefType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.VAR_DECL__REF_TYPE, null, msgs);
-      msgs = basicSetRefType(newRefType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__REF_TYPE, newRefType, newRefType));
-  }
+		if (newRefType != refType) {
+			NotificationChain msgs = null;
+			if (refType != null)
+				msgs = ((InternalEObject)refType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.VAR_DECL__REF_TYPE, null, msgs);
+			if (newRefType != null)
+				msgs = ((InternalEObject)newRefType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.VAR_DECL__REF_TYPE, null, msgs);
+			msgs = basicSetRefType(newRefType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__REF_TYPE, newRefType, newRefType));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isVarargs()
+	 * @generated
+	 */
+  @Override
+		public boolean isVarargs()
   {
-    return varargs;
-  }
+		return varargs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setVarargs(boolean newVarargs)
+	 * @generated
+	 */
+  @Override
+		public void setVarargs(boolean newVarargs)
   {
-    boolean oldVarargs = varargs;
-    varargs = newVarargs;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__VARARGS, oldVarargs, varargs));
-  }
+		boolean oldVarargs = varargs;
+		varargs = newVarargs;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__VARARGS, oldVarargs, varargs));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case RoomPackage.VAR_DECL__REF_TYPE:
-        return basicSetRefType(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RoomPackage.VAR_DECL__REF_TYPE:
+				return basicSetRefType(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.VAR_DECL__NAME:
-        return getName();
-      case RoomPackage.VAR_DECL__REF_TYPE:
-        return getRefType();
-      case RoomPackage.VAR_DECL__VARARGS:
-        return isVarargs();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.VAR_DECL__NAME:
+				return getName();
+			case RoomPackage.VAR_DECL__REF_TYPE:
+				return getRefType();
+			case RoomPackage.VAR_DECL__VARARGS:
+				return isVarargs();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.VAR_DECL__NAME:
-        setName((String)newValue);
-        return;
-      case RoomPackage.VAR_DECL__REF_TYPE:
-        setRefType((RefableType)newValue);
-        return;
-      case RoomPackage.VAR_DECL__VARARGS:
-        setVarargs((Boolean)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.VAR_DECL__NAME:
+				setName((String)newValue);
+				return;
+			case RoomPackage.VAR_DECL__REF_TYPE:
+				setRefType((RefableType)newValue);
+				return;
+			case RoomPackage.VAR_DECL__VARARGS:
+				setVarargs((Boolean)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.VAR_DECL__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case RoomPackage.VAR_DECL__REF_TYPE:
-        setRefType((RefableType)null);
-        return;
-      case RoomPackage.VAR_DECL__VARARGS:
-        setVarargs(VARARGS_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.VAR_DECL__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case RoomPackage.VAR_DECL__REF_TYPE:
+				setRefType((RefableType)null);
+				return;
+			case RoomPackage.VAR_DECL__VARARGS:
+				setVarargs(VARARGS_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.VAR_DECL__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RoomPackage.VAR_DECL__REF_TYPE:
-        return refType != null;
-      case RoomPackage.VAR_DECL__VARARGS:
-        return varargs != VARARGS_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.VAR_DECL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case RoomPackage.VAR_DECL__REF_TYPE:
+				return refType != null;
+			case RoomPackage.VAR_DECL__VARARGS:
+				return varargs != VARARGS_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", varargs: ");
-    result.append(varargs);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", varargs: ");
+		result.append(varargs);
+		result.append(')');
+		return result.toString();
+	}
 
 } //VarDeclImpl

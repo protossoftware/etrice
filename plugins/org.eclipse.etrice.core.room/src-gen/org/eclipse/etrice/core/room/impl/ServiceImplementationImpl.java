@@ -31,144 +31,140 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 public class ServiceImplementationImpl extends MinimalEObjectImpl.Container implements ServiceImplementation
 {
   /**
-   * The cached value of the '{@link #getSpp() <em>Spp</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSpp() <em>Spp</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSpp()
-   * @generated
-   * @ordered
-   */
+	 * @see #getSpp()
+	 * @generated
+	 * @ordered
+	 */
   protected SPP spp;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ServiceImplementationImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.SERVICE_IMPLEMENTATION;
-  }
+		return RoomPackage.Literals.SERVICE_IMPLEMENTATION;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SPP getSpp()
+	 * @generated
+	 */
+  @Override
+		public SPP getSpp()
   {
-    if (spp != null && spp.eIsProxy())
-    {
-      InternalEObject oldSpp = (InternalEObject)spp;
-      spp = (SPP)eResolveProxy(oldSpp);
-      if (spp != oldSpp)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SERVICE_IMPLEMENTATION__SPP, oldSpp, spp));
-      }
-    }
-    return spp;
-  }
+		if (spp != null && spp.eIsProxy()) {
+			InternalEObject oldSpp = (InternalEObject)spp;
+			spp = (SPP)eResolveProxy(oldSpp);
+			if (spp != oldSpp) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SERVICE_IMPLEMENTATION__SPP, oldSpp, spp));
+			}
+		}
+		return spp;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public SPP basicGetSpp()
   {
-    return spp;
-  }
+		return spp;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setSpp(SPP newSpp)
+	 * @generated
+	 */
+  @Override
+		public void setSpp(SPP newSpp)
   {
-    SPP oldSpp = spp;
-    spp = newSpp;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SERVICE_IMPLEMENTATION__SPP, oldSpp, spp));
-  }
+		SPP oldSpp = spp;
+		spp = newSpp;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SERVICE_IMPLEMENTATION__SPP, oldSpp, spp));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
-        if (resolve) return getSpp();
-        return basicGetSpp();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
+				if (resolve) return getSpp();
+				return basicGetSpp();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
-        setSpp((SPP)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
+				setSpp((SPP)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
-        setSpp((SPP)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
+				setSpp((SPP)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
-        return spp != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
+				return spp != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //ServiceImplementationImpl

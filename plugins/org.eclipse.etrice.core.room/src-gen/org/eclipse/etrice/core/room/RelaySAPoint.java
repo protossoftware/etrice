@@ -28,29 +28,29 @@ package org.eclipse.etrice.core.room;
 public interface RelaySAPoint extends SAPoint
 {
   /**
-   * Returns the value of the '<em><b>Relay</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Relay</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the referenced SPP.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Relay</em>' reference.
-   * @see #setRelay(SPP)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getRelaySAPoint_Relay()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is the referenced SPP.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Relay</em>' reference.
+	 * @see #setRelay(SPP)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getRelaySAPoint_Relay()
+	 * @model
+	 * @generated
+	 */
   SPP getRelay();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.RelaySAPoint#getRelay <em>Relay</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.RelaySAPoint#getRelay <em>Relay</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Relay</em>' reference.
-   * @see #getRelay()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Relay</em>' reference.
+	 * @see #getRelay()
+	 * @generated
+	 */
   void setRelay(SPP value);
 
 } // RelaySAPoint

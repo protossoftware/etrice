@@ -23,758 +23,801 @@ import org.eclipse.etrice.core.room.*;
 public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
 {
   /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static RoomFactory init()
   {
-    try
-    {
-      RoomFactory theRoomFactory = (RoomFactory)EPackage.Registry.INSTANCE.getEFactory(RoomPackage.eNS_URI);
-      if (theRoomFactory != null)
-      {
-        return theRoomFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new RoomFactoryImpl();
-  }
+		try {
+			RoomFactory theRoomFactory = (RoomFactory)EPackage.Registry.INSTANCE.getEFactory(RoomPackage.eNS_URI);
+			if (theRoomFactory != null) {
+				return theRoomFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new RoomFactoryImpl();
+	}
 
   /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public RoomFactoryImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public EObject create(EClass eClass)
   {
-    switch (eClass.getClassifierID())
-    {
-      case RoomPackage.ROOM_MODEL: return createRoomModel();
-      case RoomPackage.ROOM_CLASS: return createRoomClass();
-      case RoomPackage.STRUCTURE_CLASS: return createStructureClass();
-      case RoomPackage.ACTOR_CONTAINER_CLASS: return createActorContainerClass();
-      case RoomPackage.VAR_DECL: return createVarDecl();
-      case RoomPackage.MESSAGE_DATA: return createMessageData();
-      case RoomPackage.REFABLE_TYPE: return createRefableType();
-      case RoomPackage.DATA_TYPE: return createDataType();
-      case RoomPackage.COMPLEX_TYPE: return createComplexType();
-      case RoomPackage.PRIMITIVE_TYPE: return createPrimitiveType();
-      case RoomPackage.ENUMERATION_TYPE: return createEnumerationType();
-      case RoomPackage.ENUM_LITERAL: return createEnumLiteral();
-      case RoomPackage.EXTERNAL_TYPE: return createExternalType();
-      case RoomPackage.DATA_CLASS: return createDataClass();
-      case RoomPackage.ATTRIBUTE: return createAttribute();
-      case RoomPackage.OPERATION: return createOperation();
-      case RoomPackage.STANDARD_OPERATION: return createStandardOperation();
-      case RoomPackage.PORT_OPERATION: return createPortOperation();
-      case RoomPackage.CLASS_STRUCTOR: return createClassStructor();
-      case RoomPackage.PROTOCOL_CLASS: return createProtocolClass();
-      case RoomPackage.MESSAGE: return createMessage();
-      case RoomPackage.PORT_CLASS: return createPortClass();
-      case RoomPackage.MESSAGE_HANDLER: return createMessageHandler();
-      case RoomPackage.IN_MESSAGE_HANDLER: return createInMessageHandler();
-      case RoomPackage.OUT_MESSAGE_HANDLER: return createOutMessageHandler();
-      case RoomPackage.ACTOR_CLASS: return createActorClass();
-      case RoomPackage.INTERFACE_ITEM: return createInterfaceItem();
-      case RoomPackage.PORT: return createPort();
-      case RoomPackage.EXTERNAL_PORT: return createExternalPort();
-      case RoomPackage.SAP: return createSAP();
-      case RoomPackage.SPP: return createSPP();
-      case RoomPackage.SERVICE_IMPLEMENTATION: return createServiceImplementation();
-      case RoomPackage.LOGICAL_SYSTEM: return createLogicalSystem();
-      case RoomPackage.ACTOR_CONTAINER_REF: return createActorContainerRef();
-      case RoomPackage.SUB_SYSTEM_REF: return createSubSystemRef();
-      case RoomPackage.SUB_SYSTEM_CLASS: return createSubSystemClass();
-      case RoomPackage.LOGICAL_THREAD: return createLogicalThread();
-      case RoomPackage.ACTOR_INSTANCE_MAPPING: return createActorInstanceMapping();
-      case RoomPackage.REF_PATH: return createRefPath();
-      case RoomPackage.REF_SEGMENT: return createRefSegment();
-      case RoomPackage.BINDING: return createBinding();
-      case RoomPackage.BINDING_END_POINT: return createBindingEndPoint();
-      case RoomPackage.LAYER_CONNECTION: return createLayerConnection();
-      case RoomPackage.SA_POINT: return createSAPoint();
-      case RoomPackage.REF_SA_POINT: return createRefSAPoint();
-      case RoomPackage.RELAY_SA_POINT: return createRelaySAPoint();
-      case RoomPackage.SP_POINT: return createSPPoint();
-      case RoomPackage.ACTOR_REF: return createActorRef();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eClass.getClassifierID()) {
+			case RoomPackage.ROOM_MODEL: return createRoomModel();
+			case RoomPackage.ROOM_CLASS: return createRoomClass();
+			case RoomPackage.STRUCTURE_CLASS: return createStructureClass();
+			case RoomPackage.ACTOR_CONTAINER_CLASS: return createActorContainerClass();
+			case RoomPackage.VAR_DECL: return createVarDecl();
+			case RoomPackage.MESSAGE_DATA: return createMessageData();
+			case RoomPackage.REFABLE_TYPE: return createRefableType();
+			case RoomPackage.DATA_TYPE: return createDataType();
+			case RoomPackage.COMPLEX_TYPE: return createComplexType();
+			case RoomPackage.PRIMITIVE_TYPE: return createPrimitiveType();
+			case RoomPackage.ENUMERATION_TYPE: return createEnumerationType();
+			case RoomPackage.ENUM_LITERAL: return createEnumLiteral();
+			case RoomPackage.EXTERNAL_TYPE: return createExternalType();
+			case RoomPackage.DATA_CLASS: return createDataClass();
+			case RoomPackage.ATTRIBUTE: return createAttribute();
+			case RoomPackage.OPERATION: return createOperation();
+			case RoomPackage.STANDARD_OPERATION: return createStandardOperation();
+			case RoomPackage.PORT_OPERATION: return createPortOperation();
+			case RoomPackage.CLASS_STRUCTOR: return createClassStructor();
+			case RoomPackage.PROTOCOL_CLASS: return createProtocolClass();
+			case RoomPackage.MESSAGE: return createMessage();
+			case RoomPackage.PORT_CLASS: return createPortClass();
+			case RoomPackage.MESSAGE_HANDLER: return createMessageHandler();
+			case RoomPackage.IN_MESSAGE_HANDLER: return createInMessageHandler();
+			case RoomPackage.OUT_MESSAGE_HANDLER: return createOutMessageHandler();
+			case RoomPackage.ACTOR_CLASS: return createActorClass();
+			case RoomPackage.INTERFACE_ITEM: return createInterfaceItem();
+			case RoomPackage.PORT: return createPort();
+			case RoomPackage.EXTERNAL_PORT: return createExternalPort();
+			case RoomPackage.SAP: return createSAP();
+			case RoomPackage.SPP: return createSPP();
+			case RoomPackage.SERVICE_IMPLEMENTATION: return createServiceImplementation();
+			case RoomPackage.LOGICAL_SYSTEM: return createLogicalSystem();
+			case RoomPackage.ACTOR_CONTAINER_REF: return createActorContainerRef();
+			case RoomPackage.SUB_SYSTEM_REF: return createSubSystemRef();
+			case RoomPackage.SUB_SYSTEM_CLASS: return createSubSystemClass();
+			case RoomPackage.LOGICAL_THREAD: return createLogicalThread();
+			case RoomPackage.ACTOR_INSTANCE_MAPPING: return createActorInstanceMapping();
+			case RoomPackage.REF_PATH: return createRefPath();
+			case RoomPackage.REF_SEGMENT: return createRefSegment();
+			case RoomPackage.BINDING: return createBinding();
+			case RoomPackage.BINDING_END_POINT: return createBindingEndPoint();
+			case RoomPackage.LAYER_CONNECTION: return createLayerConnection();
+			case RoomPackage.SA_POINT: return createSAPoint();
+			case RoomPackage.REF_SA_POINT: return createRefSAPoint();
+			case RoomPackage.RELAY_SA_POINT: return createRelaySAPoint();
+			case RoomPackage.SP_POINT: return createSPPoint();
+			case RoomPackage.ACTOR_REF: return createActorRef();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object createFromString(EDataType eDataType, String initialValue)
   {
-    switch (eDataType.getClassifierID())
-    {
-      case RoomPackage.COMMUNICATION_TYPE:
-        return createCommunicationTypeFromString(eDataType, initialValue);
-      case RoomPackage.REFERENCE_TYPE:
-        return createReferenceTypeFromString(eDataType, initialValue);
-      case RoomPackage.ROOM_ANNOTATION_TARGET_ENUM:
-        return createRoomAnnotationTargetEnumFromString(eDataType, initialValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eDataType.getClassifierID()) {
+			case RoomPackage.COMMUNICATION_TYPE:
+				return createCommunicationTypeFromString(eDataType, initialValue);
+			case RoomPackage.REFERENCE_TYPE:
+				return createReferenceTypeFromString(eDataType, initialValue);
+			case RoomPackage.ROOM_ANNOTATION_TARGET_ENUM:
+				return createRoomAnnotationTargetEnumFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String convertToString(EDataType eDataType, Object instanceValue)
   {
-    switch (eDataType.getClassifierID())
-    {
-      case RoomPackage.COMMUNICATION_TYPE:
-        return convertCommunicationTypeToString(eDataType, instanceValue);
-      case RoomPackage.REFERENCE_TYPE:
-        return convertReferenceTypeToString(eDataType, instanceValue);
-      case RoomPackage.ROOM_ANNOTATION_TARGET_ENUM:
-        return convertRoomAnnotationTargetEnumToString(eDataType, instanceValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eDataType.getClassifierID()) {
+			case RoomPackage.COMMUNICATION_TYPE:
+				return convertCommunicationTypeToString(eDataType, instanceValue);
+			case RoomPackage.REFERENCE_TYPE:
+				return convertReferenceTypeToString(eDataType, instanceValue);
+			case RoomPackage.ROOM_ANNOTATION_TARGET_ENUM:
+				return convertRoomAnnotationTargetEnumToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RoomModel createRoomModel()
+	 * @generated
+	 */
+  @Override
+		public RoomModel createRoomModel()
   {
-    RoomModelImpl roomModel = new RoomModelImpl();
-    return roomModel;
-  }
+		RoomModelImpl roomModel = new RoomModelImpl();
+		return roomModel;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RoomClass createRoomClass()
+	 * @generated
+	 */
+  @Override
+		public RoomClass createRoomClass()
   {
-    RoomClassImpl roomClass = new RoomClassImpl();
-    return roomClass;
-  }
+		RoomClassImpl roomClass = new RoomClassImpl();
+		return roomClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public StructureClass createStructureClass()
+	 * @generated
+	 */
+  @Override
+		public StructureClass createStructureClass()
   {
-    StructureClassImpl structureClass = new StructureClassImpl();
-    return structureClass;
-  }
+		StructureClassImpl structureClass = new StructureClassImpl();
+		return structureClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActorContainerClass createActorContainerClass()
+	 * @generated
+	 */
+  @Override
+		public ActorContainerClass createActorContainerClass()
   {
-    ActorContainerClassImpl actorContainerClass = new ActorContainerClassImpl();
-    return actorContainerClass;
-  }
+		ActorContainerClassImpl actorContainerClass = new ActorContainerClassImpl();
+		return actorContainerClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public VarDecl createVarDecl()
+	 * @generated
+	 */
+  @Override
+		public VarDecl createVarDecl()
   {
-    VarDeclImpl varDecl = new VarDeclImpl();
-    return varDecl;
-  }
+		VarDeclImpl varDecl = new VarDeclImpl();
+		return varDecl;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public MessageData createMessageData()
+	 * @generated
+	 */
+  @Override
+		public MessageData createMessageData()
   {
-    MessageDataImpl messageData = new MessageDataImpl();
-    return messageData;
-  }
+		MessageDataImpl messageData = new MessageDataImpl();
+		return messageData;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RefableType createRefableType()
+	 * @generated
+	 */
+  @Override
+		public RefableType createRefableType()
   {
-    RefableTypeImpl refableType = new RefableTypeImpl();
-    return refableType;
-  }
+		RefableTypeImpl refableType = new RefableTypeImpl();
+		return refableType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public DataType createDataType()
+	 * @generated
+	 */
+  @Override
+		public DataType createDataType()
   {
-    DataTypeImpl dataType = new DataTypeImpl();
-    return dataType;
-  }
+		DataTypeImpl dataType = new DataTypeImpl();
+		return dataType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ComplexType createComplexType()
+	 * @generated
+	 */
+  @Override
+		public ComplexType createComplexType()
   {
-    ComplexTypeImpl complexType = new ComplexTypeImpl();
-    return complexType;
-  }
+		ComplexTypeImpl complexType = new ComplexTypeImpl();
+		return complexType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public PrimitiveType createPrimitiveType()
+	 * @generated
+	 */
+  @Override
+		public PrimitiveType createPrimitiveType()
   {
-    PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
-    return primitiveType;
-  }
+		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
+		return primitiveType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EnumerationType createEnumerationType()
+	 * @generated
+	 */
+  @Override
+		public EnumerationType createEnumerationType()
   {
-    EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
-    return enumerationType;
-  }
+		EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
+		return enumerationType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public EnumLiteral createEnumLiteral()
+	 * @generated
+	 */
+  @Override
+		public EnumLiteral createEnumLiteral()
   {
-    EnumLiteralImpl enumLiteral = new EnumLiteralImpl();
-    return enumLiteral;
-  }
+		EnumLiteralImpl enumLiteral = new EnumLiteralImpl();
+		return enumLiteral;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExternalType createExternalType()
+	 * @generated
+	 */
+  @Override
+		public ExternalType createExternalType()
   {
-    ExternalTypeImpl externalType = new ExternalTypeImpl();
-    return externalType;
-  }
+		ExternalTypeImpl externalType = new ExternalTypeImpl();
+		return externalType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public DataClass createDataClass()
+	 * @generated
+	 */
+  @Override
+		public DataClass createDataClass()
   {
-    DataClassImpl dataClass = new DataClassImpl();
-    return dataClass;
-  }
+		DataClassImpl dataClass = new DataClassImpl();
+		return dataClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Attribute createAttribute()
+	 * @generated
+	 */
+  @Override
+		public Attribute createAttribute()
   {
-    AttributeImpl attribute = new AttributeImpl();
-    return attribute;
-  }
+		AttributeImpl attribute = new AttributeImpl();
+		return attribute;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Operation createOperation()
+	 * @generated
+	 */
+  @Override
+		public Operation createOperation()
   {
-    OperationImpl operation = new OperationImpl();
-    return operation;
-  }
+		OperationImpl operation = new OperationImpl();
+		return operation;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public StandardOperation createStandardOperation()
+	 * @generated
+	 */
+  @Override
+		public StandardOperation createStandardOperation()
   {
-    StandardOperationImpl standardOperation = new StandardOperationImpl();
-    return standardOperation;
-  }
+		StandardOperationImpl standardOperation = new StandardOperationImpl();
+		return standardOperation;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public PortOperation createPortOperation()
+	 * @generated
+	 */
+  @Override
+		public PortOperation createPortOperation()
   {
-    PortOperationImpl portOperation = new PortOperationImpl();
-    return portOperation;
-  }
+		PortOperationImpl portOperation = new PortOperationImpl();
+		return portOperation;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ClassStructor createClassStructor()
+	 * @generated
+	 */
+  @Override
+		public ClassStructor createClassStructor()
   {
-    ClassStructorImpl classStructor = new ClassStructorImpl();
-    return classStructor;
-  }
+		ClassStructorImpl classStructor = new ClassStructorImpl();
+		return classStructor;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ProtocolClass createProtocolClass()
+	 * @generated
+	 */
+  @Override
+		public ProtocolClass createProtocolClass()
   {
-    ProtocolClassImpl protocolClass = new ProtocolClassImpl();
-    return protocolClass;
-  }
+		ProtocolClassImpl protocolClass = new ProtocolClassImpl();
+		return protocolClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Message createMessage()
+	 * @generated
+	 */
+  @Override
+		public Message createMessage()
   {
-    MessageImpl message = new MessageImpl();
-    return message;
-  }
+		MessageImpl message = new MessageImpl();
+		return message;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public PortClass createPortClass()
+	 * @generated
+	 */
+  @Override
+		public PortClass createPortClass()
   {
-    PortClassImpl portClass = new PortClassImpl();
-    return portClass;
-  }
+		PortClassImpl portClass = new PortClassImpl();
+		return portClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public MessageHandler createMessageHandler()
+	 * @generated
+	 */
+  @Override
+		public MessageHandler createMessageHandler()
   {
-    MessageHandlerImpl messageHandler = new MessageHandlerImpl();
-    return messageHandler;
-  }
+		MessageHandlerImpl messageHandler = new MessageHandlerImpl();
+		return messageHandler;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public InMessageHandler createInMessageHandler()
+	 * @generated
+	 */
+  @Override
+		public InMessageHandler createInMessageHandler()
   {
-    InMessageHandlerImpl inMessageHandler = new InMessageHandlerImpl();
-    return inMessageHandler;
-  }
+		InMessageHandlerImpl inMessageHandler = new InMessageHandlerImpl();
+		return inMessageHandler;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public OutMessageHandler createOutMessageHandler()
+	 * @generated
+	 */
+  @Override
+		public OutMessageHandler createOutMessageHandler()
   {
-    OutMessageHandlerImpl outMessageHandler = new OutMessageHandlerImpl();
-    return outMessageHandler;
-  }
+		OutMessageHandlerImpl outMessageHandler = new OutMessageHandlerImpl();
+		return outMessageHandler;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActorClass createActorClass()
+	 * @generated
+	 */
+  @Override
+		public ActorClass createActorClass()
   {
-    ActorClassImpl actorClass = new ActorClassImpl();
-    return actorClass;
-  }
+		ActorClassImpl actorClass = new ActorClassImpl();
+		return actorClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfaceItem createInterfaceItem()
+	 * @generated
+	 */
+  @Override
+		public InterfaceItem createInterfaceItem()
   {
-    InterfaceItemImpl interfaceItem = new InterfaceItemImpl();
-    return interfaceItem;
-  }
+		InterfaceItemImpl interfaceItem = new InterfaceItemImpl();
+		return interfaceItem;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Port createPort()
+	 * @generated
+	 */
+  @Override
+		public Port createPort()
   {
-    PortImpl port = new PortImpl();
-    return port;
-  }
+		PortImpl port = new PortImpl();
+		return port;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExternalPort createExternalPort()
+	 * @generated
+	 */
+  @Override
+		public ExternalPort createExternalPort()
   {
-    ExternalPortImpl externalPort = new ExternalPortImpl();
-    return externalPort;
-  }
+		ExternalPortImpl externalPort = new ExternalPortImpl();
+		return externalPort;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SAP createSAP()
+	 * @generated
+	 */
+  @Override
+		public SAP createSAP()
   {
-    SAPImpl sap = new SAPImpl();
-    return sap;
-  }
+		SAPImpl sap = new SAPImpl();
+		return sap;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SPP createSPP()
+	 * @generated
+	 */
+  @Override
+		public SPP createSPP()
   {
-    SPPImpl spp = new SPPImpl();
-    return spp;
-  }
+		SPPImpl spp = new SPPImpl();
+		return spp;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ServiceImplementation createServiceImplementation()
+	 * @generated
+	 */
+  @Override
+		public ServiceImplementation createServiceImplementation()
   {
-    ServiceImplementationImpl serviceImplementation = new ServiceImplementationImpl();
-    return serviceImplementation;
-  }
+		ServiceImplementationImpl serviceImplementation = new ServiceImplementationImpl();
+		return serviceImplementation;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public LogicalSystem createLogicalSystem()
+	 * @generated
+	 */
+  @Override
+		public LogicalSystem createLogicalSystem()
   {
-    LogicalSystemImpl logicalSystem = new LogicalSystemImpl();
-    return logicalSystem;
-  }
+		LogicalSystemImpl logicalSystem = new LogicalSystemImpl();
+		return logicalSystem;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActorContainerRef createActorContainerRef()
+	 * @generated
+	 */
+  @Override
+		public ActorContainerRef createActorContainerRef()
   {
-    ActorContainerRefImpl actorContainerRef = new ActorContainerRefImpl();
-    return actorContainerRef;
-  }
+		ActorContainerRefImpl actorContainerRef = new ActorContainerRefImpl();
+		return actorContainerRef;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SubSystemRef createSubSystemRef()
+	 * @generated
+	 */
+  @Override
+		public SubSystemRef createSubSystemRef()
   {
-    SubSystemRefImpl subSystemRef = new SubSystemRefImpl();
-    return subSystemRef;
-  }
+		SubSystemRefImpl subSystemRef = new SubSystemRefImpl();
+		return subSystemRef;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SubSystemClass createSubSystemClass()
+	 * @generated
+	 */
+  @Override
+		public SubSystemClass createSubSystemClass()
   {
-    SubSystemClassImpl subSystemClass = new SubSystemClassImpl();
-    return subSystemClass;
-  }
+		SubSystemClassImpl subSystemClass = new SubSystemClassImpl();
+		return subSystemClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public LogicalThread createLogicalThread()
+	 * @generated
+	 */
+  @Override
+		public LogicalThread createLogicalThread()
   {
-    LogicalThreadImpl logicalThread = new LogicalThreadImpl();
-    return logicalThread;
-  }
+		LogicalThreadImpl logicalThread = new LogicalThreadImpl();
+		return logicalThread;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActorInstanceMapping createActorInstanceMapping()
+	 * @generated
+	 */
+  @Override
+		public ActorInstanceMapping createActorInstanceMapping()
   {
-    ActorInstanceMappingImpl actorInstanceMapping = new ActorInstanceMappingImpl();
-    return actorInstanceMapping;
-  }
+		ActorInstanceMappingImpl actorInstanceMapping = new ActorInstanceMappingImpl();
+		return actorInstanceMapping;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RefPath createRefPath()
+	 * @generated
+	 */
+  @Override
+		public RefPath createRefPath()
   {
-    RefPathImpl refPath = new RefPathImpl();
-    return refPath;
-  }
+		RefPathImpl refPath = new RefPathImpl();
+		return refPath;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RefSegment createRefSegment()
+	 * @generated
+	 */
+  @Override
+		public RefSegment createRefSegment()
   {
-    RefSegmentImpl refSegment = new RefSegmentImpl();
-    return refSegment;
-  }
+		RefSegmentImpl refSegment = new RefSegmentImpl();
+		return refSegment;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Binding createBinding()
+	 * @generated
+	 */
+  @Override
+		public Binding createBinding()
   {
-    BindingImpl binding = new BindingImpl();
-    return binding;
-  }
+		BindingImpl binding = new BindingImpl();
+		return binding;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public BindingEndPoint createBindingEndPoint()
+	 * @generated
+	 */
+  @Override
+		public BindingEndPoint createBindingEndPoint()
   {
-    BindingEndPointImpl bindingEndPoint = new BindingEndPointImpl();
-    return bindingEndPoint;
-  }
+		BindingEndPointImpl bindingEndPoint = new BindingEndPointImpl();
+		return bindingEndPoint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public LayerConnection createLayerConnection()
+	 * @generated
+	 */
+  @Override
+		public LayerConnection createLayerConnection()
   {
-    LayerConnectionImpl layerConnection = new LayerConnectionImpl();
-    return layerConnection;
-  }
+		LayerConnectionImpl layerConnection = new LayerConnectionImpl();
+		return layerConnection;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SAPoint createSAPoint()
+	 * @generated
+	 */
+  @Override
+		public SAPoint createSAPoint()
   {
-    SAPointImpl saPoint = new SAPointImpl();
-    return saPoint;
-  }
+		SAPointImpl saPoint = new SAPointImpl();
+		return saPoint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RefSAPoint createRefSAPoint()
+	 * @generated
+	 */
+  @Override
+		public RefSAPoint createRefSAPoint()
   {
-    RefSAPointImpl refSAPoint = new RefSAPointImpl();
-    return refSAPoint;
-  }
+		RefSAPointImpl refSAPoint = new RefSAPointImpl();
+		return refSAPoint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RelaySAPoint createRelaySAPoint()
+	 * @generated
+	 */
+  @Override
+		public RelaySAPoint createRelaySAPoint()
   {
-    RelaySAPointImpl relaySAPoint = new RelaySAPointImpl();
-    return relaySAPoint;
-  }
+		RelaySAPointImpl relaySAPoint = new RelaySAPointImpl();
+		return relaySAPoint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public SPPoint createSPPoint()
+	 * @generated
+	 */
+  @Override
+		public SPPoint createSPPoint()
   {
-    SPPointImpl spPoint = new SPPointImpl();
-    return spPoint;
-  }
+		SPPointImpl spPoint = new SPPointImpl();
+		return spPoint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActorRef createActorRef()
+	 * @generated
+	 */
+  @Override
+		public ActorRef createActorRef()
   {
-    ActorRefImpl actorRef = new ActorRefImpl();
-    return actorRef;
-  }
+		ActorRefImpl actorRef = new ActorRefImpl();
+		return actorRef;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public CommunicationType createCommunicationTypeFromString(EDataType eDataType, String initialValue)
   {
-    CommunicationType result = CommunicationType.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
+		CommunicationType result = CommunicationType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String convertCommunicationTypeToString(EDataType eDataType, Object instanceValue)
   {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ReferenceType createReferenceTypeFromString(EDataType eDataType, String initialValue)
   {
-    ReferenceType result = ReferenceType.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
+		ReferenceType result = ReferenceType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String convertReferenceTypeToString(EDataType eDataType, Object instanceValue)
   {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public RoomAnnotationTargetEnum createRoomAnnotationTargetEnumFromString(EDataType eDataType, String initialValue)
   {
-    RoomAnnotationTargetEnum result = RoomAnnotationTargetEnum.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
+		RoomAnnotationTargetEnum result = RoomAnnotationTargetEnum.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String convertRoomAnnotationTargetEnumToString(EDataType eDataType, Object instanceValue)
   {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public RoomPackage getRoomPackage()
+	 * @generated
+	 */
+  @Override
+		public RoomPackage getRoomPackage()
   {
-    return (RoomPackage)getEPackage();
-  }
+		return (RoomPackage)getEPackage();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+	 * @deprecated
+	 * @generated
+	 */
   @Deprecated
   public static RoomPackage getPackage()
   {
-    return RoomPackage.eINSTANCE;
-  }
+		return RoomPackage.eINSTANCE;
+	}
 
 } //RoomFactoryImpl

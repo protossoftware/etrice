@@ -29,55 +29,55 @@ package org.eclipse.etrice.core.room;
 public interface SPPoint extends RoomElement
 {
   /**
-   * Returns the value of the '<em><b>Ref</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the referenced actor container ref.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Ref</em>' reference.
-   * @see #setRef(ActorContainerRef)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getSPPoint_Ref()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is the referenced actor container ref.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(ActorContainerRef)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getSPPoint_Ref()
+	 * @model
+	 * @generated
+	 */
   ActorContainerRef getRef();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.SPPoint#getRef <em>Ref</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.SPPoint#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ref</em>' reference.
-   * @see #getRef()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
   void setRef(ActorContainerRef value);
 
   /**
-   * Returns the value of the '<em><b>Service</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Service</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the referenced service.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Service</em>' reference.
-   * @see #setService(SPP)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getSPPoint_Service()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is the referenced service.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Service</em>' reference.
+	 * @see #setService(SPP)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getSPPoint_Service()
+	 * @model
+	 * @generated
+	 */
   SPP getService();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.SPPoint#getService <em>Service</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.SPPoint#getService <em>Service</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Service</em>' reference.
-   * @see #getService()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Service</em>' reference.
+	 * @see #getService()
+	 * @generated
+	 */
   void setService(SPP value);
 
 } // SPPoint

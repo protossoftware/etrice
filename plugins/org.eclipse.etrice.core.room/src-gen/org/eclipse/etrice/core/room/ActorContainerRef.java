@@ -35,64 +35,63 @@ import org.eclipse.etrice.core.common.base.Documentation;
 public interface ActorContainerRef extends RoomElement
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>By this name the actor container reference is referred to in the model.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerRef_Name()
-   * @model
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>By this name the actor container reference is referred to in the model.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerRef_Name()
+	 * @model
+	 * @generated
+	 */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorContainerRef#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorContainerRef#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Docu</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is an optional documentation.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Docu</em>' containment reference.
-   * @see #setDocu(Documentation)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerRef_Docu()
-   * @model containment="true"
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>This is an optional documentation.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Docu</em>' containment reference.
+	 * @see #setDocu(Documentation)
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerRef_Docu()
+	 * @model containment="true"
+	 * @generated
+	 */
   Documentation getDocu();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorContainerRef#getDocu <em>Docu</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorContainerRef#getDocu <em>Docu</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Docu</em>' containment reference.
-   * @see #getDocu()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Docu</em>' containment reference.
+	 * @see #getDocu()
+	 * @generated
+	 */
   void setDocu(Documentation value);
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof &lt;%org.eclipse.etrice.core.room.ActorRef%&gt;)\r\n\treturn ((ActorRef)this).getType();\r\nelse if (this instanceof &lt;%org.eclipse.etrice.core.room.SubSystemRef%&gt;)\r\n\treturn ((SubSystemRef)this).getType();\r\nelse\r\n\treturn null;\r\n'"
-   * @generated
-   */
+	 * @model kind="operation"
+	 * @generated
+	 */
   StructureClass getStructureClass();
 
 } // ActorContainerRef

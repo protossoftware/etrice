@@ -37,19 +37,19 @@ import org.eclipse.emf.common.util.EList;
 public interface LogicalSystem extends StructureClass
 {
   /**
-   * Returns the value of the '<em><b>Sub Systems</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.SubSystemRef}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Sub Systems</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.room.SubSystemRef}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>The list of all sub systems contained in the logical system.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Sub Systems</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getLogicalSystem_SubSystems()
-   * @model containment="true"
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * <br>The list of all sub systems contained in the logical system.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Sub Systems</em>' containment reference list.
+	 * @see org.eclipse.etrice.core.room.RoomPackage#getLogicalSystem_SubSystems()
+	 * @model containment="true"
+	 * @generated
+	 */
   EList<SubSystemRef> getSubSystems();
 
 } // LogicalSystem

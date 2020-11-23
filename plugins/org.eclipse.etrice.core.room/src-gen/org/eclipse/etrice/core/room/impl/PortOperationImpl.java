@@ -30,144 +30,140 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class PortOperationImpl extends OperationImpl implements PortOperation
 {
   /**
-   * The cached value of the '{@link #getSendsMsg() <em>Sends Msg</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSendsMsg() <em>Sends Msg</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSendsMsg()
-   * @generated
-   * @ordered
-   */
+	 * @see #getSendsMsg()
+	 * @generated
+	 * @ordered
+	 */
   protected Message sendsMsg;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected PortOperationImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.PORT_OPERATION;
-  }
+		return RoomPackage.Literals.PORT_OPERATION;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public Message getSendsMsg()
+	 * @generated
+	 */
+  @Override
+		public Message getSendsMsg()
   {
-    if (sendsMsg != null && sendsMsg.eIsProxy())
-    {
-      InternalEObject oldSendsMsg = (InternalEObject)sendsMsg;
-      sendsMsg = (Message)eResolveProxy(oldSendsMsg);
-      if (sendsMsg != oldSendsMsg)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.PORT_OPERATION__SENDS_MSG, oldSendsMsg, sendsMsg));
-      }
-    }
-    return sendsMsg;
-  }
+		if (sendsMsg != null && sendsMsg.eIsProxy()) {
+			InternalEObject oldSendsMsg = (InternalEObject)sendsMsg;
+			sendsMsg = (Message)eResolveProxy(oldSendsMsg);
+			if (sendsMsg != oldSendsMsg) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.PORT_OPERATION__SENDS_MSG, oldSendsMsg, sendsMsg));
+			}
+		}
+		return sendsMsg;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Message basicGetSendsMsg()
   {
-    return sendsMsg;
-  }
+		return sendsMsg;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setSendsMsg(Message newSendsMsg)
+	 * @generated
+	 */
+  @Override
+		public void setSendsMsg(Message newSendsMsg)
   {
-    Message oldSendsMsg = sendsMsg;
-    sendsMsg = newSendsMsg;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT_OPERATION__SENDS_MSG, oldSendsMsg, sendsMsg));
-  }
+		Message oldSendsMsg = sendsMsg;
+		sendsMsg = newSendsMsg;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT_OPERATION__SENDS_MSG, oldSendsMsg, sendsMsg));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RoomPackage.PORT_OPERATION__SENDS_MSG:
-        if (resolve) return getSendsMsg();
-        return basicGetSendsMsg();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RoomPackage.PORT_OPERATION__SENDS_MSG:
+				if (resolve) return getSendsMsg();
+				return basicGetSendsMsg();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RoomPackage.PORT_OPERATION__SENDS_MSG:
-        setSendsMsg((Message)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RoomPackage.PORT_OPERATION__SENDS_MSG:
+				setSendsMsg((Message)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.PORT_OPERATION__SENDS_MSG:
-        setSendsMsg((Message)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.PORT_OPERATION__SENDS_MSG:
+				setSendsMsg((Message)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RoomPackage.PORT_OPERATION__SENDS_MSG:
-        return sendsMsg != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RoomPackage.PORT_OPERATION__SENDS_MSG:
+				return sendsMsg != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //PortOperationImpl
