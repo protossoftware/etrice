@@ -109,6 +109,7 @@ public abstract class WiredStructureClassImpl extends EObjectImpl implements Wir
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Wire> getWires() {
 		if (wires == null) {
 			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ETriceGenPackage.WIRED_STRUCTURE_CLASS__WIRES);
@@ -121,6 +122,7 @@ public abstract class WiredStructureClassImpl extends EObjectImpl implements Wir
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OpenBinding> getOpenBindings() {
 		if (openBindings == null) {
 			openBindings = new EObjectContainmentEList<OpenBinding>(OpenBinding.class, this, ETriceGenPackage.WIRED_STRUCTURE_CLASS__OPEN_BINDINGS);
@@ -133,6 +135,7 @@ public abstract class WiredStructureClassImpl extends EObjectImpl implements Wir
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OpenServiceConnection> getProvidedServices() {
 		if (providedServices == null) {
 			providedServices = new EObjectContainmentEList<OpenServiceConnection>(OpenServiceConnection.class, this, ETriceGenPackage.WIRED_STRUCTURE_CLASS__PROVIDED_SERVICES);
@@ -145,6 +148,7 @@ public abstract class WiredStructureClassImpl extends EObjectImpl implements Wir
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OpenServiceConnection> getRequiredServices() {
 		if (requiredServices == null) {
 			requiredServices = new EObjectContainmentEList<OpenServiceConnection>(OpenServiceConnection.class, this, ETriceGenPackage.WIRED_STRUCTURE_CLASS__REQUIRED_SERVICES);

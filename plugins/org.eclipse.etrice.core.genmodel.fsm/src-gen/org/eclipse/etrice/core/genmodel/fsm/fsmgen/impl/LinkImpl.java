@@ -141,6 +141,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph getGraph() {
 		if (eContainerFeatureID() != FsmGenPackage.LINK__GRAPH) return null;
 		return (Graph)eInternalContainer();
@@ -161,6 +162,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGraph(Graph newGraph) {
 		if (newGraph != eInternalContainer() || (eContainerFeatureID() != FsmGenPackage.LINK__GRAPH && newGraph != null)) {
 			if (EcoreUtil.isAncestor(this, newGraph))
@@ -182,6 +184,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -223,6 +226,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(Node newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;
@@ -242,6 +246,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -283,6 +288,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(Node newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
@@ -302,6 +308,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Link> getChainHeads() {
 		if (chainHeads == null) {
 			chainHeads = new EObjectResolvingEList<Link>(Link.class, this, FsmGenPackage.LINK__CHAIN_HEADS);
@@ -314,6 +321,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIfitemTriggered() {
 		return ifitemTriggered;
 	}
@@ -323,6 +331,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIfitemTriggered(boolean newIfitemTriggered) {
 		boolean oldIfitemTriggered = ifitemTriggered;
 		ifitemTriggered = newIfitemTriggered;
@@ -335,6 +344,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getCommonData() {
 		if (commonData != null && commonData.eIsProxy()) {
 			InternalEObject oldCommonData = (InternalEObject)commonData;
@@ -361,6 +371,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCommonData(EObject newCommonData) {
 		EObject oldCommonData = commonData;
 		commonData = newCommonData;
@@ -373,6 +384,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransitionBase getTransition() {
 		if (transition != null && transition.eIsProxy()) {
 			InternalEObject oldTransition = (InternalEObject)transition;
@@ -399,6 +411,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransition(TransitionBase newTransition) {
 		TransitionBase oldTransition = transition;
 		transition = newTransition;
@@ -411,12 +424,13 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (getTransition() instanceof InitialTransition) {
 			return "Link initial -> " + getTarget().toString() + " (InitialTransition)";
 		}
 		else if (getTransition() instanceof NonInitialTransition) {
-			return "Link " + getSource().toString() + " -> " + getTarget().toString() + " (NonInitialTransition)";
+			return "Link " + getSource().toString() + " -> " + getTarget().toString() + " (InitialTransition)";
 		}
 		else if (getTransition() instanceof RefinedTransition) {
 			return "RefinedTransition";

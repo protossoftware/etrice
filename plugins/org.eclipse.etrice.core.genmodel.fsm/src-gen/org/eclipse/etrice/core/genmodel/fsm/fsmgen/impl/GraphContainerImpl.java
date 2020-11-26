@@ -137,6 +137,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph getGraph() {
 		return graph;
 	}
@@ -161,6 +162,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGraph(Graph newGraph) {
 		if (newGraph != graph) {
 			NotificationChain msgs = null;
@@ -180,6 +182,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ModelComponent getComponent() {
 		if (component != null && component.eIsProxy()) {
 			InternalEObject oldComponent = (InternalEObject)component;
@@ -206,6 +209,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setComponent(ModelComponent newComponent) {
 		ModelComponent oldComponent = component;
 		component = newComponent;
@@ -218,6 +222,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isInitializedTriggersInStates() {
 		return initializedTriggersInStates;
 	}
@@ -227,6 +232,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitializedTriggersInStates(boolean newInitializedTriggersInStates) {
 		boolean oldInitializedTriggersInStates = initializedTriggersInStates;
 		initializedTriggersInStates = newInitializedTriggersInStates;
@@ -239,6 +245,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isInitializedChainHeads() {
 		return initializedChainHeads;
 	}
@@ -248,6 +255,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitializedChainHeads(boolean newInitializedChainHeads) {
 		boolean oldInitializedChainHeads = initializedChainHeads;
 		initializedChainHeads = newInitializedChainHeads;
@@ -260,6 +268,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isInitializedCommonData() {
 		return initializedCommonData;
 	}
@@ -269,6 +278,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitializedCommonData(boolean newInitializedCommonData) {
 		boolean oldInitializedCommonData = initializedCommonData;
 		initializedCommonData = newInitializedCommonData;
@@ -398,7 +408,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (initializedTriggersInStates: ");
 		result.append(initializedTriggersInStates);
 		result.append(", initializedChainHeads: ");

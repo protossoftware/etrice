@@ -94,6 +94,7 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PortInstance> getPorts() {
 		if (ports == null) {
 			ports = new EObjectWithInverseResolvingEList.ManyInverse<PortInstance>(PortInstance.class, this, ETriceGenPackage.BINDING_INSTANCE__PORTS, ETriceGenPackage.PORT_INSTANCE__BINDINGS);
@@ -106,6 +107,7 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Binding getBinding() {
 		if (binding != null && binding.eIsProxy()) {
 			InternalEObject oldBinding = (InternalEObject)binding;
@@ -132,6 +134,7 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBinding(Binding newBinding) {
 		Binding oldBinding = binding;
 		binding = newBinding;

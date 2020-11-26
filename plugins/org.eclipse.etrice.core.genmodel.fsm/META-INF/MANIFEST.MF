@@ -10,12 +10,12 @@ Export-Package: org.eclipse.etrice.core.genmodel.fsm,
  org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl,
  org.eclipse.etrice.core.genmodel.fsm.fsmgen.util
 Require-Bundle: org.eclipse.etrice.core.common;visibility:=reexport,
-  org.eclipse.etrice.core.fsm;visibility:=reexport,
+ org.eclipse.etrice.core.fsm;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
-  org.eclipse.etrice.generator.base
+ org.eclipse.etrice.generator.base
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

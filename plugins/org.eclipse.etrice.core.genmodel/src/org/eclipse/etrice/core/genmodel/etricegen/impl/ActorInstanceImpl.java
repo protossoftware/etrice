@@ -103,6 +103,7 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ActorClass getActorClass() {
 		if (actorClass != null && actorClass.eIsProxy()) {
 			InternalEObject oldActorClass = (InternalEObject)actorClass;
@@ -129,6 +130,7 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setActorClass(ActorClass newActorClass) {
 		ActorClass oldActorClass = actorClass;
 		actorClass = newActorClass;
@@ -141,6 +143,7 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getReplIdx() {
 		return replIdx;
 	}
@@ -150,6 +153,7 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReplIdx(int newReplIdx) {
 		int oldReplIdx = replIdx;
 		replIdx = newReplIdx;
@@ -248,7 +252,7 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (replIdx: ");
 		result.append(replIdx);
 		result.append(')');

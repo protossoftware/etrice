@@ -104,6 +104,7 @@ public class WireImpl extends EObjectImpl implements Wire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isDataDriven() {
 		return dataDriven;
 	}
@@ -113,6 +114,7 @@ public class WireImpl extends EObjectImpl implements Wire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDataDriven(boolean newDataDriven) {
 		boolean oldDataDriven = dataDriven;
 		dataDriven = newDataDriven;
@@ -125,6 +127,7 @@ public class WireImpl extends EObjectImpl implements Wire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getPath1() {
 		if (path1 == null) {
 			path1 = new EDataTypeEList<String>(String.class, this, ETriceGenPackage.WIRE__PATH1);
@@ -137,6 +140,7 @@ public class WireImpl extends EObjectImpl implements Wire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getPath2() {
 		if (path2 == null) {
 			path2 = new EDataTypeEList<String>(String.class, this, ETriceGenPackage.WIRE__PATH2);

@@ -85,6 +85,7 @@ public class OpenServiceConnectionImpl extends EObjectImpl implements OpenServic
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getPath() {
 		if (path == null) {
 			path = new EDataTypeEList<String>(String.class, this, ETriceGenPackage.OPEN_SERVICE_CONNECTION__PATH);
@@ -97,6 +98,7 @@ public class OpenServiceConnectionImpl extends EObjectImpl implements OpenServic
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProtocolClass getProtocol() {
 		if (protocol != null && protocol.eIsProxy()) {
 			InternalEObject oldProtocol = (InternalEObject)protocol;
@@ -123,6 +125,7 @@ public class OpenServiceConnectionImpl extends EObjectImpl implements OpenServic
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProtocol(ProtocolClass newProtocol) {
 		ProtocolClass oldProtocol = protocol;
 		protocol = newProtocol;

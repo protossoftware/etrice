@@ -105,6 +105,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SPP getSpp() {
 		if (spp != null && spp.eIsProxy()) {
 			InternalEObject oldSpp = (InternalEObject)spp;
@@ -131,6 +132,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSpp(SPP newSpp) {
 		SPP oldSpp = spp;
 		spp = newSpp;
@@ -143,6 +145,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ConnectionInstance> getIncoming() {
 		if (incoming == null) {
 			incoming = new EObjectWithInverseResolvingEList<ConnectionInstance>(ConnectionInstance.class, this, ETriceGenPackage.SPP_INSTANCE__INCOMING, ETriceGenPackage.CONNECTION_INSTANCE__TO_SPP);
@@ -155,6 +158,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConnectionInstance getOutgoing() {
 		if (outgoing != null && outgoing.eIsProxy()) {
 			InternalEObject oldOutgoing = (InternalEObject)outgoing;
@@ -196,6 +200,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOutgoing(ConnectionInstance newOutgoing) {
 		if (newOutgoing != outgoing) {
 			NotificationChain msgs = null;

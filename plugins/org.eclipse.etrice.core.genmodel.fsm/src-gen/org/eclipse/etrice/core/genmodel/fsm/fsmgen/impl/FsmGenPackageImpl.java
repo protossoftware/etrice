@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.CommonTrigger;
@@ -106,7 +107,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link FsmGenPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -120,11 +121,13 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		if (isInited) return (FsmGenPackage)EPackage.Registry.INSTANCE.getEPackage(FsmGenPackage.eNS_URI);
 
 		// Obtain or create and register package
-		FsmGenPackageImpl theFsmGenPackage = (FsmGenPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FsmGenPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FsmGenPackageImpl());
+		Object registeredFsmGenPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		FsmGenPackageImpl theFsmGenPackage = registeredFsmGenPackage instanceof FsmGenPackageImpl ? (FsmGenPackageImpl)registeredFsmGenPackage : new FsmGenPackageImpl();
 
 		isInited = true;
 
 		// Initialize simple dependencies
+		BasePackage.eINSTANCE.eClass();
 		FSMPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -136,7 +139,6 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		// Mark meta-data to indicate it can't be changed
 		theFsmGenPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(FsmGenPackage.eNS_URI, theFsmGenPackage);
 		return theFsmGenPackage;
@@ -147,6 +149,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGraphContainer() {
 		return graphContainerEClass;
 	}
@@ -156,6 +159,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraphContainer_Graph() {
 		return (EReference)graphContainerEClass.getEStructuralFeatures().get(0);
 	}
@@ -165,6 +169,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraphContainer_Component() {
 		return (EReference)graphContainerEClass.getEStructuralFeatures().get(1);
 	}
@@ -174,6 +179,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGraphContainer_InitializedTriggersInStates() {
 		return (EAttribute)graphContainerEClass.getEStructuralFeatures().get(2);
 	}
@@ -183,6 +189,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGraphContainer_InitializedChainHeads() {
 		return (EAttribute)graphContainerEClass.getEStructuralFeatures().get(3);
 	}
@@ -192,6 +199,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGraphContainer_InitializedCommonData() {
 		return (EAttribute)graphContainerEClass.getEStructuralFeatures().get(4);
 	}
@@ -201,6 +209,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGraph() {
 		return graphEClass;
 	}
@@ -210,6 +219,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraph_Nodes() {
 		return (EReference)graphEClass.getEStructuralFeatures().get(0);
 	}
@@ -219,6 +229,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraph_Links() {
 		return (EReference)graphEClass.getEStructuralFeatures().get(1);
 	}
@@ -228,6 +239,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraph_StateGraph() {
 		return (EReference)graphEClass.getEStructuralFeatures().get(2);
 	}
@@ -237,6 +249,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraph_Node() {
 		return (EReference)graphEClass.getEStructuralFeatures().get(3);
 	}
@@ -246,6 +259,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getGraph__ToString() {
 		return graphEClass.getEOperations().get(0);
 	}
@@ -255,6 +269,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGraphItem() {
 		return graphItemEClass;
 	}
@@ -264,6 +279,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGraphItem_Inherited() {
 		return (EAttribute)graphItemEClass.getEStructuralFeatures().get(0);
 	}
@@ -273,6 +289,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -282,6 +299,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Graph() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -291,6 +309,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Subgraph() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -300,6 +319,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Outgoing() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -309,6 +329,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Incoming() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(3);
 	}
@@ -318,6 +339,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_StateGraphNode() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(4);
 	}
@@ -327,6 +349,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_CaughtTriggers() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(5);
 	}
@@ -336,6 +359,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode_InheritanceLevel() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(6);
 	}
@@ -345,6 +369,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getNode__ToString() {
 		return nodeEClass.getEOperations().get(0);
 	}
@@ -354,6 +379,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLink() {
 		return linkEClass;
 	}
@@ -363,6 +389,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLink_Graph() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(0);
 	}
@@ -372,6 +399,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLink_Source() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(1);
 	}
@@ -381,6 +409,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLink_Target() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(2);
 	}
@@ -390,6 +419,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLink_ChainHeads() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(3);
 	}
@@ -399,6 +429,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLink_IfitemTriggered() {
 		return (EAttribute)linkEClass.getEStructuralFeatures().get(4);
 	}
@@ -408,6 +439,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLink_CommonData() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(5);
 	}
@@ -417,6 +449,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLink_Transition() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(6);
 	}
@@ -426,6 +459,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getLink__ToString() {
 		return linkEClass.getEOperations().get(0);
 	}
@@ -435,6 +469,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCommonTrigger() {
 		return commonTriggerEClass;
 	}
@@ -444,6 +479,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCommonTrigger_Msg() {
 		return (EReference)commonTriggerEClass.getEStructuralFeatures().get(0);
 	}
@@ -453,6 +489,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCommonTrigger_Ifitem() {
 		return (EReference)commonTriggerEClass.getEStructuralFeatures().get(1);
 	}
@@ -462,6 +499,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCommonTrigger_Trigger() {
 		return (EAttribute)commonTriggerEClass.getEStructuralFeatures().get(3);
 	}
@@ -471,6 +509,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCommonTrigger_Links() {
 		return (EReference)commonTriggerEClass.getEStructuralFeatures().get(4);
 	}
@@ -480,6 +519,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFSMGenElement() {
 		return fsmGenElementEClass;
 	}
@@ -489,6 +529,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCommonTrigger_HasGuard() {
 		return (EAttribute)commonTriggerEClass.getEStructuralFeatures().get(2);
 	}
@@ -498,6 +539,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FsmGenFactory getFsmGenFactory() {
 		return (FsmGenFactory)getEFactoryInstance();
 	}

@@ -87,6 +87,7 @@ public class OptionalActorInstanceImpl extends StructureInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ActorClass getActorClass() {
 		if (actorClass != null && actorClass.eIsProxy()) {
 			InternalEObject oldActorClass = (InternalEObject)actorClass;
@@ -113,6 +114,7 @@ public class OptionalActorInstanceImpl extends StructureInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setActorClass(ActorClass newActorClass) {
 		ActorClass oldActorClass = actorClass;
 		actorClass = newActorClass;
@@ -125,6 +127,7 @@ public class OptionalActorInstanceImpl extends StructureInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SAPInstance> getRequiredServices() {
 		if (requiredServices == null) {
 			requiredServices = new EObjectResolvingEList<SAPInstance>(SAPInstance.class, this, ETriceGenPackage.OPTIONAL_ACTOR_INSTANCE__REQUIRED_SERVICES);

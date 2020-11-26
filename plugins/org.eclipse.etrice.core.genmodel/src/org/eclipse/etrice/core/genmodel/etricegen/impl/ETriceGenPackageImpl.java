@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
@@ -254,7 +255,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ETriceGenPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -268,12 +269,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		if (isInited) return (ETriceGenPackage)EPackage.Registry.INSTANCE.getEPackage(ETriceGenPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ETriceGenPackageImpl theETriceGenPackage = (ETriceGenPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ETriceGenPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ETriceGenPackageImpl());
+		Object registeredETriceGenPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ETriceGenPackageImpl theETriceGenPackage = registeredETriceGenPackage instanceof ETriceGenPackageImpl ? (ETriceGenPackageImpl)registeredETriceGenPackage : new ETriceGenPackageImpl();
 
 		isInited = true;
 
 		// Initialize simple dependencies
 		RoomPackage.eINSTANCE.eClass();
+		FSMPackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
 		FsmGenPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -285,7 +289,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		// Mark meta-data to indicate it can't be changed
 		theETriceGenPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ETriceGenPackage.eNS_URI, theETriceGenPackage);
 		return theETriceGenPackage;
@@ -296,6 +299,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRoot() {
 		return rootEClass;
 	}
@@ -305,6 +309,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRoot_Library() {
 		return (EAttribute)rootEClass.getEStructuralFeatures().get(0);
 	}
@@ -314,6 +319,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_SystemInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(1);
 	}
@@ -323,6 +329,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_OwnSubSystemInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(2);
 	}
@@ -332,6 +339,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_SubSystemInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(3);
 	}
@@ -341,6 +349,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_Models() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(4);
 	}
@@ -350,6 +359,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_ImportedModels() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(5);
 	}
@@ -359,6 +369,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_XpActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(6);
 	}
@@ -368,6 +379,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_DataClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(7);
 	}
@@ -377,6 +389,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_ProtocolClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(8);
 	}
@@ -386,6 +399,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_ActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(9);
 	}
@@ -395,6 +409,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_EnumClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(10);
 	}
@@ -404,6 +419,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_SubSystemClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(11);
 	}
@@ -413,6 +429,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_OptionalInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(12);
 	}
@@ -422,6 +439,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_OptionalActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(13);
 	}
@@ -431,6 +449,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_WiredInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(14);
 	}
@@ -440,6 +459,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInstanceBase() {
 		return instanceBaseEClass;
 	}
@@ -449,6 +469,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInstanceBase_Name() {
 		return (EAttribute)instanceBaseEClass.getEStructuralFeatures().get(0);
 	}
@@ -458,6 +479,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInstanceBase_Path() {
 		return (EAttribute)instanceBaseEClass.getEStructuralFeatures().get(1);
 	}
@@ -467,6 +489,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInstanceBase_ObjId() {
 		return (EAttribute)instanceBaseEClass.getEStructuralFeatures().get(2);
 	}
@@ -476,6 +499,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInstanceBase_ThreadId() {
 		return (EAttribute)instanceBaseEClass.getEStructuralFeatures().get(3);
 	}
@@ -485,6 +509,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInstanceBase_NObjIDs() {
 		return (EAttribute)instanceBaseEClass.getEStructuralFeatures().get(4);
 	}
@@ -494,6 +519,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAbstractInstance() {
 		return abstractInstanceEClass;
 	}
@@ -503,6 +529,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractInstance_Ports() {
 		return (EReference)abstractInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -512,6 +539,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getActorInterfaceInstance() {
 		return actorInterfaceInstanceEClass;
 	}
@@ -521,6 +549,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getActorInterfaceInstance_ActorClass() {
 		return (EReference)actorInterfaceInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -530,6 +559,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getActorInterfaceInstance_ProvidedServices() {
 		return (EReference)actorInterfaceInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -539,6 +569,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getActorInterfaceInstance_OptionalInstances() {
 		return (EReference)actorInterfaceInstanceEClass.getEStructuralFeatures().get(2);
 	}
@@ -548,6 +579,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getActorInterfaceInstance_Array() {
 		return (EAttribute)actorInterfaceInstanceEClass.getEStructuralFeatures().get(3);
 	}
@@ -557,6 +589,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStructureInstance() {
 		return structureInstanceEClass;
 	}
@@ -566,6 +599,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStructureInstance_Instances() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -575,6 +609,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStructureInstance_Saps() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -584,6 +619,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStructureInstance_Spps() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(2);
 	}
@@ -593,6 +629,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStructureInstance_Services() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(3);
 	}
@@ -602,6 +639,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStructureInstance_Bindings() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(4);
 	}
@@ -611,6 +649,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStructureInstance_Connections() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(5);
 	}
@@ -620,6 +659,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStructureInstance_AllContainedInstances() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(6);
 	}
@@ -629,6 +669,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStructureInstance_OrderedIfItemInstances() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(7);
 	}
@@ -638,6 +679,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSystemInstance() {
 		return systemInstanceEClass;
 	}
@@ -647,6 +689,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSystemInstance_Instances() {
 		return (EReference)systemInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -656,6 +699,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSystemInstance_LogicalSystem() {
 		return (EReference)systemInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -665,6 +709,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSubSystemInstance() {
 		return subSystemInstanceEClass;
 	}
@@ -674,6 +719,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubSystemInstance_SubSystemClass() {
 		return (EReference)subSystemInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -683,6 +729,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSubSystemInstance_MaxObjId() {
 		return (EAttribute)subSystemInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -692,6 +739,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getActorInstance() {
 		return actorInstanceEClass;
 	}
@@ -701,6 +749,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getActorInstance_ActorClass() {
 		return (EReference)actorInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -710,6 +759,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getActorInstance_ReplIdx() {
 		return (EAttribute)actorInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -719,6 +769,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getActorInstance_UnindexedName() {
 		return (EAttribute)actorInstanceEClass.getEStructuralFeatures().get(2);
 	}
@@ -728,6 +779,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOptionalActorInstance() {
 		return optionalActorInstanceEClass;
 	}
@@ -737,6 +789,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOptionalActorInstance_ActorClass() {
 		return (EReference)optionalActorInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -746,6 +799,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOptionalActorInstance_RequiredServices() {
 		return (EReference)optionalActorInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -755,6 +809,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInterfaceItemInstance() {
 		return interfaceItemInstanceEClass;
 	}
@@ -764,6 +819,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInterfaceItemInstance_Protocol() {
 		return (EReference)interfaceItemInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -773,6 +829,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInterfaceItemInstance_Peers() {
 		return (EReference)interfaceItemInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -782,6 +839,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPortInstance() {
 		return portInstanceEClass;
 	}
@@ -791,6 +849,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPortInstance_Port() {
 		return (EReference)portInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -800,6 +859,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPortInstance_Kind() {
 		return (EAttribute)portInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -809,6 +869,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPortInstance_Bindings() {
 		return (EReference)portInstanceEClass.getEStructuralFeatures().get(2);
 	}
@@ -818,6 +879,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBindingInstance() {
 		return bindingInstanceEClass;
 	}
@@ -827,6 +889,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBindingInstance_Ports() {
 		return (EReference)bindingInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -836,6 +899,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBindingInstance_Binding() {
 		return (EReference)bindingInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -845,6 +909,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSAPInstance() {
 		return sapInstanceEClass;
 	}
@@ -854,6 +919,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSAPInstance_Sap() {
 		return (EReference)sapInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -863,6 +929,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSPPInstance() {
 		return sppInstanceEClass;
 	}
@@ -872,6 +939,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSPPInstance_Spp() {
 		return (EReference)sppInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -881,6 +949,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSPPInstance_Incoming() {
 		return (EReference)sppInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -890,6 +959,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSPPInstance_Outgoing() {
 		return (EReference)sppInstanceEClass.getEStructuralFeatures().get(2);
 	}
@@ -899,6 +969,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getServiceImplInstance() {
 		return serviceImplInstanceEClass;
 	}
@@ -908,6 +979,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getServiceImplInstance_SvcImpl() {
 		return (EReference)serviceImplInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -917,6 +989,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConnectionInstance() {
 		return connectionInstanceEClass;
 	}
@@ -926,6 +999,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConnectionInstance_FromAI() {
 		return (EReference)connectionInstanceEClass.getEStructuralFeatures().get(0);
 	}
@@ -935,6 +1009,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConnectionInstance_FromSPP() {
 		return (EReference)connectionInstanceEClass.getEStructuralFeatures().get(1);
 	}
@@ -944,6 +1019,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConnectionInstance_ToSPP() {
 		return (EReference)connectionInstanceEClass.getEStructuralFeatures().get(2);
 	}
@@ -953,6 +1029,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConnectionInstance_Connection() {
 		return (EReference)connectionInstanceEClass.getEStructuralFeatures().get(3);
 	}
@@ -962,6 +1039,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExpandedActorClass() {
 		return expandedActorClassEClass;
 	}
@@ -971,6 +1049,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExpandedActorClass_ActorClass() {
 		return (EReference)expandedActorClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -980,6 +1059,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExpandedActorClass_GraphContainer() {
 		return (EReference)expandedActorClassEClass.getEStructuralFeatures().get(1);
 	}
@@ -989,6 +1069,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWiredStructureClass() {
 		return wiredStructureClassEClass;
 	}
@@ -998,6 +1079,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWiredStructureClass_Wires() {
 		return (EReference)wiredStructureClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -1007,6 +1089,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWiredStructureClass_OpenBindings() {
 		return (EReference)wiredStructureClassEClass.getEStructuralFeatures().get(1);
 	}
@@ -1016,6 +1099,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWiredStructureClass_ProvidedServices() {
 		return (EReference)wiredStructureClassEClass.getEStructuralFeatures().get(2);
 	}
@@ -1025,6 +1109,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWiredStructureClass_RequiredServices() {
 		return (EReference)wiredStructureClassEClass.getEStructuralFeatures().get(3);
 	}
@@ -1034,6 +1119,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOpenBinding() {
 		return openBindingEClass;
 	}
@@ -1043,6 +1129,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOpenBinding_Path() {
 		return (EAttribute)openBindingEClass.getEStructuralFeatures().get(0);
 	}
@@ -1052,6 +1139,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOpenBinding_Port() {
 		return (EReference)openBindingEClass.getEStructuralFeatures().get(1);
 	}
@@ -1061,6 +1149,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOpenServiceConnection() {
 		return openServiceConnectionEClass;
 	}
@@ -1070,6 +1159,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOpenServiceConnection_Path() {
 		return (EAttribute)openServiceConnectionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1079,6 +1169,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOpenServiceConnection_Protocol() {
 		return (EReference)openServiceConnectionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1088,6 +1179,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWire() {
 		return wireEClass;
 	}
@@ -1097,6 +1189,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWire_DataDriven() {
 		return (EAttribute)wireEClass.getEStructuralFeatures().get(0);
 	}
@@ -1106,6 +1199,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWire_Path1() {
 		return (EAttribute)wireEClass.getEStructuralFeatures().get(1);
 	}
@@ -1115,6 +1209,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWire_Path2() {
 		return (EAttribute)wireEClass.getEStructuralFeatures().get(2);
 	}
@@ -1124,6 +1219,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWiredActorClass() {
 		return wiredActorClassEClass;
 	}
@@ -1133,6 +1229,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWiredActorClass_ActorClass() {
 		return (EReference)wiredActorClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -1142,6 +1239,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWiredSubSystemClass() {
 		return wiredSubSystemClassEClass;
 	}
@@ -1151,6 +1249,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getWiredSubSystemClass_SubSystemClass() {
 		return (EReference)wiredSubSystemClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -1160,6 +1259,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getPortKind() {
 		return portKindEEnum;
 	}
@@ -1169,6 +1269,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ETriceGenFactory getETriceGenFactory() {
 		return (ETriceGenFactory)getEFactoryInstance();
 	}

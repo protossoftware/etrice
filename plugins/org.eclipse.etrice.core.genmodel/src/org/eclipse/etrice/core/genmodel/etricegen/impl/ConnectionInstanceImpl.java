@@ -107,6 +107,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AbstractInstance getFromAI() {
 		if (fromAI != null && fromAI.eIsProxy()) {
 			InternalEObject oldFromAI = (InternalEObject)fromAI;
@@ -133,6 +134,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFromAI(AbstractInstance newFromAI) {
 		AbstractInstance oldFromAI = fromAI;
 		fromAI = newFromAI;
@@ -145,6 +147,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SPPInstance getFromSPP() {
 		if (fromSPP != null && fromSPP.eIsProxy()) {
 			InternalEObject oldFromSPP = (InternalEObject)fromSPP;
@@ -186,6 +189,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFromSPP(SPPInstance newFromSPP) {
 		if (newFromSPP != fromSPP) {
 			NotificationChain msgs = null;
@@ -205,6 +209,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SPPInstance getToSPP() {
 		if (toSPP != null && toSPP.eIsProxy()) {
 			InternalEObject oldToSPP = (InternalEObject)toSPP;
@@ -246,6 +251,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToSPP(SPPInstance newToSPP) {
 		if (newToSPP != toSPP) {
 			NotificationChain msgs = null;
@@ -265,6 +271,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LayerConnection getConnection() {
 		if (connection != null && connection.eIsProxy()) {
 			InternalEObject oldConnection = (InternalEObject)connection;
@@ -291,6 +298,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConnection(LayerConnection newConnection) {
 		LayerConnection oldConnection = connection;
 		connection = newConnection;

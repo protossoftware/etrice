@@ -94,6 +94,7 @@ public class GraphImpl extends FSMGenElementImpl implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Node> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentWithInverseEList<Node>(Node.class, this, FsmGenPackage.GRAPH__NODES, FsmGenPackage.NODE__GRAPH);
@@ -106,6 +107,7 @@ public class GraphImpl extends FSMGenElementImpl implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Link> getLinks() {
 		if (links == null) {
 			links = new EObjectContainmentWithInverseEList<Link>(Link.class, this, FsmGenPackage.GRAPH__LINKS, FsmGenPackage.LINK__GRAPH);
@@ -118,6 +120,7 @@ public class GraphImpl extends FSMGenElementImpl implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateGraph getStateGraph() {
 		if (stateGraph != null && stateGraph.eIsProxy()) {
 			InternalEObject oldStateGraph = (InternalEObject)stateGraph;
@@ -144,6 +147,7 @@ public class GraphImpl extends FSMGenElementImpl implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStateGraph(StateGraph newStateGraph) {
 		StateGraph oldStateGraph = stateGraph;
 		stateGraph = newStateGraph;
@@ -156,6 +160,7 @@ public class GraphImpl extends FSMGenElementImpl implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getNode() {
 		if (eContainerFeatureID() != FsmGenPackage.GRAPH__NODE) return null;
 		return (Node)eInternalContainer();
@@ -176,6 +181,7 @@ public class GraphImpl extends FSMGenElementImpl implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNode(Node newNode) {
 		if (newNode != eInternalContainer() || (eContainerFeatureID() != FsmGenPackage.GRAPH__NODE && newNode != null)) {
 			if (EcoreUtil.isAncestor(this, newNode))
@@ -197,6 +203,7 @@ public class GraphImpl extends FSMGenElementImpl implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 		result.append("StateGraph {\n");

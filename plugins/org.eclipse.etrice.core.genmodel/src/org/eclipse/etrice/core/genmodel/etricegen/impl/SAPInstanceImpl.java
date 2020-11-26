@@ -73,6 +73,7 @@ public class SAPInstanceImpl extends InterfaceItemInstanceImpl implements SAPIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SAP getSap() {
 		if (sap != null && sap.eIsProxy()) {
 			InternalEObject oldSap = (InternalEObject)sap;
@@ -99,6 +100,7 @@ public class SAPInstanceImpl extends InterfaceItemInstanceImpl implements SAPIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSap(SAP newSap) {
 		SAP oldSap = sap;
 		sap = newSap;

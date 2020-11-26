@@ -79,6 +79,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ActorClass getActorClass() {
 		ActorClass actorClass = basicGetActorClass();
 		return actorClass != null && actorClass.eIsProxy() ? (ActorClass)eResolveProxy((InternalEObject)actorClass) : actorClass;
@@ -98,6 +99,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GraphContainer getGraphContainer() {
 		return graphContainer;
 	}
@@ -145,6 +147,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGraphContainer(GraphContainer newGraphContainer) {
 		if (newGraphContainer != graphContainer) {
 			NotificationChain msgs = null;

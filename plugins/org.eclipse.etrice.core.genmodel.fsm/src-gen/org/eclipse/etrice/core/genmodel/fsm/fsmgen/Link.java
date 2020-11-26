@@ -211,7 +211,7 @@ public interface Link extends GraphItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (getTransition() instanceof <%org.eclipse.etrice.core.fsm.fSM.InitialTransition%>) {\r\n\treturn \"Link initial -> \" + getTarget().toString() + \" (InitialTransition)\";\r\n}\r\nelse if (getTransition() instanceof <%org.eclipse.etrice.core.fsm.fSM.NonInitialTransition%>) {\r\n\treturn \"Link \" + getSource().toString() + \" -> \" + getTarget().toString() + \" (InitialTransition)\";\r\n}\r\nelse if (getTransition() instanceof <%org.eclipse.etrice.core.fsm.fSM.RefinedTransition%>) {\r\n\treturn \"RefinedTransition\";\r\n}\r\nreturn \"?\";'"
+	 * @model
 	 * @generated
 	 */
 	String toString();

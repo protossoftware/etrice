@@ -73,6 +73,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GraphContainer createGraphContainer() {
 		GraphContainerImpl graphContainer = new GraphContainerImpl();
 		return graphContainer;
@@ -83,6 +84,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph createGraph() {
 		GraphImpl graph = new GraphImpl();
 		return graph;
@@ -93,6 +95,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GraphItem createGraphItem() {
 		GraphItemImpl graphItem = new GraphItemImpl();
 		return graphItem;
@@ -103,6 +106,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node createNode() {
 		NodeImpl node = new NodeImpl();
 		return node;
@@ -113,6 +117,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Link createLink() {
 		LinkImpl link = new LinkImpl();
 		return link;
@@ -123,6 +128,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CommonTrigger createCommonTrigger() {
 		CommonTriggerImpl commonTrigger = new CommonTriggerImpl();
 		return commonTrigger;
@@ -133,6 +139,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FSMGenElement createFSMGenElement() {
 		FSMGenElementImpl fsmGenElement = new FSMGenElementImpl();
 		return fsmGenElement;
@@ -143,6 +150,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FsmGenPackage getFsmGenPackage() {
 		return (FsmGenPackage)getEPackage();
 	}

@@ -73,6 +73,7 @@ public class WiredActorClassImpl extends WiredStructureClassImpl implements Wire
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ActorClass getActorClass() {
 		if (actorClass != null && actorClass.eIsProxy()) {
 			InternalEObject oldActorClass = (InternalEObject)actorClass;
@@ -99,6 +100,7 @@ public class WiredActorClassImpl extends WiredStructureClassImpl implements Wire
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setActorClass(ActorClass newActorClass) {
 		ActorClass oldActorClass = actorClass;
 		actorClass = newActorClass;

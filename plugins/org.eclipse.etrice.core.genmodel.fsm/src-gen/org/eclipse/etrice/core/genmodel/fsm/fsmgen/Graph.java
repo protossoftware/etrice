@@ -118,7 +118,7 @@ public interface Graph extends FSMGenElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='StringBuilder result = new StringBuilder();\r\nresult.append(\"StateGraph {\\n\");\r\nfor (Node n : getNodes()) {\r\n\tresult.append(\"  \" + n.toString() + \"\\n\");\r\n}\r\nfor (Link l : getLinks()) {\r\n\tresult.append(\"  \" + l.toString() + \"\\n\");\r\n}\r\nresult.append(\"}\");\r\nreturn result.toString();'"
+	 * @model
 	 * @generated
 	 */
 	String toString();

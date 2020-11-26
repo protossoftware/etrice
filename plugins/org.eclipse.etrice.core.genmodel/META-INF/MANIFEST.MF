@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.etrice.core.genmodel;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: Eclipse eTrice
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.core.genmodel,
@@ -13,13 +13,13 @@ Export-Package: org.eclipse.etrice.core.genmodel,
  org.eclipse.etrice.core.genmodel.etricegen.impl,
  org.eclipse.etrice.core.genmodel.etricegen.util,
  org.eclipse.etrice.core.genmodel.util
-Require-Bundle:  org.eclipse.etrice.core.common;visibility:=reexport,
-  org.eclipse.etrice.core.fsm;visibility:=reexport,
-  org.eclipse.etrice.core.room;visibility:=reexport,
-  org.eclipse.etrice.core.genmodel.fsm;visibility:=reexport,
+Require-Bundle: org.eclipse.etrice.core.common;visibility:=reexport,
+ org.eclipse.etrice.core.fsm;visibility:=reexport,
+ org.eclipse.etrice.core.room;visibility:=reexport,
+ org.eclipse.etrice.core.genmodel.fsm;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
-  org.eclipse.etrice.generator.base
+ org.eclipse.etrice.generator.base
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: org.eclipse.etrice.core.genmodel

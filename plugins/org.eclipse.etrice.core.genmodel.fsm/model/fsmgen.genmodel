@@ -3,9 +3,9 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.etrice.core.genmodel.fsm/src-gen"
     editDirectory="/org.eclipse.etrice.core.genmodel.fsm.edit/src" editorDirectory="/org.eclipse.etrice.core.genmodel.fsm.editor/src"
     modelPluginID="org.eclipse.etrice.core.genmodel.fsm" modelName="Fsmgen" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     editPluginID="org.eclipse.etrice.core.genmodel.fsm.edit" editorPluginID="org.eclipse.etrice.core.genmodel.fsm.editor"
-    usedGenPackages="../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base ../../org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM"
+    usedGenPackages="../../org.eclipse.etrice.core.common/model/generated/Base.genmodel#//base ../../org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM"
     operationReflection="true" importOrganizing="true">
   <foreignModel>fsmgen.ecore</foreignModel>
   <genPackages prefix="FsmGen" basePackage="org.eclipse.etrice.core.genmodel.fsm"
@@ -13,12 +13,16 @@
     <genClasses ecoreClass="fsmgen.ecore#//GraphContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//GraphContainer/graph"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//GraphContainer/component"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//GraphContainer/initializedTriggersInStates"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//GraphContainer/initializedChainHeads"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//GraphContainer/initializedCommonData"/>
     </genClasses>
     <genClasses ecoreClass="fsmgen.ecore#//Graph">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Graph/nodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Graph/links"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Graph/stateGraph"/>
-      <genOperations ecoreOperation="fsmgen.ecore#//Graph/toString"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fsmgen.ecore#//Graph/node"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//Graph/toString" body="StringBuilder result = new StringBuilder();&#xD;&#xA;result.append(&quot;StateGraph {\n&quot;);&#xD;&#xA;for (Node n : getNodes()) {&#xD;&#xA;&#x9;result.append(&quot;  &quot; + n.toString() + &quot;\n&quot;);&#xD;&#xA;}&#xD;&#xA;for (Link l : getLinks()) {&#xD;&#xA;&#x9;result.append(&quot;  &quot; + l.toString() + &quot;\n&quot;);&#xD;&#xA;}&#xD;&#xA;result.append(&quot;}&quot;);&#xD;&#xA;return result.toString();"/>
     </genClasses>
     <genClasses ecoreClass="fsmgen.ecore#//GraphItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//GraphItem/inherited"/>
@@ -30,7 +34,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Node/incoming"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Node/stateGraphNode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Node/caughtTriggers"/>
-      <genOperations ecoreOperation="fsmgen.ecore#//Node/toString"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//Node/inheritanceLevel"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//Node/toString" body="String type = &quot;?&quot;;&#xD;&#xA;if (getStateGraphNode() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.RefinedState%>) {&#xD;&#xA;&#x9;type = &quot;RefinedState&quot;;&#xD;&#xA;}&#xD;&#xA;else if (getStateGraphNode() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.SimpleState%>) {&#xD;&#xA;&#x9;type = &quot;SimpleState&quot;;&#xD;&#xA;}&#xD;&#xA;else if (getStateGraphNode() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.TrPoint%>) {&#xD;&#xA;&#x9;type = &quot;TrPoint&quot;;&#xD;&#xA;}&#xD;&#xA;else if (getStateGraphNode() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.ChoicePoint%>) {&#xD;&#xA;&#x9;type = &quot;ChoicePoint&quot;;&#xD;&#xA;}&#xD;&#xA;return &quot;Node &quot; + getStateGraphNode().getName() + &quot; (&quot; + type + &quot;)&quot;;"/>
     </genClasses>
     <genClasses ecoreClass="fsmgen.ecore#//Link">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fsmgen.ecore#//Link/graph"/>
@@ -40,13 +45,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//Link/ifitemTriggered"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Link/commonData"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Link/transition"/>
-      <genOperations ecoreOperation="fsmgen.ecore#//Link/toString"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//Link/toString" body="if (getTransition() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.InitialTransition%>) {&#xD;&#xA;&#x9;return &quot;Link initial -> &quot; + getTarget().toString() + &quot; (InitialTransition)&quot;;&#xD;&#xA;}&#xD;&#xA;else if (getTransition() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.NonInitialTransition%>) {&#xD;&#xA;&#x9;return &quot;Link &quot; + getSource().toString() + &quot; -> &quot; + getTarget().toString() + &quot; (InitialTransition)&quot;;&#xD;&#xA;}&#xD;&#xA;else if (getTransition() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.RefinedTransition%>) {&#xD;&#xA;&#x9;return &quot;RefinedTransition&quot;;&#xD;&#xA;}&#xD;&#xA;return &quot;?&quot;;"/>
     </genClasses>
     <genClasses ecoreClass="fsmgen.ecore#//CommonTrigger">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//CommonTrigger/msg"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//CommonTrigger/ifitem"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//CommonTrigger/hasGuard"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//CommonTrigger/trigger"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//CommonTrigger/transitions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//CommonTrigger/links"/>
     </genClasses>
+    <genClasses ecoreClass="fsmgen.ecore#//FSMGenElement"/>
   </genPackages>
 </genmodel:GenModel>

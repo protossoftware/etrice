@@ -156,6 +156,7 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractInstance> getInstances() {
 		if (instances == null) {
 			instances = new EObjectContainmentEList<AbstractInstance>(AbstractInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__INSTANCES);
@@ -168,6 +169,7 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SAPInstance> getSaps() {
 		if (saps == null) {
 			saps = new EObjectContainmentEList<SAPInstance>(SAPInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__SAPS);
@@ -180,6 +182,7 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SPPInstance> getSpps() {
 		if (spps == null) {
 			spps = new EObjectContainmentEList<SPPInstance>(SPPInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__SPPS);
@@ -192,6 +195,7 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ServiceImplInstance> getServices() {
 		if (services == null) {
 			services = new EObjectContainmentEList<ServiceImplInstance>(ServiceImplInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__SERVICES);
@@ -204,6 +208,7 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<BindingInstance> getBindings() {
 		if (bindings == null) {
 			bindings = new EObjectContainmentEList<BindingInstance>(BindingInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__BINDINGS);
@@ -216,6 +221,7 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ConnectionInstance> getConnections() {
 		if (connections == null) {
 			connections = new EObjectContainmentEList<ConnectionInstance>(ConnectionInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__CONNECTIONS);

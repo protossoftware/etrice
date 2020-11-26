@@ -85,6 +85,7 @@ public class OpenBindingImpl extends EObjectImpl implements OpenBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getPath() {
 		if (path == null) {
 			path = new EDataTypeEList<String>(String.class, this, ETriceGenPackage.OPEN_BINDING__PATH);
@@ -97,6 +98,7 @@ public class OpenBindingImpl extends EObjectImpl implements OpenBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Port getPort() {
 		if (port != null && port.eIsProxy()) {
 			InternalEObject oldPort = (InternalEObject)port;
@@ -123,6 +125,7 @@ public class OpenBindingImpl extends EObjectImpl implements OpenBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPort(Port newPort) {
 		Port oldPort = port;
 		port = newPort;

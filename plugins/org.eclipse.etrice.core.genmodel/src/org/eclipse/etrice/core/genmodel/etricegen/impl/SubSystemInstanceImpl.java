@@ -91,6 +91,7 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SubSystemClass getSubSystemClass() {
 		if (subSystemClass != null && subSystemClass.eIsProxy()) {
 			InternalEObject oldSubSystemClass = (InternalEObject)subSystemClass;
@@ -117,6 +118,7 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSubSystemClass(SubSystemClass newSubSystemClass) {
 		SubSystemClass oldSubSystemClass = subSystemClass;
 		subSystemClass = newSubSystemClass;

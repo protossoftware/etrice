@@ -132,6 +132,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getMsg() {
 		if (msg != null && msg.eIsProxy()) {
 			InternalEObject oldMsg = (InternalEObject)msg;
@@ -158,6 +159,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMsg(EObject newMsg) {
 		EObject oldMsg = msg;
 		msg = newMsg;
@@ -170,6 +172,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AbstractInterfaceItem getIfitem() {
 		if (ifitem != null && ifitem.eIsProxy()) {
 			InternalEObject oldIfitem = (InternalEObject)ifitem;
@@ -196,6 +199,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIfitem(AbstractInterfaceItem newIfitem) {
 		AbstractInterfaceItem oldIfitem = ifitem;
 		ifitem = newIfitem;
@@ -208,6 +212,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTrigger() {
 		return trigger;
 	}
@@ -217,6 +222,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTrigger(String newTrigger) {
 		String oldTrigger = trigger;
 		trigger = newTrigger;
@@ -229,6 +235,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Link> getLinks() {
 		if (links == null) {
 			links = new EObjectResolvingEList<Link>(Link.class, this, FsmGenPackage.COMMON_TRIGGER__LINKS);
@@ -241,6 +248,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isHasGuard() {
 		return hasGuard;
 	}
@@ -250,6 +258,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHasGuard(boolean newHasGuard) {
 		boolean oldHasGuard = hasGuard;
 		hasGuard = newHasGuard;
@@ -368,7 +377,7 @@ public class CommonTriggerImpl extends FSMGenElementImpl implements CommonTrigge
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (hasGuard: ");
 		result.append(hasGuard);
 		result.append(", trigger: ");

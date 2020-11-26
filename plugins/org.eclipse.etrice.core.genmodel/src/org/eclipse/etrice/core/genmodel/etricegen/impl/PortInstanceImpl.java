@@ -112,6 +112,7 @@ public class PortInstanceImpl extends InterfaceItemInstanceImpl implements PortI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Port getPort() {
 		if (port != null && port.eIsProxy()) {
 			InternalEObject oldPort = (InternalEObject)port;
@@ -138,6 +139,7 @@ public class PortInstanceImpl extends InterfaceItemInstanceImpl implements PortI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPort(Port newPort) {
 		Port oldPort = port;
 		port = newPort;
@@ -150,6 +152,7 @@ public class PortInstanceImpl extends InterfaceItemInstanceImpl implements PortI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PortKind getKind() {
 		return kind;
 	}
@@ -159,6 +162,7 @@ public class PortInstanceImpl extends InterfaceItemInstanceImpl implements PortI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKind(PortKind newKind) {
 		PortKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
@@ -171,6 +175,7 @@ public class PortInstanceImpl extends InterfaceItemInstanceImpl implements PortI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<BindingInstance> getBindings() {
 		if (bindings == null) {
 			bindings = new EObjectWithInverseResolvingEList.ManyInverse<BindingInstance>(BindingInstance.class, this, ETriceGenPackage.PORT_INSTANCE__BINDINGS, ETriceGenPackage.BINDING_INSTANCE__PORTS);
@@ -297,7 +302,7 @@ public class PortInstanceImpl extends InterfaceItemInstanceImpl implements PortI
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (kind: ");
 		result.append(kind);
 		result.append(')');

@@ -117,6 +117,7 @@ public class ActorInterfaceInstanceImpl extends AbstractInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ActorClass getActorClass() {
 		if (actorClass != null && actorClass.eIsProxy()) {
 			InternalEObject oldActorClass = (InternalEObject)actorClass;
@@ -143,6 +144,7 @@ public class ActorInterfaceInstanceImpl extends AbstractInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setActorClass(ActorClass newActorClass) {
 		ActorClass oldActorClass = actorClass;
 		actorClass = newActorClass;
@@ -155,6 +157,7 @@ public class ActorInterfaceInstanceImpl extends AbstractInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ServiceImplInstance> getProvidedServices() {
 		if (providedServices == null) {
 			providedServices = new EObjectResolvingEList<ServiceImplInstance>(ServiceImplInstance.class, this, ETriceGenPackage.ACTOR_INTERFACE_INSTANCE__PROVIDED_SERVICES);
@@ -167,6 +170,7 @@ public class ActorInterfaceInstanceImpl extends AbstractInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OptionalActorInstance> getOptionalInstances() {
 		if (optionalInstances == null) {
 			optionalInstances = new EObjectResolvingEList<OptionalActorInstance>(OptionalActorInstance.class, this, ETriceGenPackage.ACTOR_INTERFACE_INSTANCE__OPTIONAL_INSTANCES);
@@ -179,6 +183,7 @@ public class ActorInterfaceInstanceImpl extends AbstractInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isArray() {
 		return array;
 	}
@@ -188,6 +193,7 @@ public class ActorInterfaceInstanceImpl extends AbstractInstanceImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setArray(boolean newArray) {
 		boolean oldArray = array;
 		array = newArray;
@@ -296,7 +302,7 @@ public class ActorInterfaceInstanceImpl extends AbstractInstanceImpl implements 
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (array: ");
 		result.append(array);
 		result.append(')');

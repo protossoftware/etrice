@@ -68,6 +68,7 @@ public class GraphItemImpl extends FSMGenElementImpl implements GraphItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isInherited() {
 		return inherited;
 	}
@@ -77,6 +78,7 @@ public class GraphItemImpl extends FSMGenElementImpl implements GraphItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInherited(boolean newInherited) {
 		boolean oldInherited = inherited;
 		inherited = newInherited;
@@ -151,7 +153,7 @@ public class GraphItemImpl extends FSMGenElementImpl implements GraphItem {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (inherited: ");
 		result.append(inherited);
 		result.append(')');

@@ -146,6 +146,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph getGraph() {
 		if (eContainerFeatureID() != FsmGenPackage.NODE__GRAPH) return null;
 		return (Graph)eInternalContainer();
@@ -166,6 +167,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGraph(Graph newGraph) {
 		if (newGraph != eInternalContainer() || (eContainerFeatureID() != FsmGenPackage.NODE__GRAPH && newGraph != null)) {
 			if (EcoreUtil.isAncestor(this, newGraph))
@@ -187,6 +189,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph getSubgraph() {
 		return subgraph;
 	}
@@ -211,6 +214,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSubgraph(Graph newSubgraph) {
 		if (newSubgraph != subgraph) {
 			NotificationChain msgs = null;
@@ -230,6 +234,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Link> getOutgoing() {
 		if (outgoing == null) {
 			outgoing = new EObjectWithInverseResolvingEList<Link>(Link.class, this, FsmGenPackage.NODE__OUTGOING, FsmGenPackage.LINK__SOURCE);
@@ -242,6 +247,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Link> getIncoming() {
 		if (incoming == null) {
 			incoming = new EObjectWithInverseResolvingEList<Link>(Link.class, this, FsmGenPackage.NODE__INCOMING, FsmGenPackage.LINK__TARGET);
@@ -254,6 +260,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateGraphNode getStateGraphNode() {
 		if (stateGraphNode != null && stateGraphNode.eIsProxy()) {
 			InternalEObject oldStateGraphNode = (InternalEObject)stateGraphNode;
@@ -280,6 +287,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStateGraphNode(StateGraphNode newStateGraphNode) {
 		StateGraphNode oldStateGraphNode = stateGraphNode;
 		stateGraphNode = newStateGraphNode;
@@ -292,6 +300,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<CommonTrigger> getCaughtTriggers() {
 		if (caughtTriggers == null) {
 			caughtTriggers = new EObjectContainmentEList<CommonTrigger>(CommonTrigger.class, this, FsmGenPackage.NODE__CAUGHT_TRIGGERS);
@@ -304,6 +313,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getInheritanceLevel() {
 		return inheritanceLevel;
 	}
@@ -313,6 +323,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInheritanceLevel(int newInheritanceLevel) {
 		int oldInheritanceLevel = inheritanceLevel;
 		inheritanceLevel = newInheritanceLevel;
@@ -325,6 +336,7 @@ public class NodeImpl extends GraphItemImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		String type = "?";
 		if (getStateGraphNode() instanceof RefinedState) {

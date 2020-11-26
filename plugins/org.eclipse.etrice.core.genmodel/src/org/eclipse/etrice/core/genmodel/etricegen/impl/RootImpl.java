@@ -247,6 +247,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RoomModel> getModels() {
 		if (models == null) {
 			models = new EObjectResolvingEList<RoomModel>(RoomModel.class, this, ETriceGenPackage.ROOT__MODELS);
@@ -259,6 +260,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RoomModel> getImportedModels() {
 		if (importedModels == null) {
 			importedModels = new EObjectResolvingEList<RoomModel>(RoomModel.class, this, ETriceGenPackage.ROOT__IMPORTED_MODELS);
@@ -271,6 +273,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExpandedActorClass> getXpActorClasses() {
 		if (xpActorClasses == null) {
 			xpActorClasses = new EObjectContainmentEList<ExpandedActorClass>(ExpandedActorClass.class, this, ETriceGenPackage.ROOT__XP_ACTOR_CLASSES);
@@ -343,6 +346,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OptionalActorInstance> getOptionalInstances() {
 		if (optionalInstances == null) {
 			optionalInstances = new EObjectContainmentEList<OptionalActorInstance>(OptionalActorInstance.class, this, ETriceGenPackage.ROOT__OPTIONAL_INSTANCES);
@@ -355,6 +359,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ActorClass> getOptionalActorClasses() {
 		if (optionalActorClasses == null) {
 			optionalActorClasses = new EObjectResolvingEList<ActorClass>(ActorClass.class, this, ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES);
@@ -367,6 +372,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<WiredStructureClass> getWiredInstances() {
 		if (wiredInstances == null) {
 			wiredInstances = new EObjectContainmentEList<WiredStructureClass>(WiredStructureClass.class, this, ETriceGenPackage.ROOT__WIRED_INSTANCES);
@@ -379,6 +385,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isLibrary() {
 		return library;
 	}
@@ -388,6 +395,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLibrary(boolean newLibrary) {
 		boolean oldLibrary = library;
 		library = newLibrary;
@@ -400,6 +408,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SystemInstance> getSystemInstances() {
 		if (systemInstances == null) {
 			systemInstances = new EObjectContainmentEList<SystemInstance>(SystemInstance.class, this, ETriceGenPackage.ROOT__SYSTEM_INSTANCES);
@@ -412,6 +421,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SubSystemInstance> getOwnSubSystemInstances() {
 		if (ownSubSystemInstances == null) {
 			ownSubSystemInstances = new EObjectContainmentEList<SubSystemInstance>(SubSystemInstance.class, this, ETriceGenPackage.ROOT__OWN_SUB_SYSTEM_INSTANCES);
@@ -815,7 +825,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (library: ");
 		result.append(library);
 		result.append(')');

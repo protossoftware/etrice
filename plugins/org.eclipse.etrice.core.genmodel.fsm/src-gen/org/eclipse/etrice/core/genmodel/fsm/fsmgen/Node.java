@@ -192,7 +192,7 @@ public interface Node extends GraphItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='String type = \"?\";\r\nif (getStateGraphNode() instanceof <%org.eclipse.etrice.core.fsm.fSM.RefinedState%>) {\r\n\ttype = \"RefinedState\";\r\n}\r\nelse if (getStateGraphNode() instanceof <%org.eclipse.etrice.core.fsm.fSM.SimpleState%>) {\r\n\ttype = \"SimpleState\";\r\n}\r\nelse if (getStateGraphNode() instanceof <%org.eclipse.etrice.core.fsm.fSM.TrPoint%>) {\r\n\ttype = \"TrPoint\";\r\n}\r\nelse if (getStateGraphNode() instanceof <%org.eclipse.etrice.core.fsm.fSM.ChoicePoint%>) {\r\n\ttype = \"ChoicePoint\";\r\n}\r\nreturn \"Node \" + getStateGraphNode().getName() + \" (\" + type + \")\";'"
+	 * @model
 	 * @generated
 	 */
 	String toString();

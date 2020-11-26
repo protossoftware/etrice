@@ -81,6 +81,7 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProtocolClass getProtocol() {
 		ProtocolClass protocol = basicGetProtocol();
 		return protocol != null && protocol.eIsProxy() ? (ProtocolClass)eResolveProxy((InternalEObject)protocol) : protocol;
@@ -109,6 +110,7 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<InterfaceItemInstance> getPeers() {
 		if (peers == null) {
 			peers = new EObjectResolvingEList<InterfaceItemInstance>(InterfaceItemInstance.class, this, ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PEERS);

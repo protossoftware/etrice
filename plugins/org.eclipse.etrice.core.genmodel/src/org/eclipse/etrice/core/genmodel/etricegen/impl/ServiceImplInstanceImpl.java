@@ -74,6 +74,7 @@ public class ServiceImplInstanceImpl extends InterfaceItemInstanceImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ServiceImplementation getSvcImpl() {
 		if (svcImpl != null && svcImpl.eIsProxy()) {
 			InternalEObject oldSvcImpl = (InternalEObject)svcImpl;
@@ -100,6 +101,7 @@ public class ServiceImplInstanceImpl extends InterfaceItemInstanceImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSvcImpl(ServiceImplementation newSvcImpl) {
 		ServiceImplementation oldSvcImpl = svcImpl;
 		svcImpl = newSvcImpl;

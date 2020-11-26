@@ -91,6 +91,7 @@ public class SystemInstanceImpl extends InstanceBaseImpl implements SystemInstan
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SubSystemInstance> getInstances() {
 		if (instances == null) {
 			instances = new EObjectContainmentEList<SubSystemInstance>(SubSystemInstance.class, this, ETriceGenPackage.SYSTEM_INSTANCE__INSTANCES);
@@ -103,6 +104,7 @@ public class SystemInstanceImpl extends InstanceBaseImpl implements SystemInstan
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicalSystem getLogicalSystem() {
 		if (logicalSystem != null && logicalSystem.eIsProxy()) {
 			InternalEObject oldLogicalSystem = (InternalEObject)logicalSystem;
@@ -129,6 +131,7 @@ public class SystemInstanceImpl extends InstanceBaseImpl implements SystemInstan
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLogicalSystem(LogicalSystem newLogicalSystem) {
 		LogicalSystem oldLogicalSystem = logicalSystem;
 		logicalSystem = newLogicalSystem;

@@ -126,6 +126,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -136,6 +137,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ActorInterfaceInstance createActorInterfaceInstance() {
 		ActorInterfaceInstanceImpl actorInterfaceInstance = new ActorInterfaceInstanceImpl();
 		return actorInterfaceInstance;
@@ -146,6 +148,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StructureInstance createStructureInstance() {
 		StructureInstanceImpl structureInstance = new StructureInstanceImpl();
 		return structureInstance;
@@ -156,6 +159,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SystemInstance createSystemInstance() {
 		SystemInstanceImpl systemInstance = new SystemInstanceImpl();
 		return systemInstance;
@@ -166,6 +170,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SubSystemInstance createSubSystemInstance() {
 		SubSystemInstanceImpl subSystemInstance = new SubSystemInstanceImpl();
 		return subSystemInstance;
@@ -176,6 +181,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ActorInstance createActorInstance() {
 		ActorInstanceImpl actorInstance = new ActorInstanceImpl();
 		return actorInstance;
@@ -186,6 +192,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OptionalActorInstance createOptionalActorInstance() {
 		OptionalActorInstanceImpl optionalActorInstance = new OptionalActorInstanceImpl();
 		return optionalActorInstance;
@@ -196,6 +203,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InterfaceItemInstance createInterfaceItemInstance() {
 		InterfaceItemInstanceImpl interfaceItemInstance = new InterfaceItemInstanceImpl();
 		return interfaceItemInstance;
@@ -206,6 +214,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PortInstance createPortInstance() {
 		PortInstanceImpl portInstance = new PortInstanceImpl();
 		return portInstance;
@@ -216,6 +225,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BindingInstance createBindingInstance() {
 		BindingInstanceImpl bindingInstance = new BindingInstanceImpl();
 		return bindingInstance;
@@ -226,6 +236,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SAPInstance createSAPInstance() {
 		SAPInstanceImpl sapInstance = new SAPInstanceImpl();
 		return sapInstance;
@@ -236,6 +247,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SPPInstance createSPPInstance() {
 		SPPInstanceImpl sppInstance = new SPPInstanceImpl();
 		return sppInstance;
@@ -246,6 +258,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ServiceImplInstance createServiceImplInstance() {
 		ServiceImplInstanceImpl serviceImplInstance = new ServiceImplInstanceImpl();
 		return serviceImplInstance;
@@ -256,6 +269,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConnectionInstance createConnectionInstance() {
 		ConnectionInstanceImpl connectionInstance = new ConnectionInstanceImpl();
 		return connectionInstance;
@@ -266,6 +280,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExpandedActorClass createExpandedActorClass() {
 		ExpandedActorClassImpl expandedActorClass = new ExpandedActorClassImpl();
 		return expandedActorClass;
@@ -276,6 +291,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OpenBinding createOpenBinding() {
 		OpenBindingImpl openBinding = new OpenBindingImpl();
 		return openBinding;
@@ -286,6 +302,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OpenServiceConnection createOpenServiceConnection() {
 		OpenServiceConnectionImpl openServiceConnection = new OpenServiceConnectionImpl();
 		return openServiceConnection;
@@ -296,6 +313,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Wire createWire() {
 		WireImpl wire = new WireImpl();
 		return wire;
@@ -306,6 +324,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WiredActorClass createWiredActorClass() {
 		WiredActorClassImpl wiredActorClass = new WiredActorClassImpl();
 		return wiredActorClass;
@@ -316,6 +335,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WiredSubSystemClass createWiredSubSystemClass() {
 		WiredSubSystemClassImpl wiredSubSystemClass = new WiredSubSystemClassImpl();
 		return wiredSubSystemClass;
@@ -346,6 +366,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ETriceGenPackage getETriceGenPackage() {
 		return (ETriceGenPackage)getEPackage();
 	}

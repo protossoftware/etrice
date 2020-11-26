@@ -2,32 +2,32 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="etricegen" nsURI="http://www.eclipse.org/etrice/generator" nsPrefix="etricegen">
   <eClassifiers xsi:type="ecore:EClass" name="Root">
-    <eOperations name="getReferencedModels" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel">
-      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
+    <eOperations name="getReferencedModels" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//RoomModel">
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//RoomClass"/>
     </eOperations>
-    <eOperations name="getReferencedProtocolClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass">
-      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
+    <eOperations name="getReferencedProtocolClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ProtocolClass">
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//RoomClass"/>
     </eOperations>
-    <eOperations name="getReferencedDataClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass">
-      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
+    <eOperations name="getReferencedDataClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//DataClass">
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//RoomClass"/>
     </eOperations>
-    <eOperations name="getReferencedEnumClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType">
-      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
+    <eOperations name="getReferencedEnumClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//EnumerationType">
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//RoomClass"/>
     </eOperations>
-    <eOperations name="getReferencedActorClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
-      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
+    <eOperations name="getReferencedActorClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass">
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//RoomClass"/>
     </eOperations>
     <eOperations name="getExpandedActorClass" eType="#//ExpandedActorClass">
       <eParameters name="ai" eType="#//ActorInstance"/>
     </eOperations>
     <eOperations name="getExpandedActorClass" eType="#//ExpandedActorClass">
-      <eParameters name="ac" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+      <eParameters name="ac" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"/>
     </eOperations>
     <eOperations name="getInstance" eType="#//StructureInstance">
       <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="getSubClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
-      <eParameters name="ac" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eOperations name="getSubClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass">
+      <eParameters name="ac" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"/>
     </eOperations>
     <eOperations name="computeSubClasses"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="library" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -39,30 +39,30 @@
         eType="#//SubSystemInstance" changeable="false" volatile="true" transient="true"
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"/>
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//RoomModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedModels" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"/>
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//RoomModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="xpActorClasses" upperBound="-1"
         eType="#//ExpandedActorClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataClasses" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//DataClass"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClasses" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ProtocolClass"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClasses" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="enumClasses" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//EnumerationType"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClasses" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//SubSystemClass"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="optionalInstances" upperBound="-1"
         eType="#//OptionalActorInstance" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="optionalActorClasses" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="wiredInstances" upperBound="-1"
         eType="#//WiredStructureClass" containment="true"/>
   </eClassifiers>
@@ -81,7 +81,7 @@
         eType="#//PortInstance" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorInterfaceInstance" eSuperTypes="#//AbstractInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="providedServices" upperBound="-1"
         eType="#//ServiceImplInstance"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="optionalInstances" upperBound="-1"
@@ -112,25 +112,25 @@
   <eClassifiers xsi:type="ecore:EClass" name="SystemInstance" eSuperTypes="#//InstanceBase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
         eType="#//SubSystemInstance" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="logicalSystem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logicalSystem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//LogicalSystem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SubSystemInstance" eSuperTypes="#//StructureInstance">
     <eOperations name="getThreadId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eParameters name="instance" eType="#//InstanceBase"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//SubSystemClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxObjId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorInstance" eSuperTypes="#//StructureInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="replIdx" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="-1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unindexedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OptionalActorInstance" eSuperTypes="#//StructureInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredServices" upperBound="-1"
         eType="#//SAPInstance"/>
   </eClassifiers>
@@ -138,14 +138,14 @@
     <eOperations name="isReplicated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isSimple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isRelay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="getInterfaceItem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"
+    <eOperations name="getInterfaceItem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//InterfaceItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ProtocolClass"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="peers" upperBound="-1"
         eType="#//InterfaceItemInstance"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortInstance" eSuperTypes="#//InterfaceItemInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//Port"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//PortKind"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
         eType="#//BindingInstance" eOpposite="#//BindingInstance/ports"/>
@@ -159,20 +159,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="BindingInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="2" eType="#//PortInstance"
         eOpposite="#//PortInstance/bindings"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Binding"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//Binding"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAPInstance" eSuperTypes="#//InterfaceItemInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sap" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAP"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sap" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//SAP"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SPPInstance" eSuperTypes="#//InstanceBase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SPP"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//SPP"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
         eType="#//ConnectionInstance" eOpposite="#//ConnectionInstance/toSPP"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" eType="#//ConnectionInstance"
         eOpposite="#//ConnectionInstance/fromSPP"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ServiceImplInstance" eSuperTypes="#//InterfaceItemInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="svcImpl" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ServiceImplementation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="svcImpl" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ServiceImplementation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="fromAI" eType="#//AbstractInstance"/>
@@ -180,7 +180,7 @@
         eOpposite="#//SPPInstance/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="toSPP" eType="#//SPPInstance"
         eOpposite="#//SPPInstance/incoming"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connection" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LayerConnection"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connection" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//LayerConnection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WiredStructureClass" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wires" upperBound="-1"
@@ -195,12 +195,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="OpenBinding">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//Port"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpenServiceConnection">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ProtocolClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Wire">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataDriven" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -210,16 +210,16 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WiredActorClass" eSuperTypes="#//WiredStructureClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WiredSubSystemClass" eSuperTypes="#//WiredStructureClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//SubSystemClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpandedActorClass">
     <eOperations name="getInterfaceItemLocalId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eParameters name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="graphContainer" eType="ecore:EClass ../../org.eclipse.etrice.core.genmodel.fsm/model/fsmgen.ecore#//GraphContainer"
         containment="true"/>

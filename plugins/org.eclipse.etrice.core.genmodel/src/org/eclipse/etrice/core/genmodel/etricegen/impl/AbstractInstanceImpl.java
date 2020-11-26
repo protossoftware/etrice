@@ -81,6 +81,7 @@ public abstract class AbstractInstanceImpl extends InstanceBaseImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PortInstance> getPorts() {
 		if (ports == null) {
 			ports = new EObjectContainmentEList<PortInstance>(PortInstance.class, this, ETriceGenPackage.ABSTRACT_INSTANCE__PORTS);
