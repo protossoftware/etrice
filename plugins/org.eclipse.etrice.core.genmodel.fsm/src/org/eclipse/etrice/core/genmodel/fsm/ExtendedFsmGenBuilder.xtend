@@ -116,6 +116,13 @@ class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 			return
 		}
 		else {
+			// check whether we already visited the target node
+			if(!l.target.outgoing.empty && l.target.outgoing.head.chainHeads.contains(head)) {
+				// the transition chain generator can't handle cyclic transition chains
+				validationError("This transition is part of a cyclic transition chain", l.transition, null);
+				return;
+			}
+			
 			// follow all outgoing links recursively
 			for (next : l.target.outgoing) {
 				next.followChain(head)
