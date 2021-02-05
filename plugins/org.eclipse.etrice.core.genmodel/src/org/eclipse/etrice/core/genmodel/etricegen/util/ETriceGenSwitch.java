@@ -263,6 +263,12 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ETriceGenPackage.EXPANDED_PROTOCOL_CLASS: {
+				ExpandedProtocolClass expandedProtocolClass = (ExpandedProtocolClass)theEObject;
+				T result = caseExpandedProtocolClass(expandedProtocolClass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -519,6 +525,21 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExpandedActorClass(ExpandedActorClass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expanded Protocol Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expanded Protocol Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpandedProtocolClass(ExpandedProtocolClass object) {
 		return null;
 	}
 

@@ -1,0 +1,8 @@
+RoomModel EmptyActor {
+
+	import etrice.api.types.*
+
+	ActorClass AEmpty {
+		
+	}
+}

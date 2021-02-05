@@ -159,13 +159,22 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__PROTOCOL_CLASSES = 8;
 
 	/**
+	 * The feature id for the '<em><b>Xp Protocol Classes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__XP_PROTOCOL_CLASSES = 9;
+
+	/**
 	 * The feature id for the '<em><b>Actor Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__ACTOR_CLASSES = 9;
+	int ROOT__ACTOR_CLASSES = 10;
 
 	/**
 	 * The feature id for the '<em><b>Enum Classes</b></em>' reference list.
@@ -174,7 +183,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__ENUM_CLASSES = 10;
+	int ROOT__ENUM_CLASSES = 11;
 
 	/**
 	 * The feature id for the '<em><b>Sub System Classes</b></em>' reference list.
@@ -183,7 +192,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__SUB_SYSTEM_CLASSES = 11;
+	int ROOT__SUB_SYSTEM_CLASSES = 12;
 
 	/**
 	 * The feature id for the '<em><b>Optional Instances</b></em>' containment reference list.
@@ -192,7 +201,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__OPTIONAL_INSTANCES = 12;
+	int ROOT__OPTIONAL_INSTANCES = 13;
 
 	/**
 	 * The feature id for the '<em><b>Optional Actor Classes</b></em>' reference list.
@@ -201,7 +210,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__OPTIONAL_ACTOR_CLASSES = 13;
+	int ROOT__OPTIONAL_ACTOR_CLASSES = 14;
 
 	/**
 	 * The feature id for the '<em><b>Wired Instances</b></em>' containment reference list.
@@ -210,7 +219,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__WIRED_INSTANCES = 14;
+	int ROOT__WIRED_INSTANCES = 15;
 
 	/**
 	 * The number of structural features of the '<em>Root</em>' class.
@@ -219,7 +228,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 15;
+	int ROOT_FEATURE_COUNT = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
@@ -1021,13 +1030,22 @@ public interface ETriceGenPackage extends EPackage {
 	int ACTOR_INSTANCE__UNINDEXED_NAME = STRUCTURE_INSTANCE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Xp Actor Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INSTANCE__XP_ACTOR_CLASS = STRUCTURE_INSTANCE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Actor Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR_INSTANCE_FEATURE_COUNT = STRUCTURE_INSTANCE_FEATURE_COUNT + 3;
+	int ACTOR_INSTANCE_FEATURE_COUNT = STRUCTURE_INSTANCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OptionalActorInstanceImpl <em>Optional Actor Instance</em>}' class.
@@ -1266,13 +1284,22 @@ public interface ETriceGenPackage extends EPackage {
 	int INTERFACE_ITEM_INSTANCE__PEERS = INSTANCE_BASE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Xp Protocol Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS = INSTANCE_BASE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Interface Item Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_ITEM_INSTANCE_FEATURE_COUNT = INSTANCE_BASE_FEATURE_COUNT + 2;
+	int INTERFACE_ITEM_INSTANCE_FEATURE_COUNT = INSTANCE_BASE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.PortInstanceImpl <em>Port Instance</em>}' class.
@@ -1346,6 +1373,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORT_INSTANCE__PEERS = INTERFACE_ITEM_INSTANCE__PEERS;
+
+	/**
+	 * The feature id for the '<em><b>Xp Protocol Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_INSTANCE__XP_PROTOCOL_CLASS = INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Port</b></em>' reference.
@@ -1492,6 +1528,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int SAP_INSTANCE__PEERS = INTERFACE_ITEM_INSTANCE__PEERS;
+
+	/**
+	 * The feature id for the '<em><b>Xp Protocol Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAP_INSTANCE__XP_PROTOCOL_CLASS = INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Sap</b></em>' reference.
@@ -1674,6 +1719,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int SERVICE_IMPL_INSTANCE__PEERS = INTERFACE_ITEM_INSTANCE__PEERS;
+
+	/**
+	 * The feature id for the '<em><b>Xp Protocol Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_IMPL_INSTANCE__XP_PROTOCOL_CLASS = INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Svc Impl</b></em>' reference.
@@ -2080,13 +2134,59 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER = 1;
 
 	/**
+	 * The feature id for the '<em><b>Tracing Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__TRACING_ENABLED = 2;
+
+	/**
 	 * The number of structural features of the '<em>Expanded Actor Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = 2;
+	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedProtocolClassImpl <em>Expanded Protocol Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedProtocolClassImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedProtocolClass()
+	 * @generated
+	 */
+	int EXPANDED_PROTOCOL_CLASS = 23;
+
+	/**
+	 * The feature id for the '<em><b>Ordered Message Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_PROTOCOL_CLASS__ORDERED_MESSAGE_NAMES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Protocol Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_PROTOCOL_CLASS__PROTOCOL_CLASS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Expanded Protocol Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_PROTOCOL_CLASS_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.
@@ -2096,7 +2196,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getPortKind()
 	 * @generated
 	 */
-	int PORT_KIND = 23;
+	int PORT_KIND = 24;
 
 
 	/**
@@ -2207,6 +2307,17 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoot_ProtocolClasses();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getXpProtocolClasses <em>Xp Protocol Classes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Xp Protocol Classes</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getXpProtocolClasses()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_XpProtocolClasses();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getActorClasses <em>Actor Classes</em>}'.
@@ -2620,6 +2731,17 @@ public interface ETriceGenPackage extends EPackage {
 	EAttribute getActorInstance_UnindexedName();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getXpActorClass <em>Xp Actor Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Xp Actor Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getXpActorClass()
+	 * @see #getActorInstance()
+	 * @generated
+	 */
+	EReference getActorInstance_XpActorClass();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance <em>Optional Actor Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2682,6 +2804,17 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getInterfaceItemInstance_Peers();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getXpProtocolClass <em>Xp Protocol Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Xp Protocol Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getXpProtocolClass()
+	 * @see #getInterfaceItemInstance()
+	 * @generated
+	 */
+	EReference getInterfaceItemInstance_XpProtocolClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.PortInstance <em>Port Instance</em>}'.
@@ -2928,6 +3061,49 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExpandedActorClass_GraphContainer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#isTracingEnabled <em>Tracing Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tracing Enabled</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#isTracingEnabled()
+	 * @see #getExpandedActorClass()
+	 * @generated
+	 */
+	EAttribute getExpandedActorClass_TracingEnabled();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass <em>Expanded Protocol Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expanded Protocol Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass
+	 * @generated
+	 */
+	EClass getExpandedProtocolClass();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass#getOrderedMessageNames <em>Ordered Message Names</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Ordered Message Names</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass#getOrderedMessageNames()
+	 * @see #getExpandedProtocolClass()
+	 * @generated
+	 */
+	EAttribute getExpandedProtocolClass_OrderedMessageNames();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass#getProtocolClass <em>Protocol Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Protocol Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass#getProtocolClass()
+	 * @see #getExpandedProtocolClass()
+	 * @generated
+	 */
+	EReference getExpandedProtocolClass_ProtocolClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass <em>Wired Structure Class</em>}'.
@@ -3245,6 +3421,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__PROTOCOL_CLASSES = eINSTANCE.getRoot_ProtocolClasses();
+
+		/**
+		 * The meta object literal for the '<em><b>Xp Protocol Classes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__XP_PROTOCOL_CLASSES = eINSTANCE.getRoot_XpProtocolClasses();
 
 		/**
 		 * The meta object literal for the '<em><b>Actor Classes</b></em>' reference list feature.
@@ -3565,6 +3749,14 @@ public interface ETriceGenPackage extends EPackage {
 		EAttribute ACTOR_INSTANCE__UNINDEXED_NAME = eINSTANCE.getActorInstance_UnindexedName();
 
 		/**
+		 * The meta object literal for the '<em><b>Xp Actor Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTOR_INSTANCE__XP_ACTOR_CLASS = eINSTANCE.getActorInstance_XpActorClass();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OptionalActorInstanceImpl <em>Optional Actor Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3615,6 +3807,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INTERFACE_ITEM_INSTANCE__PEERS = eINSTANCE.getInterfaceItemInstance_Peers();
+
+		/**
+		 * The meta object literal for the '<em><b>Xp Protocol Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS = eINSTANCE.getInterfaceItemInstance_XpProtocolClass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.PortInstanceImpl <em>Port Instance</em>}' class.
@@ -3813,6 +4013,40 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER = eINSTANCE.getExpandedActorClass_GraphContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Tracing Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPANDED_ACTOR_CLASS__TRACING_ENABLED = eINSTANCE.getExpandedActorClass_TracingEnabled();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedProtocolClassImpl <em>Expanded Protocol Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedProtocolClassImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedProtocolClass()
+		 * @generated
+		 */
+		EClass EXPANDED_PROTOCOL_CLASS = eINSTANCE.getExpandedProtocolClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Ordered Message Names</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPANDED_PROTOCOL_CLASS__ORDERED_MESSAGE_NAMES = eINSTANCE.getExpandedProtocolClass_OrderedMessageNames();
+
+		/**
+		 * The meta object literal for the '<em><b>Protocol Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPANDED_PROTOCOL_CLASS__PROTOCOL_CLASS = eINSTANCE.getExpandedProtocolClass_ProtocolClass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl <em>Wired Structure Class</em>}' class.

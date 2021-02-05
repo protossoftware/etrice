@@ -279,4 +279,15 @@ class FsmGenExtensions {
 	static def getLinkFor(GraphContainer gc, TransitionBase t) {
 		gc.graph.allLinks.findFirst[transition===t]
 	}
+	
+	/**
+     * @param states a list of {@link State}s
+     * @return a list ordered such that leaf states are last
+     */
+    static def getLeafStatesLast(List<State> states) {
+		val leaf = states.filter(s|s.subgraph === null)
+		val nonLeaf = states.filter(s|s.subgraph !== null)
+
+		nonLeaf + leaf
+	}
 }

@@ -169,6 +169,15 @@ public interface ETriceGenFactory extends EFactory {
 	ExpandedActorClass createExpandedActorClass();
 
 	/**
+	 * Returns a new object of class '<em>Expanded Protocol Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expanded Protocol Class</em>'.
+	 * @generated
+	 */
+	ExpandedProtocolClass createExpandedProtocolClass();
+
+	/**
 	 * Returns a new object of class '<em>Open Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -12,6 +12,11 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initializedCommonData"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderedStates" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//State"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderedStateNames" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Graph" eSuperTypes="#//FSMGenElement">
     <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">

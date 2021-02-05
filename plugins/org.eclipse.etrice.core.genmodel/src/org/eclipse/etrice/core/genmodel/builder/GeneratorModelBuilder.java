@@ -14,6 +14,8 @@
 
 package org.eclipse.etrice.core.genmodel.builder;
 
+import static com.google.common.base.Verify.verifyNotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +24,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -35,6 +39,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
@@ -215,6 +220,11 @@ public class GeneratorModelBuilder {
 		
 		// transform actor classes
 		createExpandedActorClasses(root);
+		
+		// transform protocol classes
+		if(!root.isLibrary()) {
+			createExpandedProtocolClasses(root);
+		}
 		
 		return root;
 	}
@@ -1223,16 +1233,37 @@ public class GeneratorModelBuilder {
 	 * @param root - the model root
 	 */
 	private void createExpandedActorClasses(Root root) {
+		Map<ActorClass, ExpandedActorClass> map = new HashMap<>();
+		
 		for (ActorClass ac : root.getActorClasses()) {
-			root.getXpActorClasses().add(createExpandedActorClass(ac));
+			ExpandedActorClass xpac = createExpandedActorClass(ac);
+			root.getXpActorClasses().add(xpac);
+			map.put(ac, xpac);
 		}
 		
 		// the C generator also needs actor classes to connect with
 		for (RoomModel model : root.getImportedModels()) {
-			roomHelpers.getRoomClasses(model, ActorClass.class).forEach(ac ->
-				root.getXpActorClasses().add(createExpandedActorClass(ac))
-			);
+			roomHelpers.getRoomClasses(model, ActorClass.class).forEach(ac -> {
+				ExpandedActorClass xpac = createExpandedActorClass(ac);
+				root.getXpActorClasses().add(xpac);
+				map.put(ac, xpac);
+			});
 		}
+		
+		// set tracing flag
+		map.values().forEach(xpac -> {
+			boolean isTracing = roomHelpers.hasTracingAnnotation(xpac.getActorClass()) && roomHelpers
+					.getAllInterfaceItems(xpac.getActorClass()).stream().anyMatch(ifItem -> ifItem.isEventDriven());
+			xpac.setTracingEnabled(isTracing);
+		});
+		
+		// link with objects
+		allObjects.forEach(inst -> {
+			if(inst instanceof ActorInstance) {
+				ActorInstance ai = (ActorInstance) inst;
+				ai.setXpActorClass(verifyNotNull(map.get(ai.getActorClass())));
+			}
+		});
 	}
 
 	/**
@@ -1254,5 +1285,45 @@ public class GeneratorModelBuilder {
 		xpac.setGraphContainer(gc);
 		
 		return xpac;
+	}
+	
+	private void createExpandedProtocolClasses(Root root) {
+		Map<ProtocolClass, ExpandedProtocolClass> map = new HashMap<>();
+		
+		root.getProtocolClasses().forEach(pc -> {
+			ExpandedProtocolClass xppc = createExpandedProtocolClasses(pc);
+			root.getXpProtocolClasses().add(xppc);
+			map.put(pc, xppc);
+		});
+		
+		// link with objects
+		allObjects.forEach(inst -> {
+			if(inst instanceof InterfaceItemInstance) {
+				InterfaceItemInstance ifItem = (InterfaceItemInstance) inst;
+				ProtocolClass pc = ifItem.getProtocol();
+				if(!map.containsKey(pc)) {
+					ExpandedProtocolClass xppc = createExpandedProtocolClasses(pc);
+					root.getXpProtocolClasses().add(xppc);
+					map.put(pc, xppc);
+				}
+				ifItem.setXpProtocolClass(verifyNotNull(map.get(pc)));
+			}
+		});
+	}
+	
+	/**
+	 * expanded protocol classes similar to expanded actor class
+	 * @param root - the model root
+	 */
+	public ExpandedProtocolClass createExpandedProtocolClasses(ProtocolClass pc) {
+		ExpandedProtocolClass xppc = ETriceGenFactory.eINSTANCE.createExpandedProtocolClass();
+		xppc.setProtocolClass(pc);
+		
+		Stream.concat(roomHelpers.getAllOutgoingMessages(pc).stream(), roomHelpers.getAllIncomingMessages(pc).stream())
+				.forEach(msg -> {
+					xppc.getOrderedMessageNames().add(msg.getName());
+				});
+		
+		return xppc;
 	}
 }

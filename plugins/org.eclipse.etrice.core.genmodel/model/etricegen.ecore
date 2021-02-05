@@ -50,6 +50,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClasses" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ProtocolClass"
         volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xpProtocolClasses" upperBound="-1"
+        eType="#//ExpandedProtocolClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClasses" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"
         volatile="true" transient="true" derived="true"/>
@@ -128,6 +130,7 @@
         defaultValueLiteral="-1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unindexedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xpActorClass" eType="#//ExpandedActorClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OptionalActorInstance" eSuperTypes="#//StructureInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ActorClass"/>
@@ -143,6 +146,7 @@
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="peers" upperBound="-1"
         eType="#//InterfaceItemInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xpProtocolClass" eType="#//ExpandedProtocolClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortInstance" eSuperTypes="#//InterfaceItemInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//Port"/>
@@ -223,5 +227,11 @@
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="graphContainer" eType="ecore:EClass ../../org.eclipse.etrice.core.genmodel.fsm/model/fsmgen.ecore#//GraphContainer"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tracingEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedProtocolClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderedMessageNames" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/model/generated/Room.ecore#//ProtocolClass"/>
   </eClassifiers>
 </ecore:EPackage>

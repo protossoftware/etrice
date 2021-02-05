@@ -141,13 +141,31 @@ public interface FsmGenPackage extends EPackage {
 	int GRAPH_CONTAINER__INITIALIZED_COMMON_DATA = FSM_GEN_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Ordered States</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH_CONTAINER__ORDERED_STATES = FSM_GEN_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Ordered State Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH_CONTAINER__ORDERED_STATE_NAMES = FSM_GEN_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Graph Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAPH_CONTAINER_FEATURE_COUNT = FSM_GEN_ELEMENT_FEATURE_COUNT + 5;
+	int GRAPH_CONTAINER_FEATURE_COUNT = FSM_GEN_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Graph Container</em>' class.
@@ -626,6 +644,28 @@ public interface FsmGenPackage extends EPackage {
 	EAttribute getGraphContainer_InitializedCommonData();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#getOrderedStates <em>Ordered States</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Ordered States</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#getOrderedStates()
+	 * @see #getGraphContainer()
+	 * @generated
+	 */
+	EReference getGraphContainer_OrderedStates();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#getOrderedStateNames <em>Ordered State Names</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Ordered State Names</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#getOrderedStateNames()
+	 * @see #getGraphContainer()
+	 * @generated
+	 */
+	EAttribute getGraphContainer_OrderedStateNames();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph <em>Graph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1051,6 +1091,22 @@ public interface FsmGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GRAPH_CONTAINER__INITIALIZED_COMMON_DATA = eINSTANCE.getGraphContainer_InitializedCommonData();
+
+		/**
+		 * The meta object literal for the '<em><b>Ordered States</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GRAPH_CONTAINER__ORDERED_STATES = eINSTANCE.getGraphContainer_OrderedStates();
+
+		/**
+		 * The meta object literal for the '<em><b>Ordered State Names</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRAPH_CONTAINER__ORDERED_STATE_NAMES = eINSTANCE.getGraphContainer_OrderedStateNames();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.GraphImpl <em>Graph</em>}' class.

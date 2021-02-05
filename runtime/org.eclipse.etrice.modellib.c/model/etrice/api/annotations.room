@@ -56,6 +56,17 @@ RoomModel etrice.api.annotations {
 	}
 	
 	/**
+	 * Instruments the given target for tracing. 
+	 * The tracing information can be found in the genmodel. At runtime, the generated code will call etMSCTracer.h.
+	 * The implementation is not part of of eTrice.
+	 */
+	AnnotationType Tracing {
+		target = {
+			ActorClass
+		}
+	}
+	
+	/**
 	 * A SubSystemClass or ActorClass having this annotation is construed as an instance.<br>
 	 * During generation the necessary instantiation (LogicalSystem, SubSystemRef etc.) and mapping will be created. 
 	 * <p>

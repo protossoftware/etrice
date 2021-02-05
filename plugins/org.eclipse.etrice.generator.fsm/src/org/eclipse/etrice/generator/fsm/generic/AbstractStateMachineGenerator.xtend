@@ -126,18 +126,18 @@ abstract class AbstractStateMachineGenerator {
 			allStateNodes.filter[inherited].size else 0
 		
 		// considered are all states (case of !omitBase) or just the ones which are not inherited (case of omitBase)
-		var consideredStates = (if (omitBase)
-			allStateNodes.filter[!inherited] else allStateNodes).map[stateGraphNode].filter(typeof(State)).toList
+		val consideredStates = (if (omitBase)
+			allStateNodes.filter[!inherited] else allStateNodes).map[stateGraphNode].filter(typeof(State)).toSet
 
 		// we sort them with the non leaf states last to have the history as short as possible
-		consideredStates = consideredStates.leafStatesLast.toList
+		val generatedStates = gc.orderedStates.filter[consideredStates.contains(it)]
 
 		var list = <Pair<String, String>>newArrayList
 		if (!omitBase) {
 			list.add(pair("NO_STATE","0"))
 			list.add(pair("STATE_TOP","1"))
 		}
-		for (state : consideredStates) {
+		for (state : generatedStates) {
 			list.add(pair(state.getGenStateId, offset.toString))
 			offset = offset+1;
 		}

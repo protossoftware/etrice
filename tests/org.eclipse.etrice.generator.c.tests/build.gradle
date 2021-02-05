@@ -4,3 +4,45 @@ apply from: "$rootDir/gradle/etTest.gradle"
 
 createTest('c', 'sendingDataTest')
 createTest('c', 'staticConfigTest')
+createTest('c', 'traceTest', ['saveGenModel', 'tmp/genmodel.xmi'])
+
+task traceTestCGenModel(group: 'verification') {
+	doFirst {
+		def genmodel = new XmlSlurper().parse(file('-tmp/genmodel.xmi'))
+		
+		// expect stable ordered ids, ids have to match with generated code
+		def pingPongProtocol = genmodel.xpProtocolClasses[0]
+		assert pingPongProtocol.orderedMessageNames[0] == 'pong'
+		assert pingPongProtocol.orderedMessageNames[1] == 'ping'
+		
+		// top actor and classes of all refs are enabled
+		assert genmodel.xpActorClasses[0].@tracingEnabled
+		assert genmodel.xpActorClasses[1].@tracingEnabled
+		assert genmodel.xpActorClasses[2].@tracingEnabled
+		// timer not
+		assert genmodel.xpActorClasses[3].@tracingEnabled == ""
+			
+		def senderGraph = genmodel.xpActorClasses[1].graphContainer
+		assert senderGraph.orderedStateNames[0] == 'receiveBroadcast'
+		assert senderGraph.orderedStateNames[1] == 'startPing'
+		assert senderGraph.orderedStateNames[2] == 'sendRepl'
+		assert senderGraph.orderedStateNames[3] == 'sendBroadcast'
+		assert senderGraph.orderedStateNames[4] == 'receiveBroadcast_recv1'
+		assert senderGraph.orderedStateNames[5] == 'final'
+		
+		assert genmodel.'**'.find{ e -> e.@objId == '1' }.@name == 'topActor'
+		assert genmodel.'**'.find{ e -> e.@objId == '3' }.@name == 'sender'
+		assert genmodel.'**'.find{ e -> e.@objId == '4' }.@name == 'sendPort'
+		assert genmodel.'**'.find{ e -> e.@objId == '9' }.@name == 'recvPort'
+		assert genmodel.'**'.find{ e -> e.@objId == '10' }.@name == 'recvPortRepl1'
+		assert genmodel.'**'.find{ e -> e.@objId == '11' }.@name == 'recvPortRepl2'
+		assert genmodel.'**'.find{ e -> e.@objId == '3' }.@name == 'sender'
+		assert genmodel.'**'.find{ e -> e.@objId == '8' }.@name == 'receiver'
+		// sendPortRepl is replicated
+		def sendPortRepl = genmodel.'**'.find{ e -> e.@objId == '5' }
+		assert sendPortRepl.@name == 'sendPortRepl'
+		assert sendPortRepl.@peers.text().contains(' ')	// two cross-references seperated by space
+	}
+}
+traceTestCGenModel.dependsOn(generateTraceTestC)
+check.dependsOn(traceTestCGenModel)

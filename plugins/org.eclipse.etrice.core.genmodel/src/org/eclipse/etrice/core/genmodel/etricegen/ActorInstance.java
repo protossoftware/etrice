@@ -14,6 +14,7 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
@@ -35,6 +36,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getActorClass <em>Actor Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getReplIdx <em>Repl Idx</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getUnindexedName <em>Unindexed Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getXpActorClass <em>Xp Actor Class</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActorInstance()
@@ -109,5 +111,27 @@ public interface ActorInstance extends StructureInstance {
 	 * @generated
 	 */
 	String getUnindexedName();
+
+	/**
+	 * Returns the value of the '<em><b>Xp Actor Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Xp Actor Class</em>' reference.
+	 * @see #setXpActorClass(ExpandedActorClass)
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActorInstance_XpActorClass()
+	 * @model
+	 * @generated
+	 */
+	ExpandedActorClass getXpActorClass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getXpActorClass <em>Xp Actor Class</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Xp Actor Class</em>' reference.
+	 * @see #getXpActorClass()
+	 * @generated
+	 */
+	void setXpActorClass(ExpandedActorClass value);
 
 } // ActorInstance

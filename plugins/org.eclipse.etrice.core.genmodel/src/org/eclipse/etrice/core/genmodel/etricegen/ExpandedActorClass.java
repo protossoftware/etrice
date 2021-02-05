@@ -14,6 +14,7 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
@@ -32,6 +33,7 @@ import org.eclipse.etrice.core.room.ActorClass;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getActorClass <em>Actor Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getGraphContainer <em>Graph Container</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#isTracingEnabled <em>Tracing Enabled</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedActorClass()
@@ -78,6 +80,28 @@ public interface ExpandedActorClass extends EObject {
 	 * @generated
 	 */
 	void setGraphContainer(GraphContainer value);
+
+	/**
+	 * Returns the value of the '<em><b>Tracing Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tracing Enabled</em>' attribute.
+	 * @see #setTracingEnabled(boolean)
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedActorClass_TracingEnabled()
+	 * @model
+	 * @generated
+	 */
+	boolean isTracingEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#isTracingEnabled <em>Tracing Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tracing Enabled</em>' attribute.
+	 * @see #isTracingEnabled()
+	 * @generated
+	 */
+	void setTracingEnabled(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

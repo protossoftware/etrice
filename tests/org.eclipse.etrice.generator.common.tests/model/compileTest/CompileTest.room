@@ -6,6 +6,7 @@ RoomModel CompileTest {
 	import StatemachineInterfaceTest.StatemachineInterfaceTest
 	import StatemachineInterfaceInheritedTest.StatemachineInterfaceInheritedTest
 	import ContinuationTransitionTest.ContinuationTransitionTest
+	import EmptyActor.AEmpty
 
 	ActorClass CompileTests {
 		@TestInstance
@@ -16,6 +17,7 @@ RoomModel CompileTest {
 			ActorRef statemachineInterfaceTest : StatemachineInterfaceTest
 			ActorRef statemachineInterfaceInheritedTest : StatemachineInterfaceInheritedTest
 			ActorRef continuationTransitionTest : ContinuationTransitionTest
+			ActorRef empty : AEmpty
 		}
 		Behavior {
 			ctor '''caseId = etUnit_openAll("log", "CompileTest", "org.eclipse.etrice.generator.common.tests.CompileTests", "CompileTests_case");'''

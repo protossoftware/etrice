@@ -2,15 +2,20 @@
  */
 package org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 
+import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
@@ -28,6 +33,8 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.GraphContainerImpl#isInitializedTriggersInStates <em>Initialized Triggers In States</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.GraphContainerImpl#isInitializedChainHeads <em>Initialized Chain Heads</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.GraphContainerImpl#isInitializedCommonData <em>Initialized Common Data</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.GraphContainerImpl#getOrderedStates <em>Ordered States</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.GraphContainerImpl#getOrderedStateNames <em>Ordered State Names</em>}</li>
  * </ul>
  *
  * @generated
@@ -112,6 +119,26 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * @ordered
 	 */
 	protected boolean initializedCommonData = INITIALIZED_COMMON_DATA_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOrderedStates() <em>Ordered States</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrderedStates()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<State> orderedStates;
+
+	/**
+	 * The cached value of the '{@link #getOrderedStateNames() <em>Ordered State Names</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrderedStateNames()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> orderedStateNames;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -292,6 +319,32 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * @generated
 	 */
 	@Override
+	public EList<State> getOrderedStates() {
+		if (orderedStates == null) {
+			orderedStates = new EObjectResolvingEList<State>(State.class, this, FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATES);
+		}
+		return orderedStates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<String> getOrderedStateNames() {
+		if (orderedStateNames == null) {
+			orderedStateNames = new EDataTypeUniqueEList<String>(String.class, this, FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATE_NAMES);
+		}
+		return orderedStateNames;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FsmGenPackage.GRAPH_CONTAINER__GRAPH:
@@ -319,6 +372,10 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 				return isInitializedChainHeads();
 			case FsmGenPackage.GRAPH_CONTAINER__INITIALIZED_COMMON_DATA:
 				return isInitializedCommonData();
+			case FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATES:
+				return getOrderedStates();
+			case FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATE_NAMES:
+				return getOrderedStateNames();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -328,6 +385,7 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -345,6 +403,14 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 				return;
 			case FsmGenPackage.GRAPH_CONTAINER__INITIALIZED_COMMON_DATA:
 				setInitializedCommonData((Boolean)newValue);
+				return;
+			case FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATES:
+				getOrderedStates().clear();
+				getOrderedStates().addAll((Collection<? extends State>)newValue);
+				return;
+			case FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATE_NAMES:
+				getOrderedStateNames().clear();
+				getOrderedStateNames().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -373,6 +439,12 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 			case FsmGenPackage.GRAPH_CONTAINER__INITIALIZED_COMMON_DATA:
 				setInitializedCommonData(INITIALIZED_COMMON_DATA_EDEFAULT);
 				return;
+			case FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATES:
+				getOrderedStates().clear();
+				return;
+			case FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATE_NAMES:
+				getOrderedStateNames().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -395,6 +467,10 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 				return initializedChainHeads != INITIALIZED_CHAIN_HEADS_EDEFAULT;
 			case FsmGenPackage.GRAPH_CONTAINER__INITIALIZED_COMMON_DATA:
 				return initializedCommonData != INITIALIZED_COMMON_DATA_EDEFAULT;
+			case FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATES:
+				return orderedStates != null && !orderedStates.isEmpty();
+			case FsmGenPackage.GRAPH_CONTAINER__ORDERED_STATE_NAMES:
+				return orderedStateNames != null && !orderedStateNames.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -415,6 +491,8 @@ public class GraphContainerImpl extends FSMGenElementImpl implements GraphContai
 		result.append(initializedChainHeads);
 		result.append(", initializedCommonData: ");
 		result.append(initializedCommonData);
+		result.append(", orderedStateNames: ");
+		result.append(orderedStateNames);
 		result.append(')');
 		return result.toString();
 	}

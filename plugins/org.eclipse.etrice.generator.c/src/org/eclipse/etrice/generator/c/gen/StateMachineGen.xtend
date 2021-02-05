@@ -17,18 +17,15 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
-import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
-import org.eclipse.etrice.core.fsm.fSM.State
-import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
 
-	@Inject extension RoomExtensions
 	@Inject protected extension GeneratorOptionsHelper
 
 	def genHeaderConstants(ExpandedActorClass xpac) {
@@ -70,18 +67,22 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	 */
 	override genExtra(GraphContainer gc, boolean generateImplementation) {
 		val mc = gc.component
-		val allStates = gc.graph.allStateNodes.map[stateGraphNode].filter(typeof(State)).toList
-		val states = allStates.getLeafStatesLast
 		'''
 			/* state names */
 			#ifdef ET_MSC_LOGGER_ACTIVATE
-				static const char* stateStrings[] = {"<no state>","<top>",«FOR state : states SEPARATOR ","»"«state.genStatePathName»"
+				static const char* stateStrings[] = {"<no state>","<top>",«FOR state : gc.orderedStates SEPARATOR ","»"«state.genStatePathName»"
 				«ENDFOR»};
 			#endif
 
 			«langExt.accessLevelPrivate»void setState(«mc.componentName»* self, «stateType» new_state) {
+				«IF (gc.eContainer as ExpandedActorClass).isTracingEnabled»
+					#ifdef ET_MSC_TRACER_ACTIVATE
+						if(self->state != new_state) {
+							ET_MSC_TRACER_SET_STATE(self->constData->objId, new_state);
+						}
+					#endif
+				«ENDIF»
 				self->state = new_state;
-				
 				ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state]);
 			}
 

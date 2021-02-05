@@ -24,6 +24,8 @@ import org.eclipse.etrice.core.fsm.fSM.ModelComponent
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.fsm.util.FSMHelpers
 
+import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.getLeafStatesLast;
+
 /**
  * @author Henrik Rentz-Reichert
  *
@@ -72,17 +74,6 @@ class FSMExtensions {
 		ret.removeAll(l2)
 		return ret;
 	}
-
-    /**
-     * @param states a list of {@link State}s
-     * @return a list ordered such that leaf states are last
-     */
-    def getLeafStatesLast(List<State> states) {
-        val leaf = states.filter(s|s.leaf)
-        val nonLeaf = states.filter(s|!s.leaf)
-        
-        nonLeaf + leaf
-    }
 
     /**
      * @param ac an {@link ActorClass}

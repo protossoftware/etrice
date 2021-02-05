@@ -16,6 +16,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//GraphContainer/initializedTriggersInStates"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//GraphContainer/initializedChainHeads"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//GraphContainer/initializedCommonData"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//GraphContainer/orderedStates"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//GraphContainer/orderedStateNames"/>
     </genClasses>
     <genClasses ecoreClass="fsmgen.ecore#//Graph">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Graph/nodes"/>

@@ -25,6 +25,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/xpActorClasses"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/dataClasses"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/protocolClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/xpProtocolClasses"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/actorClasses"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/enumClasses"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/subSystemClasses"/>
@@ -102,6 +103,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ActorInstance/actorClass"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//ActorInstance/replIdx"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//ActorInstance/unindexedName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ActorInstance/xpActorClass"/>
     </genClasses>
     <genClasses ecoreClass="etricegen.ecore#//OptionalActorInstance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//OptionalActorInstance/actorClass"/>
@@ -110,6 +112,7 @@
     <genClasses ecoreClass="etricegen.ecore#//InterfaceItemInstance">
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference etricegen.ecore#//InterfaceItemInstance/protocol"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//InterfaceItemInstance/peers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//InterfaceItemInstance/xpProtocolClass"/>
       <genOperations ecoreOperation="etricegen.ecore#//InterfaceItemInstance/isReplicated"/>
       <genOperations ecoreOperation="etricegen.ecore#//InterfaceItemInstance/isSimple"/>
       <genOperations ecoreOperation="etricegen.ecore#//InterfaceItemInstance/isRelay"/>
@@ -169,9 +172,14 @@
     <genClasses ecoreClass="etricegen.ecore#//ExpandedActorClass">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedActorClass/actorClass"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedActorClass/graphContainer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//ExpandedActorClass/tracingEnabled"/>
       <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getInterfaceItemLocalId">
         <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getInterfaceItemLocalId/ifitem"/>
       </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="etricegen.ecore#//ExpandedProtocolClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//ExpandedProtocolClass/orderedMessageNames"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedProtocolClass/protocolClass"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

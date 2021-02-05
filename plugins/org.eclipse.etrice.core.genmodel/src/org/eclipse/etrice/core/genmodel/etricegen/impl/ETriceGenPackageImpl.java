@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
@@ -177,6 +178,13 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	private EClass expandedActorClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expandedProtocolClassEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -400,7 +408,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getRoot_ActorClasses() {
+	public EReference getRoot_XpProtocolClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -410,7 +418,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getRoot_EnumClasses() {
+	public EReference getRoot_ActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -420,7 +428,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getRoot_SubSystemClasses() {
+	public EReference getRoot_EnumClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -430,7 +438,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getRoot_OptionalInstances() {
+	public EReference getRoot_SubSystemClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -440,7 +448,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getRoot_OptionalActorClasses() {
+	public EReference getRoot_OptionalInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -450,8 +458,18 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getRoot_WiredInstances() {
+	public EReference getRoot_OptionalActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRoot_WiredInstances() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -780,6 +798,16 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	@Override
+	public EReference getActorInstance_XpActorClass() {
+		return (EReference)actorInstanceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getOptionalActorInstance() {
 		return optionalActorInstanceEClass;
 	}
@@ -832,6 +860,16 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	@Override
 	public EReference getInterfaceItemInstance_Peers() {
 		return (EReference)interfaceItemInstanceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getInterfaceItemInstance_XpProtocolClass() {
+		return (EReference)interfaceItemInstanceEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1062,6 +1100,46 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	@Override
 	public EReference getExpandedActorClass_GraphContainer() {
 		return (EReference)expandedActorClassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getExpandedActorClass_TracingEnabled() {
+		return (EAttribute)expandedActorClassEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpandedProtocolClass() {
+		return expandedProtocolClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getExpandedProtocolClass_OrderedMessageNames() {
+		return (EAttribute)expandedProtocolClassEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExpandedProtocolClass_ProtocolClass() {
+		return (EReference)expandedProtocolClassEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1303,6 +1381,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(rootEClass, ROOT__XP_ACTOR_CLASSES);
 		createEReference(rootEClass, ROOT__DATA_CLASSES);
 		createEReference(rootEClass, ROOT__PROTOCOL_CLASSES);
+		createEReference(rootEClass, ROOT__XP_PROTOCOL_CLASSES);
 		createEReference(rootEClass, ROOT__ACTOR_CLASSES);
 		createEReference(rootEClass, ROOT__ENUM_CLASSES);
 		createEReference(rootEClass, ROOT__SUB_SYSTEM_CLASSES);
@@ -1348,6 +1427,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(actorInstanceEClass, ACTOR_INSTANCE__ACTOR_CLASS);
 		createEAttribute(actorInstanceEClass, ACTOR_INSTANCE__REPL_IDX);
 		createEAttribute(actorInstanceEClass, ACTOR_INSTANCE__UNINDEXED_NAME);
+		createEReference(actorInstanceEClass, ACTOR_INSTANCE__XP_ACTOR_CLASS);
 
 		optionalActorInstanceEClass = createEClass(OPTIONAL_ACTOR_INSTANCE);
 		createEReference(optionalActorInstanceEClass, OPTIONAL_ACTOR_INSTANCE__ACTOR_CLASS);
@@ -1356,6 +1436,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		interfaceItemInstanceEClass = createEClass(INTERFACE_ITEM_INSTANCE);
 		createEReference(interfaceItemInstanceEClass, INTERFACE_ITEM_INSTANCE__PROTOCOL);
 		createEReference(interfaceItemInstanceEClass, INTERFACE_ITEM_INSTANCE__PEERS);
+		createEReference(interfaceItemInstanceEClass, INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS);
 
 		portInstanceEClass = createEClass(PORT_INSTANCE);
 		createEReference(portInstanceEClass, PORT_INSTANCE__PORT);
@@ -1411,6 +1492,11 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		expandedActorClassEClass = createEClass(EXPANDED_ACTOR_CLASS);
 		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__ACTOR_CLASS);
 		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER);
+		createEAttribute(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__TRACING_ENABLED);
+
+		expandedProtocolClassEClass = createEClass(EXPANDED_PROTOCOL_CLASS);
+		createEAttribute(expandedProtocolClassEClass, EXPANDED_PROTOCOL_CLASS__ORDERED_MESSAGE_NAMES);
+		createEReference(expandedProtocolClassEClass, EXPANDED_PROTOCOL_CLASS__PROTOCOL_CLASS);
 
 		// Create enums
 		portKindEEnum = createEEnum(PORT_KIND);
@@ -1475,6 +1561,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEReference(getRoot_XpActorClasses(), this.getExpandedActorClass(), null, "xpActorClasses", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_DataClasses(), theRoomPackage.getDataClass(), null, "dataClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_ProtocolClasses(), theRoomPackage.getProtocolClass(), null, "protocolClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_XpProtocolClasses(), this.getExpandedProtocolClass(), null, "xpProtocolClasses", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_ActorClasses(), theRoomPackage.getActorClass(), null, "actorClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_EnumClasses(), theRoomPackage.getEnumerationType(), null, "enumClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_SubSystemClasses(), theRoomPackage.getSubSystemClass(), null, "subSystemClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1554,6 +1641,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEReference(getActorInstance_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, ActorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActorInstance_ReplIdx(), ecorePackage.getEInt(), "replIdx", "-1", 0, 1, ActorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActorInstance_UnindexedName(), ecorePackage.getEString(), "unindexedName", null, 0, 1, ActorInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getActorInstance_XpActorClass(), this.getExpandedActorClass(), null, "xpActorClass", null, 0, 1, ActorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(optionalActorInstanceEClass, OptionalActorInstance.class, "OptionalActorInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOptionalActorInstance_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, OptionalActorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1562,6 +1650,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEClass(interfaceItemInstanceEClass, InterfaceItemInstance.class, "InterfaceItemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInterfaceItemInstance_Protocol(), theRoomPackage.getProtocolClass(), null, "protocol", null, 0, 1, InterfaceItemInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getInterfaceItemInstance_Peers(), this.getInterfaceItemInstance(), null, "peers", null, 0, -1, InterfaceItemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInterfaceItemInstance_XpProtocolClass(), this.getExpandedProtocolClass(), null, "xpProtocolClass", null, 0, 1, InterfaceItemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(interfaceItemInstanceEClass, ecorePackage.getEBoolean(), "isReplicated", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1625,9 +1714,14 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEClass(expandedActorClassEClass, ExpandedActorClass.class, "ExpandedActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpandedActorClass_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, ExpandedActorClass.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getExpandedActorClass_GraphContainer(), theFsmGenPackage.getGraphContainer(), null, "graphContainer", null, 0, 1, ExpandedActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExpandedActorClass_TracingEnabled(), ecorePackage.getEBoolean(), "tracingEnabled", null, 0, 1, ExpandedActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, ecorePackage.getEInt(), "getInterfaceItemLocalId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theFSMPackage.getAbstractInterfaceItem(), "ifitem", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(expandedProtocolClassEClass, ExpandedProtocolClass.class, "ExpandedProtocolClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getExpandedProtocolClass_OrderedMessageNames(), ecorePackage.getEString(), "orderedMessageNames", null, 0, -1, ExpandedProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpandedProtocolClass_ProtocolClass(), theRoomPackage.getProtocolClass(), null, "protocolClass", null, 0, 1, ExpandedProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portKindEEnum, PortKind.class, "PortKind");

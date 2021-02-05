@@ -13,6 +13,7 @@
  */
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
@@ -39,6 +41,7 @@ import org.eclipse.etrice.core.room.ActorClass;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl#getActorClass <em>Actor Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl#getGraphContainer <em>Graph Container</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl#isTracingEnabled <em>Tracing Enabled</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,6 +57,25 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * @ordered
 	 */
 	protected GraphContainer graphContainer;
+
+	/**
+	 * The default value of the '{@link #isTracingEnabled() <em>Tracing Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTracingEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TRACING_ENABLED_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isTracingEnabled() <em>Tracing Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTracingEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean tracingEnabled = TRACING_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -165,6 +187,29 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isTracingEnabled() {
+		return tracingEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTracingEnabled(boolean newTracingEnabled) {
+		boolean oldTracingEnabled = tracingEnabled;
+		tracingEnabled = newTracingEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_ACTOR_CLASS__TRACING_ENABLED, oldTracingEnabled, tracingEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public int getInterfaceItemLocalId(AbstractInterfaceItem ifitem) {
@@ -207,6 +252,8 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 				return basicGetActorClass();
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
 				return getGraphContainer();
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__TRACING_ENABLED:
+				return isTracingEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -216,11 +263,15 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
 				setGraphContainer((GraphContainer)newValue);
+				return;
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__TRACING_ENABLED:
+				setTracingEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -236,6 +287,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
 				setGraphContainer((GraphContainer)null);
+				return;
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__TRACING_ENABLED:
+				setTracingEnabled(TRACING_ENABLED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -253,8 +307,26 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 				return basicGetActorClass() != null;
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
 				return graphContainer != null;
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__TRACING_ENABLED:
+				return tracingEnabled != TRACING_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (tracingEnabled: ");
+		result.append(tracingEnabled);
+		result.append(')');
+		return result.toString();
 	}
 	
 } //ExpandedActorClassImpl

@@ -42,6 +42,9 @@
 /** switches the logging of synchronous messages on,  needs \ref ET_MSC_LOGGER_ACTIVATE */
 #define ET_ASYNC_MSC_LOGGER_ACTIVATE
 
+/** switches the binary tracing of asynchronous messages */
+#undef ET_MSC_TRACER_ACTIVATE
+
 /* data logger */
 
 /** switches the data logger on */

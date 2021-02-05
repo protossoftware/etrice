@@ -86,6 +86,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 			case ETriceGenPackage.WIRED_ACTOR_CLASS: return createWiredActorClass();
 			case ETriceGenPackage.WIRED_SUB_SYSTEM_CLASS: return createWiredSubSystemClass();
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: return createExpandedActorClass();
+			case ETriceGenPackage.EXPANDED_PROTOCOL_CLASS: return createExpandedProtocolClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -284,6 +285,17 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	public ExpandedActorClass createExpandedActorClass() {
 		ExpandedActorClassImpl expandedActorClass = new ExpandedActorClassImpl();
 		return expandedActorClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpandedProtocolClass createExpandedProtocolClass() {
+		ExpandedProtocolClassImpl expandedProtocolClass = new ExpandedProtocolClassImpl();
+		return expandedProtocolClass;
 	}
 
 	/**

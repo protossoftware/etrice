@@ -37,6 +37,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -70,6 +71,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getXpActorClasses <em>Xp Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getDataClasses <em>Data Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getProtocolClasses <em>Protocol Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getXpProtocolClasses <em>Xp Protocol Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getActorClasses <em>Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getEnumClasses <em>Enum Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemClasses <em>Sub System Classes</em>}</li>
@@ -171,6 +173,16 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected EList<ExpandedActorClass> xpActorClasses;
+
+	/**
+	 * The cached value of the '{@link #getXpProtocolClasses() <em>Xp Protocol Classes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getXpProtocolClasses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExpandedProtocolClass> xpProtocolClasses;
 
 	/**
 	 * The cached value of the '{@link #getOptionalInstances() <em>Optional Instances</em>}' containment reference list.
@@ -315,6 +327,19 @@ public class RootImpl extends EObjectImpl implements Root {
 			computeUsedClasses();
 		}
 		return protocolClasses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<ExpandedProtocolClass> getXpProtocolClasses() {
+		if (xpProtocolClasses == null) {
+			xpProtocolClasses = new EObjectContainmentEList<ExpandedProtocolClass>(ExpandedProtocolClass.class, this, ETriceGenPackage.ROOT__XP_PROTOCOL_CLASSES);
+		}
+		return xpProtocolClasses;
 	}
 
 	/**
@@ -602,6 +627,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return ((InternalEList<?>)getOwnSubSystemInstances()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
 				return ((InternalEList<?>)getXpActorClasses()).basicRemove(otherEnd, msgs);
+			case ETriceGenPackage.ROOT__XP_PROTOCOL_CLASSES:
+				return ((InternalEList<?>)getXpProtocolClasses()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
 				return ((InternalEList<?>)getOptionalInstances()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
@@ -636,6 +663,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getDataClasses();
 			case ETriceGenPackage.ROOT__PROTOCOL_CLASSES:
 				return getProtocolClasses();
+			case ETriceGenPackage.ROOT__XP_PROTOCOL_CLASSES:
+				return getXpProtocolClasses();
 			case ETriceGenPackage.ROOT__ACTOR_CLASSES:
 				return getActorClasses();
 			case ETriceGenPackage.ROOT__ENUM_CLASSES:
@@ -691,6 +720,10 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__PROTOCOL_CLASSES:
 				getProtocolClasses().clear();
 				getProtocolClasses().addAll((Collection<? extends ProtocolClass>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__XP_PROTOCOL_CLASSES:
+				getXpProtocolClasses().clear();
+				getXpProtocolClasses().addAll((Collection<? extends ExpandedProtocolClass>)newValue);
 				return;
 			case ETriceGenPackage.ROOT__ACTOR_CLASSES:
 				getActorClasses().clear();
@@ -752,6 +785,9 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__PROTOCOL_CLASSES:
 				getProtocolClasses().clear();
 				return;
+			case ETriceGenPackage.ROOT__XP_PROTOCOL_CLASSES:
+				getXpProtocolClasses().clear();
+				return;
 			case ETriceGenPackage.ROOT__ACTOR_CLASSES:
 				getActorClasses().clear();
 				return;
@@ -800,6 +836,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return !getDataClasses().isEmpty();
 			case ETriceGenPackage.ROOT__PROTOCOL_CLASSES:
 				return !getProtocolClasses().isEmpty();
+			case ETriceGenPackage.ROOT__XP_PROTOCOL_CLASSES:
+				return xpProtocolClasses != null && !xpProtocolClasses.isEmpty();
 			case ETriceGenPackage.ROOT__ACTOR_CLASSES:
 				return !getActorClasses().isEmpty();
 			case ETriceGenPackage.ROOT__ENUM_CLASSES:

@@ -34,9 +34,14 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 
+import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.getAllStateNodes;
+import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.getLeafStatesLast;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider
+
 class BasicFsmGenBuilder {
 	
 	protected extension FSMHelpers fsmHelpers
+	protected FSMNameProvider fsmNameProvider = new FSMNameProvider();
 	
 	protected val factory = FsmGenFactory.eINSTANCE
 	var int inheritanceLevel = 0
@@ -52,6 +57,12 @@ class BasicFsmGenBuilder {
 	private def GraphContainer create factory.createGraphContainer createContainer(ModelComponent mc) {
 		it.component = mc
 		it.graph = createStateMachine(mc)
+		
+		// ensure consistent state ordering in genmodel and generation
+		if(it.graph !== null) {
+			it.orderedStates += it.graph.allStateNodes.map[stateGraphNode].filter(State).toList.getLeafStatesLast
+			it.orderedStateNames += it.orderedStates.map[fsmNameProvider.getFullPath(it)]
+		}
 	}
 	
 	private def Graph createStateMachine(ModelComponent mc) {

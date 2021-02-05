@@ -2,7 +2,9 @@
  */
 package org.eclipse.etrice.core.genmodel.fsm.fsmgen;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.State;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +20,8 @@ import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#isInitializedTriggersInStates <em>Initialized Triggers In States</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#isInitializedChainHeads <em>Initialized Chain Heads</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#isInitializedCommonData <em>Initialized Common Data</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#getOrderedStates <em>Ordered States</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer#getOrderedStateNames <em>Ordered State Names</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getGraphContainer()
@@ -154,5 +158,29 @@ public interface GraphContainer extends FSMGenElement {
 	 * @generated
 	 */
 	void setInitializedCommonData(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Ordered States</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.fsm.fSM.State}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ordered States</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getGraphContainer_OrderedStates()
+	 * @model transient="true"
+	 * @generated
+	 */
+	EList<State> getOrderedStates();
+
+	/**
+	 * Returns the value of the '<em><b>Ordered State Names</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ordered State Names</em>' attribute list.
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getGraphContainer_OrderedStateNames()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getOrderedStateNames();
 
 } // GraphContainer

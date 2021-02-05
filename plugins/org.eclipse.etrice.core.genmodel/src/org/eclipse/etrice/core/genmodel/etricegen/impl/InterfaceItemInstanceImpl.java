@@ -16,11 +16,14 @@ package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortKind;
@@ -42,6 +45,7 @@ import org.eclipse.etrice.core.room.SPP;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InterfaceItemInstanceImpl#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InterfaceItemInstanceImpl#getPeers <em>Peers</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InterfaceItemInstanceImpl#getXpProtocolClass <em>Xp Protocol Class</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,6 +60,16 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 	 * @ordered
 	 */
 	protected EList<InterfaceItemInstance> peers;
+
+	/**
+	 * The cached value of the '{@link #getXpProtocolClass() <em>Xp Protocol Class</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getXpProtocolClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExpandedProtocolClass xpProtocolClass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,6 +130,46 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 			peers = new EObjectResolvingEList<InterfaceItemInstance>(InterfaceItemInstance.class, this, ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PEERS);
 		}
 		return peers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpandedProtocolClass getXpProtocolClass() {
+		if (xpProtocolClass != null && xpProtocolClass.eIsProxy()) {
+			InternalEObject oldXpProtocolClass = (InternalEObject)xpProtocolClass;
+			xpProtocolClass = (ExpandedProtocolClass)eResolveProxy(oldXpProtocolClass);
+			if (xpProtocolClass != oldXpProtocolClass) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS, oldXpProtocolClass, xpProtocolClass));
+			}
+		}
+		return xpProtocolClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpandedProtocolClass basicGetXpProtocolClass() {
+		return xpProtocolClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setXpProtocolClass(ExpandedProtocolClass newXpProtocolClass) {
+		ExpandedProtocolClass oldXpProtocolClass = xpProtocolClass;
+		xpProtocolClass = newXpProtocolClass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS, oldXpProtocolClass, xpProtocolClass));
 	}
 
 	/**
@@ -203,6 +257,9 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 				return basicGetProtocol();
 			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PEERS:
 				return getPeers();
+			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS:
+				if (resolve) return getXpProtocolClass();
+				return basicGetXpProtocolClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -220,6 +277,9 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 				getPeers().clear();
 				getPeers().addAll((Collection<? extends InterfaceItemInstance>)newValue);
 				return;
+			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS:
+				setXpProtocolClass((ExpandedProtocolClass)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -234,6 +294,9 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 		switch (featureID) {
 			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PEERS:
 				getPeers().clear();
+				return;
+			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS:
+				setXpProtocolClass((ExpandedProtocolClass)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -251,6 +314,8 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 				return basicGetProtocol() != null;
 			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PEERS:
 				return peers != null && !peers.isEmpty();
+			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__XP_PROTOCOL_CLASS:
+				return xpProtocolClass != null;
 		}
 		return super.eIsSet(featureID);
 	}

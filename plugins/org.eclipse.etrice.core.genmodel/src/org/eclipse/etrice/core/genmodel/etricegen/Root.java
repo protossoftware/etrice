@@ -43,6 +43,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getXpActorClasses <em>Xp Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getDataClasses <em>Data Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getProtocolClasses <em>Protocol Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getXpProtocolClasses <em>Xp Protocol Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getActorClasses <em>Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getEnumClasses <em>Enum Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemClasses <em>Sub System Classes</em>}</li>
@@ -205,6 +206,18 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	EList<ProtocolClass> getProtocolClasses();
+
+	/**
+	 * Returns the value of the '<em><b>Xp Protocol Classes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedProtocolClass}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Xp Protocol Classes</em>' containment reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_XpProtocolClasses()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ExpandedProtocolClass> getXpProtocolClasses();
 
 	/**
 	 * Returns the value of the '<em><b>Actor Classes</b></em>' reference list.

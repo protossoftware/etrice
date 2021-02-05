@@ -401,7 +401,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						int i;
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
 							«portClassName»_«message.name»(&((etReplPort*)self)->ports[i].port«dataCall»);
-						}					
+						}
 					«ELSE»
 						int i;
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
@@ -450,12 +450,13 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		'''
 	}
 
-	def private sendMessageCall(boolean hasData, String selfPtr, String msg, String typeName, String data) {
-		if (hasData)
-			"etPort_sendMessage("+selfPtr+", "+msg+", sizeof("+typeName+"), "+data+");"
-		else
-			"etPort_sendMessage("+selfPtr+", "+msg+", 0, NULL);"
-	}
+	def private sendMessageCall(boolean hasData, String selfPtr, String msg, String typeName, String data) '''
+		«IF hasData»
+			etPort_sendMessage(«selfPtr», «msg», sizeof(«typeName»), «data»);
+		«ELSE»
+			etPort_sendMessage(«selfPtr», «msg», 0, NULL);
+		«ENDIF»
+	'''
 	
 	def private messageSignature(String className, String messageName, String methodSuffix, String data) {
 		"void "+className+"_"+messageName+methodSuffix+"(const "+className+"* self"+data+")"

@@ -210,6 +210,26 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getGraphContainer_OrderedStates() {
+		return (EReference)graphContainerEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getGraphContainer_OrderedStateNames() {
+		return (EAttribute)graphContainerEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getGraph() {
 		return graphEClass;
 	}
@@ -569,6 +589,8 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		createEAttribute(graphContainerEClass, GRAPH_CONTAINER__INITIALIZED_TRIGGERS_IN_STATES);
 		createEAttribute(graphContainerEClass, GRAPH_CONTAINER__INITIALIZED_CHAIN_HEADS);
 		createEAttribute(graphContainerEClass, GRAPH_CONTAINER__INITIALIZED_COMMON_DATA);
+		createEReference(graphContainerEClass, GRAPH_CONTAINER__ORDERED_STATES);
+		createEAttribute(graphContainerEClass, GRAPH_CONTAINER__ORDERED_STATE_NAMES);
 
 		graphEClass = createEClass(GRAPH);
 		createEReference(graphEClass, GRAPH__NODES);
@@ -655,6 +677,8 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		initEAttribute(getGraphContainer_InitializedTriggersInStates(), ecorePackage.getEBoolean(), "initializedTriggersInStates", null, 0, 1, GraphContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGraphContainer_InitializedChainHeads(), ecorePackage.getEBoolean(), "initializedChainHeads", null, 0, 1, GraphContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGraphContainer_InitializedCommonData(), ecorePackage.getEBoolean(), "initializedCommonData", null, 0, 1, GraphContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGraphContainer_OrderedStates(), theFSMPackage.getState(), null, "orderedStates", null, 0, -1, GraphContainer.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGraphContainer_OrderedStateNames(), ecorePackage.getEString(), "orderedStateNames", null, 0, -1, GraphContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(graphEClass, Graph.class, "Graph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGraph_Nodes(), this.getNode(), this.getNode_Graph(), "nodes", null, 0, -1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -22,14 +22,16 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.InterfaceItem
+import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.RoomModel
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.base.logging.ILogger
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
-import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
-import org.eclipse.etrice.generator.base.logging.ILogger
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -101,12 +103,18 @@ class ActorClassGen extends GenericActorClassGenerator {
 		typedef struct «ac.name»_const {
 			#ifdef ET_MSC_LOGGER_ACTIVATE
 				const char* instName;
+			#endif
+			«IF xpac.isTracingEnabled»
+				#if defined ET_MSC_TRACER_ACTIVATE || defined ET_MSC_LOGGER_ACTIVATE
+					uint16 objId;
+				#endif
+			«ENDIF»
 			«IF !hasConstData»
-				#else
+				#if !defined(ET_MSC_LOGGER_ACTIVATE) «IF xpac.isTracingEnabled»&& !defined(ET_MSC_TRACER_ACTIVATE)«ENDIF»
 					/* This actor class has no const data. To keep this case simple we introduce this dummy variable. */
 					int dummy;
-			«ENDIF»
-			#endif
+				#endif
+			«ENDIF»			
 			
 			/* simple ports */
 			«FOR ep : eventPorts»
@@ -211,9 +219,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* simple event ports */
 		«FOR ep : eventPorts.filter[multiplicity==1]»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!==null) "data" else ""»
-				«val data2 = if (msg.data!==null) ", data" else ""»
-				#define «ep.name»_«msg.name»(«data1») «ep.portClassName»_«msg.name»(&self->constData->«ep.name»«data2»)
+				«val data1 = if (msg.data!==null) "data"»
+				«val data2 = if (msg.data!==null) ", data"»
+				«generateDefine('''«ep.name»_«msg.name»(«data1»)''', #[
+					'''«ep.portClassName»_«msg.name»(&self->constData->«ep.name»«data2»)''',
+					xpac.tracingCall(ep, false, msg, false)
+				])»
 			«ENDFOR»
 		«ENDFOR»
 
@@ -227,8 +238,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* data send ports */
 		«FOR ep : sendPorts»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!==null) "data" else ""»
-				«val data2 = if (msg.data!==null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data"»
+				«val data2 = if (msg.data!==null) ", data"»
 				#define «ep.name»_«msg.name»(«data1») «ep.portClassName»_«msg.name»_set(&self->«ep.name»«data2»)
 			«ENDFOR»
 		«ENDFOR»
@@ -236,9 +247,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* saps */
 		«FOR sap: ac.allSAPs»
 			«FOR msg : sap.outgoing»
-				«val data1 = if (msg.data!==null) "data" else ""»
-				«val data2 = if (msg.data!==null) ", data" else ""»
-				#define «sap.name»_«msg.name»(«data1») «sap.portClassName»_«msg.name»(&self->constData->«sap.name»«data2»)
+				«val data1 = if (msg.data!==null) "data"»
+				«val data2 = if (msg.data!==null) ", data"»
+				«generateDefine('''«sap.name»_«msg.name»(«data1»)''', #[
+					'''«sap.portClassName»_«msg.name»(&self->constData->«sap.name»«data2»)''',
+					xpac.tracingCall(sap, false, msg, false)
+				])»
 			«ENDFOR»
 		«ENDFOR»
 
@@ -248,20 +262,32 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDIF»
 		«FOR ep : replEventPorts»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!==null) "data" else ""»
-				«val data2 = if (msg.data!==null) ", data" else ""»
-				#define «ep.name»_«msg.name»_broadcast(«data1») «ep.portClassName»_«msg.name»_broadcast(&self->constData->«ep.name»«data2»)
-				#define «ep.name»_«msg.name»(idx«data2») «ep.portClassName»_«msg.name»(&self->constData->«ep.name», idx«data2»)
+				«val data1 = if (msg.data!==null) "data"»
+				«val data2 = if (msg.data!==null) ", data"»
+				«generateDefine('''«ep.name»_«msg.name»_broadcast(«data1»)''', #[
+					'''«ep.portClassName»_«msg.name»_broadcast(&self->constData->«ep.name»«data2»)''',
+					xpac.tracingCall(ep, false, msg, true)
+				])»
+				«generateDefine('''«ep.name»_«msg.name»(idx«data2»)''', #[
+					'''«ep.portClassName»_«msg.name»(&self->constData->«ep.name», idx«data2»)''',
+					xpac.tracingCall(ep, true, msg, false)
+				])»
 			«ENDFOR»
 		«ENDFOR»
 
 		/* services */
 		«FOR svc : ac.allServiceImplementations»
 			«FOR msg : svc.spp.outgoing»
-				«val data1 = if (msg.data!==null) "data" else ""»
-				«val data2 = if (msg.data!==null) ", data" else ""»
-				#define «svc.spp.name»_«msg.name»_broadcast(«data1») «svc.spp.portClassName»_«msg.name»_broadcast(&self->constData->«svc.spp.name»«data2»)
-				#define «svc.spp.name»_«msg.name»(idx«data2») «svc.spp.portClassName»_«msg.name»(&self->constData->«svc.spp.name», idx«data2»)
+				«val data1 = if (msg.data!==null) "data"»
+				«val data2 = if (msg.data!==null) ", data"»
+				«generateDefine('''«svc.spp.name»_«msg.name»_broadcast(«data1»)''', #[
+					'''«svc.spp.portClassName»_«msg.name»_broadcast(&self->constData->«svc.spp.name»«data2»)''',
+					xpac.tracingCall(svc.spp, false, msg, true)
+				])»
+				«generateDefine('''«svc.spp.name»_«msg.name»(idx«data2»)''', #[
+					'''«svc.spp.portClassName»_«msg.name»(&self->constData->«svc.spp.name», idx«data2»)''',
+					xpac.tracingCall(svc.spp, true, msg, false)
+				])»
 			«ENDFOR»
 		«ENDFOR»
 
@@ -289,6 +315,30 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«generateIncludeGuardEnd(filename)»
 
 	'''
+	}
+	
+	private def generateDefine(String sig, Iterable<String> lines) {
+		val filteredLines = lines.filterNull.toList
+		switch filteredLines {
+			case filteredLines.size > 1: '''
+				#define «sig» { «filteredLines.head»«IF filteredLines.size > 1»; \«ENDIF»
+								«filteredLines.tail.join('; \\\n')» }
+			'''
+			default: '''#define «sig» «filteredLines.head»'''
+		}
+	}
+	
+	private def tracingCall(ExpandedActorClass xpac, InterfaceItem item, boolean idx, Message msg, boolean broadcast) {
+		if(xpac.isTracingEnabled) {
+			val dir = if (item.conjugated) "IN_" else "OUT_"
+			val peerAddress =  switch item {
+				case idx: '''((self->constData->«item.name».size>idx) ? self->constData->«item.name».ports[idx].port.peerAddress : 1)'''
+				case broadcast: '''((self->constData->«item.name».size) ? self->constData->«item.name».ports[0].port.peerAddress : 1)'''
+				default: '''self->constData->«item.name».peerAddress'''
+			}
+			val traceMacro = if(broadcast) 'ET_MSC_TRACER_ASYNC_BCAST' else 'ET_MSC_TRACER_ASYNC_OUT'
+			return '''«traceMacro»(«peerAddress», «memberInUse(item.protocol.name, dir+msg.name)»);'''
+		}
 	}
 
 	private def operationParams(Operation op) {
@@ -329,6 +379,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
+		#include "debugging/etMSCTracer.h"
 		#include "etUnit/etUnit.h"
 		#include "base/etMemory.h"
 
@@ -360,6 +411,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
 			«IF !isEmptyStateGraph»
 				«IF handleEvents»
+					«IF xpac.isTracingEnabled»ET_MSC_TRACER_ASYNC_IN(((etPort*)ifitem)->peerAddress, msg->evtID);«ENDIF»
 					«langExt.operationScope(ac.name, false)»receiveEvent((«ac.name»*) self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
 				«ELSE»
 					«langExt.operationScope(ac.name, false)»receiveEventInternal((«ac.name»*) self);

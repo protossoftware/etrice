@@ -1170,7 +1170,21 @@ public class RoomHelpers extends FSMHelpers {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Returns if ActorClass has annotation 'Tracing'
+	 */
+	public boolean hasTracingAnnotation(ActorClass ac) {
+		return ac.getAnnotations().stream().anyMatch(anno -> anno.getType().getName().equals("Tracing"));
+	}
+	
+	/**
+	 * Returns if ActorClass tracing is hierarchic
+	 */
+	public boolean isTracingHierarchic(ActorClass ac) {
+		return Boolean.valueOf(getAttribute(ac, "Tracing", "hierarchic"));
+	}
+	
 	/**
 	 * Returns the value of an annotation attribute of an {@link ActorClass}
 	 *

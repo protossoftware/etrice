@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getPeers <em>Peers</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getXpProtocolClass <em>Xp Protocol Class</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getInterfaceItemInstance()
@@ -70,6 +71,28 @@ public interface InterfaceItemInstance extends InstanceBase {
 	 * @generated
 	 */
 	EList<InterfaceItemInstance> getPeers();
+
+	/**
+	 * Returns the value of the '<em><b>Xp Protocol Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Xp Protocol Class</em>' reference.
+	 * @see #setXpProtocolClass(ExpandedProtocolClass)
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getInterfaceItemInstance_XpProtocolClass()
+	 * @model
+	 * @generated
+	 */
+	ExpandedProtocolClass getXpProtocolClass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getXpProtocolClass <em>Xp Protocol Class</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Xp Protocol Class</em>' reference.
+	 * @see #getXpProtocolClass()
+	 * @generated
+	 */
+	void setXpProtocolClass(ExpandedProtocolClass value);
 
 	/**
 	 * <!-- begin-user-doc -->

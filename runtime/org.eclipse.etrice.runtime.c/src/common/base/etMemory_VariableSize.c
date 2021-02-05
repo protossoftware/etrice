@@ -41,13 +41,13 @@ void* etMemory_VariableSize_alloc(etMemory* heap, etUInt16 size) {
 	size = MEM_CEIL(size);
 
 	DO_LOCK
-	if (self->current + size < ((etUInt8*)self) + self->base.size) {
+	if (size > 0 && self->current + size < ((etUInt8*)self) + self->base.size) {
 		etUInt32 used;
 
 		mem = (void*) self->current;
 		self->current += size;
 
-		used = ((etUInt8*)self) + self->base.size - self->current;
+		used = self->current - ((etUInt8*)self);
 		if (used > self->base.statistics.maxUsed) {
 			self->base.statistics.maxUsed = used;
 		}

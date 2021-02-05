@@ -15,12 +15,15 @@
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 
 /**
@@ -34,6 +37,7 @@ import org.eclipse.etrice.core.room.ActorClass;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInstanceImpl#getActorClass <em>Actor Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInstanceImpl#getReplIdx <em>Repl Idx</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInstanceImpl#getUnindexedName <em>Unindexed Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInstanceImpl#getXpActorClass <em>Xp Actor Class</em>}</li>
  * </ul>
  *
  * @generated
@@ -78,6 +82,16 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * @ordered
 	 */
 	protected static final String UNINDEXED_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getXpActorClass() <em>Xp Actor Class</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getXpActorClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExpandedActorClass xpActorClass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -176,6 +190,46 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * @generated
 	 */
 	@Override
+	public ExpandedActorClass getXpActorClass() {
+		if (xpActorClass != null && xpActorClass.eIsProxy()) {
+			InternalEObject oldXpActorClass = (InternalEObject)xpActorClass;
+			xpActorClass = (ExpandedActorClass)eResolveProxy(oldXpActorClass);
+			if (xpActorClass != oldXpActorClass) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.ACTOR_INSTANCE__XP_ACTOR_CLASS, oldXpActorClass, xpActorClass));
+			}
+		}
+		return xpActorClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpandedActorClass basicGetXpActorClass() {
+		return xpActorClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setXpActorClass(ExpandedActorClass newXpActorClass) {
+		ExpandedActorClass oldXpActorClass = xpActorClass;
+		xpActorClass = newXpActorClass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ACTOR_INSTANCE__XP_ACTOR_CLASS, oldXpActorClass, xpActorClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ETriceGenPackage.ACTOR_INSTANCE__ACTOR_CLASS:
@@ -185,6 +239,9 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 				return getReplIdx();
 			case ETriceGenPackage.ACTOR_INSTANCE__UNINDEXED_NAME:
 				return getUnindexedName();
+			case ETriceGenPackage.ACTOR_INSTANCE__XP_ACTOR_CLASS:
+				if (resolve) return getXpActorClass();
+				return basicGetXpActorClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -202,6 +259,9 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 				return;
 			case ETriceGenPackage.ACTOR_INSTANCE__REPL_IDX:
 				setReplIdx((Integer)newValue);
+				return;
+			case ETriceGenPackage.ACTOR_INSTANCE__XP_ACTOR_CLASS:
+				setXpActorClass((ExpandedActorClass)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -221,6 +281,9 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 			case ETriceGenPackage.ACTOR_INSTANCE__REPL_IDX:
 				setReplIdx(REPL_IDX_EDEFAULT);
 				return;
+			case ETriceGenPackage.ACTOR_INSTANCE__XP_ACTOR_CLASS:
+				setXpActorClass((ExpandedActorClass)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -239,6 +302,8 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 				return replIdx != REPL_IDX_EDEFAULT;
 			case ETriceGenPackage.ACTOR_INSTANCE__UNINDEXED_NAME:
 				return UNINDEXED_NAME_EDEFAULT == null ? getUnindexedName() != null : !UNINDEXED_NAME_EDEFAULT.equals(getUnindexedName());
+			case ETriceGenPackage.ACTOR_INSTANCE__XP_ACTOR_CLASS:
+				return xpActorClass != null;
 		}
 		return super.eIsSet(featureID);
 	}
