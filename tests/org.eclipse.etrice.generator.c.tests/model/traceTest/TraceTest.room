@@ -95,16 +95,16 @@ RoomModel TraceTest {
 				EXPECT_EQUAL_INT32(etUnitId, "<|MODEL_LOCATION|>", 0, GENMODEL_msgId(PingPongProtocol_OUT_pong));
 				EXPECT_EQUAL_INT32(etUnitId, "<|MODEL_LOCATION|>", 1, GENMODEL_msgId(PingPongProtocol_IN_ping));
 				
-				const int16 topActorObjId = 1;
-				const int16 senderObjId = 3;
-				const int16 receiverObjId = 8;
-				const int16 unknownObjId = 0;
+				#define topActorObjId 		1
+				#define senderObjId 		3
+				#define receiverObjId 		8
+				#define unknownObjId 		0
 				
-				const int16 firstSenderStateId = 1;	// first leaf state
-				const int16 pingId = 1;
-				const int16 pongId = 0;
+				#define firstSenderStateId 	1	// first leaf state
+				#define pingId 				1
+				#define pongId 				0
 				
-				static int16 resultlist[] = {
+				static const int16 resultlist[] = {
 				//	event		(peer)objId		msg or state id
 					ASYNC_OUT, 	unknownObjId,	pingId,		// unboundPort.ping
 					ASYNC_OUT, 	9, 				pingId,		// sendPort.ping()

@@ -4,11 +4,11 @@ apply from: "$rootDir/gradle/etTest.gradle"
 
 createTest('c', 'sendingDataTest')
 createTest('c', 'staticConfigTest')
-createTest('c', 'traceTest', ['saveGenModel', 'tmp/genmodel.xmi'])
+createTest('c', 'traceTest', ['saveGenModel', 'genmodel.xmi'])
 
 task traceTestCGenModel(group: 'verification') {
 	doFirst {
-		def genmodel = new XmlSlurper().parse(file('-tmp/genmodel.xmi'))
+		def genmodel = new XmlSlurper().parse(file('build/src-gen/traceTestC/-genmodel.xmi'))
 		
 		// expect stable ordered ids, ids have to match with generated code
 		def pingPongProtocol = genmodel.xpProtocolClasses[0]
