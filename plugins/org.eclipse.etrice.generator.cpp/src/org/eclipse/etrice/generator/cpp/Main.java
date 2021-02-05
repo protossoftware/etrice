@@ -58,7 +58,7 @@ public class Main extends AbstractGenerator {
 			return GENERATOR_ERROR;
 		}
 
-		Root genModel = createGeneratorModel(resources, arguments, logger);
+		Root genModel = createGeneratorModel(resources, arguments, fileIO, logger);
 		if (diagnostician.isFailed() || genModel==null) {
 			logger.logError("errors during build of generator model");
 			return GENERATOR_ERROR;

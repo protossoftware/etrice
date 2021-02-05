@@ -47,7 +47,7 @@ public class Main extends AbstractGenerator {
 	protected InstanceDiagramGen instanceDiagramGenerator;
 	
 	protected int runGenerator(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
-		Root genModel = createGeneratorModel(resources, arguments, logger);
+		Root genModel = createGeneratorModel(resources, arguments, fileIO, logger);
 		if (diagnostician.isFailed() || genModel==null) {
 			logger.logError("errors during build of generator model");
 			return GENERATOR_ERROR;

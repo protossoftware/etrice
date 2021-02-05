@@ -14,6 +14,7 @@
 
 package org.eclipse.etrice.generator.base;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -178,13 +179,27 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	protected ResourceSet getResourceSet() {
 		return resourceSet;
 	}
+	
+	/**
+	 * 
+	 * Use {@link #createGeneratorModel(List, Arguments, IGeneratorFileIO, ILogger)}
+	 * 
+	 * @param resources the list of models
+	 * @param arguments the generator arguments
+	 * @return the {@link Root} object of the generator model (is added to a new Resource also)
+	 * 
+	 */
+	@Deprecated
+	protected Root createGeneratorModel(List<Resource> resources, Arguments arguments, ILogger logger) {
+		return createGeneratorModel(resources, arguments, null, logger);
+	}
 
 	/**
 	 * @param resources the list of models
 	 * @param arguments the generator arguments
 	 * @return the {@link Root} object of the generator model (is added to a new Resource also)
 	 */
-	protected Root createGeneratorModel(List<Resource> resources, Arguments arguments, ILogger logger) {
+	protected Root createGeneratorModel(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 		boolean doTranslate = !arguments.get(AbstractGeneratorOptions.NOTRANSLATE);
 		boolean asLibrary = arguments.get(AbstractGeneratorOptions.LIB);
 		String genModelPath = arguments.get(AbstractGeneratorOptions.SAVE_GEN_MODEL);
@@ -243,7 +258,15 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 			if (!genModelPath.isEmpty()) {
 				try {
 					logger.logInfo("saving genmodel to "+genModelPath);
-					genResource.save(Collections.EMPTY_MAP);
+					if(fileIO != null) {
+						// use fileIO with cleanDirectory
+						ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+						genResource.save(outputStream, Collections.EMPTY_MAP);
+						fileIO.generateFile(genModelURI.toFileString(), outputStream.toString());
+					} else {
+						// fallback
+						genResource.save(Collections.EMPTY_MAP);
+					}
 				}
 				catch (IOException e) {
 					logger.logError(e.getMessage());
