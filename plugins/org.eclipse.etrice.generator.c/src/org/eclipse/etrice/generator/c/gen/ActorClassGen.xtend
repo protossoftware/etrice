@@ -379,9 +379,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
-		#include "debugging/etMSCTracer.h"
 		#include "etUnit/etUnit.h"
 		#include "base/etMemory.h"
+		#ifdef ET_MSC_TRACER_ACTIVATE
+			#include "debugging/etMSCTracer.h"
+		#endif
 
 		«FOR path : root.getReferencedProtocolClasses(ac).map[includePath].sort»
 			#include «path»
