@@ -14,8 +14,11 @@
 
 package org.eclipse.etrice.core.genmodel.fsm
 
+import java.util.ArrayDeque
+import java.util.Deque
 import java.util.HashMap
 import java.util.List
+import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage
@@ -75,7 +78,7 @@ class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 	def withChainHeads(GraphContainer gc) {
 		if (!gc.initializedChainHeads) {
 			if (gc.graph!==null) {
-				gc.graph.allChainHeads.forEach[it.followChain(it)]
+				gc.graph.allChainHeads.forEach[it.followChain(it, newHashSet, new ArrayDeque)]
 			}
 			gc.initializedChainHeads = true
 		}
@@ -101,7 +104,7 @@ class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 		return gc
 	}
 	
-	private def void followChain(Link l, Link head) {
+	private def void followChain(Link l, Link head, Set<Node> visited, Deque<Node> stack) {
 		// if we started at an initial or guarded transition no interface item can be provided
 		if (!(head.transition instanceof TriggeredTransition)) {
 			l.ifitemTriggered = false
@@ -115,18 +118,21 @@ class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 		if (target instanceof State || target instanceof TransitionPoint) {
 			return
 		}
-		else {
-			// check whether we already visited the target node
-			if(!l.target.outgoing.empty && l.target.outgoing.head.chainHeads.contains(head)) {
-				// the transition chain generator can't handle cyclic transition chains
-				validationError("This transition is part of a cyclic transition chain", l.transition, null);
-				return;
-			}
-			
+		// check whether we already came from the target of this link 
+		else if(stack.contains(l.target)) {
+			// the transition chain generator can't handle cyclic transition chains
+			validationError("This transition is part of a cyclic transition chain", l.transition, null);
+			return;
+		}
+		// only proceed if we did not visit the target of this link already
+		else if(!visited.contains(l.target)) {
+			visited.add(l.target);
+			stack.addLast(l.target);
 			// follow all outgoing links recursively
 			for (next : l.target.outgoing) {
-				next.followChain(head)
+				next.followChain(head, visited, stack)
 			}
+			stack.removeLast();
 		}
 	}
 	
