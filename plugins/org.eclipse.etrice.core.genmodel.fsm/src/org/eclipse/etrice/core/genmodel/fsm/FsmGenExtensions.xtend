@@ -193,10 +193,10 @@ class FsmGenExtensions {
 		var current = s
 		while (current!==null) {
 			// outgoing transitions of the state
-			result.addAll(s.outgoing)
+			result.addAll(current.outgoing)
 			
 			// outgoing transitions of the transition points of the same level
-			result.addAll(s.graph.transitionPointNodes.map[outgoing].flatten)
+			result.addAll(current.graph.transitionPointNodes.map[outgoing].flatten)
 			
 			// ascend to the parent state (iff)
 			current = current.getParentState
