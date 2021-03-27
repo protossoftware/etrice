@@ -15,8 +15,6 @@
 package org.eclipse.etrice.core.room.util
 
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.etrice.core.fsm.fSM.RefinedTransition
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
 import org.eclipse.etrice.core.genmodel.fsm.ICommonDataCalculator
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link
@@ -34,7 +32,7 @@ class CommonDataCalculator implements ICommonDataCalculator {
 		}
 		else {
 			// since l isIfitemTriggered we have at least one triggered transition
-			var transitions = l.chainHeads.map[transition.realTransition].filter(typeof(TriggeredTransition))
+			var transitions = l.chainHeads.map[transition].filter(typeof(TriggeredTransition))
 			
 			// we also expect to have triggers
 			val triggers = transitions.map[triggers].flatten
@@ -59,14 +57,5 @@ class CommonDataCalculator implements ICommonDataCalculator {
 		}
 		
 		return null
-	}
-	
-	private static def realTransition(TransitionBase t) {
-		var tr = t
-		while (tr instanceof RefinedTransition) {
-			tr = tr.target
-		}
-		
-		return tr
 	}
 }

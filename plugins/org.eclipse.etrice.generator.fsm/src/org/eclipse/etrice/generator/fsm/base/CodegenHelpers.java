@@ -17,7 +17,6 @@ package org.eclipse.etrice.generator.fsm.base;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 
@@ -34,7 +33,7 @@ public class CodegenHelpers {
 	 * @param t a {@link Transition}
 	 * @return a name for the action code operation the generator will generate
 	 */
-	public String getActionCodeOperationName(TransitionBase t) {
+	public String getActionCodeOperationName(Transition t) {
 		return "action_"+fsmNameProvider.getFullPath(t);
 	}
 	
@@ -66,7 +65,7 @@ public class CodegenHelpers {
 	 * @param tc a {@link Transition}
 	 * @return a name for the constant transition chain ID the generator will generate
 	 */
-	public String getGenChainId(TransitionBase tc) {
+	public String getGenChainId(Transition tc) {
 		return "CHAIN_"+fsmNameProvider.getFullPath(tc);
 	}
 	

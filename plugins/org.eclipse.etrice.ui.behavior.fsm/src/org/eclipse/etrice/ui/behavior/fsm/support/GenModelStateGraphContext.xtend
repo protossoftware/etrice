@@ -18,12 +18,10 @@ import org.eclipse.etrice.core.fsm.fSM.ChoicePoint
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.fsm.fSM.TrPoint
-import org.eclipse.etrice.core.fsm.fSM.Transition
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMDiagramTypeProvider
 import org.eclipse.etrice.ui.behavior.fsm.provider.BaseDiagramProvider
 import org.eclipse.etrice.ui.behavior.fsm.provider.GenModelProvider
-import org.eclipse.etrice.core.fsm.fSM.RefinedTransition
 
 /**
  *  StateGraphContext based on newfsmgen.
@@ -84,10 +82,7 @@ class GenModelStateGraphContext implements IStateGraphContext {
 	}
 	
 	override getTransitions() {
-		val baseTransitions = graph.links.map[it.transition]
-		
-		// we take the union of Transitions and targets of RefinedTransitions
-		(baseTransitions.filter(Transition) + baseTransitions.filter(RefinedTransition).map[target]).toList
+		graph.links.map[transition]
 	}
 	
 }

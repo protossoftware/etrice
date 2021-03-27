@@ -47,6 +47,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//Link/ifitemTriggered"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Link/commonData"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Link/transition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//Link/refinements"/>
       <genOperations ecoreOperation="fsmgen.ecore#//Link/toString" body="if (getTransition() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.InitialTransition%>) {&#xD;&#xA;&#x9;return &quot;Link initial -> &quot; + getTarget().toString() + &quot; (InitialTransition)&quot;;&#xD;&#xA;}&#xD;&#xA;else if (getTransition() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.NonInitialTransition%>) {&#xD;&#xA;&#x9;return &quot;Link &quot; + getSource().toString() + &quot; -> &quot; + getTarget().toString() + &quot; (InitialTransition)&quot;;&#xD;&#xA;}&#xD;&#xA;else if (getTransition() instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.RefinedTransition%>) {&#xD;&#xA;&#x9;return &quot;RefinedTransition&quot;;&#xD;&#xA;}&#xD;&#xA;return &quot;?&quot;;"/>
     </genClasses>
     <genClasses ecoreClass="fsmgen.ecore#//CommonTrigger">

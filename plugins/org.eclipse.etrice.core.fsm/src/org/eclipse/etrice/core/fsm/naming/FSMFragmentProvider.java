@@ -94,7 +94,8 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 			// by the Behavior Editor
 			
 			// going up two steps in the containment hierarchy either hits a state or a ModelComponent
-			return topSwitch.doSwitch(t.eContainer().eContainer())+SEP+t.getTarget().getName();
+			String targetName = t.getTarget() != null ? t.getTarget().getName() : "null";
+			return topSwitch.doSwitch(t.eContainer().eContainer())+SEP+targetName;
 		}
 		
 		@Override

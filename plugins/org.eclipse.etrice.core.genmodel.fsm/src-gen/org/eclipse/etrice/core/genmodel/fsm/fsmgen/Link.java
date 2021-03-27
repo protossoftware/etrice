@@ -4,7 +4,8 @@ package org.eclipse.etrice.core.genmodel.fsm.fsmgen;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +23,7 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link#isIfitemTriggered <em>Ifitem Triggered</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link#getCommonData <em>Common Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link#getRefinements <em>Refinements</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getLink()
@@ -191,12 +193,12 @@ public interface Link extends GraphItem {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Transition</em>' reference.
-	 * @see #setTransition(TransitionBase)
+	 * @see #setTransition(Transition)
 	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getLink_Transition()
 	 * @model
 	 * @generated
 	 */
-	TransitionBase getTransition();
+	Transition getTransition();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link#getTransition <em>Transition</em>}' reference.
@@ -206,7 +208,19 @@ public interface Link extends GraphItem {
 	 * @see #getTransition()
 	 * @generated
 	 */
-	void setTransition(TransitionBase value);
+	void setTransition(Transition value);
+
+	/**
+	 * Returns the value of the '<em><b>Refinements</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.fsm.fSM.RefinedTransition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Refinements</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getLink_Refinements()
+	 * @model
+	 * @generated
+	 */
+	EList<RefinedTransition> getRefinements();
 
 	/**
 	 * <!-- begin-user-doc -->

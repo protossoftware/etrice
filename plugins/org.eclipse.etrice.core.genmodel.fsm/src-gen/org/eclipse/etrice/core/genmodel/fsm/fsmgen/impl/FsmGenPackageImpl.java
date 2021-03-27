@@ -480,6 +480,16 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getLink_Refinements() {
+		return (EReference)linkEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EOperation getLink__ToString() {
 		return linkEClass.getEOperations().get(0);
 	}
@@ -620,6 +630,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		createEAttribute(linkEClass, LINK__IFITEM_TRIGGERED);
 		createEReference(linkEClass, LINK__COMMON_DATA);
 		createEReference(linkEClass, LINK__TRANSITION);
+		createEReference(linkEClass, LINK__REFINEMENTS);
 		createEOperation(linkEClass, LINK___TO_STRING);
 
 		commonTriggerEClass = createEClass(COMMON_TRIGGER);
@@ -709,7 +720,8 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		initEReference(getLink_ChainHeads(), this.getLink(), null, "chainHeads", null, 0, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLink_IfitemTriggered(), ecorePackage.getEBoolean(), "ifitemTriggered", "true", 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLink_CommonData(), ecorePackage.getEObject(), null, "commonData", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLink_Transition(), theFSMPackage.getTransitionBase(), null, "transition", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Transition(), theFSMPackage.getTransition(), null, "transition", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Refinements(), theFSMPackage.getRefinedTransition(), null, "refinements", null, 0, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getLink__ToString(), ecorePackage.getEString(), "toString", 0, 1, IS_UNIQUE, IS_ORDERED);
 

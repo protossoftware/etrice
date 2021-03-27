@@ -71,7 +71,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ifitemTriggered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="commonData" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//TransitionBase"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refinements" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//RefinedTransition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CommonTrigger" eSuperTypes="#//FSMGenElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>

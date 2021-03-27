@@ -15,6 +15,8 @@
 package org.eclipse.etrice.core.genmodel.fsm
 
 import java.util.List
+import java.util.stream.Collectors
+import java.util.stream.Stream
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition
@@ -23,10 +25,11 @@ import org.eclipse.etrice.core.fsm.fSM.EntryPoint
 import org.eclipse.etrice.core.fsm.fSM.ExitPoint
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition
+import org.eclipse.etrice.core.fsm.fSM.TransitionBase
+import org.eclipse.etrice.core.fsm.fSM.Transition
 import org.eclipse.etrice.core.fsm.fSM.RefinedTransition
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.fsm.fSM.TrPoint
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph
@@ -112,6 +115,12 @@ class FsmGenExtensions {
 		g.trPointNodes.map[stateGraphNode].filter(typeof(TrPoint))
 	}
 	
+	static def getAllActionCodes(Link l) {
+		Stream.concat(Stream.of(l.transition), l.refinements.stream)
+			.map[action].filter[it !== null]
+			.collect(Collectors.toList)
+	}
+	
 	static def getInitialTransition(Graph g) {
 		g.links.map[transition].filter(typeof(InitialTransition)).head
 	}
@@ -164,15 +173,10 @@ class FsmGenExtensions {
 	 * @param l a link
 	 * @return {@code true} if this transition is of one of the above types
 	 */
-	static def boolean isChainHead(TransitionBase t) {
-		if (t instanceof RefinedTransition) {
-			t.target.isChainHead
-		}
-		else {
-			t instanceof InitialTransition ||
-			t instanceof GuardedTransition ||
-			t instanceof TriggeredTransition
-		}
+	static def boolean isChainHead(Transition t) {
+		return t instanceof InitialTransition
+			|| t instanceof GuardedTransition
+			|| t instanceof TriggeredTransition
 	}
 	
 	static def getOutgoingTriggeredTransitionLinks(Node s) {
@@ -277,7 +281,8 @@ class FsmGenExtensions {
 	}
 	
 	static def getLinkFor(GraphContainer gc, TransitionBase t) {
-		gc.graph.allLinks.findFirst[transition===t]
+		val tr = if (t instanceof RefinedTransition) t.target else t
+		gc.graph.allLinks.findFirst[transition === tr]
 	}
 	
 	/**

@@ -18,10 +18,8 @@ import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
-import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
-import org.eclipse.etrice.core.fsm.util.FSMHelpers;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
@@ -37,8 +35,6 @@ import org.eclipse.etrice.generator.fsm.generic.ILanguageExtensionBase.TypedData
  */
 public class TransitionChainVisitor implements ITransitionChainVisitor {
 
-	private FSMHelpers fsmHelpers = new FSMHelpers();
-	
 	// Initialized in constructor
 	private GraphContainer gc;
 	private ILanguageExtensionBase langExt;
@@ -66,10 +62,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 		this.translationProvider = translationProvider;
 	}
 	
-	protected void init(TransitionBase tr) {
-		while (tr instanceof RefinedTransition) {
-			tr = ((RefinedTransition) tr).getTarget();
-		}
+	protected void init(Transition tr) {
 		if (tr instanceof GuardedTransition) {
 			dataDriven = true;
 		}
@@ -80,14 +73,14 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 	// ITransitionChainVisitor interface
 	
-	public String genActionOperationCall(TransitionBase tr) {
+	public String genActionOperationCall(Transition tr) {
 		boolean noIfItem = dataDriven;
 		Link l = FsmGenExtensions.getLinkFor(gc, tr);
 		for (Link ch : l.getChainHeads()) {
 			noIfItem |= ch.getTransition() instanceof InitialTransition;
 		}
 		
-		if (fsmHelpers.hasDetailCode(tr.getAction())) {
+		if (!FsmGenExtensions.getAllActionCodes(l).isEmpty()) {
 			if (noIfItem)
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else {
@@ -135,7 +128,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 			return "return " + codegenHelpers.getGenStateId(state) + " + STATE_MAX;";
 	}
 
-	public String genTypedData(TransitionBase tr) {
+	public String genTypedData(Transition tr) {
 		Link l = FsmGenExtensions.getLinkFor(gc, tr);
 		return langExt.generateArglistAndTypedData(l.getCommonData())[TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal()];
 	}

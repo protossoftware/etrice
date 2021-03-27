@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 import org.eclipse.etrice.generator.fsm.generic.AbstractStateMachineGenerator
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 
 /**
  * A target language independent generator of the state machine implementation
@@ -108,27 +109,26 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
     }
 
 	override String genActionCodeMethod(GraphContainer gc, Link link, boolean generateImplementation) {
-        var hasArgs = !link.chainHeads.empty && link.chainHeads.forall[transition instanceof NonInitialTransition && !(transition instanceof GuardedTransition)]
-        val opScope = langExt.operationScope(gc.className, false)
-        val opScopePriv = if (langExt.usesInheritance) opScope else ""
-        val ifItemPtr = "InterfaceItemBase"+langExt.pointerLiteral()
-        val constIfItemPtr = if (langExt.usesPointers)
-                                "const "+ifItemPtr
-                            else
-                                ifItemPtr
-
-        if (generateImplementation) {
-    	    '''
-                «langExt.accessLevelProtected»void «opScopePriv»«link.transition.getActionCodeOperationName()»(«langExt.selfPointer(gc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(gc, link)»«ENDIF») {
-                    «translator.getTranslatedCode(link.transition.action)»
-                }
-    	    '''
-        }
-        else {
-            '''
-                «langExt.accessLevelProtected»«langExt.makeOverridable»void «link.transition.getActionCodeOperationName()»(«langExt.selfPointer(gc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(gc, link)»«ENDIF»);
-            '''
-        }
+		var hasArgs = !link.chainHeads.empty && link.chainHeads.forall[transition instanceof NonInitialTransition && !(transition instanceof GuardedTransition)]
+		val opScope = langExt.operationScope(gc.className, false)
+		val opScopePriv = if (langExt.usesInheritance) opScope else ""
+		val ifItemPtr = "InterfaceItemBase"+langExt.pointerLiteral()
+		val constIfItemPtr = if (langExt.usesPointers) "const "+ifItemPtr else ifItemPtr
+		val actionCodes = FsmGenExtensions.getAllActionCodes(link)
+		
+		'''
+			«IF !actionCodes.empty»
+				«IF generateImplementation»
+					«langExt.accessLevelProtected»void «opScopePriv»«link.transition.getActionCodeOperationName()»(«langExt.selfPointer(gc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(gc, link)»«ENDIF») {
+						«FOR dc : actionCodes»
+							«translator.getTranslatedCode(dc)»
+						«ENDFOR»
+					}
+				«ELSE»
+					«langExt.accessLevelProtected»«langExt.makeOverridable»void «link.transition.getActionCodeOperationName()»(«langExt.selfPointer(gc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(gc, link)»«ENDIF»);
+				«ENDIF»
+			«ENDIF»
+		'''
 	}
 
 	/**

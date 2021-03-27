@@ -18,7 +18,6 @@ import java.util.List
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent
 import org.eclipse.etrice.core.fsm.fSM.RefinedState
-import org.eclipse.etrice.core.fsm.fSM.RefinedTransition
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.fsm.fSM.StateGraph
 import org.eclipse.etrice.core.fsm.fSM.StateGraphNode
@@ -77,12 +76,7 @@ class BaseDiagramPositionProvider implements IPositionProvider {
 	}
 	
 	override getPoints(Transition trans) {
-		val pe = {
-			if (trans instanceof RefinedTransition)
-				baseDiagram.getPictograms(trans.target).head
-			else
-				baseDiagram.getPictograms(trans).head
-		}
+		val pe = baseDiagram.getPictograms(trans).head
 		newArrayList => [ pointList | 
 			if (pe instanceof Connection){
 				val graphPosAndSize = getGraphPosAndSize(trans.eContainer as StateGraph)

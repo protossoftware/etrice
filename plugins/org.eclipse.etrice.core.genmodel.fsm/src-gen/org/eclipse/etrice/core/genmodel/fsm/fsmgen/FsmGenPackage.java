@@ -478,13 +478,22 @@ public interface FsmGenPackage extends EPackage {
 	int LINK__TRANSITION = GRAPH_ITEM_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Refinements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK__REFINEMENTS = GRAPH_ITEM_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Link</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_FEATURE_COUNT = GRAPH_ITEM_FEATURE_COUNT + 7;
+	int LINK_FEATURE_COUNT = GRAPH_ITEM_FEATURE_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>To String</em>' operation.
@@ -935,6 +944,17 @@ public interface FsmGenPackage extends EPackage {
 	EReference getLink_Transition();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link#getRefinements <em>Refinements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Refinements</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link#getRefinements()
+	 * @see #getLink()
+	 * @generated
+	 */
+	EReference getLink_Refinements();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link#toString() <em>To String</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1315,6 +1335,14 @@ public interface FsmGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LINK__TRANSITION = eINSTANCE.getLink_Transition();
+
+		/**
+		 * The meta object literal for the '<em><b>Refinements</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LINK__REFINEMENTS = eINSTANCE.getLink_Refinements();
 
 		/**
 		 * The meta object literal for the '<em><b>To String</b></em>' operation.

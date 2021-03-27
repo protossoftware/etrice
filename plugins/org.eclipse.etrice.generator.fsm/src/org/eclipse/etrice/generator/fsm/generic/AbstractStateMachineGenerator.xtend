@@ -237,7 +237,7 @@ abstract class AbstractStateMachineGenerator {
 	 * @return the generated code
 	 */
 	def String genActionCodes(GraphContainer gc, boolean generateImplementation, boolean omitBase) {
-		val transitions = gc.graph.allLinks.filter[!omitBase || !inherited].filter[transition.action.hasDetailCode].toList
+		val transitions = gc.graph.allLinks.filter[!omitBase || !inherited].toList
 		'''
 		«FOR tr : transitions»
 			«gc.genActionCodeMethod(tr, generateImplementation)»

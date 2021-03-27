@@ -20,8 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
-
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
@@ -42,6 +41,7 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node;
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.LinkImpl#isIfitemTriggered <em>Ifitem Triggered</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.LinkImpl#getCommonData <em>Common Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.LinkImpl#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.LinkImpl#getRefinements <em>Refinements</em>}</li>
  * </ul>
  *
  * @generated
@@ -115,7 +115,17 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * @generated
 	 * @ordered
 	 */
-	protected TransitionBase transition;
+	protected Transition transition;
+
+	/**
+	 * The cached value of the '{@link #getRefinements() <em>Refinements</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRefinements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RefinedTransition> refinements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -385,10 +395,10 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * @generated
 	 */
 	@Override
-	public TransitionBase getTransition() {
+	public Transition getTransition() {
 		if (transition != null && transition.eIsProxy()) {
 			InternalEObject oldTransition = (InternalEObject)transition;
-			transition = (TransitionBase)eResolveProxy(oldTransition);
+			transition = (Transition)eResolveProxy(oldTransition);
 			if (transition != oldTransition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmGenPackage.LINK__TRANSITION, oldTransition, transition));
@@ -402,7 +412,7 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TransitionBase basicGetTransition() {
+	public Transition basicGetTransition() {
 		return transition;
 	}
 
@@ -412,11 +422,24 @@ public class LinkImpl extends GraphItemImpl implements Link {
 	 * @generated
 	 */
 	@Override
-	public void setTransition(TransitionBase newTransition) {
-		TransitionBase oldTransition = transition;
+	public void setTransition(Transition newTransition) {
+		Transition oldTransition = transition;
 		transition = newTransition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FsmGenPackage.LINK__TRANSITION, oldTransition, transition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<RefinedTransition> getRefinements() {
+		if (refinements == null) {
+			refinements = new EObjectResolvingEList<RefinedTransition>(RefinedTransition.class, this, FsmGenPackage.LINK__REFINEMENTS);
+		}
+		return refinements;
 	}
 
 	/**
@@ -520,6 +543,8 @@ public class LinkImpl extends GraphItemImpl implements Link {
 			case FsmGenPackage.LINK__TRANSITION:
 				if (resolve) return getTransition();
 				return basicGetTransition();
+			case FsmGenPackage.LINK__REFINEMENTS:
+				return getRefinements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -553,7 +578,11 @@ public class LinkImpl extends GraphItemImpl implements Link {
 				setCommonData((EObject)newValue);
 				return;
 			case FsmGenPackage.LINK__TRANSITION:
-				setTransition((TransitionBase)newValue);
+				setTransition((Transition)newValue);
+				return;
+			case FsmGenPackage.LINK__REFINEMENTS:
+				getRefinements().clear();
+				getRefinements().addAll((Collection<? extends RefinedTransition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -586,7 +615,10 @@ public class LinkImpl extends GraphItemImpl implements Link {
 				setCommonData((EObject)null);
 				return;
 			case FsmGenPackage.LINK__TRANSITION:
-				setTransition((TransitionBase)null);
+				setTransition((Transition)null);
+				return;
+			case FsmGenPackage.LINK__REFINEMENTS:
+				getRefinements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -614,6 +646,8 @@ public class LinkImpl extends GraphItemImpl implements Link {
 				return commonData != null;
 			case FsmGenPackage.LINK__TRANSITION:
 				return transition != null;
+			case FsmGenPackage.LINK__REFINEMENTS:
+				return refinements != null && !refinements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

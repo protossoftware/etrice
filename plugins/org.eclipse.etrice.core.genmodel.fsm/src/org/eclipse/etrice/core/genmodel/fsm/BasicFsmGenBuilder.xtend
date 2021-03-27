@@ -138,8 +138,8 @@ class BasicFsmGenBuilder {
 	}
 	
 	private def handleRefinedTransition(RefinedTransition t) {
-		// change the target link's transition to the refined transition
-		t.target.createLink.transition = t
+		// add refined transition to the target link's refinements
+		t.target.createLink.refinements += t
 	}
 	
 	private def Link create factory.createLink createLink(Transition tr) {

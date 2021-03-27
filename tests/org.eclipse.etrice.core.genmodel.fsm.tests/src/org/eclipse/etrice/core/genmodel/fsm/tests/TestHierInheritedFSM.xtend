@@ -82,7 +82,9 @@ class TestHierInheritedFSM extends FsmGenTestBase {
 		]
 		gc2.graph.links.filter[transition.name == 'tr3'] => [
 			assertEquals(1, size)
-			assertEquals('RefinedTransition:TestActor2$tr3', EcoreUtil.getURI(head.transition).fragment)
+			assertEquals('TriggeredTransition:TestActor$tr3', EcoreUtil.getURI(head.transition).fragment)
+			assertEquals(1, head.refinements.size)
+			assertEquals('RefinedTransition:TestActor2$tr3', EcoreUtil.getURI(head.refinements.head).fragment)
 		]
 	}
 }

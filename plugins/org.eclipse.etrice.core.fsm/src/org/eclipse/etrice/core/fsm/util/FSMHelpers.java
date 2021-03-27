@@ -47,7 +47,6 @@ import org.eclipse.etrice.core.fsm.fSM.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
 import org.eclipse.etrice.core.fsm.fSM.TransitionChainStartTransition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
@@ -614,11 +613,7 @@ public class FSMHelpers extends BaseHelpers {
 		return false;
 	}
 	
-	public State getSuperState(TransitionBase tr) {
-		if (tr instanceof RefinedTransition) {
-			return getSuperState(((RefinedTransition) tr).getTarget());
-		}
-		
+	public State getSuperState(Transition tr) {
 		if (tr.eContainer().eContainer() instanceof State) {
 			return (State) tr.eContainer().eContainer();
 		}
