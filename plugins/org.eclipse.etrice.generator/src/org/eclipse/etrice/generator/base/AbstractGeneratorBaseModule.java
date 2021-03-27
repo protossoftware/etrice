@@ -68,6 +68,8 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 	public void configure(Binder binder) {
 		binder.bind(ResourceSet.class).to(XtextResourceSet.class);
 
+		// Logger and GeneratorFileIO objects should *not* be injected by dependency injection.
+		// However, in order to avoid rewriting a lot of code we still provide these singletons.
 		binder.bind(Logger.class).in(Singleton.class);
 		binder.bind(GeneratorFileIO.class).in(Singleton.class);
 		

@@ -15,9 +15,6 @@
 
 package org.eclipse.etrice.generator.base.logging;
 
-import org.eclipse.etrice.generator.base.logging.ILogger;
-import org.eclipse.etrice.generator.base.logging.Loglevel;
-
 /**
  * @author Henrik Rentz-Reichert
  *
@@ -46,10 +43,6 @@ public class NullLogger implements ILogger {
 	@Override
 	public Loglevel getLoglevel() {
 		return Loglevel.OFF;
-	}
-
-	@Override
-	public void setLoglevel(Loglevel loglevel) {
 	}
 
 	public boolean hasErrors() {

@@ -51,9 +51,4 @@ public interface ILogger {
 	 */
 	Loglevel getLoglevel();
 	
-	/**
-	 * @param loglevel the loglevel
-	 */
-	void setLoglevel(Loglevel loglevel);
-	
 }

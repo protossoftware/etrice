@@ -193,15 +193,15 @@ public class GeneratorApplication {
 
 	private Logger createLogger(Arguments arguments, ILineOutput out) {
 		Logger logger = loggerProvider.get();
-		logger.setLoglevel(arguments.get(GeneratorApplicationOptions.LOGLEVEL));
-		logger.setOutput(out);
+		Loglevel loglevel = arguments.get(GeneratorApplicationOptions.LOGLEVEL);
+		logger.init(loglevel, out);
 		return logger;
 	}
 
 	private GeneratorFileIO createGeneratorFileIO(Arguments arguments, Logger logger) {
 		GeneratorFileIO fileIO = fileIOProvider.get();
-		fileIO.setOutputDirectory(arguments.get(GeneratorApplicationOptions.GEN_DIR));
-		fileIO.setLogger(logger);
+		String genDir = arguments.get(GeneratorApplicationOptions.GEN_DIR);
+		fileIO.init(genDir, logger);
 		return fileIO;
 	}
 

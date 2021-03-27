@@ -34,6 +34,8 @@ import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.base.logging.NullLogger;
 import org.eclipse.xtext.util.RuntimeIOException;
 
+import com.google.inject.Inject;
+
 /**
  * Incrementally writes files to an output directory.
  * 
@@ -49,20 +51,10 @@ public class GeneratorFileIO implements IGeneratorFileIO {
 	private Path outputPath;
 	private ILogger logger;
 	
-	/**
-	 * Creates a new generator file io instance that writes to the working directory.
-	 */
-	public GeneratorFileIO() {
-		this("");
-	}
-	
-	/**
-	 * Creates a new generator file io that writes to the specified output directory.
-	 * 
-	 * @param outputPath the path to the output directory
-	 */
-	public GeneratorFileIO(String outputPath) {
-		this(outputPath, new NullLogger());
+	@Inject
+	@Deprecated
+	private GeneratorFileIO() {
+		init("", new NullLogger());
 	}
 	
 	/**
@@ -72,19 +64,20 @@ public class GeneratorFileIO implements IGeneratorFileIO {
 	 * @param logger the logger
 	 */
 	public GeneratorFileIO(String outputPath, ILogger logger) {
-		generatedFiles = new HashSet<>();
-		
-		setOutputDirectory(outputPath);
-		setLogger(logger);
+		init(outputPath, logger);
 	}
 	
 	/**
-	 * Sets to logger.
+	 * Sets the output directory and logger for this file io and
+	 * clears the record of already generated files.
 	 * 
-	 * @param logger the logger
+	 * @param outputPath the path to the output directory
+	 * @param logger a logger
 	 */
-	public void setLogger(ILogger logger) {
+	public void init(String outputPath, ILogger logger) {
+		this.outputPath = Paths.get(outputPath).normalize();
 		this.logger = logger;
+		generatedFiles = new HashSet<>();
 	}
 	
 	/**
@@ -94,24 +87,6 @@ public class GeneratorFileIO implements IGeneratorFileIO {
 	 */
 	public Path getOutputDirectory() {
 		return outputPath;
-	}
-	
-	/**
-	 * Sets the output directory.
-	 * 
-	 * @param path the path to the new output directory
-	 */
-	public void setOutputDirectory(Path path) {
-		outputPath = path.normalize();
-	}
-	
-	/**
-	 * Sets the output directory.
-	 * 
-	 * @param path the path to the new output directory
-	 */
-	public void setOutputDirectory(String path) {
-		setOutputDirectory(Paths.get(path));
 	}
 	
 	@Override

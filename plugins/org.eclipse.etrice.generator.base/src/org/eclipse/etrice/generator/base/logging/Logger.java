@@ -18,6 +18,8 @@ package org.eclipse.etrice.generator.base.logging;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.base.io.LineOutput;
 
+import com.google.inject.Inject;
+
 /**
  * A simple logger class implementing the
  * {@link ILineOutputLogger ILineOutputLogger}
@@ -27,7 +29,7 @@ import org.eclipse.etrice.generator.base.io.LineOutput;
  * @author Henrik Rentz-Reichert
  * 
  */
-public class Logger implements ILineOutputLogger, ILineOutput {
+public class Logger implements ILogger, ILineOutput {
 
 	private static final String DEBUG_PREFIX =		"[DEBUG]   ";
 	private static final String INFO_PREFIX =		"[INFO]    ";
@@ -38,21 +40,19 @@ public class Logger implements ILineOutputLogger, ILineOutput {
 	private Loglevel loglevel;
 	private ILineOutput output;
 	
-	public Logger() {
-		this(Loglevel.WARNING, new LineOutput());
-	}
-	
-	public Logger(Loglevel loglevel) {
-		this(loglevel, new LineOutput());
-	}
-	
-	public Logger(ILineOutput out) {
-		this(Loglevel.WARNING, out);
+	@Inject
+	@Deprecated
+	private Logger() {
+		init(Loglevel.WARNING, new LineOutput());
 	}
 	
 	public Logger(Loglevel loglevel, ILineOutput out) {
-		setLoglevel(loglevel);
-		setOutput(out);
+		init(loglevel, out);
+	}
+	
+	public void init(Loglevel loglevel, ILineOutput output) {
+		this.loglevel = loglevel;
+		this.output = output;
 	}
 	
 	@Override
@@ -88,16 +88,6 @@ public class Logger implements ILineOutputLogger, ILineOutput {
 		return loglevel;
 	}
 	
-	@Override
-	public void setLoglevel(Loglevel loglevel) {
-		this.loglevel = loglevel;
-	}
-	
-	@Override
-	public void setOutput(ILineOutput out) {
-		output = out;
-	}
-
 	@Override
 	public void println(String txt) {
 		output.println(txt);
