@@ -370,28 +370,32 @@ public class EtUnitReportConverter {
 	}
 	
 	protected DocumentRoot applyOptions(BaseOptions options, DocumentRoot root) {
-		if (root!=null && options.isReplaceSuiteName()) {
-			if (root.getTestsuites()!=null) {
-				if (root.getTestsuites().getTestsuite().size()==1) {
-					root.getTestsuites().getTestsuite().get(0).setName(options.getSuiteName());
+		if (root != null && root.getTestsuites() != null) {
+			List<TestsuiteType> suites = root.getTestsuites().getTestsuite();
+			if(options.isReplaceSuiteName()) {
+				if (suites.size()==1) {
+					suites.get(0).setName(options.getSuiteName());
 				}
 				else {
 					int i=0;
-					for (TestsuiteType suite : root.getTestsuites().getTestsuite()) {
+					for (TestsuiteType suite : suites) {
 						suite.setName(options.getSuiteName()+i);
 						++i;
 					}
 				}
 			}
-		}
-		if(root != null && options.isPrefixSuiteName()) {
-			if(root.getTestsuites() != null) {
-				for(TestsuiteType suite : root.getTestsuites().getTestsuite()) {
+			if(options.isPrefixSuiteName()) {
+				for(TestsuiteType suite : suites) {
 					suite.setName(options.getSuiteNamePrefix() + suite.getName());
 				}
 			}
+			// Also write the name of the test suite to the classname attribute of each test case
+			// because some tools pick up on this attribute and ignore suite names (e.g. GitLab).
+			for(TestsuiteType suite : suites) {
+				suite.getTestcase().forEach(tc -> tc.setClassname(suite.getName()));
+			}
 		}
-		
+			
 		return root;
 	}
 

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="ASCII"?>
 <testsuites>
   <testsuite failures="0" name="TestMessage" tests="1" time="0.0">
-    <testcase name="TestEtMessage_testBasicMessage" time="0.0"/>
+    <testcase classname="TestMessage" name="TestEtMessage_testBasicMessage" time="0.0"/>
   </testsuite>
   <testsuite failures="1" name="TestEtMessageQueue" tests="2" time="0.187">
-    <testcase name="TestEtMessageQueue_testPushPop" time="0.0">
+    <testcase classname="TestEtMessageQueue" name="TestEtMessageQueue_testPushPop" time="0.0">
       <failure message="expected=334 actual=333">rcvMsg2->evtID: expected=334, actual=333
  at ..\src\runtime\TestEtMessageQueue.c:42</failure>
     </testcase>
-    <testcase name="TestEtMessageQueue_testMassiveMessaging" time="0.187"/>
+    <testcase classname="TestEtMessageQueue" name="TestEtMessageQueue_testMassiveMessaging" time="0.187"/>
   </testsuite>
   <testsuite failures="0" name="TestEtMessageService" skipped="2" tests="5" time="0.016">
-    <testcase name="TestEtMessageService_init" time="0.0"/>
-    <testcase name="TestEtMessageService_GetPushPopReturn" time="0.0"/>
-    <testcase name="TestEtMessageService_GetReturn" time="0.016"/>
-    <testcase name="TestEtMessageService_execute">
+    <testcase classname="TestEtMessageService" name="TestEtMessageService_init" time="0.0"/>
+    <testcase classname="TestEtMessageService" name="TestEtMessageService_GetPushPopReturn" time="0.0"/>
+    <testcase classname="TestEtMessageService" name="TestEtMessageService_GetReturn" time="0.016"/>
+    <testcase classname="TestEtMessageService" name="TestEtMessageService_execute">
       <skipped message="not &quot;working&quot;"/>
     </testcase>
-    <testcase name="TestEtMessageService_getMessagePoolLowWaterMark">
+    <testcase classname="TestEtMessageService" name="TestEtMessageService_getMessagePoolLowWaterMark">
       <skipped/>
     </testcase>
   </testsuite>
   <testsuite failures="0" name="TestEtUnit" tests="2" time="0.0">
-    <testcase name="TestEtUnit_Expect_Order" time="0.0"/>
-    <testcase name="TestEtUnit_Expect" time="0.0"/>
+    <testcase classname="TestEtUnit" name="TestEtUnit_Expect_Order" time="0.0"/>
+    <testcase classname="TestEtUnit" name="TestEtUnit_Expect" time="0.0"/>
   </testsuite>
 </testsuites>
