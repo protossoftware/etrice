@@ -1,0 +1,5 @@
+dependencies {
+	api project(':plugins:org.eclipse.etrice.core.common')
+	api "org.eclipse.xtext:org.eclipse.xtext.ide:${versions.xtext}"
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${versions.xtext}"
+}

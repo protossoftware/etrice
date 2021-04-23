@@ -4,11 +4,17 @@ plugins {
 
 def xtextProjects = [
 	'org.eclipse.etrice.core.common',
+	'org.eclipse.etrice.core.common.ide',
 	'org.eclipse.etrice.core.config',
+	'org.eclipse.etrice.core.config.ide',
 	'org.eclipse.etrice.core.etmap',
+	'org.eclipse.etrice.core.etmap.ide',
 	'org.eclipse.etrice.core.etphys',
+	'org.eclipse.etrice.core.etphys.ide',
 	'org.eclipse.etrice.core.fsm',
-	'org.eclipse.etrice.core.room'
+	'org.eclipse.etrice.core.fsm.ide',
+	'org.eclipse.etrice.core.room',
+	'org.eclipse.etrice.core.room.ide'
 ].collect { project it }
 
 subprojects {
@@ -44,7 +50,7 @@ configure(xtextProjects) {
 			}
 			resources {
 				srcDirs = ['src', 'src-gen', 'model']
-				include '**/*.xtextbin', '**/*.tokens', '**/*.genmodel', '**/*.ecore'
+				exclude '**/*.g', '**/*.mwe2', '**/*.xtend', '**/*._trace'
 			}
 		}
 	}
