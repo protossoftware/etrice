@@ -1,0 +1,11 @@
+MappingModel TimerServiceTest {
+	import TimerServiceTest.TimerServiceTestLogSys
+	import TimerServiceTest.TimerServiceTestPhysSys
+
+	Mapping TimerServiceTestLogSys -> TimerServiceTestPhysSys {
+		SubSystemMapping main -> node {
+			ThreadMapping defaultThread -> DefaultPhysicalThread
+		}
+	}
+
+}

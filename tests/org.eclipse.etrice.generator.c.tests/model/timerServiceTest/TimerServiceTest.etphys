@@ -1,0 +1,25 @@
+PhysicalModel TimerServiceTest {
+
+	PhysicalSystem TimerServiceTestPhysSys {
+		NodeRef node : DefaultNodeClass
+	}
+
+	NodeClass DefaultNodeClass {
+		runtime = DefaultRuntimeClass
+		priomin = -10
+		priomax = 10
+		DefaultThread DefaultPhysicalThread {
+			execmode = mixed
+			interval = 300ms
+			prio = 0
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 100
+		}
+	}
+
+	RuntimeClass DefaultRuntimeClass {
+		model = multiThreaded
+	}
+
+}

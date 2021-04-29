@@ -1,0 +1,186 @@
+/**
+ * Functional tests for etrice.api.timer.ATimerService and related etrice model API.
+ * 
+ * NOTE: These tests assume that the standard etrice platform implementation is used, which means
+ * that they will rely on the underlying OS timing and thread behavior. Consider implementing a
+ * partially stubbed runtime with simulated timing and scheduling, if this causes issues in CI.
+ */
+RoomModel TimerServiceTest {
+
+	import etrice.api.types.*
+	import etrice.api.timer.ATimerService
+	import etrice.api.timer.PTimer
+	import etrice.api.testcontrol.PTestControl
+	import etrice.api.testcontrol.ControllableSequentialTestExecutor
+
+	/** 
+	 * ATimerService should send a timeout once per the expected number of polling intervals,
+	 * given the timer interval specified with setTimer.
+	 */
+	async ActorClass APolledPeriodicTimeoutTest {
+		Interface {
+			Port ctl: PTestControl
+		}
+		Structure {
+			usercode2 '''
+				#include <etUnit/etUnit.h>
+				#include <helpers/etTimeHelpers.h>
+			'''
+			usercode3 '''				
+				enum TestEventEnum {
+					TESTEVENT_POLLING_CYCLE,
+					TESTEVENT_TIMEOUT,
+					TESTEVENT_END
+				};
+			'''
+			external Port ctl
+			SAP timer: PTimer
+			Attribute testId: int16
+			Attribute startTime: int32
+			Attribute pollingCycles: int32
+			Attribute timeouts: int32
+		}
+		Behavior {
+			ctor '''
+				pollingCycles = 0;
+				timeouts = 0;
+			'''
+			Operation currentTime(): int32 '''
+				etTime curr;
+				getTimeFromTarget(&curr);
+				int32 result = etTimeHelpers_convertToMSec(&curr);
+				return result;
+			'''
+			StateMachine {
+				Transition init: initial -> Pre
+				State Pre
+				Transition start: Pre -> Running {
+					triggers { <start: ctl> }
+					action '''
+						testId = etUnit_openTestCase("ShouldSendPeriodicTimeoutsWithinExpectedPollingIntervals");
+
+						// Define event expectations.
+						// NOTE: the timeout messages are dispatched after the polling handlers
+						// have been executed, which is why the timeout events always follow after
+						// the polling cycle in which they were queued.
+						static int16 expectedTestEvents[] = {
+							TESTEVENT_POLLING_CYCLE,	// given polling interval 300ms, setTimer 500ms
+							TESTEVENT_POLLING_CYCLE,	
+							TESTEVENT_POLLING_CYCLE,
+							TESTEVENT_TIMEOUT,		 	// timeout at 500ms -> queued during polling cycle 3 at 600ms
+							TESTEVENT_POLLING_CYCLE,
+							TESTEVENT_POLLING_CYCLE,
+							TESTEVENT_TIMEOUT,			// timeout at 1000ms -> queued during polling cycle 5 at 1200ms
+							TESTEVENT_POLLING_CYCLE,
+							TESTEVENT_END,
+						};
+						EXPECT_ORDER_START(testId, expectedTestEvents, sizeof(expectedTestEvents)/sizeof(expectedTestEvents[0]));
+					'''
+				}
+				State Running {
+					do '''
+						// Initiate test sequence, synchronized to polling interval.
+						// NOTE: the value of the polling interval is not available during runtime,
+						// so startTimer value has to be hardcoded based on etphys configuration!
+						if (pollingCycles == 0) {
+							startTime = currentTime();
+							etLogger_logInfo("sending startTimer request");
+							timer.startTimer(500);
+						}
+
+						++pollingCycles;
+						etLogger_logInfoF("pollingCycles: %d, %d", pollingCycles, currentTime()-startTime);
+						EXPECT_ORDER(testId, "pollingCycle", TESTEVENT_POLLING_CYCLE);
+					'''
+				}
+				Transition recvTimeout: Running -> Running {
+					triggers { <timeout:timer> }
+					action '''
+						++timeouts;
+						etLogger_logInfoF("timeout: %d (%d)", timeouts, currentTime()-startTime);
+						EXPECT_ORDER(testId, "timeout", TESTEVENT_TIMEOUT);
+					'''
+				}
+				Transition done: Running -> Post {
+					guard '''timeouts == 2'''
+					action '''
+						// End test sequence
+						EXPECT_ORDER_END(testId, "done", TESTEVENT_END);
+						timer.kill();
+						etUnit_closeTestCase(testId);
+						ctl.done(true);
+					'''
+				}
+				Transition abort: Running -> Post {
+					triggers { <abort: ctl> }
+					action '''
+						timer.kill();
+						EXPECT_TRUE(testId, "Aborted test", ET_FALSE);
+						etUnit_closeTestCase(testId);
+						ctl.done(true);
+					'''
+				}
+				State Post
+			}
+		}
+	}
+
+	ActorClass ATestHarness {
+		Interface {
+		}
+		Structure {
+			usercode2 '''
+				#include <etUnit/etUnit.h>
+			'''
+			conjugated Port runnerCtl: PTestControl
+			ActorRef runner: ControllableSequentialTestExecutor
+			ActorRef t1: APolledPeriodicTimeoutTest
+			Binding runner.control and t1.ctl
+			Binding runner.exeControl and runnerCtl
+			SAP testSuiteTimeout: PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Running {
+					action '''
+						etUnit_open("log", "TimerServiceTest");
+						etUnit_openTestSuite("org.eclipse.etrice.generator.c.tests.TimerServiceTest");
+						// Overall timeout of 10 seconds
+						testSuiteTimeout.startTimeout(10000);
+						runnerCtl.start();
+					'''
+				}
+				State Running
+				Transition timedOut: Running -> Running {
+					triggers { <timeout:testSuiteTimeout> }
+					action '''
+						etLogger_logError("test timed out!");
+						runnerCtl.abort();
+					'''
+				}
+				Transition done: Running -> Finished {
+					triggers { <done: runnerCtl> }
+					action '''
+						etUnit_closeTestSuite();
+						etUnit_close();
+						etUnit_testFinished(0);
+					'''
+				}
+				State Finished 
+			}
+		}
+	}
+
+	SubSystemClass TimerServiceTestSubSys {
+		LogicalThread defaultThread
+
+		ActorRef tests: ATestHarness
+		ActorRef actorUnderTest: ATimerService
+		LayerConnection ref tests satisfied_by actorUnderTest.timer
+		LayerConnection ref tests satisfied_by actorUnderTest.supervisionControl
+	}
+	
+	LogicalSystem TimerServiceTestLogSys {
+		SubSystemRef main: TimerServiceTestSubSys
+	}
+}

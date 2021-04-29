@@ -5,6 +5,7 @@ apply from: "$rootDir/gradle/etTest.gradle"
 createTest('c', 'sendingDataTest')
 createTest('c', 'staticConfigTest')
 createTest('c', 'traceTest', ['saveGenModel', 'genmodel.xmi'])
+createTest('c', 'timerServiceTest')
 
 task traceTestCGenModel(group: 'verification') {
 	doFirst {

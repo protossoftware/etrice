@@ -1,4 +1,5 @@
 srcDir model/sendingDataTest
 srcDir model/staticConfigTest
+srcDir model/timerServiceTest
 srcDir model/traceTest
 project org.eclipse.etrice.modellib.c
