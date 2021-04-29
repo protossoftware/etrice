@@ -49,9 +49,17 @@ typedef CRITICAL_SECTION etOSMutexData;
 typedef HANDLE etOSThreadData;
 typedef DWORD etOSThreadId;
 typedef HANDLE etOSSemaData;
-typedef HANDLE etOSTimerData;
 typedef DWORD etOSTimerId;
 typedef SOCKET etOSSocketData;
+
+/** Switches the etTimer implementation to use the Windows Multimedia timer API **/
+/* #define ET_RT_WIN_TIMER_MM */
+
+#ifdef ET_RT_WIN_TIMER_MM
+typedef MMRESULT etOSTimerData;
+#else /* ET_RUNTIME_WIN_TIMER_MM */
+typedef HANDLE etOSTimerData;
+#endif /* ET_RUNTIME_WIN_TIMER_MM */
 
 /*-----------------------------------------------------------*/
 
