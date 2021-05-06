@@ -7,7 +7,7 @@ plugins {
 
 apply from: "$rootDir/gradle/publish.gradle"
 
-def platform = ''
+def platform = 'UNKNOWN'
 if(isFamily(FAMILY_WINDOWS)) { platform = 'MT_WIN_MinGW' }
 else if(isFamily(FAMILY_UNIX)) { platform = 'MT_POSIX_GENERIC_GCC' }
 
@@ -32,12 +32,7 @@ model {
 }
 
 zipSource {
-	from(['src/common', 'src/config', 'src/util']) {
-		into 'src'
-	}
-	from('src/platforms') {
-		into 'platform'
-	}
+	from('src/common', 'src/config', 'src/util')
 }
 
 publishing {
@@ -48,3 +43,27 @@ publishing {
     }
 	repositories publishRepos
 }
+
+// Configure publishing of platforms
+subprojects {
+	buildDir = parent.layout.buildDirectory.dir("platforms/${project.name}")
+
+	apply plugin: 'de.protos.source-publish'
+	apply from: "$rootDir/gradle/publish.gradle"
+
+	zipSource {
+		from layout.projectDirectory
+		exclude '*Examples/'
+	}
+
+	publishing {
+		publications {
+			etrice(MavenPublication) {
+				artifactId = "${parent.project.name}.${project.name}"
+				from components.adhoc
+			}
+		}
+		repositories publishRepos
+	}
+}
+

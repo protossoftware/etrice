@@ -58,9 +58,7 @@ task zipModellib(type: Zip, dependsOn: syncGenDir) {
 build.dependsOn zipModellib
 
 zipSource {
-	from(modelSet.room.genDir) {
-		into 'src'
-	}
+	from(modelSet.room.genDir)
 }
 
 publishing {

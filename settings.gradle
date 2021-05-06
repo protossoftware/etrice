@@ -69,3 +69,17 @@ include	'plugins:org.eclipse.etrice.core.common',
 	
 	'releng:org.eclipse.etrice.releng',
 	'releng:org.eclipse.etrice.site'
+
+// Include selected platforms of the c runtime as individual subprojects
+def runtime = project(':runtime:org.eclipse.etrice.runtime.c')
+['MT_POSIX_GENERIC_GCC',
+ 'MT_WIN_MinGW',
+ 'MT_32Bit_FreeRTOS_Generic',
+ 'ST_32Bit_Generic'
+].each { platform ->
+	def name = platform.toLowerCase().replace('_', '-')
+	def path = "${runtime.path}:${name}"
+	def dir = file("${runtime.projectDir}/src/platforms/${platform}")
+	include path
+	project(path).projectDir = dir
+}
