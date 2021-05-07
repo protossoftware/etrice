@@ -21,12 +21,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
+public class ETPhysGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class PhysicalModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.etphys.ETPhys.PhysicalModel");
@@ -47,13 +46,25 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//PhysicalModel:
-		//	'PhysicalModel' name=FQN '{'
-		//	imports+=Import* (systems+=PhysicalSystem | nodeClasses+=NodeClass | runtimeClasses+=RuntimeClass)*
-		//	'}';
+		//    'PhysicalModel' name=FQN '{'
+		//        (imports+=Import)*
+		//        (
+		//            systems+=PhysicalSystem |
+		//            nodeClasses+=NodeClass |
+		//            runtimeClasses+=RuntimeClass
+		//        )*
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'PhysicalModel' name=FQN '{' imports+=Import* (systems+=PhysicalSystem | nodeClasses+=NodeClass |
-		//runtimeClasses+=RuntimeClass)* '}'
+		//'PhysicalModel' name=FQN '{'
+		//    (imports+=Import)*
+		//    (
+		//        systems+=PhysicalSystem |
+		//        nodeClasses+=NodeClass |
+		//        runtimeClasses+=RuntimeClass
+		//    )*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'PhysicalModel'
@@ -68,13 +79,17 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//imports+=Import*
+		//(imports+=Import)*
 		public Assignment getImportsAssignment_3() { return cImportsAssignment_3; }
 		
 		//Import
 		public RuleCall getImportsImportParserRuleCall_3_0() { return cImportsImportParserRuleCall_3_0; }
 		
-		//(systems+=PhysicalSystem | nodeClasses+=NodeClass | runtimeClasses+=RuntimeClass)*
+		//(
+		//    systems+=PhysicalSystem |
+		//    nodeClasses+=NodeClass |
+		//    runtimeClasses+=RuntimeClass
+		//)*
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//systems+=PhysicalSystem
@@ -112,12 +127,15 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//PhysicalSystem:
-		//	'PhysicalSystem' name=ID docu=Documentation? '{'
-		//	nodeRefs+=NodeRef*
-		//	'}';
+		//    'PhysicalSystem' name=ID (docu=Documentation)? '{'
+		//        nodeRefs+=NodeRef*
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'PhysicalSystem' name=ID docu=Documentation? '{' nodeRefs+=NodeRef* '}'
+		//'PhysicalSystem' name=ID (docu=Documentation)? '{'
+		//    nodeRefs+=NodeRef*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'PhysicalSystem'
@@ -129,7 +147,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//docu=Documentation?
+		//(docu=Documentation)?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 		
 		//Documentation
@@ -161,10 +179,11 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
 		
 		//NodeRef:
-		//	'NodeRef' name=ID ':' type=[NodeClass|FQN] docu=Documentation?;
+		//    'NodeRef' name=ID ':' type=[NodeClass|FQN] (docu=Documentation)?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'NodeRef' name=ID ':' type=[NodeClass|FQN] docu=Documentation?
+		//'NodeRef' name=ID ':' type=[NodeClass|FQN] (docu=Documentation)?
 		public Group getGroup() { return cGroup; }
 		
 		//'NodeRef'
@@ -188,7 +207,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//FQN
 		public RuleCall getTypeNodeClassFQNParserRuleCall_3_0_1() { return cTypeNodeClassFQNParserRuleCall_3_0_1; }
 		
-		//docu=Documentation?
+		//(docu=Documentation)?
 		public Assignment getDocuAssignment_4() { return cDocuAssignment_4; }
 		
 		//Documentation
@@ -225,14 +244,21 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//NodeClass:
-		//	'NodeClass' name=ID docu=Documentation? '{' ('runtime' '=' runtime=[RuntimeClass|FQN] &
-		//	'priomin' '=' priomin=Integer &
-		//	'priomax' '=' priomax=Integer) threads+=PhysicalThread*
-		//	'}';
+		//    'NodeClass'name=ID (docu=Documentation)? '{'
+		//        ('runtime' '=' runtime=[RuntimeClass|FQN] &
+		//        'priomin' '=' priomin=Integer &
+		//        'priomax' '=' priomax=Integer)
+		//        threads+=PhysicalThread*
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'NodeClass' name=ID docu=Documentation? '{' ('runtime' '=' runtime=[RuntimeClass|FQN] & 'priomin' '=' priomin=Integer &
-		//'priomax' '=' priomax=Integer) threads+=PhysicalThread* '}'
+		//'NodeClass'name=ID (docu=Documentation)? '{'
+		//    ('runtime' '=' runtime=[RuntimeClass|FQN] &
+		//    'priomin' '=' priomin=Integer &
+		//    'priomax' '=' priomax=Integer)
+		//    threads+=PhysicalThread*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'NodeClass'
@@ -244,7 +270,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//docu=Documentation?
+		//(docu=Documentation)?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 		
 		//Documentation
@@ -253,7 +279,9 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//'runtime' '=' runtime=[RuntimeClass|FQN] & 'priomin' '=' priomin=Integer & 'priomax' '=' priomax=Integer
+		//('runtime' '=' runtime=[RuntimeClass|FQN] &
+		//'priomin' '=' priomin=Integer &
+		//'priomax' '=' priomax=Integer)
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//'runtime' '=' runtime=[RuntimeClass|FQN]
@@ -357,20 +385,28 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//PhysicalThread:
-		//	(default?='DefaultThread' | 'Thread') name=ID '{' ('execmode' '=' execmode=ExecMode & ('interval' '=' time=TIME)? &
-		//	'prio' '=' prio=Integer &
-		//	'stacksize' '=' stacksize=INT &
-		//	'msgblocksize' '=' msgblocksize=INT &
-		//	'msgpoolsize' '=' msgpoolsize=INT)
-		//	'}';
+		//    (default?='DefaultThread' | 'Thread') name=ID '{'
+		//        ('execmode' '=' execmode=ExecMode &
+		//        ('interval' '=' time=TIME)? &
+		//        'prio' '=' prio=Integer &
+		//        'stacksize' '=' stacksize=INT &
+		//        'msgblocksize' '=' msgblocksize=INT &
+		//        'msgpoolsize' '=' msgpoolsize=INT)
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(default?='DefaultThread' | 'Thread') name=ID '{' ('execmode' '=' execmode=ExecMode & ('interval' '=' time=TIME)? &
-		//'prio' '=' prio=Integer & 'stacksize' '=' stacksize=INT & 'msgblocksize' '=' msgblocksize=INT & 'msgpoolsize' '='
-		//msgpoolsize=INT) '}'
+		//(default?='DefaultThread' | 'Thread') name=ID '{'
+		//    ('execmode' '=' execmode=ExecMode &
+		//    ('interval' '=' time=TIME)? &
+		//    'prio' '=' prio=Integer &
+		//    'stacksize' '=' stacksize=INT &
+		//    'msgblocksize' '=' msgblocksize=INT &
+		//    'msgpoolsize' '=' msgpoolsize=INT)
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
-		//default?='DefaultThread' | 'Thread'
+		//(default?='DefaultThread' | 'Thread')
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//default?='DefaultThread'
@@ -391,8 +427,12 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//'execmode' '=' execmode=ExecMode & ('interval' '=' time=TIME)? & 'prio' '=' prio=Integer & 'stacksize' '=' stacksize=INT
-		//& 'msgblocksize' '=' msgblocksize=INT & 'msgpoolsize' '=' msgpoolsize=INT
+		//('execmode' '=' execmode=ExecMode &
+		//('interval' '=' time=TIME)? &
+		//'prio' '=' prio=Integer &
+		//'stacksize' '=' stacksize=INT &
+		//'msgblocksize' '=' msgblocksize=INT &
+		//'msgpoolsize' '=' msgpoolsize=INT)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
 		//'execmode' '=' execmode=ExecMode
@@ -504,12 +544,15 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//RuntimeClass:
-		//	'RuntimeClass' name=ID docu=Documentation? '{'
-		//	'model' '=' threadModel=ThreadModel
-		//	'}';
+		//    'RuntimeClass' name=ID (docu=Documentation)? '{'
+		//        'model' '=' threadModel=ThreadModel
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'RuntimeClass' name=ID docu=Documentation? '{' 'model' '=' threadModel=ThreadModel '}'
+		//'RuntimeClass' name=ID (docu=Documentation)? '{'
+		//    'model' '=' threadModel=ThreadModel
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'RuntimeClass'
@@ -521,7 +564,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//docu=Documentation?
+		//(docu=Documentation)?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 		
 		//Documentation
@@ -546,7 +589,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 	
-	public class ExecModeElements extends AbstractEnumRuleElementFinder {
+	public class ExecModeElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.etphys.ETPhys.ExecMode");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cPOLLEDEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -557,12 +600,15 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMIXEDMixedKeyword_2_0 = (Keyword)cMIXEDEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum ExecMode:
-		//	POLLED='polled' |
-		//	BLOCKED='blocked' |
-		//	MIXED='mixed';
+		//    POLLED='polled' |
+		//    BLOCKED='blocked' |
+		//    MIXED='mixed'
+		//;
 		public EnumRule getRule() { return rule; }
 		
-		//POLLED='polled' | BLOCKED='blocked' | MIXED='mixed'
+		//POLLED='polled' |
+		//BLOCKED='blocked' |
+		//MIXED='mixed'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//POLLED='polled'
@@ -583,7 +629,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//'mixed'
 		public Keyword getMIXEDMixedKeyword_2_0() { return cMIXEDMixedKeyword_2_0; }
 	}
-	public class ThreadModelElements extends AbstractEnumRuleElementFinder {
+	public class ThreadModelElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.etphys.ETPhys.ThreadModel");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cSINGLE_THREADEDEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -592,11 +638,13 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMULTI_THREADEDMultiThreadedKeyword_1_0 = (Keyword)cMULTI_THREADEDEnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum ThreadModel:
-		//	SINGLE_THREADED='singleThreaded' |
-		//	MULTI_THREADED='multiThreaded';
+		//    SINGLE_THREADED='singleThreaded' |
+		//    MULTI_THREADED='multiThreaded'
+		//;
 		public EnumRule getRule() { return rule; }
 		
-		//SINGLE_THREADED='singleThreaded' | MULTI_THREADED='multiThreaded'
+		//SINGLE_THREADED='singleThreaded' |
+		//MULTI_THREADED='multiThreaded'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//SINGLE_THREADED='singleThreaded'
@@ -676,9 +724,15 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//PhysicalModel:
-	//	'PhysicalModel' name=FQN '{'
-	//	imports+=Import* (systems+=PhysicalSystem | nodeClasses+=NodeClass | runtimeClasses+=RuntimeClass)*
-	//	'}';
+	//    'PhysicalModel' name=FQN '{'
+	//        (imports+=Import)*
+	//        (
+	//            systems+=PhysicalSystem |
+	//            nodeClasses+=NodeClass |
+	//            runtimeClasses+=RuntimeClass
+	//        )*
+	//    '}'
+	//;
 	public PhysicalModelElements getPhysicalModelAccess() {
 		return pPhysicalModel;
 	}
@@ -688,9 +742,10 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PhysicalSystem:
-	//	'PhysicalSystem' name=ID docu=Documentation? '{'
-	//	nodeRefs+=NodeRef*
-	//	'}';
+	//    'PhysicalSystem' name=ID (docu=Documentation)? '{'
+	//        nodeRefs+=NodeRef*
+	//    '}'
+	//;
 	public PhysicalSystemElements getPhysicalSystemAccess() {
 		return pPhysicalSystem;
 	}
@@ -700,7 +755,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//NodeRef:
-	//	'NodeRef' name=ID ':' type=[NodeClass|FQN] docu=Documentation?;
+	//    'NodeRef' name=ID ':' type=[NodeClass|FQN] (docu=Documentation)?
+	//;
 	public NodeRefElements getNodeRefAccess() {
 		return pNodeRef;
 	}
@@ -710,10 +766,13 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//NodeClass:
-	//	'NodeClass' name=ID docu=Documentation? '{' ('runtime' '=' runtime=[RuntimeClass|FQN] &
-	//	'priomin' '=' priomin=Integer &
-	//	'priomax' '=' priomax=Integer) threads+=PhysicalThread*
-	//	'}';
+	//    'NodeClass'name=ID (docu=Documentation)? '{'
+	//        ('runtime' '=' runtime=[RuntimeClass|FQN] &
+	//        'priomin' '=' priomin=Integer &
+	//        'priomax' '=' priomax=Integer)
+	//        threads+=PhysicalThread*
+	//    '}'
+	//;
 	public NodeClassElements getNodeClassAccess() {
 		return pNodeClass;
 	}
@@ -723,12 +782,15 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PhysicalThread:
-	//	(default?='DefaultThread' | 'Thread') name=ID '{' ('execmode' '=' execmode=ExecMode & ('interval' '=' time=TIME)? &
-	//	'prio' '=' prio=Integer &
-	//	'stacksize' '=' stacksize=INT &
-	//	'msgblocksize' '=' msgblocksize=INT &
-	//	'msgpoolsize' '=' msgpoolsize=INT)
-	//	'}';
+	//    (default?='DefaultThread' | 'Thread') name=ID '{'
+	//        ('execmode' '=' execmode=ExecMode &
+	//        ('interval' '=' time=TIME)? &
+	//        'prio' '=' prio=Integer &
+	//        'stacksize' '=' stacksize=INT &
+	//        'msgblocksize' '=' msgblocksize=INT &
+	//        'msgpoolsize' '=' msgpoolsize=INT)
+	//    '}'
+	//;
 	public PhysicalThreadElements getPhysicalThreadAccess() {
 		return pPhysicalThread;
 	}
@@ -738,9 +800,10 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//enum ExecMode:
-	//	POLLED='polled' |
-	//	BLOCKED='blocked' |
-	//	MIXED='mixed';
+	//    POLLED='polled' |
+	//    BLOCKED='blocked' |
+	//    MIXED='mixed'
+	//;
 	public ExecModeElements getExecModeAccess() {
 		return eExecMode;
 	}
@@ -750,9 +813,10 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//RuntimeClass:
-	//	'RuntimeClass' name=ID docu=Documentation? '{'
-	//	'model' '=' threadModel=ThreadModel
-	//	'}';
+	//    'RuntimeClass' name=ID (docu=Documentation)? '{'
+	//        'model' '=' threadModel=ThreadModel
+	//    '}'
+	//;
 	public RuntimeClassElements getRuntimeClassAccess() {
 		return pRuntimeClass;
 	}
@@ -762,8 +826,9 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//enum ThreadModel:
-	//	SINGLE_THREADED='singleThreaded' |
-	//	MULTI_THREADED='multiThreaded';
+	//    SINGLE_THREADED='singleThreaded' |
+	//    MULTI_THREADED='multiThreaded'
+	//;
 	public ThreadModelElements getThreadModelAccess() {
 		return eThreadModel;
 	}
@@ -774,8 +839,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// **************************************************************
 	//// AnnotationType and Annotation Rules
-	//Annotation:
-	//	'@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
+	//Annotation:'@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?
+	//;
 	public BaseGrammarAccess.AnnotationElements getAnnotationAccess() {
 		return gaBase.getAnnotationAccess();
 	}
@@ -784,8 +849,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getAnnotationAccess().getRule();
 	}
 	
-	//KeyValue:
-	//	key=ID '=' value=Literal;
+	//KeyValue: key=ID '=' value=Literal;
 	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
 		return gaBase.getKeyValueAccess();
 	}
@@ -795,10 +859,11 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AnnotationType:
-	//	'AnnotationType' name=ID docu=Documentation? '{'
-	//	'target' '=' (targets+=AnnotationTargetType | '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)*
-	//	'}') attributes+=AnnotationAttribute*
-	//	'}';
+	//    'AnnotationType' name=ID (docu=Documentation)? '{'
+	//    'target' '=' (targets+=(AnnotationTargetType) | ( '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* '}'))
+	//    attributes+=AnnotationAttribute*
+	//    '}'
+	//;
 	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {
 		return gaBase.getAnnotationTypeAccess();
 	}
@@ -808,15 +873,16 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	////
-	//// Sub-grammars should use AnnotationTargetType to refer to 
-	//// specific sub-grammar targets. For example, valid values for 
-	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
-	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
-	//// implementing validation, quick-fixes, and code completion proposals via the 
+	//// Sub-grammars should use AnnotationTargetType to refer to
+	//// specific sub-grammar targets. For example, valid values for
+	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass",
+	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for
+	//// implementing validation, quick-fixes, and code completion proposals via the
 	//// usual Xtext mechanisms.
 	////
 	//AnnotationTargetType:
-	//	ID;
+	//    ID
+	//;
 	public BaseGrammarAccess.AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
 		return gaBase.getAnnotationTargetTypeAccess();
 	}
@@ -825,8 +891,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getAnnotationTargetTypeAccess().getRule();
 	}
 	
-	//AnnotationAttribute:
-	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
+	//AnnotationAttribute: SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
 		return gaBase.getAnnotationAttributeAccess();
 	}
@@ -836,7 +901,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SimpleAnnotationAttribute:
-	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType;
+	//    (optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
+	//;
 	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
 		return gaBase.getSimpleAnnotationAttributeAccess();
 	}
@@ -846,7 +912,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EnumAnnotationAttribute:
-	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}';
+	//    (optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}'
+	//;
 	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
 		return gaBase.getEnumAnnotationAttributeAccess();
 	}
@@ -859,24 +926,24 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//// Import rules
 	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
 	//// this is configured in the work flow by
-	////			fragment = scoping.ImportURIScopingFragment {}
-	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
-	////			ImportedNamespaceAwareLocalScopeProvider
+	////            fragment = scoping.ImportURIScopingFragment {}
+	//// and by overriding configureIScopeProviderDelegate in the runtime module with
+	////            ImportedNamespaceAwareLocalScopeProvider
 	//// also configure in the RuntimeModule
-	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-	////		return PlatformRelativeUriResolver.class;
-	////	}
+	////    public Class<? extends ImportUriResolver> bindImportUriResolver() {
+	////        return PlatformRelativeUriResolver.class;
+	////    }
 	//// and in the UiRuntimeModule
-	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
-	////		return GlobalNonPlatformURIEditorOpener.class;
-	////	}
-	////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
-	////		return ImportAwareHyperlinkHelper.class;
-	////	}
+	////    public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+	////        return GlobalNonPlatformURIEditorOpener.class;
+	////    }
+	////    public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+	////        return ImportAwareHyperlinkHelper.class;
+	////    }
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
-	//Import:
-	//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
+	//Import :
+	//    'import' ((importedNamespace=ImportedFQN ('from' importURI=STRING)?) | ('model' importURI=STRING));
 	public BaseGrammarAccess.ImportElements getImportAccess() {
 		return gaBase.getImportAccess();
 	}
@@ -886,7 +953,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ImportedFQN:
-	//	FQN '.*'?;
+	//    FQN ('.*')?;
 	public BaseGrammarAccess.ImportedFQNElements getImportedFQNAccess() {
 		return gaBase.getImportedFQNAccess();
 	}
@@ -898,10 +965,10 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//// **************************************************************
 	//// Documentation Rule
 	//Documentation:
-	//	{Documentation}
-	//	'['
-	//	lines+=STRING*
-	//	']';
+	//    {Documentation}
+	//    '['
+	//        lines+=STRING*
+	//    ']';
 	public BaseGrammarAccess.DocumentationElements getDocumentationAccess() {
 		return gaBase.getDocumentationAccess();
 	}
@@ -912,8 +979,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// **************************************************************
 	//// Time Rule
-	//TIME ecore::ELong:
-	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns';
+	//TIME returns ecore::ELong: (INT 's') | (INT 'ms') | (INT 'us') | (INT 'ns');
 	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
 		return gaBase.getTIMEAccess();
 	}
@@ -922,11 +988,14 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getTIMEAccess().getRule();
 	}
 	
+	//// **************************************************************
+	//// Literal Rules
 	//enum LiteralType:
-	//	BOOL='ptBoolean' |
-	//	INT='ptInteger' |
-	//	REAL='ptReal' |
-	//	CHAR='ptCharacter';
+	//    BOOL='ptBoolean' |
+	//    INT='ptInteger' |
+	//    REAL='ptReal' |
+	//    CHAR='ptCharacter'
+	//;
 	public BaseGrammarAccess.LiteralTypeElements getLiteralTypeAccess() {
 		return gaBase.getLiteralTypeAccess();
 	}
@@ -936,7 +1005,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//LiteralArray:
-	//	literals+=Literal (',' literals+=Literal)*;
+	//    literals+=Literal (',' literals+=Literal)*;
 	public BaseGrammarAccess.LiteralArrayElements getLiteralArrayAccess() {
 		return gaBase.getLiteralArrayAccess();
 	}
@@ -945,9 +1014,11 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getLiteralArrayAccess().getRule();
 	}
 	
-	//// Value Types for Attributes
+	//    // Value Types for Attributes
 	//Literal:
-	//	BooleanLiteral | NumberLiteral | StringLiteral;
+	//    BooleanLiteral |
+	//    NumberLiteral |
+	//    StringLiteral;
 	public BaseGrammarAccess.LiteralElements getLiteralAccess() {
 		return gaBase.getLiteralAccess();
 	}
@@ -957,7 +1028,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//BooleanLiteral:
-	//	{BooleanLiteral} ('false' | isTrue?='true');
+	//    {BooleanLiteral} ('false' | isTrue?='true');
 	public BaseGrammarAccess.BooleanLiteralElements getBooleanLiteralAccess() {
 		return gaBase.getBooleanLiteralAccess();
 	}
@@ -967,7 +1038,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//NumberLiteral:
-	//	IntLiteral | RealLiteral;
+	//    IntLiteral | RealLiteral;
 	public BaseGrammarAccess.NumberLiteralElements getNumberLiteralAccess() {
 		return gaBase.getNumberLiteralAccess();
 	}
@@ -977,7 +1048,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//RealLiteral:
-	//	{RealLiteral} value=Real;
+	//    {RealLiteral} value=Real;
 	public BaseGrammarAccess.RealLiteralElements getRealLiteralAccess() {
 		return gaBase.getRealLiteralAccess();
 	}
@@ -987,7 +1058,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//IntLiteral:
-	//	{IntLiteral} value=Integer;
+	//    {IntLiteral} value=Integer;
 	public BaseGrammarAccess.IntLiteralElements getIntLiteralAccess() {
 		return gaBase.getIntLiteralAccess();
 	}
@@ -997,7 +1068,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//StringLiteral:
-	//	{StringLiteral} value=STRING;
+	//    {StringLiteral} value=STRING;
 	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
 		return gaBase.getStringLiteralAccess();
 	}
@@ -1006,8 +1077,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 	
-	//Integer ecore::ELong:
-	//	('+' | '-')? INT | HEX;
+	//Integer returns ecore::ELong:
+	//    (('+' | '-')? INT) | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -1016,8 +1087,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getIntegerAccess().getRule();
 	}
 	
-	//Real ecore::EDouble:
-	//	Decimal | DecimalExp;
+	//Real returns ecore::EDouble:
+	//    Decimal | /*DotDecimal | DecimalDot |*/ DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -1027,7 +1098,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Decimal hidden():
-	//	('+' | '-')? INT '.' INT;
+	//    ('+' | '-')? INT '.' INT;
 	public BaseGrammarAccess.DecimalElements getDecimalAccess() {
 		return gaBase.getDecimalAccess();
 	}
@@ -1037,12 +1108,12 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	////DotDecimal hidden():
-	////	('+' | '-')? '.' INT;
+	////    ('+' | '-')? '.' INT;
 	////
 	////DecimalDot hidden():
-	////	('+' | '-')? INT '.';
+	////    ('+' | '-')? INT '.';
 	//DecimalExp hidden():
-	//	('+' | '-')? INT '.' INT ('e' | 'E') ('+' | '-')? INT;
+	//    ('+' | '-')? INT '.' INT ('e' | 'E') ('+' | '-')? INT;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaBase.getDecimalExpAccess();
 	}
@@ -1052,7 +1123,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//FQN:
-	//	ID ('.' ID)*;
+	//    ID ('.' ID)*;
 	public BaseGrammarAccess.FQNElements getFQNAccess() {
 		return gaBase.getFQNAccess();
 	}
@@ -1062,55 +1133,51 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal HEX:
-	//	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+	//    ('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return gaBase.getHEXRule();
 	}
 	
 	//terminal CC_STRING:
-	//	"'''"->"'''";
+	//    "'''" -> "'''";
 	public TerminalRule getCC_STRINGRule() {
 		return gaBase.getCC_STRINGRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

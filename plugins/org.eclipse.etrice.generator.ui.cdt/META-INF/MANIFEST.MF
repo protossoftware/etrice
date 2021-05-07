@@ -4,7 +4,7 @@ Bundle-Name: CDT integration of eTrice
 Bundle-SymbolicName: org.eclipse.etrice.generator.ui.cdt;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Bundle-Vendor: Eclipse eTrice
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.etrice.generator.ui,
  org.eclipse.cdt.core,
  org.eclipse.cdt.managedbuilder.core,

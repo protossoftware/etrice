@@ -65,6 +65,7 @@ public class StateTerminalImpl extends TransitionTerminalImpl implements StateTe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State getState()
   {
     if (state != null && state.eIsProxy())
@@ -95,6 +96,7 @@ public class StateTerminalImpl extends TransitionTerminalImpl implements StateTe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setState(State newState)
   {
     State oldState = state;

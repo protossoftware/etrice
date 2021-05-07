@@ -73,6 +73,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isIsTrue()
   {
     return isTrue;
@@ -83,6 +84,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIsTrue(boolean newIsTrue)
   {
     boolean oldIsTrue = isTrue;
@@ -167,7 +169,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (isTrue: ");
     result.append(isTrue);
     result.append(')');

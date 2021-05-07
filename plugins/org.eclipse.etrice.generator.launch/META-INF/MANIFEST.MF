@@ -23,7 +23,7 @@ Require-Bundle:  org.eclipse.etrice.generator,
  org.eclipse.etrice.core.common.ui
 Import-Package: org.eclipse.xtext.xbase.lib
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: Eclipse eTrice
 Export-Package: org.eclipse.etrice.generator.launch
 Automatic-Module-Name: org.eclipse.etrice.generator.launch

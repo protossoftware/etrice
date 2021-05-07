@@ -598,7 +598,7 @@ rulePhysicalThread returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getPhysicalThreadRule());
 						}
-						setWithLastConsumed($current, "default", true, "DefaultThread");
+						setWithLastConsumed($current, "default", lv_default_0_0 != null, "DefaultThread");
 					}
 				)
 			)
@@ -1119,7 +1119,7 @@ ruleSimpleAnnotationAttribute returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
 						}
-						setWithLastConsumed($current, "optional", true, "optional");
+						setWithLastConsumed($current, "optional", lv_optional_0_0 != null, "optional");
 					}
 				)
 			)
@@ -1204,7 +1204,7 @@ ruleEnumAnnotationAttribute returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
 						}
-						setWithLastConsumed($current, "optional", true, "optional");
+						setWithLastConsumed($current, "optional", lv_optional_0_0 != null, "optional");
 					}
 				)
 			)
@@ -1638,7 +1638,7 @@ ruleBooleanLiteral returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getBooleanLiteralRule());
 						}
-						setWithLastConsumed($current, "isTrue", true, "true");
+						setWithLastConsumed($current, "isTrue", lv_isTrue_2_0 != null, "true");
 					}
 				)
 			)

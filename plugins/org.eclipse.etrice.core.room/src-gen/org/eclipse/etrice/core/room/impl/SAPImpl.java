@@ -18,24 +18,24 @@ import org.eclipse.etrice.core.room.SAP;
 public class SAPImpl extends InterfaceItemImpl implements SAP
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected SAPImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.SAP;
-	}
+    return RoomPackage.Literals.SAP;
+  }
 
 } //SAPImpl

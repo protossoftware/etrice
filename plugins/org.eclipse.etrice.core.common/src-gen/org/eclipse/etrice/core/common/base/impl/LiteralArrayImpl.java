@@ -72,6 +72,7 @@ public class LiteralArrayImpl extends MinimalEObjectImpl.Container implements Li
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Literal> getLiterals()
   {
     if (literals == null)

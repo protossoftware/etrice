@@ -1,8 +1,6 @@
-
 ext.versions = [
-	'guava' : '21.0',
-	'xtext' : '2.15.0',
-	'core_runtime' : '3.12.0',
-	'core_resources' : '3.12.0',
-	'commons_io' : '2.5'
+	'guava' : '30.1-jre',
+	'xtext' : '2.25.0',
+	'core_runtime' : '3.20.100',
+	'core_resources' : '3.14.0'
 ]

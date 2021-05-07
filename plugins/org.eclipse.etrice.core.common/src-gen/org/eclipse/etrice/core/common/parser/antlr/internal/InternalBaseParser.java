@@ -850,7 +850,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
                     						}
-                    						setWithLastConsumed(current, "optional", true, "optional");
+                    						setWithLastConsumed(current, "optional", lv_optional_0_0 != null, "optional");
                     					
 
                     }
@@ -1057,7 +1057,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
                     						}
-                    						setWithLastConsumed(current, "optional", true, "optional");
+                    						setWithLastConsumed(current, "optional", lv_optional_0_0 != null, "optional");
                     					
 
                     }
@@ -1748,7 +1748,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getBooleanLiteralRule());
                     						}
-                    						setWithLastConsumed(current, "isTrue", true, "true");
+                    						setWithLastConsumed(current, "isTrue", lv_isTrue_2_0 != null, "true");
                     					
 
                     }

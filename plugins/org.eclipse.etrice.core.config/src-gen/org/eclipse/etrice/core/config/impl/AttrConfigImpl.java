@@ -80,6 +80,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Attribute getAttribute()
   {
     if (attribute != null && attribute.eIsProxy())
@@ -110,6 +111,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAttribute(Attribute newAttribute)
   {
     Attribute oldAttribute = attribute;
@@ -123,6 +125,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ConfigValueArray getValue()
   {
     return value;
@@ -150,6 +153,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(ConfigValueArray newValue)
   {
     if (newValue != value)

@@ -40,191 +40,199 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class EnumerationTypeImpl extends DataTypeImpl implements EnumerationType
 {
   /**
-	 * The cached value of the '{@link #getPrimitiveType() <em>Primitive Type</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getPrimitiveType() <em>Primitive Type</em>}' reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getPrimitiveType()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getPrimitiveType()
+   * @generated
+   * @ordered
+   */
   protected PrimitiveType primitiveType;
 
   /**
-	 * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getLiterals()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getLiterals()
+   * @generated
+   * @ordered
+   */
   protected EList<EnumLiteral> literals;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected EnumerationTypeImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.ENUMERATION_TYPE;
-	}
+    return RoomPackage.Literals.ENUMERATION_TYPE;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public PrimitiveType getPrimitiveType()
+  public PrimitiveType getPrimitiveType()
   {
-		if (primitiveType != null && primitiveType.eIsProxy()) {
-			InternalEObject oldPrimitiveType = (InternalEObject)primitiveType;
-			primitiveType = (PrimitiveType)eResolveProxy(oldPrimitiveType);
-			if (primitiveType != oldPrimitiveType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE, oldPrimitiveType, primitiveType));
-			}
-		}
-		return primitiveType;
-	}
+    if (primitiveType != null && primitiveType.eIsProxy())
+    {
+      InternalEObject oldPrimitiveType = (InternalEObject)primitiveType;
+      primitiveType = (PrimitiveType)eResolveProxy(oldPrimitiveType);
+      if (primitiveType != oldPrimitiveType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE, oldPrimitiveType, primitiveType));
+      }
+    }
+    return primitiveType;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public PrimitiveType basicGetPrimitiveType()
   {
-		return primitiveType;
-	}
+    return primitiveType;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setPrimitiveType(PrimitiveType newPrimitiveType)
+  public void setPrimitiveType(PrimitiveType newPrimitiveType)
   {
-		PrimitiveType oldPrimitiveType = primitiveType;
-		primitiveType = newPrimitiveType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE, oldPrimitiveType, primitiveType));
-	}
+    PrimitiveType oldPrimitiveType = primitiveType;
+    primitiveType = newPrimitiveType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE, oldPrimitiveType, primitiveType));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<EnumLiteral> getLiterals()
+  public EList<EnumLiteral> getLiterals()
   {
-		if (literals == null) {
-			literals = new EObjectContainmentEList<EnumLiteral>(EnumLiteral.class, this, RoomPackage.ENUMERATION_TYPE__LITERALS);
-		}
-		return literals;
-	}
+    if (literals == null)
+    {
+      literals = new EObjectContainmentEList<EnumLiteral>(EnumLiteral.class, this, RoomPackage.ENUMERATION_TYPE__LITERALS);
+    }
+    return literals;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RoomPackage.ENUMERATION_TYPE__LITERALS:
-				return ((InternalEList<?>)getLiterals()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ENUMERATION_TYPE__LITERALS:
+        return ((InternalEList<?>)getLiterals()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE:
-				if (resolve) return getPrimitiveType();
-				return basicGetPrimitiveType();
-			case RoomPackage.ENUMERATION_TYPE__LITERALS:
-				return getLiterals();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE:
+        if (resolve) return getPrimitiveType();
+        return basicGetPrimitiveType();
+      case RoomPackage.ENUMERATION_TYPE__LITERALS:
+        return getLiterals();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE:
-				setPrimitiveType((PrimitiveType)newValue);
-				return;
-			case RoomPackage.ENUMERATION_TYPE__LITERALS:
-				getLiterals().clear();
-				getLiterals().addAll((Collection<? extends EnumLiteral>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE:
+        setPrimitiveType((PrimitiveType)newValue);
+        return;
+      case RoomPackage.ENUMERATION_TYPE__LITERALS:
+        getLiterals().clear();
+        getLiterals().addAll((Collection<? extends EnumLiteral>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE:
-				setPrimitiveType((PrimitiveType)null);
-				return;
-			case RoomPackage.ENUMERATION_TYPE__LITERALS:
-				getLiterals().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE:
+        setPrimitiveType((PrimitiveType)null);
+        return;
+      case RoomPackage.ENUMERATION_TYPE__LITERALS:
+        getLiterals().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE:
-				return primitiveType != null;
-			case RoomPackage.ENUMERATION_TYPE__LITERALS:
-				return literals != null && !literals.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ENUMERATION_TYPE__PRIMITIVE_TYPE:
+        return primitiveType != null;
+      case RoomPackage.ENUMERATION_TYPE__LITERALS:
+        return literals != null && !literals.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //EnumerationTypeImpl

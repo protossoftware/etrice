@@ -100,6 +100,7 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubSystemRef getLogicalSubSys()
   {
     if (logicalSubSys != null && logicalSubSys.eIsProxy())
@@ -130,6 +131,7 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLogicalSubSys(SubSystemRef newLogicalSubSys)
   {
     SubSystemRef oldLogicalSubSys = logicalSubSys;
@@ -143,6 +145,7 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NodeRef getNode()
   {
     if (node != null && node.eIsProxy())
@@ -173,6 +176,7 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNode(NodeRef newNode)
   {
     NodeRef oldNode = node;
@@ -186,6 +190,7 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ThreadMapping> getThreadMappings()
   {
     if (threadMappings == null)

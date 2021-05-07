@@ -67,6 +67,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getGuard()
   {
     return guard;
@@ -94,6 +95,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setGuard(DetailCode newGuard)
   {
     if (newGuard != guard)

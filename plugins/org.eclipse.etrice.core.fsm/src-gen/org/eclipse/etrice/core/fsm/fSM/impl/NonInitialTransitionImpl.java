@@ -66,6 +66,7 @@ public class NonInitialTransitionImpl extends TransitionImpl implements NonIniti
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TransitionTerminal getFrom()
   {
     return from;
@@ -93,6 +94,7 @@ public class NonInitialTransitionImpl extends TransitionImpl implements NonIniti
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFrom(TransitionTerminal newFrom)
   {
     if (newFrom != from)

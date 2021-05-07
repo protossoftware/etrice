@@ -1177,7 +1177,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getVarDeclRule());
                     					}
-                    					setWithLastConsumed(current, "varargs", true, "varargs");
+                    					setWithLastConsumed(current, "varargs", lv_varargs_3_0 != null, "varargs");
                     				
 
                     }
@@ -1473,7 +1473,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getRefableTypeRule());
                     					}
-                    					setWithLastConsumed(current, "ref", true, "ref");
+                    					setWithLastConsumed(current, "ref", lv_ref_1_0 != null, "ref");
                     				
 
                     }
@@ -3782,7 +3782,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getStandardOperationRule());
                     					}
-                    					setWithLastConsumed(current, "override", true, "override");
+                    					setWithLastConsumed(current, "override", lv_override_0_0 != null, "override");
                     				
 
                     }
@@ -5624,7 +5624,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getMessageRule());
                     					}
-                    					setWithLastConsumed(current, "priv", true, "private");
+                    					setWithLastConsumed(current, "priv", lv_priv_0_0 != null, "private");
                     				
 
                     }
@@ -6816,7 +6816,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    										if (current==null) {
             	    											current = createModelElement(grammarAccess.getActorClassRule());
             	    										}
-            	    										setWithLastConsumed(current, "abstract", true, "abstract");
+            	    										setWithLastConsumed(current, "abstract", lv_abstract_1_0 != null, "abstract");
             	    									
 
             	    }
@@ -8328,7 +8328,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getPortRule());
                     					}
-                    					setWithLastConsumed(current, "conjugated", true, "conjugated");
+                    					setWithLastConsumed(current, "conjugated", lv_conjugated_0_0 != null, "conjugated");
                     				
 
                     }
@@ -14584,7 +14584,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getDetailCodeRule());
                     						}
-                    						setWithLastConsumed(current, "used", true, "{");
+                    						setWithLastConsumed(current, "used", lv_used_2_0 != null, "{");
                     					
 
                     }
@@ -14903,7 +14903,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getTransitionPointRule());
                     					}
-                    					setWithLastConsumed(current, "handler", true, "handler");
+                    					setWithLastConsumed(current, "handler", lv_handler_0_0 != null, "handler");
                     				
 
                     }
@@ -21119,7 +21119,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
                     						}
-                    						setWithLastConsumed(current, "optional", true, "optional");
+                    						setWithLastConsumed(current, "optional", lv_optional_0_0 != null, "optional");
                     					
 
                     }
@@ -21326,7 +21326,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
                     						}
-                    						setWithLastConsumed(current, "optional", true, "optional");
+                    						setWithLastConsumed(current, "optional", lv_optional_0_0 != null, "optional");
                     					
 
                     }
@@ -22254,7 +22254,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getBooleanLiteralRule());
                     						}
-                    						setWithLastConsumed(current, "isTrue", true, "true");
+                    						setWithLastConsumed(current, "isTrue", lv_isTrue_2_0 != null, "true");
                     					
 
                     }

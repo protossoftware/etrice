@@ -58,10 +58,6 @@ public interface TransitionBase extends StateGraphItem
    * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Annotations</em>' containment reference list.
    * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getTransitionBase_Annotations()

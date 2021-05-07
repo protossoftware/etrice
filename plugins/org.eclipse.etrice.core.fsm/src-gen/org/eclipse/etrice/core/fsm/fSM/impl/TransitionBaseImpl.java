@@ -98,6 +98,7 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -125,6 +126,7 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -146,6 +148,7 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -160,6 +163,7 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getAction()
   {
     return action;
@@ -187,6 +191,7 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAction(DetailCode newAction)
   {
     if (newAction != action)

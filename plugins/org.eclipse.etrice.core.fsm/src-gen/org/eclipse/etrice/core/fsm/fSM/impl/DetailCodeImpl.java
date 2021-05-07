@@ -91,6 +91,7 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getLines()
   {
     if (lines == null)
@@ -105,6 +106,7 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isUsed()
   {
     return used;
@@ -115,6 +117,7 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUsed(boolean newUsed)
   {
     boolean oldUsed = used;
@@ -211,7 +214,7 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (lines: ");
     result.append(lines);
     result.append(", used: ");

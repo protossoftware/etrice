@@ -222,6 +222,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isDefault()
   {
     return default_;
@@ -232,6 +233,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDefault(boolean newDefault)
   {
     boolean oldDefault = default_;
@@ -245,6 +247,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -255,6 +258,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -268,6 +272,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ExecMode getExecmode()
   {
     return execmode;
@@ -278,6 +283,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExecmode(ExecMode newExecmode)
   {
     ExecMode oldExecmode = execmode;
@@ -291,6 +297,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public long getTime()
   {
     return time;
@@ -301,6 +308,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTime(long newTime)
   {
     long oldTime = time;
@@ -314,6 +322,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public long getPrio()
   {
     return prio;
@@ -324,6 +333,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPrio(long newPrio)
   {
     long oldPrio = prio;
@@ -337,6 +347,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getStacksize()
   {
     return stacksize;
@@ -347,6 +358,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStacksize(int newStacksize)
   {
     int oldStacksize = stacksize;
@@ -360,6 +372,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getMsgblocksize()
   {
     return msgblocksize;
@@ -370,6 +383,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMsgblocksize(int newMsgblocksize)
   {
     int oldMsgblocksize = msgblocksize;
@@ -383,6 +397,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getMsgpoolsize()
   {
     return msgpoolsize;
@@ -393,6 +408,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMsgpoolsize(int newMsgpoolsize)
   {
     int oldMsgpoolsize = msgpoolsize;
@@ -547,7 +563,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (default: ");
     result.append(default_);
     result.append(", name: ");

@@ -65,6 +65,7 @@ public class TrPointTerminalImpl extends TransitionTerminalImpl implements TrPoi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TrPoint getTrPoint()
   {
     if (trPoint != null && trPoint.eIsProxy())
@@ -95,6 +96,7 @@ public class TrPointTerminalImpl extends TransitionTerminalImpl implements TrPoi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTrPoint(TrPoint newTrPoint)
   {
     TrPoint oldTrPoint = trPoint;

@@ -5,5 +5,5 @@ Bundle-SymbolicName: org.eclipse.etrice.logging
 Bundle-Version: 0.0.0.qualifier
 Bundle-Vendor: Eclipse eTrice
 Fragment-Host: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.eclipse.etrice.logging

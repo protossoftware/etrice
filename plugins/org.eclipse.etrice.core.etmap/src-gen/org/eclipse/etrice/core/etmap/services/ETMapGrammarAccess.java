@@ -18,11 +18,11 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
+public class ETMapGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class MappingModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.etmap.ETMap.MappingModel");
@@ -38,13 +38,17 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//MappingModel:
-		//	'MappingModel' name=FQN '{'
-		//	imports+=Import*
-		//	mappings+=Mapping*
-		//	'}';
+		//    'MappingModel' name=FQN '{'
+		//        (imports+=Import)*
+		//        mappings+=Mapping*
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'MappingModel' name=FQN '{' imports+=Import* mappings+=Mapping* '}'
+		//'MappingModel' name=FQN '{'
+		//    (imports+=Import)*
+		//    mappings+=Mapping*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'MappingModel'
@@ -59,7 +63,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//imports+=Import*
+		//(imports+=Import)*
 		public Assignment getImportsAssignment_3() { return cImportsAssignment_3; }
 		
 		//Import
@@ -91,13 +95,15 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Mapping:
-		//	'Mapping' logicalSys=[room::LogicalSystem|FQN] '->' physicalSys=[phys::PhysicalSystem|FQN] '{'
-		//	subsysMappings+=SubSystemMapping*
-		//	'}';
+		//    'Mapping' logicalSys=[room::LogicalSystem|FQN] '->' physicalSys=[phys::PhysicalSystem|FQN] '{'
+		//        subsysMappings+=SubSystemMapping*
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Mapping' logicalSys=[room::LogicalSystem|FQN] '->' physicalSys=[phys::PhysicalSystem|FQN] '{'
-		//subsysMappings+=SubSystemMapping* '}'
+		//    subsysMappings+=SubSystemMapping*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'Mapping'
@@ -154,22 +160,24 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		//SubSystemMapping:
-		//	'SubSystemMapping' logicalSubSys=[room::SubSystemRef] '->' node=[phys::NodeRef] ('{'
-		//	threadMappings+=ThreadMapping*
-		//	'}')?;
+		//    'SubSystemMapping' logicalSubSys=[room::SubSystemRef|ID] '->' node=[phys::NodeRef|ID] ('{'
+		//        threadMappings+=ThreadMapping*
+		//    '}')?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'SubSystemMapping' logicalSubSys=[room::SubSystemRef] '->' node=[phys::NodeRef] ('{' threadMappings+=ThreadMapping*
+		//'SubSystemMapping' logicalSubSys=[room::SubSystemRef|ID] '->' node=[phys::NodeRef|ID] ('{'
+		//    threadMappings+=ThreadMapping*
 		//'}')?
 		public Group getGroup() { return cGroup; }
 		
 		//'SubSystemMapping'
 		public Keyword getSubSystemMappingKeyword_0() { return cSubSystemMappingKeyword_0; }
 		
-		//logicalSubSys=[room::SubSystemRef]
+		//logicalSubSys=[room::SubSystemRef|ID]
 		public Assignment getLogicalSubSysAssignment_1() { return cLogicalSubSysAssignment_1; }
 		
-		//[room::SubSystemRef]
+		//[room::SubSystemRef|ID]
 		public CrossReference getLogicalSubSysSubSystemRefCrossReference_1_0() { return cLogicalSubSysSubSystemRefCrossReference_1_0; }
 		
 		//ID
@@ -178,16 +186,18 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 		
-		//node=[phys::NodeRef]
+		//node=[phys::NodeRef|ID]
 		public Assignment getNodeAssignment_3() { return cNodeAssignment_3; }
 		
-		//[phys::NodeRef]
+		//[phys::NodeRef|ID]
 		public CrossReference getNodeNodeRefCrossReference_3_0() { return cNodeNodeRefCrossReference_3_0; }
 		
 		//ID
 		public RuleCall getNodeNodeRefIDTerminalRuleCall_3_0_1() { return cNodeNodeRefIDTerminalRuleCall_3_0_1; }
 		
-		//('{' threadMappings+=ThreadMapping* '}')?
+		//('{'
+		//       threadMappings+=ThreadMapping*
+		//   '}')?
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'{'
@@ -215,19 +225,20 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1 = (RuleCall)cPhysicalThreadPhysicalThreadCrossReference_3_0.eContents().get(1);
 		
 		//ThreadMapping:
-		//	'ThreadMapping' logicalThread=[room::LogicalThread] '->' physicalThread=[phys::PhysicalThread];
+		//    'ThreadMapping' logicalThread=[room::LogicalThread|ID] '->' physicalThread=[phys::PhysicalThread|ID]
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ThreadMapping' logicalThread=[room::LogicalThread] '->' physicalThread=[phys::PhysicalThread]
+		//'ThreadMapping' logicalThread=[room::LogicalThread|ID] '->' physicalThread=[phys::PhysicalThread|ID]
 		public Group getGroup() { return cGroup; }
 		
 		//'ThreadMapping'
 		public Keyword getThreadMappingKeyword_0() { return cThreadMappingKeyword_0; }
 		
-		//logicalThread=[room::LogicalThread]
+		//logicalThread=[room::LogicalThread|ID]
 		public Assignment getLogicalThreadAssignment_1() { return cLogicalThreadAssignment_1; }
 		
-		//[room::LogicalThread]
+		//[room::LogicalThread|ID]
 		public CrossReference getLogicalThreadLogicalThreadCrossReference_1_0() { return cLogicalThreadLogicalThreadCrossReference_1_0; }
 		
 		//ID
@@ -236,10 +247,10 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 		
-		//physicalThread=[phys::PhysicalThread]
+		//physicalThread=[phys::PhysicalThread|ID]
 		public Assignment getPhysicalThreadAssignment_3() { return cPhysicalThreadAssignment_3; }
 		
-		//[phys::PhysicalThread]
+		//[phys::PhysicalThread|ID]
 		public CrossReference getPhysicalThreadPhysicalThreadCrossReference_3_0() { return cPhysicalThreadPhysicalThreadCrossReference_3_0; }
 		
 		//ID
@@ -303,10 +314,11 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//MappingModel:
-	//	'MappingModel' name=FQN '{'
-	//	imports+=Import*
-	//	mappings+=Mapping*
-	//	'}';
+	//    'MappingModel' name=FQN '{'
+	//        (imports+=Import)*
+	//        mappings+=Mapping*
+	//    '}'
+	//;
 	public MappingModelElements getMappingModelAccess() {
 		return pMappingModel;
 	}
@@ -316,9 +328,10 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Mapping:
-	//	'Mapping' logicalSys=[room::LogicalSystem|FQN] '->' physicalSys=[phys::PhysicalSystem|FQN] '{'
-	//	subsysMappings+=SubSystemMapping*
-	//	'}';
+	//    'Mapping' logicalSys=[room::LogicalSystem|FQN] '->' physicalSys=[phys::PhysicalSystem|FQN] '{'
+	//        subsysMappings+=SubSystemMapping*
+	//    '}'
+	//;
 	public MappingElements getMappingAccess() {
 		return pMapping;
 	}
@@ -328,9 +341,10 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SubSystemMapping:
-	//	'SubSystemMapping' logicalSubSys=[room::SubSystemRef] '->' node=[phys::NodeRef] ('{'
-	//	threadMappings+=ThreadMapping*
-	//	'}')?;
+	//    'SubSystemMapping' logicalSubSys=[room::SubSystemRef|ID] '->' node=[phys::NodeRef|ID] ('{'
+	//        threadMappings+=ThreadMapping*
+	//    '}')?
+	//;
 	public SubSystemMappingElements getSubSystemMappingAccess() {
 		return pSubSystemMapping;
 	}
@@ -340,7 +354,8 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ThreadMapping:
-	//	'ThreadMapping' logicalThread=[room::LogicalThread] '->' physicalThread=[phys::PhysicalThread];
+	//    'ThreadMapping' logicalThread=[room::LogicalThread|ID] '->' physicalThread=[phys::PhysicalThread|ID]
+	//;
 	public ThreadMappingElements getThreadMappingAccess() {
 		return pThreadMapping;
 	}
@@ -351,8 +366,8 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// **************************************************************
 	//// AnnotationType and Annotation Rules
-	//Annotation:
-	//	'@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
+	//Annotation:'@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?
+	//;
 	public BaseGrammarAccess.AnnotationElements getAnnotationAccess() {
 		return gaBase.getAnnotationAccess();
 	}
@@ -361,8 +376,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getAnnotationAccess().getRule();
 	}
 	
-	//KeyValue:
-	//	key=ID '=' value=Literal;
+	//KeyValue: key=ID '=' value=Literal;
 	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
 		return gaBase.getKeyValueAccess();
 	}
@@ -372,10 +386,11 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AnnotationType:
-	//	'AnnotationType' name=ID docu=Documentation? '{'
-	//	'target' '=' (targets+=AnnotationTargetType | '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)*
-	//	'}') attributes+=AnnotationAttribute*
-	//	'}';
+	//    'AnnotationType' name=ID (docu=Documentation)? '{'
+	//    'target' '=' (targets+=(AnnotationTargetType) | ( '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* '}'))
+	//    attributes+=AnnotationAttribute*
+	//    '}'
+	//;
 	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {
 		return gaBase.getAnnotationTypeAccess();
 	}
@@ -385,15 +400,16 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	////
-	//// Sub-grammars should use AnnotationTargetType to refer to 
-	//// specific sub-grammar targets. For example, valid values for 
-	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
-	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
-	//// implementing validation, quick-fixes, and code completion proposals via the 
+	//// Sub-grammars should use AnnotationTargetType to refer to
+	//// specific sub-grammar targets. For example, valid values for
+	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass",
+	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for
+	//// implementing validation, quick-fixes, and code completion proposals via the
 	//// usual Xtext mechanisms.
 	////
 	//AnnotationTargetType:
-	//	ID;
+	//    ID
+	//;
 	public BaseGrammarAccess.AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
 		return gaBase.getAnnotationTargetTypeAccess();
 	}
@@ -402,8 +418,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getAnnotationTargetTypeAccess().getRule();
 	}
 	
-	//AnnotationAttribute:
-	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
+	//AnnotationAttribute: SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
 		return gaBase.getAnnotationAttributeAccess();
 	}
@@ -413,7 +428,8 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SimpleAnnotationAttribute:
-	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType;
+	//    (optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
+	//;
 	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
 		return gaBase.getSimpleAnnotationAttributeAccess();
 	}
@@ -423,7 +439,8 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EnumAnnotationAttribute:
-	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}';
+	//    (optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}'
+	//;
 	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
 		return gaBase.getEnumAnnotationAttributeAccess();
 	}
@@ -436,24 +453,24 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	//// Import rules
 	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
 	//// this is configured in the work flow by
-	////			fragment = scoping.ImportURIScopingFragment {}
-	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
-	////			ImportedNamespaceAwareLocalScopeProvider
+	////            fragment = scoping.ImportURIScopingFragment {}
+	//// and by overriding configureIScopeProviderDelegate in the runtime module with
+	////            ImportedNamespaceAwareLocalScopeProvider
 	//// also configure in the RuntimeModule
-	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-	////		return PlatformRelativeUriResolver.class;
-	////	}
+	////    public Class<? extends ImportUriResolver> bindImportUriResolver() {
+	////        return PlatformRelativeUriResolver.class;
+	////    }
 	//// and in the UiRuntimeModule
-	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
-	////		return GlobalNonPlatformURIEditorOpener.class;
-	////	}
-	////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
-	////		return ImportAwareHyperlinkHelper.class;
-	////	}
+	////    public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+	////        return GlobalNonPlatformURIEditorOpener.class;
+	////    }
+	////    public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+	////        return ImportAwareHyperlinkHelper.class;
+	////    }
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
-	//Import:
-	//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
+	//Import :
+	//    'import' ((importedNamespace=ImportedFQN ('from' importURI=STRING)?) | ('model' importURI=STRING));
 	public BaseGrammarAccess.ImportElements getImportAccess() {
 		return gaBase.getImportAccess();
 	}
@@ -463,7 +480,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ImportedFQN:
-	//	FQN '.*'?;
+	//    FQN ('.*')?;
 	public BaseGrammarAccess.ImportedFQNElements getImportedFQNAccess() {
 		return gaBase.getImportedFQNAccess();
 	}
@@ -475,10 +492,10 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	//// **************************************************************
 	//// Documentation Rule
 	//Documentation:
-	//	{Documentation}
-	//	'['
-	//	lines+=STRING*
-	//	']';
+	//    {Documentation}
+	//    '['
+	//        lines+=STRING*
+	//    ']';
 	public BaseGrammarAccess.DocumentationElements getDocumentationAccess() {
 		return gaBase.getDocumentationAccess();
 	}
@@ -489,8 +506,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// **************************************************************
 	//// Time Rule
-	//TIME ecore::ELong:
-	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns';
+	//TIME returns ecore::ELong: (INT 's') | (INT 'ms') | (INT 'us') | (INT 'ns');
 	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
 		return gaBase.getTIMEAccess();
 	}
@@ -499,11 +515,14 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getTIMEAccess().getRule();
 	}
 	
+	//// **************************************************************
+	//// Literal Rules
 	//enum LiteralType:
-	//	BOOL='ptBoolean' |
-	//	INT='ptInteger' |
-	//	REAL='ptReal' |
-	//	CHAR='ptCharacter';
+	//    BOOL='ptBoolean' |
+	//    INT='ptInteger' |
+	//    REAL='ptReal' |
+	//    CHAR='ptCharacter'
+	//;
 	public BaseGrammarAccess.LiteralTypeElements getLiteralTypeAccess() {
 		return gaBase.getLiteralTypeAccess();
 	}
@@ -513,7 +532,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//LiteralArray:
-	//	literals+=Literal (',' literals+=Literal)*;
+	//    literals+=Literal (',' literals+=Literal)*;
 	public BaseGrammarAccess.LiteralArrayElements getLiteralArrayAccess() {
 		return gaBase.getLiteralArrayAccess();
 	}
@@ -522,9 +541,11 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getLiteralArrayAccess().getRule();
 	}
 	
-	//// Value Types for Attributes
+	//    // Value Types for Attributes
 	//Literal:
-	//	BooleanLiteral | NumberLiteral | StringLiteral;
+	//    BooleanLiteral |
+	//    NumberLiteral |
+	//    StringLiteral;
 	public BaseGrammarAccess.LiteralElements getLiteralAccess() {
 		return gaBase.getLiteralAccess();
 	}
@@ -534,7 +555,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//BooleanLiteral:
-	//	{BooleanLiteral} ('false' | isTrue?='true');
+	//    {BooleanLiteral} ('false' | isTrue?='true');
 	public BaseGrammarAccess.BooleanLiteralElements getBooleanLiteralAccess() {
 		return gaBase.getBooleanLiteralAccess();
 	}
@@ -544,7 +565,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//NumberLiteral:
-	//	IntLiteral | RealLiteral;
+	//    IntLiteral | RealLiteral;
 	public BaseGrammarAccess.NumberLiteralElements getNumberLiteralAccess() {
 		return gaBase.getNumberLiteralAccess();
 	}
@@ -554,7 +575,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//RealLiteral:
-	//	{RealLiteral} value=Real;
+	//    {RealLiteral} value=Real;
 	public BaseGrammarAccess.RealLiteralElements getRealLiteralAccess() {
 		return gaBase.getRealLiteralAccess();
 	}
@@ -564,7 +585,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//IntLiteral:
-	//	{IntLiteral} value=Integer;
+	//    {IntLiteral} value=Integer;
 	public BaseGrammarAccess.IntLiteralElements getIntLiteralAccess() {
 		return gaBase.getIntLiteralAccess();
 	}
@@ -574,7 +595,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//StringLiteral:
-	//	{StringLiteral} value=STRING;
+	//    {StringLiteral} value=STRING;
 	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
 		return gaBase.getStringLiteralAccess();
 	}
@@ -583,8 +604,8 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 	
-	//Integer ecore::ELong:
-	//	('+' | '-')? INT | HEX;
+	//Integer returns ecore::ELong:
+	//    (('+' | '-')? INT) | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -593,8 +614,8 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getIntegerAccess().getRule();
 	}
 	
-	//Real ecore::EDouble:
-	//	Decimal | DecimalExp;
+	//Real returns ecore::EDouble:
+	//    Decimal | /*DotDecimal | DecimalDot |*/ DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -604,7 +625,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Decimal hidden():
-	//	('+' | '-')? INT '.' INT;
+	//    ('+' | '-')? INT '.' INT;
 	public BaseGrammarAccess.DecimalElements getDecimalAccess() {
 		return gaBase.getDecimalAccess();
 	}
@@ -614,12 +635,12 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	////DotDecimal hidden():
-	////	('+' | '-')? '.' INT;
+	////    ('+' | '-')? '.' INT;
 	////
 	////DecimalDot hidden():
-	////	('+' | '-')? INT '.';
+	////    ('+' | '-')? INT '.';
 	//DecimalExp hidden():
-	//	('+' | '-')? INT '.' INT ('e' | 'E') ('+' | '-')? INT;
+	//    ('+' | '-')? INT '.' INT ('e' | 'E') ('+' | '-')? INT;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaBase.getDecimalExpAccess();
 	}
@@ -629,7 +650,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//FQN:
-	//	ID ('.' ID)*;
+	//    ID ('.' ID)*;
 	public BaseGrammarAccess.FQNElements getFQNAccess() {
 		return gaBase.getFQNAccess();
 	}
@@ -639,55 +660,51 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal HEX:
-	//	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+	//    ('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return gaBase.getHEXRule();
 	}
 	
 	//terminal CC_STRING:
-	//	"'''"->"'''";
+	//    "'''" -> "'''";
 	public TerminalRule getCC_STRINGRule() {
 		return gaBase.getCC_STRINGRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

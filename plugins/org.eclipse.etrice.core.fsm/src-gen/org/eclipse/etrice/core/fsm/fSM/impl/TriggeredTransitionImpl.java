@@ -70,6 +70,7 @@ public class TriggeredTransitionImpl extends TransitionChainStartTransitionImpl 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Trigger> getTriggers()
   {
     if (triggers == null)

@@ -78,6 +78,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -88,6 +89,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -101,6 +103,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDisplayName()
   {
     return getName();
@@ -112,6 +115,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolSemantics getSemantics()
   {
     // TODO: implement this method
@@ -124,6 +128,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<EObject> getAllIncomingAbstractMessages()
   {
     // TODO: implement this method
@@ -136,6 +141,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<EObject> getAllOutgoingAbstractMessages()
   {
     // TODO: implement this method
@@ -148,6 +154,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isEventDriven()
   {
     return true;
@@ -229,7 +236,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

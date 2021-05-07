@@ -16,7 +16,7 @@ Require-Bundle: org.junit,
  org.eclipse.xtend.lib.macro,
  org.eclipse.etrice.core.fsm
 Bundle-Vendor: Eclipse eTrice
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.tests.base
 Automatic-Module-Name: org.eclipse.etrice.ui.base.tests
 

@@ -21,11 +21,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
+public class ConfigGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class ConfigModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Config.ConfigModel");
@@ -41,13 +41,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ConfigModel:
-		//	'ConfigModel' name=FQN '{'
-		//	imports+=Import*
-		//	configElements+=ConfigElement*
-		//	'}';
+		//    'ConfigModel' name=FQN '{'
+		//    imports+=Import*
+		//    configElements+=ConfigElement*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ConfigModel' name=FQN '{' imports+=Import* configElements+=ConfigElement* '}'
+		//'ConfigModel' name=FQN '{'
+		//imports+=Import*
+		//configElements+=ConfigElement*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'ConfigModel'
@@ -86,7 +89,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cProtocolClassConfigParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//ConfigElement:
-		//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
+		//    SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig
@@ -121,12 +124,14 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//SubSystemConfig:
-		//	'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '{'
-		//	dynConfig=DynamicConfig
-		//	'}';
+		//    'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '{'
+		//    dynConfig=DynamicConfig
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '{' dynConfig=DynamicConfig '}'
+		//'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '{'
+		//dynConfig=DynamicConfig
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'SubSystemConfig'
@@ -144,10 +149,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'/'
 		public Keyword getSolidusKeyword_2() { return cSolidusKeyword_2; }
 		
-		//subSystem=[room::SubSystemRef]
+		//subSystem=[room::SubSystemRef|ID]
 		public Assignment getSubSystemAssignment_3() { return cSubSystemAssignment_3; }
 		
-		//[room::SubSystemRef]
+		//[room::SubSystemRef|ID]
 		public CrossReference getSubSystemSubSystemRefCrossReference_3_0() { return cSubSystemSubSystemRefCrossReference_3_0; }
 		
 		//ID
@@ -192,13 +197,20 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//DynamicConfig:
-		//	'dynamic configuration' '{' (('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor'
-		//	userCode2=STRING)) & ('polling interval' polling=TIME)?)
-		//	'}';
+		//    'dynamic configuration' '{'
+		//    ((('file path' filePath=STRING) |
+		//    (('user import' userCode1=STRING)
+		//    ('user constructor' userCode2=STRING))) &
+		//    ('polling interval' polling=TIME)?)
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'dynamic configuration' '{' (('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor'
-		//userCode2=STRING)) & ('polling interval' polling=TIME)?) '}'
+		//'dynamic configuration' '{'
+		//((('file path' filePath=STRING) |
+		//(('user import' userCode1=STRING)
+		//('user constructor' userCode2=STRING))) &
+		//('polling interval' polling=TIME)?)
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'dynamic configuration'
@@ -207,14 +219,18 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
-		//('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor' userCode2=STRING)) &
-		//('polling interval' polling=TIME)?
+		//((('file path' filePath=STRING) |
+		//(('user import' userCode1=STRING)
+		//('user constructor' userCode2=STRING))) &
+		//('polling interval' polling=TIME)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
-		//('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor' userCode2=STRING))
+		//(('file path' filePath=STRING) |
+		//    (('user import' userCode1=STRING)
+		//    ('user constructor' userCode2=STRING)))
 		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
 		
-		//'file path' filePath=STRING
+		//('file path' filePath=STRING)
 		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
 		
 		//'file path'
@@ -226,10 +242,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getFilePathSTRINGTerminalRuleCall_2_0_0_1_0() { return cFilePathSTRINGTerminalRuleCall_2_0_0_1_0; }
 		
-		//('user import' userCode1=STRING) ('user constructor' userCode2=STRING)
+		//(('user import' userCode1=STRING)
+		//('user constructor' userCode2=STRING))
 		public Group getGroup_2_0_1() { return cGroup_2_0_1; }
 		
-		//'user import' userCode1=STRING
+		//('user import' userCode1=STRING)
 		public Group getGroup_2_0_1_0() { return cGroup_2_0_1_0; }
 		
 		//'user import'
@@ -241,7 +258,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0() { return cUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0; }
 		
-		//'user constructor' userCode2=STRING
+		//('user constructor' userCode2=STRING)
 		public Group getGroup_2_0_1_1() { return cGroup_2_0_1_1; }
 		
 		//'user constructor'
@@ -281,12 +298,14 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ActorClassConfig:
-		//	'ActorClassConfig' actor=[room::ActorClass|FQN] '{'
-		//	attributes+=AttrClassConfig*
-		//	'}';
+		//    'ActorClassConfig' actor=[room::ActorClass|FQN] '{'
+		//    (attributes+=AttrClassConfig)*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ActorClassConfig' actor=[room::ActorClass|FQN] '{' attributes+=AttrClassConfig* '}'
+		//'ActorClassConfig' actor=[room::ActorClass|FQN] '{'
+		//(attributes+=AttrClassConfig)*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'ActorClassConfig'
@@ -304,7 +323,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//attributes+=AttrClassConfig*
+		//(attributes+=AttrClassConfig)*
 		public Assignment getAttributesAssignment_3() { return cAttributesAssignment_3; }
 		
 		//AttrClassConfig
@@ -336,13 +355,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//ActorInstanceConfig:
-		//	'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '/' path=RefPath '{'
-		//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*)
-		//	'}';
+		//    'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '/' path=RefPath '{'
+		//    ((attributes+=AttrInstanceConfig)* &
+		//    (ports+=PortInstanceConfig)*)
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '/' path=RefPath '{'
-		//(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) '}'
+		//'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '/' path=RefPath '{'
+		//((attributes+=AttrInstanceConfig)* &
+		//(ports+=PortInstanceConfig)*)
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'ActorInstanceConfig'
@@ -360,10 +382,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'/'
 		public Keyword getSolidusKeyword_2() { return cSolidusKeyword_2; }
 		
-		//subSystem=[room::SubSystemRef]
+		//subSystem=[room::SubSystemRef|ID]
 		public Assignment getSubSystemAssignment_3() { return cSubSystemAssignment_3; }
 		
-		//[room::SubSystemRef]
+		//[room::SubSystemRef|ID]
 		public CrossReference getSubSystemSubSystemRefCrossReference_3_0() { return cSubSystemSubSystemRefCrossReference_3_0; }
 		
 		//ID
@@ -381,16 +403,17 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
 		
-		//attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*
+		//((attributes+=AttrInstanceConfig)* &
+		//(ports+=PortInstanceConfig)*)
 		public UnorderedGroup getUnorderedGroup_7() { return cUnorderedGroup_7; }
 		
-		//attributes+=AttrInstanceConfig*
+		//(attributes+=AttrInstanceConfig)*
 		public Assignment getAttributesAssignment_7_0() { return cAttributesAssignment_7_0; }
 		
 		//AttrInstanceConfig
 		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_7_0_0() { return cAttributesAttrInstanceConfigParserRuleCall_7_0_0; }
 		
-		//ports+=PortInstanceConfig*
+		//(ports+=PortInstanceConfig)*
 		public Assignment getPortsAssignment_7_1() { return cPortsAssignment_7_1; }
 		
 		//PortInstanceConfig
@@ -421,13 +444,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ProtocolClassConfig:
-		//	'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{' (('regular' regular=PortClassConfig)? & (('conjugate' |
-		//	'conjugated') conjugated=PortClassConfig)?)
-		//	'}';
+		//    'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{'
+		//    (('regular' regular=PortClassConfig)? &
+		//    (('conjugate' | 'conjugated') conjugated=PortClassConfig)?)
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{' (('regular' regular=PortClassConfig)? & (('conjugate' |
-		//'conjugated') conjugated=PortClassConfig)?) '}'
+		//'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{'
+		//(('regular' regular=PortClassConfig)? &
+		//(('conjugate' | 'conjugated') conjugated=PortClassConfig)?)
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'ProtocolClassConfig'
@@ -445,7 +471,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//('regular' regular=PortClassConfig)? & (('conjugate' | 'conjugated') conjugated=PortClassConfig)?
+		//(('regular' regular=PortClassConfig)? &
+		//(('conjugate' | 'conjugated') conjugated=PortClassConfig)?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
 		//('regular' regular=PortClassConfig)?
@@ -463,7 +490,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//(('conjugate' | 'conjugated') conjugated=PortClassConfig)?
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
-		//'conjugate' | 'conjugated'
+		//('conjugate' | 'conjugated')
 		public Alternatives getAlternatives_3_1_0() { return cAlternatives_3_1_0; }
 		
 		//'conjugate'
@@ -492,12 +519,14 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//PortClassConfig:
-		//	{PortClassConfig} 'Port' '{'
-		//	attributes+=AttrClassConfig*
-		//	'}';
+		//    {PortClassConfig} 'Port' '{'
+		//    (attributes+=AttrClassConfig)*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{PortClassConfig} 'Port' '{' attributes+=AttrClassConfig* '}'
+		//{PortClassConfig} 'Port' '{'
+		//(attributes+=AttrClassConfig)*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//{PortClassConfig}
@@ -509,7 +538,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//attributes+=AttrClassConfig*
+		//(attributes+=AttrClassConfig)*
 		public Assignment getAttributesAssignment_3() { return cAttributesAssignment_3; }
 		
 		//AttrClassConfig
@@ -531,21 +560,23 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//PortInstanceConfig:
-		//	'InterfaceItem' item=[room::InterfaceItem] '{'
-		//	attributes+=AttrInstanceConfig*
-		//	'}';
+		//    'InterfaceItem' item=[room::InterfaceItem|ID] '{'
+		//    (attributes+=AttrInstanceConfig)*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'InterfaceItem' item=[room::InterfaceItem] '{' attributes+=AttrInstanceConfig* '}'
+		//'InterfaceItem' item=[room::InterfaceItem|ID] '{'
+		//(attributes+=AttrInstanceConfig)*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'InterfaceItem'
 		public Keyword getInterfaceItemKeyword_0() { return cInterfaceItemKeyword_0; }
 		
-		//item=[room::InterfaceItem]
+		//item=[room::InterfaceItem|ID]
 		public Assignment getItemAssignment_1() { return cItemAssignment_1; }
 		
-		//[room::InterfaceItem]
+		//[room::InterfaceItem|ID]
 		public CrossReference getItemInterfaceItemCrossReference_1_0() { return cItemInterfaceItemCrossReference_1_0; }
 		
 		//ID
@@ -554,7 +585,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//attributes+=AttrInstanceConfig*
+		//(attributes+=AttrInstanceConfig)*
 		public Assignment getAttributesAssignment_3() { return cAttributesAssignment_3; }
 		
 		//AttrInstanceConfig
@@ -570,7 +601,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAttrInstanceConfigParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AttrConfig:
-		//	AttrClassConfig | AttrInstanceConfig;
+		//    AttrClassConfig | AttrInstanceConfig;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//AttrClassConfig | AttrInstanceConfig
@@ -611,14 +642,18 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AttrClassConfig:
-		//	'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' (('min' '=' min=NumberLiteral)? ('max' '='
-		//	max=NumberLiteral)?
-		//	attributes+=AttrClassConfig*)
-		//	'}')?;
+		//    'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{'
+		//    (('min' '=' min=NumberLiteral)?
+		//    ('max' '=' max=NumberLiteral)?
+		//    (attributes+=AttrClassConfig)*)
+		//    '}')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' (('min' '=' min=NumberLiteral)? ('max' '='
-		//max=NumberLiteral)? attributes+=AttrClassConfig*) '}')?
+		//'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{'
+		//(('min' '=' min=NumberLiteral)?
+		//('max' '=' max=NumberLiteral)?
+		//(attributes+=AttrClassConfig)*)
+		//'}')?
 		public Group getGroup() { return cGroup; }
 		
 		//'Attr'
@@ -645,13 +680,19 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ConfigValueArray
 		public RuleCall getValueConfigValueArrayParserRuleCall_2_1_0() { return cValueConfigValueArrayParserRuleCall_2_1_0; }
 		
-		//('{' (('min' '=' min=NumberLiteral)? ('max' '=' max=NumberLiteral)? attributes+=AttrClassConfig*) '}')?
+		//('{'
+		//   (('min' '=' min=NumberLiteral)?
+		//   ('max' '=' max=NumberLiteral)?
+		//   (attributes+=AttrClassConfig)*)
+		//   '}')?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 		
-		//('min' '=' min=NumberLiteral)? ('max' '=' max=NumberLiteral)? attributes+=AttrClassConfig*
+		//(('min' '=' min=NumberLiteral)?
+		//('max' '=' max=NumberLiteral)?
+		//(attributes+=AttrClassConfig)*)
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//('min' '=' min=NumberLiteral)?
@@ -684,7 +725,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//NumberLiteral
 		public RuleCall getMaxNumberLiteralParserRuleCall_3_1_1_2_0() { return cMaxNumberLiteralParserRuleCall_3_1_1_2_0; }
 		
-		//attributes+=AttrClassConfig*
+		//(attributes+=AttrClassConfig)*
 		public Assignment getAttributesAssignment_3_1_2() { return cAttributesAssignment_3_1_2; }
 		
 		//AttrClassConfig
@@ -719,14 +760,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AttrInstanceConfig:
-		//	'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' ((dynConfig?='dynamic configuration'
-		//	(readOnly?='read' | 'write'))?
-		//	attributes+=AttrInstanceConfig*)
-		//	'}')?;
+		//    'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{'
+		//    ((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
+		//    (attributes+=AttrInstanceConfig*))
+		//    '}')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' ((dynConfig?='dynamic configuration'
-		//(readOnly?='read' | 'write'))? attributes+=AttrInstanceConfig*) '}')?
+		//'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{'
+		//((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
+		//(attributes+=AttrInstanceConfig*))
+		//'}')?
 		public Group getGroup() { return cGroup; }
 		
 		//'Attr'
@@ -753,13 +796,17 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ConfigValueArray
 		public RuleCall getValueConfigValueArrayParserRuleCall_2_1_0() { return cValueConfigValueArrayParserRuleCall_2_1_0; }
 		
-		//('{' ((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))? attributes+=AttrInstanceConfig*) '}')?
+		//('{'
+		//   ((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
+		//   (attributes+=AttrInstanceConfig*))
+		//   '}')?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 		
-		//(dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))? attributes+=AttrInstanceConfig*
+		//((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
+		//(attributes+=AttrInstanceConfig*))
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//(dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
@@ -771,7 +818,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'dynamic configuration'
 		public Keyword getDynConfigDynamicConfigurationKeyword_3_1_0_0_0() { return cDynConfigDynamicConfigurationKeyword_3_1_0_0_0; }
 		
-		//readOnly?='read' | 'write'
+		//(readOnly?='read' | 'write')
 		public Alternatives getAlternatives_3_1_0_1() { return cAlternatives_3_1_0_1; }
 		
 		//readOnly?='read'
@@ -783,7 +830,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'write'
 		public Keyword getWriteKeyword_3_1_0_1_1() { return cWriteKeyword_3_1_0_1_1; }
 		
-		//attributes+=AttrInstanceConfig*
+		//(attributes+=AttrInstanceConfig*)
 		public Assignment getAttributesAssignment_3_1_1() { return cAttributesAssignment_3_1_1; }
 		
 		//AttrInstanceConfig
@@ -803,7 +850,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValuesConfigValueParserRuleCall_1_1_0 = (RuleCall)cValuesAssignment_1_1.eContents().get(0);
 		
 		//ConfigValueArray:
-		//	values+=ConfigValue (',' values+=ConfigValue)*;
+		//    values+=ConfigValue (',' values+=ConfigValue)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//values+=ConfigValue (',' values+=ConfigValue)*
@@ -833,8 +880,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLiteralConfigValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEnumConfigValueParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//ConfigValue:
-		//	LiteralConfigValue | EnumConfigValue;
+		//ConfigValue: LiteralConfigValue | EnumConfigValue;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//LiteralConfigValue | EnumConfigValue
@@ -851,8 +897,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueLiteralParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
-		//LiteralConfigValue:
-		//	value=Literal;
+		//LiteralConfigValue: value=Literal;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//value=Literal
@@ -873,7 +918,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueEnumLiteralIDTerminalRuleCall_2_0_1 = (RuleCall)cValueEnumLiteralCrossReference_2_0.eContents().get(1);
 		
 		//EnumConfigValue:
-		//	type=[room::EnumerationType] '.' value=[room::EnumLiteral];
+		//    type=[room::EnumerationType] '.' value=[room::EnumLiteral];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//type=[room::EnumerationType] '.' value=[room::EnumLiteral]
@@ -911,7 +956,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefsRefSegmentParserRuleCall_1_1_0 = (RuleCall)cRefsAssignment_1_1.eContents().get(0);
 		
 		//RefPath:
-		//	refs+=RefSegment ('/' refs+=RefSegment)*;
+		//    refs+=RefSegment ('/' refs+=RefSegment)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//refs+=RefSegment ('/' refs+=RefSegment)*
@@ -946,7 +991,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIdxINTTerminalRuleCall_1_1_0 = (RuleCall)cIdxAssignment_1_1.eContents().get(0);
 		
 		//RefSegment:
-		//	ref=ID (':' idx=INT)?;
+		//    ref=ID (':' idx=INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ref=ID (':' idx=INT)?
@@ -1056,10 +1101,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//ConfigModel:
-	//	'ConfigModel' name=FQN '{'
-	//	imports+=Import*
-	//	configElements+=ConfigElement*
-	//	'}';
+	//    'ConfigModel' name=FQN '{'
+	//    imports+=Import*
+	//    configElements+=ConfigElement*
+	//    '}';
 	public ConfigModelElements getConfigModelAccess() {
 		return pConfigModel;
 	}
@@ -1069,7 +1114,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ConfigElement:
-	//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
+	//    SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 	public ConfigElementElements getConfigElementAccess() {
 		return pConfigElement;
 	}
@@ -1079,9 +1124,9 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SubSystemConfig:
-	//	'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '{'
-	//	dynConfig=DynamicConfig
-	//	'}';
+	//    'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '{'
+	//    dynConfig=DynamicConfig
+	//    '}';
 	public SubSystemConfigElements getSubSystemConfigAccess() {
 		return pSubSystemConfig;
 	}
@@ -1091,9 +1136,12 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//DynamicConfig:
-	//	'dynamic configuration' '{' (('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor'
-	//	userCode2=STRING)) & ('polling interval' polling=TIME)?)
-	//	'}';
+	//    'dynamic configuration' '{'
+	//    ((('file path' filePath=STRING) |
+	//    (('user import' userCode1=STRING)
+	//    ('user constructor' userCode2=STRING))) &
+	//    ('polling interval' polling=TIME)?)
+	//    '}';
 	public DynamicConfigElements getDynamicConfigAccess() {
 		return pDynamicConfig;
 	}
@@ -1103,9 +1151,9 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ActorClassConfig:
-	//	'ActorClassConfig' actor=[room::ActorClass|FQN] '{'
-	//	attributes+=AttrClassConfig*
-	//	'}';
+	//    'ActorClassConfig' actor=[room::ActorClass|FQN] '{'
+	//    (attributes+=AttrClassConfig)*
+	//    '}';
 	public ActorClassConfigElements getActorClassConfigAccess() {
 		return pActorClassConfig;
 	}
@@ -1115,9 +1163,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ActorInstanceConfig:
-	//	'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef] '/' path=RefPath '{'
-	//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*)
-	//	'}';
+	//    'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '/' path=RefPath '{'
+	//    ((attributes+=AttrInstanceConfig)* &
+	//    (ports+=PortInstanceConfig)*)
+	//    '}';
 	public ActorInstanceConfigElements getActorInstanceConfigAccess() {
 		return pActorInstanceConfig;
 	}
@@ -1127,9 +1176,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ProtocolClassConfig:
-	//	'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{' (('regular' regular=PortClassConfig)? & (('conjugate' |
-	//	'conjugated') conjugated=PortClassConfig)?)
-	//	'}';
+	//    'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{'
+	//    (('regular' regular=PortClassConfig)? &
+	//    (('conjugate' | 'conjugated') conjugated=PortClassConfig)?)
+	//    '}';
 	public ProtocolClassConfigElements getProtocolClassConfigAccess() {
 		return pProtocolClassConfig;
 	}
@@ -1139,9 +1189,9 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PortClassConfig:
-	//	{PortClassConfig} 'Port' '{'
-	//	attributes+=AttrClassConfig*
-	//	'}';
+	//    {PortClassConfig} 'Port' '{'
+	//    (attributes+=AttrClassConfig)*
+	//    '}';
 	public PortClassConfigElements getPortClassConfigAccess() {
 		return pPortClassConfig;
 	}
@@ -1151,9 +1201,9 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PortInstanceConfig:
-	//	'InterfaceItem' item=[room::InterfaceItem] '{'
-	//	attributes+=AttrInstanceConfig*
-	//	'}';
+	//    'InterfaceItem' item=[room::InterfaceItem|ID] '{'
+	//    (attributes+=AttrInstanceConfig)*
+	//    '}';
 	public PortInstanceConfigElements getPortInstanceConfigAccess() {
 		return pPortInstanceConfig;
 	}
@@ -1163,7 +1213,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AttrConfig:
-	//	AttrClassConfig | AttrInstanceConfig;
+	//    AttrClassConfig | AttrInstanceConfig;
 	public AttrConfigElements getAttrConfigAccess() {
 		return pAttrConfig;
 	}
@@ -1173,10 +1223,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AttrClassConfig:
-	//	'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' (('min' '=' min=NumberLiteral)? ('max' '='
-	//	max=NumberLiteral)?
-	//	attributes+=AttrClassConfig*)
-	//	'}')?;
+	//    'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{'
+	//    (('min' '=' min=NumberLiteral)?
+	//    ('max' '=' max=NumberLiteral)?
+	//    (attributes+=AttrClassConfig)*)
+	//    '}')?;
 	public AttrClassConfigElements getAttrClassConfigAccess() {
 		return pAttrClassConfig;
 	}
@@ -1186,10 +1237,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AttrInstanceConfig:
-	//	'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{' ((dynConfig?='dynamic configuration'
-	//	(readOnly?='read' | 'write'))?
-	//	attributes+=AttrInstanceConfig*)
-	//	'}')?;
+	//    'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{'
+	//    ((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
+	//    (attributes+=AttrInstanceConfig*))
+	//    '}')?;
 	public AttrInstanceConfigElements getAttrInstanceConfigAccess() {
 		return pAttrInstanceConfig;
 	}
@@ -1199,7 +1250,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ConfigValueArray:
-	//	values+=ConfigValue (',' values+=ConfigValue)*;
+	//    values+=ConfigValue (',' values+=ConfigValue)*;
 	public ConfigValueArrayElements getConfigValueArrayAccess() {
 		return pConfigValueArray;
 	}
@@ -1208,8 +1259,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getConfigValueArrayAccess().getRule();
 	}
 	
-	//ConfigValue:
-	//	LiteralConfigValue | EnumConfigValue;
+	//ConfigValue: LiteralConfigValue | EnumConfigValue;
 	public ConfigValueElements getConfigValueAccess() {
 		return pConfigValue;
 	}
@@ -1218,8 +1268,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getConfigValueAccess().getRule();
 	}
 	
-	//LiteralConfigValue:
-	//	value=Literal;
+	//LiteralConfigValue: value=Literal;
 	public LiteralConfigValueElements getLiteralConfigValueAccess() {
 		return pLiteralConfigValue;
 	}
@@ -1229,7 +1278,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EnumConfigValue:
-	//	type=[room::EnumerationType] '.' value=[room::EnumLiteral];
+	//    type=[room::EnumerationType] '.' value=[room::EnumLiteral];
 	public EnumConfigValueElements getEnumConfigValueAccess() {
 		return pEnumConfigValue;
 	}
@@ -1239,7 +1288,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//RefPath:
-	//	refs+=RefSegment ('/' refs+=RefSegment)*;
+	//    refs+=RefSegment ('/' refs+=RefSegment)*;
 	public RefPathElements getRefPathAccess() {
 		return pRefPath;
 	}
@@ -1249,7 +1298,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//RefSegment:
-	//	ref=ID (':' idx=INT)?;
+	//    ref=ID (':' idx=INT)?;
 	public RefSegmentElements getRefSegmentAccess() {
 		return pRefSegment;
 	}
@@ -1260,8 +1309,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// **************************************************************
 	//// AnnotationType and Annotation Rules
-	//Annotation:
-	//	'@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
+	//Annotation:'@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?
+	//;
 	public BaseGrammarAccess.AnnotationElements getAnnotationAccess() {
 		return gaBase.getAnnotationAccess();
 	}
@@ -1270,8 +1319,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getAnnotationAccess().getRule();
 	}
 	
-	//KeyValue:
-	//	key=ID '=' value=Literal;
+	//KeyValue: key=ID '=' value=Literal;
 	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
 		return gaBase.getKeyValueAccess();
 	}
@@ -1281,10 +1329,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AnnotationType:
-	//	'AnnotationType' name=ID docu=Documentation? '{'
-	//	'target' '=' (targets+=AnnotationTargetType | '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)*
-	//	'}') attributes+=AnnotationAttribute*
-	//	'}';
+	//    'AnnotationType' name=ID (docu=Documentation)? '{'
+	//    'target' '=' (targets+=(AnnotationTargetType) | ( '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* '}'))
+	//    attributes+=AnnotationAttribute*
+	//    '}'
+	//;
 	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {
 		return gaBase.getAnnotationTypeAccess();
 	}
@@ -1294,15 +1343,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	////
-	//// Sub-grammars should use AnnotationTargetType to refer to 
-	//// specific sub-grammar targets. For example, valid values for 
-	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
-	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
-	//// implementing validation, quick-fixes, and code completion proposals via the 
+	//// Sub-grammars should use AnnotationTargetType to refer to
+	//// specific sub-grammar targets. For example, valid values for
+	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass",
+	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for
+	//// implementing validation, quick-fixes, and code completion proposals via the
 	//// usual Xtext mechanisms.
 	////
 	//AnnotationTargetType:
-	//	ID;
+	//    ID
+	//;
 	public BaseGrammarAccess.AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
 		return gaBase.getAnnotationTargetTypeAccess();
 	}
@@ -1311,8 +1361,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getAnnotationTargetTypeAccess().getRule();
 	}
 	
-	//AnnotationAttribute:
-	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
+	//AnnotationAttribute: SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
 		return gaBase.getAnnotationAttributeAccess();
 	}
@@ -1322,7 +1371,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SimpleAnnotationAttribute:
-	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType;
+	//    (optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
+	//;
 	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
 		return gaBase.getSimpleAnnotationAttributeAccess();
 	}
@@ -1332,7 +1382,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EnumAnnotationAttribute:
-	//	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}';
+	//    (optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}'
+	//;
 	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
 		return gaBase.getEnumAnnotationAttributeAccess();
 	}
@@ -1345,24 +1396,24 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//// Import rules
 	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
 	//// this is configured in the work flow by
-	////			fragment = scoping.ImportURIScopingFragment {}
-	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
-	////			ImportedNamespaceAwareLocalScopeProvider
+	////            fragment = scoping.ImportURIScopingFragment {}
+	//// and by overriding configureIScopeProviderDelegate in the runtime module with
+	////            ImportedNamespaceAwareLocalScopeProvider
 	//// also configure in the RuntimeModule
-	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-	////		return PlatformRelativeUriResolver.class;
-	////	}
+	////    public Class<? extends ImportUriResolver> bindImportUriResolver() {
+	////        return PlatformRelativeUriResolver.class;
+	////    }
 	//// and in the UiRuntimeModule
-	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
-	////		return GlobalNonPlatformURIEditorOpener.class;
-	////	}
-	////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
-	////		return ImportAwareHyperlinkHelper.class;
-	////	}
+	////    public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+	////        return GlobalNonPlatformURIEditorOpener.class;
+	////    }
+	////    public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+	////        return ImportAwareHyperlinkHelper.class;
+	////    }
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
-	//Import:
-	//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
+	//Import :
+	//    'import' ((importedNamespace=ImportedFQN ('from' importURI=STRING)?) | ('model' importURI=STRING));
 	public BaseGrammarAccess.ImportElements getImportAccess() {
 		return gaBase.getImportAccess();
 	}
@@ -1372,7 +1423,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ImportedFQN:
-	//	FQN '.*'?;
+	//    FQN ('.*')?;
 	public BaseGrammarAccess.ImportedFQNElements getImportedFQNAccess() {
 		return gaBase.getImportedFQNAccess();
 	}
@@ -1384,10 +1435,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//// **************************************************************
 	//// Documentation Rule
 	//Documentation:
-	//	{Documentation}
-	//	'['
-	//	lines+=STRING*
-	//	']';
+	//    {Documentation}
+	//    '['
+	//        lines+=STRING*
+	//    ']';
 	public BaseGrammarAccess.DocumentationElements getDocumentationAccess() {
 		return gaBase.getDocumentationAccess();
 	}
@@ -1398,8 +1449,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// **************************************************************
 	//// Time Rule
-	//TIME ecore::ELong:
-	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns';
+	//TIME returns ecore::ELong: (INT 's') | (INT 'ms') | (INT 'us') | (INT 'ns');
 	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
 		return gaBase.getTIMEAccess();
 	}
@@ -1408,11 +1458,14 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getTIMEAccess().getRule();
 	}
 	
+	//// **************************************************************
+	//// Literal Rules
 	//enum LiteralType:
-	//	BOOL='ptBoolean' |
-	//	INT='ptInteger' |
-	//	REAL='ptReal' |
-	//	CHAR='ptCharacter';
+	//    BOOL='ptBoolean' |
+	//    INT='ptInteger' |
+	//    REAL='ptReal' |
+	//    CHAR='ptCharacter'
+	//;
 	public BaseGrammarAccess.LiteralTypeElements getLiteralTypeAccess() {
 		return gaBase.getLiteralTypeAccess();
 	}
@@ -1422,7 +1475,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//LiteralArray:
-	//	literals+=Literal (',' literals+=Literal)*;
+	//    literals+=Literal (',' literals+=Literal)*;
 	public BaseGrammarAccess.LiteralArrayElements getLiteralArrayAccess() {
 		return gaBase.getLiteralArrayAccess();
 	}
@@ -1431,9 +1484,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getLiteralArrayAccess().getRule();
 	}
 	
-	//// Value Types for Attributes
+	//    // Value Types for Attributes
 	//Literal:
-	//	BooleanLiteral | NumberLiteral | StringLiteral;
+	//    BooleanLiteral |
+	//    NumberLiteral |
+	//    StringLiteral;
 	public BaseGrammarAccess.LiteralElements getLiteralAccess() {
 		return gaBase.getLiteralAccess();
 	}
@@ -1443,7 +1498,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//BooleanLiteral:
-	//	{BooleanLiteral} ('false' | isTrue?='true');
+	//    {BooleanLiteral} ('false' | isTrue?='true');
 	public BaseGrammarAccess.BooleanLiteralElements getBooleanLiteralAccess() {
 		return gaBase.getBooleanLiteralAccess();
 	}
@@ -1453,7 +1508,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//NumberLiteral:
-	//	IntLiteral | RealLiteral;
+	//    IntLiteral | RealLiteral;
 	public BaseGrammarAccess.NumberLiteralElements getNumberLiteralAccess() {
 		return gaBase.getNumberLiteralAccess();
 	}
@@ -1463,7 +1518,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//RealLiteral:
-	//	{RealLiteral} value=Real;
+	//    {RealLiteral} value=Real;
 	public BaseGrammarAccess.RealLiteralElements getRealLiteralAccess() {
 		return gaBase.getRealLiteralAccess();
 	}
@@ -1473,7 +1528,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//IntLiteral:
-	//	{IntLiteral} value=Integer;
+	//    {IntLiteral} value=Integer;
 	public BaseGrammarAccess.IntLiteralElements getIntLiteralAccess() {
 		return gaBase.getIntLiteralAccess();
 	}
@@ -1483,7 +1538,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//StringLiteral:
-	//	{StringLiteral} value=STRING;
+	//    {StringLiteral} value=STRING;
 	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
 		return gaBase.getStringLiteralAccess();
 	}
@@ -1492,8 +1547,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 	
-	//Integer ecore::ELong:
-	//	('+' | '-')? INT | HEX;
+	//Integer returns ecore::ELong:
+	//    (('+' | '-')? INT) | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -1502,8 +1557,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getIntegerAccess().getRule();
 	}
 	
-	//Real ecore::EDouble:
-	//	Decimal | DecimalExp;
+	//Real returns ecore::EDouble:
+	//    Decimal | /*DotDecimal | DecimalDot |*/ DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -1513,7 +1568,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Decimal hidden():
-	//	('+' | '-')? INT '.' INT;
+	//    ('+' | '-')? INT '.' INT;
 	public BaseGrammarAccess.DecimalElements getDecimalAccess() {
 		return gaBase.getDecimalAccess();
 	}
@@ -1523,12 +1578,12 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	////DotDecimal hidden():
-	////	('+' | '-')? '.' INT;
+	////    ('+' | '-')? '.' INT;
 	////
 	////DecimalDot hidden():
-	////	('+' | '-')? INT '.';
+	////    ('+' | '-')? INT '.';
 	//DecimalExp hidden():
-	//	('+' | '-')? INT '.' INT ('e' | 'E') ('+' | '-')? INT;
+	//    ('+' | '-')? INT '.' INT ('e' | 'E') ('+' | '-')? INT;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaBase.getDecimalExpAccess();
 	}
@@ -1538,7 +1593,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//FQN:
-	//	ID ('.' ID)*;
+	//    ID ('.' ID)*;
 	public BaseGrammarAccess.FQNElements getFQNAccess() {
 		return gaBase.getFQNAccess();
 	}
@@ -1548,55 +1603,51 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal HEX:
-	//	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+	//    ('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return gaBase.getHEXRule();
 	}
 	
 	//terminal CC_STRING:
-	//	"'''"->"'''";
+	//    "'''" -> "'''";
 	public TerminalRule getCC_STRINGRule() {
 		return gaBase.getCC_STRINGRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

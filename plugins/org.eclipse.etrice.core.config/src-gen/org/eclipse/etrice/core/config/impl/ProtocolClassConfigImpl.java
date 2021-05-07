@@ -90,6 +90,7 @@ public class ProtocolClassConfigImpl extends ConfigElementImpl implements Protoc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolClass getProtocol()
   {
     if (protocol != null && protocol.eIsProxy())
@@ -120,6 +121,7 @@ public class ProtocolClassConfigImpl extends ConfigElementImpl implements Protoc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setProtocol(ProtocolClass newProtocol)
   {
     ProtocolClass oldProtocol = protocol;
@@ -133,6 +135,7 @@ public class ProtocolClassConfigImpl extends ConfigElementImpl implements Protoc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PortClassConfig getRegular()
   {
     return regular;
@@ -160,6 +163,7 @@ public class ProtocolClassConfigImpl extends ConfigElementImpl implements Protoc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRegular(PortClassConfig newRegular)
   {
     if (newRegular != regular)
@@ -181,6 +185,7 @@ public class ProtocolClassConfigImpl extends ConfigElementImpl implements Protoc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PortClassConfig getConjugated()
   {
     return conjugated;
@@ -208,6 +213,7 @@ public class ProtocolClassConfigImpl extends ConfigElementImpl implements Protoc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setConjugated(PortClassConfig newConjugated)
   {
     if (newConjugated != conjugated)

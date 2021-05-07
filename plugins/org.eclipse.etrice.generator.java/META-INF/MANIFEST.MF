@@ -16,7 +16,7 @@ Require-Bundle:  org.eclipse.etrice.core.genmodel,
  org.eclipse.xtext.util,
   org.eclipse.etrice.generator.base
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.generator.java,
  org.eclipse.etrice.generator.java.gen,
  org.eclipse.etrice.generator.java.setup

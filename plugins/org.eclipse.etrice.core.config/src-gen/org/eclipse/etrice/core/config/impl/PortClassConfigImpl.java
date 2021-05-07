@@ -72,6 +72,7 @@ public class PortClassConfigImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AttrClassConfig> getAttributes()
   {
     if (attributes == null)

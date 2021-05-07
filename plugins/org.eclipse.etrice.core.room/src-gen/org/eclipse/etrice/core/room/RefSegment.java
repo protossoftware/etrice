@@ -30,65 +30,65 @@ package org.eclipse.etrice.core.room;
 public interface RefSegment extends RoomElement
 {
   /**
-	 * Returns the value of the '<em><b>Ref</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Ref</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>The segment name corresponding to an actor reference.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Ref</em>' attribute.
-	 * @see #setRef(String)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getRefSegment_Ref()
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>The segment name corresponding to an actor reference.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Ref</em>' attribute.
+   * @see #setRef(String)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRefSegment_Ref()
+   * @model
+   * @generated
+   */
   String getRef();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.RefSegment#getRef <em>Ref</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.RefSegment#getRef <em>Ref</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ref</em>' attribute.
-	 * @see #getRef()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Ref</em>' attribute.
+   * @see #getRef()
+   * @generated
+   */
   void setRef(String value);
 
   /**
-	 * Returns the value of the '<em><b>Idx</b></em>' attribute.
-	 * The default value is <code>"-1"</code>.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Idx</b></em>' attribute.
+   * The default value is <code>"-1"</code>.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>The optional index of the reference (for replicated actors).
-	 * If not set the index is {@code -1}.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Idx</em>' attribute.
-	 * @see #setIdx(int)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getRefSegment_Idx()
-	 * @model default="-1"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>The optional index of the reference (for replicated actors).
+   * If not set the index is {@code -1}.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Idx</em>' attribute.
+   * @see #setIdx(int)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRefSegment_Idx()
+   * @model default="-1"
+   * @generated
+   */
   int getIdx();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.RefSegment#getIdx <em>Idx</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.RefSegment#getIdx <em>Idx</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Idx</em>' attribute.
-	 * @see #getIdx()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Idx</em>' attribute.
+   * @see #getIdx()
+   * @generated
+   */
   void setIdx(int value);
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * @model
+   * @generated
+   */
   String toString();
 
 } // RefSegment

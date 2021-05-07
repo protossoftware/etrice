@@ -80,6 +80,7 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LogicalThread getLogicalThread()
   {
     if (logicalThread != null && logicalThread.eIsProxy())
@@ -110,6 +111,7 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLogicalThread(LogicalThread newLogicalThread)
   {
     LogicalThread oldLogicalThread = logicalThread;
@@ -123,6 +125,7 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PhysicalThread getPhysicalThread()
   {
     if (physicalThread != null && physicalThread.eIsProxy())
@@ -153,6 +156,7 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPhysicalThread(PhysicalThread newPhysicalThread)
   {
     PhysicalThread oldPhysicalThread = physicalThread;

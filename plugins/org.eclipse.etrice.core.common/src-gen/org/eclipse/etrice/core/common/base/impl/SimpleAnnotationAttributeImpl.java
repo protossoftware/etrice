@@ -74,6 +74,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LiteralType getType()
   {
     return type;
@@ -84,6 +85,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(LiteralType newType)
   {
     LiteralType oldType = type;
@@ -168,7 +170,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (type: ");
     result.append(type);
     result.append(')');

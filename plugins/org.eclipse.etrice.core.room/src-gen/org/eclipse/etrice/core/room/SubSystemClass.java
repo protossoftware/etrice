@@ -42,51 +42,51 @@ import org.eclipse.emf.common.util.EList;
 public interface SubSystemClass extends ActorContainerClass
 {
   /**
-	 * Returns the value of the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.room.ActorInstanceMapping}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.ActorInstanceMapping}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is a list of actor instance mappings.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Actor Instance Mappings</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getSubSystemClass_ActorInstanceMappings()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is a list of actor instance mappings.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Actor Instance Mappings</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getSubSystemClass_ActorInstanceMappings()
+   * @model containment="true"
+   * @generated
+   */
   EList<ActorInstanceMapping> getActorInstanceMappings();
 
   /**
-	 * Returns the value of the '<em><b>Threads</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.room.LogicalThread}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Threads</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.LogicalThread}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is a list of all actor instance mappings of the sub system.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Threads</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getSubSystemClass_Threads()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all actor instance mappings of the sub system.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Threads</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getSubSystemClass_Threads()
+   * @model containment="true"
+   * @generated
+   */
   EList<LogicalThread> getThreads();
 
   /**
-	 * Returns the value of the '<em><b>Relay Ports</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.room.Port}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Relay Ports</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.Port}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is a list of all relay ports of the sub system.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Relay Ports</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getSubSystemClass_RelayPorts()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all relay ports of the sub system.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Relay Ports</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getSubSystemClass_RelayPorts()
+   * @model containment="true"
+   * @generated
+   */
   EList<Port> getRelayPorts();
 
 } // SubSystemClass

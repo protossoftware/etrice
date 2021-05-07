@@ -86,6 +86,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnnotationType getType()
   {
     if (type != null && type.eIsProxy())
@@ -116,6 +117,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(AnnotationType newType)
   {
     AnnotationType oldType = type;
@@ -129,6 +131,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<KeyValue> getAttributes()
   {
     if (attributes == null)

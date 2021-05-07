@@ -78,6 +78,7 @@ public class EnumConfigValueImpl extends ConfigValueImpl implements EnumConfigVa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumerationType getType()
   {
     if (type != null && type.eIsProxy())
@@ -108,6 +109,7 @@ public class EnumConfigValueImpl extends ConfigValueImpl implements EnumConfigVa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(EnumerationType newType)
   {
     EnumerationType oldType = type;
@@ -121,6 +123,7 @@ public class EnumConfigValueImpl extends ConfigValueImpl implements EnumConfigVa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumLiteral getValue()
   {
     if (value != null && value.eIsProxy())
@@ -151,6 +154,7 @@ public class EnumConfigValueImpl extends ConfigValueImpl implements EnumConfigVa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(EnumLiteral newValue)
   {
     EnumLiteral oldValue = value;

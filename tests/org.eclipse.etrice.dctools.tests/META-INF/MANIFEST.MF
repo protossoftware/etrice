@@ -4,7 +4,7 @@ Bundle-Name: Expressions UI Tests
 Bundle-SymbolicName: org.eclipse.etrice.dctools.tests;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Automatic-Module-Name: org.eclipse.etrice.expressions.ui.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: Eclipse eTrice
 Require-Bundle: org.junit,
  org.eclipse.jface.text,

@@ -21,7 +21,7 @@ Require-Bundle: org.eclipse.etrice.core.common.ui,
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.core.fsm.ui,
  org.eclipse.etrice.core.fsm.ui.contentassist,
  org.eclipse.etrice.core.fsm.ui.internal,

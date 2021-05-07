@@ -4,7 +4,7 @@ Bundle-Name: FSM GenModel Tests
 Bundle-SymbolicName: org.eclipse.etrice.core.genmodel.fsm.tests
 Bundle-Version: 0.0.0.qualifier
 Bundle-Vendor: Eclipse eTrice
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.junit,
  org.eclipse.osgi,
  org.eclipse.core.runtime,

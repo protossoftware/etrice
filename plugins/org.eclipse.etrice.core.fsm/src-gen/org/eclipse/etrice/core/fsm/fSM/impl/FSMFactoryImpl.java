@@ -147,6 +147,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FSMModel createFSMModel()
   {
     FSMModelImpl fsmModel = new FSMModelImpl();
@@ -158,6 +159,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelComponent createModelComponent()
   {
     ModelComponentImpl modelComponent = new ModelComponentImpl();
@@ -169,6 +171,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StateGraphNode createStateGraphNode()
   {
     StateGraphNodeImpl stateGraphNode = new StateGraphNodeImpl();
@@ -180,6 +183,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StateGraphItem createStateGraphItem()
   {
     StateGraphItemImpl stateGraphItem = new StateGraphItemImpl();
@@ -191,6 +195,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StateGraph createStateGraph()
   {
     StateGraphImpl stateGraph = new StateGraphImpl();
@@ -202,6 +207,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State createState()
   {
     StateImpl state = new StateImpl();
@@ -213,6 +219,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleState createSimpleState()
   {
     SimpleStateImpl simpleState = new SimpleStateImpl();
@@ -224,6 +231,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefinedState createRefinedState()
   {
     RefinedStateImpl refinedState = new RefinedStateImpl();
@@ -235,6 +243,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode createDetailCode()
   {
     DetailCodeImpl detailCode = new DetailCodeImpl();
@@ -246,6 +255,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TrPoint createTrPoint()
   {
     TrPointImpl trPoint = new TrPointImpl();
@@ -257,6 +267,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TransitionPoint createTransitionPoint()
   {
     TransitionPointImpl transitionPoint = new TransitionPointImpl();
@@ -268,6 +279,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EntryPoint createEntryPoint()
   {
     EntryPointImpl entryPoint = new EntryPointImpl();
@@ -279,6 +291,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ExitPoint createExitPoint()
   {
     ExitPointImpl exitPoint = new ExitPointImpl();
@@ -290,6 +303,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ChoicePoint createChoicePoint()
   {
     ChoicePointImpl choicePoint = new ChoicePointImpl();
@@ -301,6 +315,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TransitionBase createTransitionBase()
   {
     TransitionBaseImpl transitionBase = new TransitionBaseImpl();
@@ -312,6 +327,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Transition createTransition()
   {
     TransitionImpl transition = new TransitionImpl();
@@ -323,6 +339,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NonInitialTransition createNonInitialTransition()
   {
     NonInitialTransitionImpl nonInitialTransition = new NonInitialTransitionImpl();
@@ -334,6 +351,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TransitionChainStartTransition createTransitionChainStartTransition()
   {
     TransitionChainStartTransitionImpl transitionChainStartTransition = new TransitionChainStartTransitionImpl();
@@ -345,6 +363,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InitialTransition createInitialTransition()
   {
     InitialTransitionImpl initialTransition = new InitialTransitionImpl();
@@ -356,6 +375,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContinuationTransition createContinuationTransition()
   {
     ContinuationTransitionImpl continuationTransition = new ContinuationTransitionImpl();
@@ -367,6 +387,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TriggeredTransition createTriggeredTransition()
   {
     TriggeredTransitionImpl triggeredTransition = new TriggeredTransitionImpl();
@@ -378,6 +399,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GuardedTransition createGuardedTransition()
   {
     GuardedTransitionImpl guardedTransition = new GuardedTransitionImpl();
@@ -389,6 +411,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CPBranchTransition createCPBranchTransition()
   {
     CPBranchTransitionImpl cpBranchTransition = new CPBranchTransitionImpl();
@@ -400,6 +423,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefinedTransition createRefinedTransition()
   {
     RefinedTransitionImpl refinedTransition = new RefinedTransitionImpl();
@@ -411,6 +435,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TransitionTerminal createTransitionTerminal()
   {
     TransitionTerminalImpl transitionTerminal = new TransitionTerminalImpl();
@@ -422,6 +447,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StateTerminal createStateTerminal()
   {
     StateTerminalImpl stateTerminal = new StateTerminalImpl();
@@ -433,6 +459,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TrPointTerminal createTrPointTerminal()
   {
     TrPointTerminalImpl trPointTerminal = new TrPointTerminalImpl();
@@ -444,6 +471,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubStateTrPointTerminal createSubStateTrPointTerminal()
   {
     SubStateTrPointTerminalImpl subStateTrPointTerminal = new SubStateTrPointTerminalImpl();
@@ -455,6 +483,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ChoicepointTerminal createChoicepointTerminal()
   {
     ChoicepointTerminalImpl choicepointTerminal = new ChoicepointTerminalImpl();
@@ -466,6 +495,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Trigger createTrigger()
   {
     TriggerImpl trigger = new TriggerImpl();
@@ -477,6 +507,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MessageFromIf createMessageFromIf()
   {
     MessageFromIfImpl messageFromIf = new MessageFromIfImpl();
@@ -488,6 +519,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractInterfaceItem createAbstractInterfaceItem()
   {
     AbstractInterfaceItemImpl abstractInterfaceItem = new AbstractInterfaceItemImpl();
@@ -499,6 +531,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Guard createGuard()
   {
     GuardImpl guard = new GuardImpl();
@@ -510,6 +543,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolSemantics createProtocolSemantics()
   {
     ProtocolSemanticsImpl protocolSemantics = new ProtocolSemanticsImpl();
@@ -521,6 +555,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SemanticsRule createSemanticsRule()
   {
     SemanticsRuleImpl semanticsRule = new SemanticsRuleImpl();
@@ -532,6 +567,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InSemanticsRule createInSemanticsRule()
   {
     InSemanticsRuleImpl inSemanticsRule = new InSemanticsRuleImpl();
@@ -543,6 +579,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OutSemanticsRule createOutSemanticsRule()
   {
     OutSemanticsRuleImpl outSemanticsRule = new OutSemanticsRuleImpl();
@@ -576,6 +613,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FSMPackage getFSMPackage()
   {
     return (FSMPackage)getEPackage();

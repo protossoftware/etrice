@@ -132,6 +132,7 @@ public class PhysicalModelImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -142,6 +143,7 @@ public class PhysicalModelImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -155,6 +157,7 @@ public class PhysicalModelImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Import> getImports()
   {
     if (imports == null)
@@ -169,6 +172,7 @@ public class PhysicalModelImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<PhysicalSystem> getSystems()
   {
     if (systems == null)
@@ -183,6 +187,7 @@ public class PhysicalModelImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<NodeClass> getNodeClasses()
   {
     if (nodeClasses == null)
@@ -197,6 +202,7 @@ public class PhysicalModelImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<RuntimeClass> getRuntimeClasses()
   {
     if (runtimeClasses == null)
@@ -349,7 +355,7 @@ public class PhysicalModelImpl extends MinimalEObjectImpl.Container implements P
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

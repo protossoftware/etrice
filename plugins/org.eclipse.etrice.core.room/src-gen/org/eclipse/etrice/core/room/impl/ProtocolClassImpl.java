@@ -55,757 +55,779 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
 {
   /**
-	 * The default value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getCommType()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getCommType()
+   * @generated
+   * @ordered
+   */
   protected static final CommunicationType COMM_TYPE_EDEFAULT = CommunicationType.EVENT_DRIVEN;
 
   /**
-	 * The cached value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getCommType()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getCommType()
+   * @generated
+   * @ordered
+   */
   protected CommunicationType commType = COMM_TYPE_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getBase() <em>Base</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getBase() <em>Base</em>}' reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getBase()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getBase()
+   * @generated
+   * @ordered
+   */
   protected ProtocolClass base;
 
   /**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAnnotations()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
   protected EList<Annotation> annotations;
 
   /**
-	 * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getUserCode1()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getUserCode1()
+   * @generated
+   * @ordered
+   */
   protected DetailCode userCode1;
 
   /**
-	 * The cached value of the '{@link #getUserCode2() <em>User Code2</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getUserCode2() <em>User Code2</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getUserCode2()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getUserCode2()
+   * @generated
+   * @ordered
+   */
   protected DetailCode userCode2;
 
   /**
-	 * The cached value of the '{@link #getUserCode3() <em>User Code3</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getUserCode3() <em>User Code3</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getUserCode3()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getUserCode3()
+   * @generated
+   * @ordered
+   */
   protected DetailCode userCode3;
 
   /**
-	 * The cached value of the '{@link #getIncomingMessages() <em>Incoming Messages</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getIncomingMessages() <em>Incoming Messages</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getIncomingMessages()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getIncomingMessages()
+   * @generated
+   * @ordered
+   */
   protected EList<Message> incomingMessages;
 
   /**
-	 * The cached value of the '{@link #getOutgoingMessages() <em>Outgoing Messages</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getOutgoingMessages() <em>Outgoing Messages</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getOutgoingMessages()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getOutgoingMessages()
+   * @generated
+   * @ordered
+   */
   protected EList<Message> outgoingMessages;
 
   /**
-	 * The cached value of the '{@link #getRegular() <em>Regular</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getRegular() <em>Regular</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getRegular()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getRegular()
+   * @generated
+   * @ordered
+   */
   protected PortClass regular;
 
   /**
-	 * The cached value of the '{@link #getConjugated() <em>Conjugated</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getConjugated() <em>Conjugated</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getConjugated()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getConjugated()
+   * @generated
+   * @ordered
+   */
   protected PortClass conjugated;
 
   /**
-	 * The cached value of the '{@link #getSemantics() <em>Semantics</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getSemantics() <em>Semantics</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getSemantics()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getSemantics()
+   * @generated
+   * @ordered
+   */
   protected ProtocolSemantics semantics;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected ProtocolClassImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.PROTOCOL_CLASS;
-	}
+    return RoomPackage.Literals.PROTOCOL_CLASS;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public CommunicationType getCommType()
+  public CommunicationType getCommType()
   {
-		return commType;
-	}
+    return commType;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setCommType(CommunicationType newCommType)
+  public void setCommType(CommunicationType newCommType)
   {
-		CommunicationType oldCommType = commType;
-		commType = newCommType == null ? COMM_TYPE_EDEFAULT : newCommType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__COMM_TYPE, oldCommType, commType));
-	}
+    CommunicationType oldCommType = commType;
+    commType = newCommType == null ? COMM_TYPE_EDEFAULT : newCommType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__COMM_TYPE, oldCommType, commType));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public ProtocolClass getBase()
+  public ProtocolClass getBase()
   {
-		if (base != null && base.eIsProxy()) {
-			InternalEObject oldBase = (InternalEObject)base;
-			base = (ProtocolClass)eResolveProxy(oldBase);
-			if (base != oldBase) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.PROTOCOL_CLASS__BASE, oldBase, base));
-			}
-		}
-		return base;
-	}
+    if (base != null && base.eIsProxy())
+    {
+      InternalEObject oldBase = (InternalEObject)base;
+      base = (ProtocolClass)eResolveProxy(oldBase);
+      if (base != oldBase)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.PROTOCOL_CLASS__BASE, oldBase, base));
+      }
+    }
+    return base;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public ProtocolClass basicGetBase()
   {
-		return base;
-	}
+    return base;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setBase(ProtocolClass newBase)
+  public void setBase(ProtocolClass newBase)
   {
-		ProtocolClass oldBase = base;
-		base = newBase;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__BASE, oldBase, base));
-	}
+    ProtocolClass oldBase = base;
+    base = newBase;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__BASE, oldBase, base));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<Annotation> getAnnotations()
+  public EList<Annotation> getAnnotations()
   {
-		if (annotations == null) {
-			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.PROTOCOL_CLASS__ANNOTATIONS);
-		}
-		return annotations;
-	}
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.PROTOCOL_CLASS__ANNOTATIONS);
+    }
+    return annotations;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public DetailCode getUserCode1()
+  public DetailCode getUserCode1()
   {
-		return userCode1;
-	}
+    return userCode1;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetUserCode1(DetailCode newUserCode1, NotificationChain msgs)
   {
-		DetailCode oldUserCode1 = userCode1;
-		userCode1 = newUserCode1;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE1, oldUserCode1, newUserCode1);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    DetailCode oldUserCode1 = userCode1;
+    userCode1 = newUserCode1;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE1, oldUserCode1, newUserCode1);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setUserCode1(DetailCode newUserCode1)
+  public void setUserCode1(DetailCode newUserCode1)
   {
-		if (newUserCode1 != userCode1) {
-			NotificationChain msgs = null;
-			if (userCode1 != null)
-				msgs = ((InternalEObject)userCode1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE1, null, msgs);
-			if (newUserCode1 != null)
-				msgs = ((InternalEObject)newUserCode1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE1, null, msgs);
-			msgs = basicSetUserCode1(newUserCode1, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE1, newUserCode1, newUserCode1));
-	}
+    if (newUserCode1 != userCode1)
+    {
+      NotificationChain msgs = null;
+      if (userCode1 != null)
+        msgs = ((InternalEObject)userCode1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE1, null, msgs);
+      if (newUserCode1 != null)
+        msgs = ((InternalEObject)newUserCode1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE1, null, msgs);
+      msgs = basicSetUserCode1(newUserCode1, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE1, newUserCode1, newUserCode1));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public DetailCode getUserCode2()
+  public DetailCode getUserCode2()
   {
-		return userCode2;
-	}
+    return userCode2;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetUserCode2(DetailCode newUserCode2, NotificationChain msgs)
   {
-		DetailCode oldUserCode2 = userCode2;
-		userCode2 = newUserCode2;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE2, oldUserCode2, newUserCode2);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    DetailCode oldUserCode2 = userCode2;
+    userCode2 = newUserCode2;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE2, oldUserCode2, newUserCode2);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setUserCode2(DetailCode newUserCode2)
+  public void setUserCode2(DetailCode newUserCode2)
   {
-		if (newUserCode2 != userCode2) {
-			NotificationChain msgs = null;
-			if (userCode2 != null)
-				msgs = ((InternalEObject)userCode2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE2, null, msgs);
-			if (newUserCode2 != null)
-				msgs = ((InternalEObject)newUserCode2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE2, null, msgs);
-			msgs = basicSetUserCode2(newUserCode2, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE2, newUserCode2, newUserCode2));
-	}
+    if (newUserCode2 != userCode2)
+    {
+      NotificationChain msgs = null;
+      if (userCode2 != null)
+        msgs = ((InternalEObject)userCode2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE2, null, msgs);
+      if (newUserCode2 != null)
+        msgs = ((InternalEObject)newUserCode2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE2, null, msgs);
+      msgs = basicSetUserCode2(newUserCode2, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE2, newUserCode2, newUserCode2));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public DetailCode getUserCode3()
+  public DetailCode getUserCode3()
   {
-		return userCode3;
-	}
+    return userCode3;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetUserCode3(DetailCode newUserCode3, NotificationChain msgs)
   {
-		DetailCode oldUserCode3 = userCode3;
-		userCode3 = newUserCode3;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE3, oldUserCode3, newUserCode3);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    DetailCode oldUserCode3 = userCode3;
+    userCode3 = newUserCode3;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE3, oldUserCode3, newUserCode3);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setUserCode3(DetailCode newUserCode3)
+  public void setUserCode3(DetailCode newUserCode3)
   {
-		if (newUserCode3 != userCode3) {
-			NotificationChain msgs = null;
-			if (userCode3 != null)
-				msgs = ((InternalEObject)userCode3).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE3, null, msgs);
-			if (newUserCode3 != null)
-				msgs = ((InternalEObject)newUserCode3).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE3, null, msgs);
-			msgs = basicSetUserCode3(newUserCode3, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE3, newUserCode3, newUserCode3));
-	}
+    if (newUserCode3 != userCode3)
+    {
+      NotificationChain msgs = null;
+      if (userCode3 != null)
+        msgs = ((InternalEObject)userCode3).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE3, null, msgs);
+      if (newUserCode3 != null)
+        msgs = ((InternalEObject)newUserCode3).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__USER_CODE3, null, msgs);
+      msgs = basicSetUserCode3(newUserCode3, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__USER_CODE3, newUserCode3, newUserCode3));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<Message> getIncomingMessages()
+  public EList<Message> getIncomingMessages()
   {
-		if (incomingMessages == null) {
-			incomingMessages = new EObjectContainmentEList<Message>(Message.class, this, RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES);
-		}
-		return incomingMessages;
-	}
+    if (incomingMessages == null)
+    {
+      incomingMessages = new EObjectContainmentEList<Message>(Message.class, this, RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES);
+    }
+    return incomingMessages;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<Message> getOutgoingMessages()
+  public EList<Message> getOutgoingMessages()
   {
-		if (outgoingMessages == null) {
-			outgoingMessages = new EObjectContainmentEList<Message>(Message.class, this, RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES);
-		}
-		return outgoingMessages;
-	}
+    if (outgoingMessages == null)
+    {
+      outgoingMessages = new EObjectContainmentEList<Message>(Message.class, this, RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES);
+    }
+    return outgoingMessages;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public PortClass getRegular()
+  public PortClass getRegular()
   {
-		return regular;
-	}
+    return regular;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetRegular(PortClass newRegular, NotificationChain msgs)
   {
-		PortClass oldRegular = regular;
-		regular = newRegular;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__REGULAR, oldRegular, newRegular);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    PortClass oldRegular = regular;
+    regular = newRegular;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__REGULAR, oldRegular, newRegular);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setRegular(PortClass newRegular)
+  public void setRegular(PortClass newRegular)
   {
-		if (newRegular != regular) {
-			NotificationChain msgs = null;
-			if (regular != null)
-				msgs = ((InternalEObject)regular).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__REGULAR, null, msgs);
-			if (newRegular != null)
-				msgs = ((InternalEObject)newRegular).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__REGULAR, null, msgs);
-			msgs = basicSetRegular(newRegular, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__REGULAR, newRegular, newRegular));
-	}
+    if (newRegular != regular)
+    {
+      NotificationChain msgs = null;
+      if (regular != null)
+        msgs = ((InternalEObject)regular).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__REGULAR, null, msgs);
+      if (newRegular != null)
+        msgs = ((InternalEObject)newRegular).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__REGULAR, null, msgs);
+      msgs = basicSetRegular(newRegular, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__REGULAR, newRegular, newRegular));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public PortClass getConjugated()
+  public PortClass getConjugated()
   {
-		return conjugated;
-	}
+    return conjugated;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetConjugated(PortClass newConjugated, NotificationChain msgs)
   {
-		PortClass oldConjugated = conjugated;
-		conjugated = newConjugated;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__CONJUGATED, oldConjugated, newConjugated);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    PortClass oldConjugated = conjugated;
+    conjugated = newConjugated;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__CONJUGATED, oldConjugated, newConjugated);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setConjugated(PortClass newConjugated)
+  public void setConjugated(PortClass newConjugated)
   {
-		if (newConjugated != conjugated) {
-			NotificationChain msgs = null;
-			if (conjugated != null)
-				msgs = ((InternalEObject)conjugated).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__CONJUGATED, null, msgs);
-			if (newConjugated != null)
-				msgs = ((InternalEObject)newConjugated).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__CONJUGATED, null, msgs);
-			msgs = basicSetConjugated(newConjugated, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__CONJUGATED, newConjugated, newConjugated));
-	}
+    if (newConjugated != conjugated)
+    {
+      NotificationChain msgs = null;
+      if (conjugated != null)
+        msgs = ((InternalEObject)conjugated).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__CONJUGATED, null, msgs);
+      if (newConjugated != null)
+        msgs = ((InternalEObject)newConjugated).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__CONJUGATED, null, msgs);
+      msgs = basicSetConjugated(newConjugated, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__CONJUGATED, newConjugated, newConjugated));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public ProtocolSemantics getSemantics()
+  public ProtocolSemantics getSemantics()
   {
-		return semantics;
-	}
+    return semantics;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetSemantics(ProtocolSemantics newSemantics, NotificationChain msgs)
   {
-		ProtocolSemantics oldSemantics = semantics;
-		semantics = newSemantics;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__SEMANTICS, oldSemantics, newSemantics);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    ProtocolSemantics oldSemantics = semantics;
+    semantics = newSemantics;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__SEMANTICS, oldSemantics, newSemantics);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setSemantics(ProtocolSemantics newSemantics)
+  public void setSemantics(ProtocolSemantics newSemantics)
   {
-		if (newSemantics != semantics) {
-			NotificationChain msgs = null;
-			if (semantics != null)
-				msgs = ((InternalEObject)semantics).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__SEMANTICS, null, msgs);
-			if (newSemantics != null)
-				msgs = ((InternalEObject)newSemantics).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__SEMANTICS, null, msgs);
-			msgs = basicSetSemantics(newSemantics, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__SEMANTICS, newSemantics, newSemantics));
-	}
+    if (newSemantics != semantics)
+    {
+      NotificationChain msgs = null;
+      if (semantics != null)
+        msgs = ((InternalEObject)semantics).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__SEMANTICS, null, msgs);
+      if (newSemantics != null)
+        msgs = ((InternalEObject)newSemantics).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__SEMANTICS, null, msgs);
+      msgs = basicSetSemantics(newSemantics, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__SEMANTICS, newSemantics, newSemantics));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
-				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
-				return basicSetUserCode1(null, msgs);
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
-				return basicSetUserCode2(null, msgs);
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
-				return basicSetUserCode3(null, msgs);
-			case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
-				return ((InternalEList<?>)getIncomingMessages()).basicRemove(otherEnd, msgs);
-			case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
-				return ((InternalEList<?>)getOutgoingMessages()).basicRemove(otherEnd, msgs);
-			case RoomPackage.PROTOCOL_CLASS__REGULAR:
-				return basicSetRegular(null, msgs);
-			case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
-				return basicSetConjugated(null, msgs);
-			case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
-				return basicSetSemantics(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
+        return basicSetUserCode1(null, msgs);
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
+        return basicSetUserCode2(null, msgs);
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        return basicSetUserCode3(null, msgs);
+      case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
+        return ((InternalEList<?>)getIncomingMessages()).basicRemove(otherEnd, msgs);
+      case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
+        return ((InternalEList<?>)getOutgoingMessages()).basicRemove(otherEnd, msgs);
+      case RoomPackage.PROTOCOL_CLASS__REGULAR:
+        return basicSetRegular(null, msgs);
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        return basicSetConjugated(null, msgs);
+      case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
+        return basicSetSemantics(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
-				return getCommType();
-			case RoomPackage.PROTOCOL_CLASS__BASE:
-				if (resolve) return getBase();
-				return basicGetBase();
-			case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
-				return getAnnotations();
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
-				return getUserCode1();
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
-				return getUserCode2();
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
-				return getUserCode3();
-			case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
-				return getIncomingMessages();
-			case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
-				return getOutgoingMessages();
-			case RoomPackage.PROTOCOL_CLASS__REGULAR:
-				return getRegular();
-			case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
-				return getConjugated();
-			case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
-				return getSemantics();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
+        return getCommType();
+      case RoomPackage.PROTOCOL_CLASS__BASE:
+        if (resolve) return getBase();
+        return basicGetBase();
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        return getAnnotations();
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
+        return getUserCode1();
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
+        return getUserCode2();
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        return getUserCode3();
+      case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
+        return getIncomingMessages();
+      case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
+        return getOutgoingMessages();
+      case RoomPackage.PROTOCOL_CLASS__REGULAR:
+        return getRegular();
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        return getConjugated();
+      case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
+        return getSemantics();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
-				setCommType((CommunicationType)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__BASE:
-				setBase((ProtocolClass)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
-				getAnnotations().clear();
-				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
-				setUserCode1((DetailCode)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
-				setUserCode2((DetailCode)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
-				setUserCode3((DetailCode)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
-				getIncomingMessages().clear();
-				getIncomingMessages().addAll((Collection<? extends Message>)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
-				getOutgoingMessages().clear();
-				getOutgoingMessages().addAll((Collection<? extends Message>)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__REGULAR:
-				setRegular((PortClass)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
-				setConjugated((PortClass)newValue);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
-				setSemantics((ProtocolSemantics)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
+        setCommType((CommunicationType)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__BASE:
+        setBase((ProtocolClass)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
+        setUserCode1((DetailCode)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
+        setUserCode2((DetailCode)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        setUserCode3((DetailCode)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
+        getIncomingMessages().clear();
+        getIncomingMessages().addAll((Collection<? extends Message>)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
+        getOutgoingMessages().clear();
+        getOutgoingMessages().addAll((Collection<? extends Message>)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__REGULAR:
+        setRegular((PortClass)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        setConjugated((PortClass)newValue);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
+        setSemantics((ProtocolSemantics)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
-				setCommType(COMM_TYPE_EDEFAULT);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__BASE:
-				setBase((ProtocolClass)null);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
-				getAnnotations().clear();
-				return;
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
-				setUserCode1((DetailCode)null);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
-				setUserCode2((DetailCode)null);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
-				setUserCode3((DetailCode)null);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
-				getIncomingMessages().clear();
-				return;
-			case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
-				getOutgoingMessages().clear();
-				return;
-			case RoomPackage.PROTOCOL_CLASS__REGULAR:
-				setRegular((PortClass)null);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
-				setConjugated((PortClass)null);
-				return;
-			case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
-				setSemantics((ProtocolSemantics)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
+        setCommType(COMM_TYPE_EDEFAULT);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__BASE:
+        setBase((ProtocolClass)null);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
+        setUserCode1((DetailCode)null);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
+        setUserCode2((DetailCode)null);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        setUserCode3((DetailCode)null);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
+        getIncomingMessages().clear();
+        return;
+      case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
+        getOutgoingMessages().clear();
+        return;
+      case RoomPackage.PROTOCOL_CLASS__REGULAR:
+        setRegular((PortClass)null);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        setConjugated((PortClass)null);
+        return;
+      case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
+        setSemantics((ProtocolSemantics)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
-				return commType != COMM_TYPE_EDEFAULT;
-			case RoomPackage.PROTOCOL_CLASS__BASE:
-				return base != null;
-			case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
-				return annotations != null && !annotations.isEmpty();
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
-				return userCode1 != null;
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
-				return userCode2 != null;
-			case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
-				return userCode3 != null;
-			case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
-				return incomingMessages != null && !incomingMessages.isEmpty();
-			case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
-				return outgoingMessages != null && !outgoingMessages.isEmpty();
-			case RoomPackage.PROTOCOL_CLASS__REGULAR:
-				return regular != null;
-			case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
-				return conjugated != null;
-			case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
-				return semantics != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PROTOCOL_CLASS__COMM_TYPE:
+        return commType != COMM_TYPE_EDEFAULT;
+      case RoomPackage.PROTOCOL_CLASS__BASE:
+        return base != null;
+      case RoomPackage.PROTOCOL_CLASS__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE1:
+        return userCode1 != null;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE2:
+        return userCode2 != null;
+      case RoomPackage.PROTOCOL_CLASS__USER_CODE3:
+        return userCode3 != null;
+      case RoomPackage.PROTOCOL_CLASS__INCOMING_MESSAGES:
+        return incomingMessages != null && !incomingMessages.isEmpty();
+      case RoomPackage.PROTOCOL_CLASS__OUTGOING_MESSAGES:
+        return outgoingMessages != null && !outgoingMessages.isEmpty();
+      case RoomPackage.PROTOCOL_CLASS__REGULAR:
+        return regular != null;
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        return conjugated != null;
+      case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
+        return semantics != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (commType: ");
-		result.append(commType);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (commType: ");
+    result.append(commType);
+    result.append(')');
+    return result.toString();
+  }
 
 } //ProtocolClassImpl

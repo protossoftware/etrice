@@ -30,140 +30,146 @@ import org.eclipse.etrice.core.room.SubSystemRef;
 public class SubSystemRefImpl extends ActorContainerRefImpl implements SubSystemRef
 {
   /**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
   protected SubSystemClass type;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected SubSystemRefImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.SUB_SYSTEM_REF;
-	}
+    return RoomPackage.Literals.SUB_SYSTEM_REF;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public SubSystemClass getType()
+  public SubSystemClass getType()
   {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (SubSystemClass)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SUB_SYSTEM_REF__TYPE, oldType, type));
-			}
-		}
-		return type;
-	}
+    if (type != null && type.eIsProxy())
+    {
+      InternalEObject oldType = (InternalEObject)type;
+      type = (SubSystemClass)eResolveProxy(oldType);
+      if (type != oldType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SUB_SYSTEM_REF__TYPE, oldType, type));
+      }
+    }
+    return type;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public SubSystemClass basicGetType()
   {
-		return type;
-	}
+    return type;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setType(SubSystemClass newType)
+  public void setType(SubSystemClass newType)
   {
-		SubSystemClass oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SUB_SYSTEM_REF__TYPE, oldType, type));
-	}
+    SubSystemClass oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SUB_SYSTEM_REF__TYPE, oldType, type));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.SUB_SYSTEM_REF__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.SUB_SYSTEM_REF__TYPE:
+        if (resolve) return getType();
+        return basicGetType();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.SUB_SYSTEM_REF__TYPE:
-				setType((SubSystemClass)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.SUB_SYSTEM_REF__TYPE:
+        setType((SubSystemClass)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.SUB_SYSTEM_REF__TYPE:
-				setType((SubSystemClass)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.SUB_SYSTEM_REF__TYPE:
+        setType((SubSystemClass)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.SUB_SYSTEM_REF__TYPE:
-				return type != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.SUB_SYSTEM_REF__TYPE:
+        return type != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //SubSystemRefImpl

@@ -65,6 +65,7 @@ public class RefinedTransitionImpl extends TransitionBaseImpl implements Refined
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Transition getTarget()
   {
     if (target != null && target.eIsProxy())
@@ -95,6 +96,7 @@ public class RefinedTransitionImpl extends TransitionBaseImpl implements Refined
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTarget(Transition newTarget)
   {
     Transition oldTarget = target;

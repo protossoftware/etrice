@@ -34,243 +34,250 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class ClassStructorImpl extends MinimalEObjectImpl.Container implements ClassStructor
 {
   /**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected static final String NAME_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected String name = NAME_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getDetailCode() <em>Detail Code</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDetailCode() <em>Detail Code</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDetailCode()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDetailCode()
+   * @generated
+   * @ordered
+   */
   protected DetailCode detailCode;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected ClassStructorImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.CLASS_STRUCTOR;
-	}
+    return RoomPackage.Literals.CLASS_STRUCTOR;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public String getName()
+  public String getName()
   {
-		return name;
-	}
+    return name;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setName(String newName)
+  public void setName(String newName)
   {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.CLASS_STRUCTOR__NAME, oldName, name));
-	}
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.CLASS_STRUCTOR__NAME, oldName, name));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public DetailCode getDetailCode()
+  public DetailCode getDetailCode()
   {
-		return detailCode;
-	}
+    return detailCode;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetDetailCode(DetailCode newDetailCode, NotificationChain msgs)
   {
-		DetailCode oldDetailCode = detailCode;
-		detailCode = newDetailCode;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.CLASS_STRUCTOR__DETAIL_CODE, oldDetailCode, newDetailCode);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    DetailCode oldDetailCode = detailCode;
+    detailCode = newDetailCode;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.CLASS_STRUCTOR__DETAIL_CODE, oldDetailCode, newDetailCode);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setDetailCode(DetailCode newDetailCode)
+  public void setDetailCode(DetailCode newDetailCode)
   {
-		if (newDetailCode != detailCode) {
-			NotificationChain msgs = null;
-			if (detailCode != null)
-				msgs = ((InternalEObject)detailCode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.CLASS_STRUCTOR__DETAIL_CODE, null, msgs);
-			if (newDetailCode != null)
-				msgs = ((InternalEObject)newDetailCode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.CLASS_STRUCTOR__DETAIL_CODE, null, msgs);
-			msgs = basicSetDetailCode(newDetailCode, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.CLASS_STRUCTOR__DETAIL_CODE, newDetailCode, newDetailCode));
-	}
+    if (newDetailCode != detailCode)
+    {
+      NotificationChain msgs = null;
+      if (detailCode != null)
+        msgs = ((InternalEObject)detailCode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.CLASS_STRUCTOR__DETAIL_CODE, null, msgs);
+      if (newDetailCode != null)
+        msgs = ((InternalEObject)newDetailCode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.CLASS_STRUCTOR__DETAIL_CODE, null, msgs);
+      msgs = basicSetDetailCode(newDetailCode, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.CLASS_STRUCTOR__DETAIL_CODE, newDetailCode, newDetailCode));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public boolean isConstructor()
+  public boolean isConstructor()
   {
-		return "ctor".equals(this.getName());
-		
-	}
+    return "ctor".equals(this.getName());
+    
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
-				return basicSetDetailCode(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
+        return basicSetDetailCode(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.CLASS_STRUCTOR__NAME:
-				return getName();
-			case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
-				return getDetailCode();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.CLASS_STRUCTOR__NAME:
+        return getName();
+      case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
+        return getDetailCode();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.CLASS_STRUCTOR__NAME:
-				setName((String)newValue);
-				return;
-			case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
-				setDetailCode((DetailCode)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.CLASS_STRUCTOR__NAME:
+        setName((String)newValue);
+        return;
+      case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
+        setDetailCode((DetailCode)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.CLASS_STRUCTOR__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
-				setDetailCode((DetailCode)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.CLASS_STRUCTOR__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
+        setDetailCode((DetailCode)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.CLASS_STRUCTOR__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
-				return detailCode != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.CLASS_STRUCTOR__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RoomPackage.CLASS_STRUCTOR__DETAIL_CODE:
+        return detailCode != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
 
 } //ClassStructorImpl

@@ -4,7 +4,7 @@ Bundle-Name: eTrice Generator Config
 Bundle-SymbolicName: org.eclipse.etrice.generator.config;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Bundle-Vendor: Eclipse eTrice
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Require-Bundle:  org.eclipse.etrice.core.common,
   org.eclipse.etrice.core.fsm,

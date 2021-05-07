@@ -65,6 +65,7 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State getTarget()
   {
     if (target != null && target.eIsProxy())
@@ -95,6 +96,7 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTarget(State newTarget)
   {
     State oldTarget = target;

@@ -134,6 +134,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -161,6 +162,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -182,6 +184,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -196,6 +199,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getEntryCode()
   {
     return entryCode;
@@ -223,6 +227,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEntryCode(DetailCode newEntryCode)
   {
     if (newEntryCode != entryCode)
@@ -244,6 +249,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getExitCode()
   {
     return exitCode;
@@ -271,6 +277,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExitCode(DetailCode newExitCode)
   {
     if (newExitCode != exitCode)
@@ -292,6 +299,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getDoCode()
   {
     return doCode;
@@ -319,6 +327,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDoCode(DetailCode newDoCode)
   {
     if (newDoCode != doCode)
@@ -340,6 +349,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StateGraph getSubgraph()
   {
     return subgraph;
@@ -367,6 +377,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSubgraph(StateGraph newSubgraph)
   {
     if (newSubgraph != subgraph)
@@ -388,6 +399,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return (this instanceof SimpleState)? ((SimpleState)this).getName() :(this instanceof RefinedState)? (((RefinedState)this).getTarget()==null? "":((RefinedState)this).getTarget().getName()) :"";

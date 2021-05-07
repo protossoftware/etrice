@@ -77,6 +77,7 @@ public class SubStateTrPointTerminalImpl extends TransitionTerminalImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TrPoint getTrPoint()
   {
     if (trPoint != null && trPoint.eIsProxy())
@@ -107,6 +108,7 @@ public class SubStateTrPointTerminalImpl extends TransitionTerminalImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTrPoint(TrPoint newTrPoint)
   {
     TrPoint oldTrPoint = trPoint;
@@ -120,6 +122,7 @@ public class SubStateTrPointTerminalImpl extends TransitionTerminalImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State getState()
   {
     if (state != null && state.eIsProxy())
@@ -150,6 +153,7 @@ public class SubStateTrPointTerminalImpl extends TransitionTerminalImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setState(State newState)
   {
     State oldState = state;

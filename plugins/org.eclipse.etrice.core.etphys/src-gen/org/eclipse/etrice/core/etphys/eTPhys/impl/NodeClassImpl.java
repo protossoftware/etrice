@@ -162,6 +162,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -172,6 +173,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -185,6 +187,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -212,6 +215,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -233,6 +237,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RuntimeClass getRuntime()
   {
     if (runtime != null && runtime.eIsProxy())
@@ -263,6 +268,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRuntime(RuntimeClass newRuntime)
   {
     RuntimeClass oldRuntime = runtime;
@@ -276,6 +282,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public long getPriomin()
   {
     return priomin;
@@ -286,6 +293,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPriomin(long newPriomin)
   {
     long oldPriomin = priomin;
@@ -299,6 +307,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public long getPriomax()
   {
     return priomax;
@@ -309,6 +318,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPriomax(long newPriomax)
   {
     long oldPriomax = priomax;
@@ -322,6 +332,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<PhysicalThread> getThreads()
   {
     if (threads == null)
@@ -478,7 +489,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", priomin: ");

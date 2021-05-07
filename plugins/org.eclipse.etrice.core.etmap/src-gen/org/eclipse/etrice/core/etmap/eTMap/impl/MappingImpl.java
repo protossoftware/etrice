@@ -100,6 +100,7 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LogicalSystem getLogicalSys()
   {
     if (logicalSys != null && logicalSys.eIsProxy())
@@ -130,6 +131,7 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLogicalSys(LogicalSystem newLogicalSys)
   {
     LogicalSystem oldLogicalSys = logicalSys;
@@ -143,6 +145,7 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PhysicalSystem getPhysicalSys()
   {
     if (physicalSys != null && physicalSys.eIsProxy())
@@ -173,6 +176,7 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPhysicalSys(PhysicalSystem newPhysicalSys)
   {
     PhysicalSystem oldPhysicalSys = physicalSys;
@@ -186,6 +190,7 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SubSystemMapping> getSubsysMappings()
   {
     if (subsysMappings == null)

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Expressions UI
 Bundle-SymbolicName: org.eclipse.etrice.expressions.ui;singleton:=true
 Bundle-Version: 0.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.jface.text,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,

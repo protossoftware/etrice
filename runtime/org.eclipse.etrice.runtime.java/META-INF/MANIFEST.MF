@@ -9,5 +9,5 @@ Export-Package: org.eclipse.etrice.runtime.java.config,
  org.eclipse.etrice.runtime.java.messaging,
  org.eclipse.etrice.runtime.java.modelbase
 Bundle-Vendor: Eclipse eTrice
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.eclipse.etrice.runtime.java

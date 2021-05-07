@@ -179,7 +179,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link BasePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -194,7 +194,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
     if (isInited) return (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 
     // Obtain or create and register package
-    BasePackageImpl theBasePackage = (BasePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BasePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BasePackageImpl());
+    Object registeredBasePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    BasePackageImpl theBasePackage = registeredBasePackage instanceof BasePackageImpl ? (BasePackageImpl)registeredBasePackage : new BasePackageImpl();
 
     isInited = true;
 
@@ -207,7 +208,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
     // Mark meta-data to indicate it can't be changed
     theBasePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(BasePackage.eNS_URI, theBasePackage);
     return theBasePackage;
@@ -218,6 +218,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAnnotation()
   {
     return annotationEClass;
@@ -228,6 +229,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAnnotation_Type()
   {
     return (EReference)annotationEClass.getEStructuralFeatures().get(0);
@@ -238,6 +240,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAnnotation_Attributes()
   {
     return (EReference)annotationEClass.getEStructuralFeatures().get(1);
@@ -248,6 +251,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getKeyValue()
   {
     return keyValueEClass;
@@ -258,6 +262,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKeyValue_Key()
   {
     return (EAttribute)keyValueEClass.getEStructuralFeatures().get(0);
@@ -268,6 +273,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getKeyValue_Value()
   {
     return (EReference)keyValueEClass.getEStructuralFeatures().get(1);
@@ -278,6 +284,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAnnotationType()
   {
     return annotationTypeEClass;
@@ -288,6 +295,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAnnotationType_Name()
   {
     return (EAttribute)annotationTypeEClass.getEStructuralFeatures().get(0);
@@ -298,6 +306,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAnnotationType_Docu()
   {
     return (EReference)annotationTypeEClass.getEStructuralFeatures().get(1);
@@ -308,6 +317,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAnnotationType_Targets()
   {
     return (EAttribute)annotationTypeEClass.getEStructuralFeatures().get(2);
@@ -318,6 +328,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAnnotationType_Attributes()
   {
     return (EReference)annotationTypeEClass.getEStructuralFeatures().get(3);
@@ -328,6 +339,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAnnotationAttribute()
   {
     return annotationAttributeEClass;
@@ -338,6 +350,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAnnotationAttribute_Optional()
   {
     return (EAttribute)annotationAttributeEClass.getEStructuralFeatures().get(0);
@@ -348,6 +361,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAnnotationAttribute_Name()
   {
     return (EAttribute)annotationAttributeEClass.getEStructuralFeatures().get(1);
@@ -358,6 +372,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSimpleAnnotationAttribute()
   {
     return simpleAnnotationAttributeEClass;
@@ -368,6 +383,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleAnnotationAttribute_Type()
   {
     return (EAttribute)simpleAnnotationAttributeEClass.getEStructuralFeatures().get(0);
@@ -378,6 +394,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEnumAnnotationAttribute()
   {
     return enumAnnotationAttributeEClass;
@@ -388,6 +405,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEnumAnnotationAttribute_Values()
   {
     return (EAttribute)enumAnnotationAttributeEClass.getEStructuralFeatures().get(0);
@@ -398,6 +416,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -408,6 +427,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -418,6 +438,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(1);
@@ -428,6 +449,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDocumentation()
   {
     return documentationEClass;
@@ -438,6 +460,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDocumentation_Lines()
   {
     return (EAttribute)documentationEClass.getEStructuralFeatures().get(0);
@@ -448,6 +471,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLiteralArray()
   {
     return literalArrayEClass;
@@ -458,6 +482,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getLiteralArray_Literals()
   {
     return (EReference)literalArrayEClass.getEStructuralFeatures().get(0);
@@ -468,6 +493,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLiteral()
   {
     return literalEClass;
@@ -478,6 +504,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBooleanLiteral()
   {
     return booleanLiteralEClass;
@@ -488,6 +515,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBooleanLiteral_IsTrue()
   {
     return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
@@ -498,6 +526,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNumberLiteral()
   {
     return numberLiteralEClass;
@@ -508,6 +537,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRealLiteral()
   {
     return realLiteralEClass;
@@ -518,6 +548,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRealLiteral_Value()
   {
     return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
@@ -528,6 +559,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getIntLiteral()
   {
     return intLiteralEClass;
@@ -538,6 +570,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getIntLiteral_Value()
   {
     return (EAttribute)intLiteralEClass.getEStructuralFeatures().get(0);
@@ -548,6 +581,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStringLiteral()
   {
     return stringLiteralEClass;
@@ -558,6 +592,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getStringLiteral_Value()
   {
     return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
@@ -568,6 +603,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getLiteralType()
   {
     return literalTypeEEnum;
@@ -578,6 +614,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BaseFactory getBaseFactory()
   {
     return (BaseFactory)getEFactoryInstance();

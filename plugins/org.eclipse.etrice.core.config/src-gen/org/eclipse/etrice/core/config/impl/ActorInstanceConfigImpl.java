@@ -122,6 +122,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LogicalSystem getRoot()
   {
     if (root != null && root.eIsProxy())
@@ -152,6 +153,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRoot(LogicalSystem newRoot)
   {
     LogicalSystem oldRoot = root;
@@ -165,6 +167,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubSystemRef getSubSystem()
   {
     if (subSystem != null && subSystem.eIsProxy())
@@ -195,6 +198,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSubSystem(SubSystemRef newSubSystem)
   {
     SubSystemRef oldSubSystem = subSystem;
@@ -208,6 +212,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefPath getPath()
   {
     return path;
@@ -235,6 +240,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPath(RefPath newPath)
   {
     if (newPath != path)
@@ -256,6 +262,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AttrInstanceConfig> getAttributes()
   {
     if (attributes == null)
@@ -270,6 +277,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<PortInstanceConfig> getPorts()
   {
     if (ports == null)

@@ -23,7 +23,7 @@ Require-Bundle: org.eclipse.etrice.core.common;visibility:=reexport,
  org.eclipse.xtext.xbase.ui
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.core.common.ui.autoedit,
  org.eclipse.etrice.core.common.ui.contentassist,
  org.eclipse.etrice.core.common.ui.editor,

@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.etrice.core.genmodel.fsm;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.core.genmodel.fsm,
  org.eclipse.etrice.core.genmodel.fsm.fsmgen,
  org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl,

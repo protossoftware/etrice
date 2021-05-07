@@ -31,140 +31,146 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class ExternalPortImpl extends MinimalEObjectImpl.Container implements ExternalPort
 {
   /**
-	 * The cached value of the '{@link #getInterfacePort() <em>Interface Port</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getInterfacePort() <em>Interface Port</em>}' reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getInterfacePort()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getInterfacePort()
+   * @generated
+   * @ordered
+   */
   protected Port interfacePort;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected ExternalPortImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.EXTERNAL_PORT;
-	}
+    return RoomPackage.Literals.EXTERNAL_PORT;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public Port getInterfacePort()
+  public Port getInterfacePort()
   {
-		if (interfacePort != null && interfacePort.eIsProxy()) {
-			InternalEObject oldInterfacePort = (InternalEObject)interfacePort;
-			interfacePort = (Port)eResolveProxy(oldInterfacePort);
-			if (interfacePort != oldInterfacePort) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.EXTERNAL_PORT__INTERFACE_PORT, oldInterfacePort, interfacePort));
-			}
-		}
-		return interfacePort;
-	}
+    if (interfacePort != null && interfacePort.eIsProxy())
+    {
+      InternalEObject oldInterfacePort = (InternalEObject)interfacePort;
+      interfacePort = (Port)eResolveProxy(oldInterfacePort);
+      if (interfacePort != oldInterfacePort)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.EXTERNAL_PORT__INTERFACE_PORT, oldInterfacePort, interfacePort));
+      }
+    }
+    return interfacePort;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Port basicGetInterfacePort()
   {
-		return interfacePort;
-	}
+    return interfacePort;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setInterfacePort(Port newInterfacePort)
+  public void setInterfacePort(Port newInterfacePort)
   {
-		Port oldInterfacePort = interfacePort;
-		interfacePort = newInterfacePort;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.EXTERNAL_PORT__INTERFACE_PORT, oldInterfacePort, interfacePort));
-	}
+    Port oldInterfacePort = interfacePort;
+    interfacePort = newInterfacePort;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.EXTERNAL_PORT__INTERFACE_PORT, oldInterfacePort, interfacePort));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
-				if (resolve) return getInterfacePort();
-				return basicGetInterfacePort();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
+        if (resolve) return getInterfacePort();
+        return basicGetInterfacePort();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
-				setInterfacePort((Port)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
+        setInterfacePort((Port)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
-				setInterfacePort((Port)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
+        setInterfacePort((Port)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
-				return interfacePort != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
+        return interfacePort != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //ExternalPortImpl

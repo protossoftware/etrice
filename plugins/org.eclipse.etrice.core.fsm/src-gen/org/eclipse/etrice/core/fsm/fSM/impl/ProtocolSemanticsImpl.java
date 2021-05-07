@@ -72,6 +72,7 @@ public class ProtocolSemanticsImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SemanticsRule> getRules()
   {
     if (rules == null)

@@ -67,6 +67,7 @@ public class LiteralConfigValueImpl extends ConfigValueImpl implements LiteralCo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Literal getValue()
   {
     return value;
@@ -94,6 +95,7 @@ public class LiteralConfigValueImpl extends ConfigValueImpl implements LiteralCo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(Literal newValue)
   {
     if (newValue != value)

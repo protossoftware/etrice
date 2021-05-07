@@ -134,7 +134,7 @@ ruleModelComponent returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getModelComponentRule());
 										}
-										setWithLastConsumed($current, "abstract", true, "abstract");
+										setWithLastConsumed($current, "abstract", lv_abstract_1_0 != null, "abstract");
 									}
 								)
 								))
@@ -1028,7 +1028,7 @@ ruleDetailCode returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getDetailCodeRule());
 						}
-						setWithLastConsumed($current, "used", true, "{");
+						setWithLastConsumed($current, "used", lv_used_2_0 != null, "{");
 					}
 				)
 			)
@@ -1129,7 +1129,7 @@ ruleTransitionPoint returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getTransitionPointRule());
 					}
-					setWithLastConsumed($current, "handler", true, "handler");
+					setWithLastConsumed($current, "handler", lv_handler_0_0 != null, "handler");
 				}
 			)
 		)?
@@ -3348,7 +3348,7 @@ ruleSimpleAnnotationAttribute returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
 						}
-						setWithLastConsumed($current, "optional", true, "optional");
+						setWithLastConsumed($current, "optional", lv_optional_0_0 != null, "optional");
 					}
 				)
 			)
@@ -3433,7 +3433,7 @@ ruleEnumAnnotationAttribute returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
 						}
-						setWithLastConsumed($current, "optional", true, "optional");
+						setWithLastConsumed($current, "optional", lv_optional_0_0 != null, "optional");
 					}
 				)
 			)
@@ -3694,7 +3694,7 @@ ruleBooleanLiteral returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getBooleanLiteralRule());
 						}
-						setWithLastConsumed($current, "isTrue", true, "true");
+						setWithLastConsumed($current, "isTrue", lv_isTrue_2_0 != null, "true");
 					}
 				)
 			)

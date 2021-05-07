@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.etrice.core.common,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.etrice.generator.base
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.core.etmap,
  org.eclipse.etrice.core.etmap.eTMap,
  org.eclipse.etrice.core.etmap.eTMap.impl,

@@ -117,7 +117,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ETPhysPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -132,7 +132,8 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     if (isInited) return (ETPhysPackage)EPackage.Registry.INSTANCE.getEPackage(ETPhysPackage.eNS_URI);
 
     // Obtain or create and register package
-    ETPhysPackageImpl theETPhysPackage = (ETPhysPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ETPhysPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ETPhysPackageImpl());
+    Object registeredETPhysPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ETPhysPackageImpl theETPhysPackage = registeredETPhysPackage instanceof ETPhysPackageImpl ? (ETPhysPackageImpl)registeredETPhysPackage : new ETPhysPackageImpl();
 
     isInited = true;
 
@@ -148,7 +149,6 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     // Mark meta-data to indicate it can't be changed
     theETPhysPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ETPhysPackage.eNS_URI, theETPhysPackage);
     return theETPhysPackage;
@@ -159,6 +159,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPhysicalModel()
   {
     return physicalModelEClass;
@@ -169,6 +170,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalModel_Name()
   {
     return (EAttribute)physicalModelEClass.getEStructuralFeatures().get(0);
@@ -179,6 +181,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPhysicalModel_Imports()
   {
     return (EReference)physicalModelEClass.getEStructuralFeatures().get(1);
@@ -189,6 +192,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPhysicalModel_Systems()
   {
     return (EReference)physicalModelEClass.getEStructuralFeatures().get(2);
@@ -199,6 +203,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPhysicalModel_NodeClasses()
   {
     return (EReference)physicalModelEClass.getEStructuralFeatures().get(3);
@@ -209,6 +214,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPhysicalModel_RuntimeClasses()
   {
     return (EReference)physicalModelEClass.getEStructuralFeatures().get(4);
@@ -219,6 +225,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPhysicalSystem()
   {
     return physicalSystemEClass;
@@ -229,6 +236,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalSystem_Name()
   {
     return (EAttribute)physicalSystemEClass.getEStructuralFeatures().get(0);
@@ -239,6 +247,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPhysicalSystem_Docu()
   {
     return (EReference)physicalSystemEClass.getEStructuralFeatures().get(1);
@@ -249,6 +258,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPhysicalSystem_NodeRefs()
   {
     return (EReference)physicalSystemEClass.getEStructuralFeatures().get(2);
@@ -259,6 +269,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNodeRef()
   {
     return nodeRefEClass;
@@ -269,6 +280,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNodeRef_Name()
   {
     return (EAttribute)nodeRefEClass.getEStructuralFeatures().get(0);
@@ -279,6 +291,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNodeRef_Type()
   {
     return (EReference)nodeRefEClass.getEStructuralFeatures().get(1);
@@ -289,6 +302,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNodeRef_Docu()
   {
     return (EReference)nodeRefEClass.getEStructuralFeatures().get(2);
@@ -299,6 +313,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNodeClass()
   {
     return nodeClassEClass;
@@ -309,6 +324,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNodeClass_Name()
   {
     return (EAttribute)nodeClassEClass.getEStructuralFeatures().get(0);
@@ -319,6 +335,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNodeClass_Docu()
   {
     return (EReference)nodeClassEClass.getEStructuralFeatures().get(1);
@@ -329,6 +346,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNodeClass_Runtime()
   {
     return (EReference)nodeClassEClass.getEStructuralFeatures().get(2);
@@ -339,6 +357,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNodeClass_Priomin()
   {
     return (EAttribute)nodeClassEClass.getEStructuralFeatures().get(3);
@@ -349,6 +368,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNodeClass_Priomax()
   {
     return (EAttribute)nodeClassEClass.getEStructuralFeatures().get(4);
@@ -359,6 +379,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNodeClass_Threads()
   {
     return (EReference)nodeClassEClass.getEStructuralFeatures().get(5);
@@ -369,6 +390,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPhysicalThread()
   {
     return physicalThreadEClass;
@@ -379,6 +401,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalThread_Default()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(0);
@@ -389,6 +412,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalThread_Name()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(1);
@@ -399,6 +423,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalThread_Execmode()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(2);
@@ -409,6 +434,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalThread_Time()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(3);
@@ -419,6 +445,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalThread_Prio()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(4);
@@ -429,6 +456,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalThread_Stacksize()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(5);
@@ -439,6 +467,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalThread_Msgblocksize()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(6);
@@ -449,6 +478,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPhysicalThread_Msgpoolsize()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(7);
@@ -459,6 +489,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRuntimeClass()
   {
     return runtimeClassEClass;
@@ -469,6 +500,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRuntimeClass_Name()
   {
     return (EAttribute)runtimeClassEClass.getEStructuralFeatures().get(0);
@@ -479,6 +511,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRuntimeClass_Docu()
   {
     return (EReference)runtimeClassEClass.getEStructuralFeatures().get(1);
@@ -489,6 +522,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRuntimeClass_ThreadModel()
   {
     return (EAttribute)runtimeClassEClass.getEStructuralFeatures().get(2);
@@ -499,6 +533,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getExecMode()
   {
     return execModeEEnum;
@@ -509,6 +544,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getThreadModel()
   {
     return threadModelEEnum;
@@ -519,6 +555,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ETPhysFactory getETPhysFactory()
   {
     return (ETPhysFactory)getEFactoryInstance();

@@ -49,380 +49,391 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomModel
 {
   /**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected static final String NAME_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected String name = NAME_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDocu()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
   protected Documentation docu;
 
   /**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAnnotations()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
   protected EList<Annotation> annotations;
 
   /**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getImports()
+   * @generated
+   * @ordered
+   */
   protected EList<Import> imports;
 
   /**
-	 * The cached value of the '{@link #getAnnotationTypes() <em>Annotation Types</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAnnotationTypes() <em>Annotation Types</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAnnotationTypes()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAnnotationTypes()
+   * @generated
+   * @ordered
+   */
   protected EList<AnnotationType> annotationTypes;
 
   /**
-	 * The cached value of the '{@link #getRoomClasses() <em>Room Classes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getRoomClasses() <em>Room Classes</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getRoomClasses()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getRoomClasses()
+   * @generated
+   * @ordered
+   */
   protected EList<RoomClass> roomClasses;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected RoomModelImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.ROOM_MODEL;
-	}
+    return RoomPackage.Literals.ROOM_MODEL;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public String getName()
+  public String getName()
   {
-		return name;
-	}
+    return name;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setName(String newName)
+  public void setName(String newName)
   {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ROOM_MODEL__NAME, oldName, name));
-	}
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ROOM_MODEL__NAME, oldName, name));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public Documentation getDocu()
+  public Documentation getDocu()
   {
-		return docu;
-	}
+    return docu;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
   {
-		Documentation oldDocu = docu;
-		docu = newDocu;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ROOM_MODEL__DOCU, oldDocu, newDocu);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ROOM_MODEL__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setDocu(Documentation newDocu)
+  public void setDocu(Documentation newDocu)
   {
-		if (newDocu != docu) {
-			NotificationChain msgs = null;
-			if (docu != null)
-				msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ROOM_MODEL__DOCU, null, msgs);
-			if (newDocu != null)
-				msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ROOM_MODEL__DOCU, null, msgs);
-			msgs = basicSetDocu(newDocu, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ROOM_MODEL__DOCU, newDocu, newDocu));
-	}
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ROOM_MODEL__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ROOM_MODEL__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ROOM_MODEL__DOCU, newDocu, newDocu));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<Annotation> getAnnotations()
+  public EList<Annotation> getAnnotations()
   {
-		if (annotations == null) {
-			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.ROOM_MODEL__ANNOTATIONS);
-		}
-		return annotations;
-	}
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.ROOM_MODEL__ANNOTATIONS);
+    }
+    return annotations;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<Import> getImports()
+  public EList<Import> getImports()
   {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, RoomPackage.ROOM_MODEL__IMPORTS);
-		}
-		return imports;
-	}
+    if (imports == null)
+    {
+      imports = new EObjectContainmentEList<Import>(Import.class, this, RoomPackage.ROOM_MODEL__IMPORTS);
+    }
+    return imports;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<AnnotationType> getAnnotationTypes()
+  public EList<AnnotationType> getAnnotationTypes()
   {
-		if (annotationTypes == null) {
-			annotationTypes = new EObjectContainmentEList<AnnotationType>(AnnotationType.class, this, RoomPackage.ROOM_MODEL__ANNOTATION_TYPES);
-		}
-		return annotationTypes;
-	}
+    if (annotationTypes == null)
+    {
+      annotationTypes = new EObjectContainmentEList<AnnotationType>(AnnotationType.class, this, RoomPackage.ROOM_MODEL__ANNOTATION_TYPES);
+    }
+    return annotationTypes;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<RoomClass> getRoomClasses()
+  public EList<RoomClass> getRoomClasses()
   {
-		if (roomClasses == null) {
-			roomClasses = new EObjectContainmentEList<RoomClass>(RoomClass.class, this, RoomPackage.ROOM_MODEL__ROOM_CLASSES);
-		}
-		return roomClasses;
-	}
+    if (roomClasses == null)
+    {
+      roomClasses = new EObjectContainmentEList<RoomClass>(RoomClass.class, this, RoomPackage.ROOM_MODEL__ROOM_CLASSES);
+    }
+    return roomClasses;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RoomPackage.ROOM_MODEL__DOCU:
-				return basicSetDocu(null, msgs);
-			case RoomPackage.ROOM_MODEL__ANNOTATIONS:
-				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-			case RoomPackage.ROOM_MODEL__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
-			case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
-				return ((InternalEList<?>)getAnnotationTypes()).basicRemove(otherEnd, msgs);
-			case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
-				return ((InternalEList<?>)getRoomClasses()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ROOM_MODEL__DOCU:
+        return basicSetDocu(null, msgs);
+      case RoomPackage.ROOM_MODEL__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ROOM_MODEL__IMPORTS:
+        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        return ((InternalEList<?>)getAnnotationTypes()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
+        return ((InternalEList<?>)getRoomClasses()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.ROOM_MODEL__NAME:
-				return getName();
-			case RoomPackage.ROOM_MODEL__DOCU:
-				return getDocu();
-			case RoomPackage.ROOM_MODEL__ANNOTATIONS:
-				return getAnnotations();
-			case RoomPackage.ROOM_MODEL__IMPORTS:
-				return getImports();
-			case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
-				return getAnnotationTypes();
-			case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
-				return getRoomClasses();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ROOM_MODEL__NAME:
+        return getName();
+      case RoomPackage.ROOM_MODEL__DOCU:
+        return getDocu();
+      case RoomPackage.ROOM_MODEL__ANNOTATIONS:
+        return getAnnotations();
+      case RoomPackage.ROOM_MODEL__IMPORTS:
+        return getImports();
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        return getAnnotationTypes();
+      case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
+        return getRoomClasses();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.ROOM_MODEL__NAME:
-				setName((String)newValue);
-				return;
-			case RoomPackage.ROOM_MODEL__DOCU:
-				setDocu((Documentation)newValue);
-				return;
-			case RoomPackage.ROOM_MODEL__ANNOTATIONS:
-				getAnnotations().clear();
-				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-				return;
-			case RoomPackage.ROOM_MODEL__IMPORTS:
-				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
-				return;
-			case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
-				getAnnotationTypes().clear();
-				getAnnotationTypes().addAll((Collection<? extends AnnotationType>)newValue);
-				return;
-			case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
-				getRoomClasses().clear();
-				getRoomClasses().addAll((Collection<? extends RoomClass>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ROOM_MODEL__NAME:
+        setName((String)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__DOCU:
+        setDocu((Documentation)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__IMPORTS:
+        getImports().clear();
+        getImports().addAll((Collection<? extends Import>)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        getAnnotationTypes().clear();
+        getAnnotationTypes().addAll((Collection<? extends AnnotationType>)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
+        getRoomClasses().clear();
+        getRoomClasses().addAll((Collection<? extends RoomClass>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.ROOM_MODEL__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case RoomPackage.ROOM_MODEL__DOCU:
-				setDocu((Documentation)null);
-				return;
-			case RoomPackage.ROOM_MODEL__ANNOTATIONS:
-				getAnnotations().clear();
-				return;
-			case RoomPackage.ROOM_MODEL__IMPORTS:
-				getImports().clear();
-				return;
-			case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
-				getAnnotationTypes().clear();
-				return;
-			case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
-				getRoomClasses().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ROOM_MODEL__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case RoomPackage.ROOM_MODEL__DOCU:
+        setDocu((Documentation)null);
+        return;
+      case RoomPackage.ROOM_MODEL__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
+      case RoomPackage.ROOM_MODEL__IMPORTS:
+        getImports().clear();
+        return;
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        getAnnotationTypes().clear();
+        return;
+      case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
+        getRoomClasses().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.ROOM_MODEL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case RoomPackage.ROOM_MODEL__DOCU:
-				return docu != null;
-			case RoomPackage.ROOM_MODEL__ANNOTATIONS:
-				return annotations != null && !annotations.isEmpty();
-			case RoomPackage.ROOM_MODEL__IMPORTS:
-				return imports != null && !imports.isEmpty();
-			case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
-				return annotationTypes != null && !annotationTypes.isEmpty();
-			case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
-				return roomClasses != null && !roomClasses.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ROOM_MODEL__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RoomPackage.ROOM_MODEL__DOCU:
+        return docu != null;
+      case RoomPackage.ROOM_MODEL__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
+      case RoomPackage.ROOM_MODEL__IMPORTS:
+        return imports != null && !imports.isEmpty();
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        return annotationTypes != null && !annotationTypes.isEmpty();
+      case RoomPackage.ROOM_MODEL__ROOM_CLASSES:
+        return roomClasses != null && !roomClasses.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
 
 } //RoomModelImpl

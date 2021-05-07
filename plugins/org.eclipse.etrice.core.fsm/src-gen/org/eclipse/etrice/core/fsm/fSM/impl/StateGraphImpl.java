@@ -120,6 +120,7 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<State> getStates()
   {
     if (states == null)
@@ -134,6 +135,7 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TrPoint> getTrPoints()
   {
     if (trPoints == null)
@@ -148,6 +150,7 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ChoicePoint> getChPoints()
   {
     if (chPoints == null)
@@ -162,6 +165,7 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Transition> getTransitions()
   {
     if (transitions == null)
@@ -176,6 +180,7 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<RefinedTransition> getRefinedTransitions()
   {
     if (refinedTransitions == null)

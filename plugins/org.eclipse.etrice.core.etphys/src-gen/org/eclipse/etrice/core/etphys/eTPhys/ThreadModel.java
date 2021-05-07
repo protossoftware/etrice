@@ -43,10 +43,6 @@ public enum ThreadModel implements Enumerator
   /**
    * The '<em><b>SINGLE THREADED</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>SINGLE THREADED</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #SINGLE_THREADED
    * @model literal="singleThreaded"
@@ -58,10 +54,6 @@ public enum ThreadModel implements Enumerator
   /**
    * The '<em><b>MULTI THREADED</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>MULTI THREADED</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #MULTI_THREADED
    * @model literal="multiThreaded"
@@ -190,6 +182,7 @@ public enum ThreadModel implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -200,6 +193,7 @@ public enum ThreadModel implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -210,6 +204,7 @@ public enum ThreadModel implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

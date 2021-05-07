@@ -101,6 +101,7 @@ public class NodeRefImpl extends MinimalEObjectImpl.Container implements NodeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -111,6 +112,7 @@ public class NodeRefImpl extends MinimalEObjectImpl.Container implements NodeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -124,6 +126,7 @@ public class NodeRefImpl extends MinimalEObjectImpl.Container implements NodeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NodeClass getType()
   {
     if (type != null && type.eIsProxy())
@@ -154,6 +157,7 @@ public class NodeRefImpl extends MinimalEObjectImpl.Container implements NodeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(NodeClass newType)
   {
     NodeClass oldType = type;
@@ -167,6 +171,7 @@ public class NodeRefImpl extends MinimalEObjectImpl.Container implements NodeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -194,6 +199,7 @@ public class NodeRefImpl extends MinimalEObjectImpl.Container implements NodeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -323,7 +329,7 @@ public class NodeRefImpl extends MinimalEObjectImpl.Container implements NodeRef
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

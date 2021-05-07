@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.etrice.generator.fsmtest;visibility:=reexport,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.generator.ui.contentassist,
  org.eclipse.etrice.generator.ui.contentassist.antlr,
  org.eclipse.etrice.generator.ui.internal

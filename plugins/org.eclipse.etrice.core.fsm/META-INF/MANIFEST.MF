@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.etrice.core.common,
  com.google.guava,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.core.fsm,
  org.eclipse.etrice.core.fsm.fSM,
  org.eclipse.etrice.core.fsm.fSM.impl,

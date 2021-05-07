@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.etrice.generator;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse eTrice
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.generator.base,
  org.eclipse.etrice.generator.generic
 Require-Bundle: org.eclipse.etrice.generator.base,

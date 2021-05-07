@@ -4,7 +4,7 @@ Bundle-Name: Detail Code Tools for FSM
 Bundle-SymbolicName: org.eclipse.etrice.dctools.fsm
 Bundle-Version: 0.0.0.qualifier
 Automatic-Module-Name: org.eclipse.etrice.dctools.fsm
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: Eclipse eTrice
 Require-Bundle: org.eclipse.jface.text,
  org.eclipse.xtext.xbase.lib,

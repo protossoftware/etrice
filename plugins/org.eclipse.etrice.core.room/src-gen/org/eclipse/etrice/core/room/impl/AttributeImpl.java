@@ -38,415 +38,424 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class AttributeImpl extends MinimalEObjectImpl.Container implements Attribute
 {
   /**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected static final String NAME_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected String name = NAME_EDEFAULT;
 
   /**
-	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getSize()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getSize()
+   * @generated
+   * @ordered
+   */
   protected static final int SIZE_EDEFAULT = 0;
 
   /**
-	 * The cached value of the '{@link #getSize() <em>Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getSize() <em>Size</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getSize()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getSize()
+   * @generated
+   * @ordered
+   */
   protected int size = SIZE_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
   protected RefableType type;
 
   /**
-	 * The default value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDefaultValueLiteral()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDefaultValueLiteral()
+   * @generated
+   * @ordered
+   */
   protected static final String DEFAULT_VALUE_LITERAL_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDefaultValueLiteral()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDefaultValueLiteral()
+   * @generated
+   * @ordered
+   */
   protected String defaultValueLiteral = DEFAULT_VALUE_LITERAL_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDocu()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
   protected Documentation docu;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected AttributeImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.ATTRIBUTE;
-	}
+    return RoomPackage.Literals.ATTRIBUTE;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public String getName()
+  public String getName()
   {
-		return name;
-	}
+    return name;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setName(String newName)
+  public void setName(String newName)
   {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__NAME, oldName, name));
-	}
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__NAME, oldName, name));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public int getSize()
+  public int getSize()
   {
-		return size;
-	}
+    return size;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setSize(int newSize)
+  public void setSize(int newSize)
   {
-		int oldSize = size;
-		size = newSize;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__SIZE, oldSize, size));
-	}
+    int oldSize = size;
+    size = newSize;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__SIZE, oldSize, size));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public RefableType getType()
+  public RefableType getType()
   {
-		return type;
-	}
+    return type;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetType(RefableType newType, NotificationChain msgs)
   {
-		RefableType oldType = type;
-		type = newType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__TYPE, oldType, newType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    RefableType oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setType(RefableType newType)
+  public void setType(RefableType newType)
   {
-		if (newType != type) {
-			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__TYPE, newType, newType));
-	}
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__TYPE, newType, newType));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public String getDefaultValueLiteral()
+  public String getDefaultValueLiteral()
   {
-		return defaultValueLiteral;
-	}
+    return defaultValueLiteral;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setDefaultValueLiteral(String newDefaultValueLiteral)
+  public void setDefaultValueLiteral(String newDefaultValueLiteral)
   {
-		String oldDefaultValueLiteral = defaultValueLiteral;
-		defaultValueLiteral = newDefaultValueLiteral;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL, oldDefaultValueLiteral, defaultValueLiteral));
-	}
+    String oldDefaultValueLiteral = defaultValueLiteral;
+    defaultValueLiteral = newDefaultValueLiteral;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL, oldDefaultValueLiteral, defaultValueLiteral));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public Documentation getDocu()
+  public Documentation getDocu()
   {
-		return docu;
-	}
+    return docu;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
   {
-		Documentation oldDocu = docu;
-		docu = newDocu;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DOCU, oldDocu, newDocu);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setDocu(Documentation newDocu)
+  public void setDocu(Documentation newDocu)
   {
-		if (newDocu != docu) {
-			NotificationChain msgs = null;
-			if (docu != null)
-				msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__DOCU, null, msgs);
-			if (newDocu != null)
-				msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__DOCU, null, msgs);
-			msgs = basicSetDocu(newDocu, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DOCU, newDocu, newDocu));
-	}
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__DOCU, newDocu, newDocu));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RoomPackage.ATTRIBUTE__TYPE:
-				return basicSetType(null, msgs);
-			case RoomPackage.ATTRIBUTE__DOCU:
-				return basicSetDocu(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ATTRIBUTE__TYPE:
+        return basicSetType(null, msgs);
+      case RoomPackage.ATTRIBUTE__DOCU:
+        return basicSetDocu(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.ATTRIBUTE__NAME:
-				return getName();
-			case RoomPackage.ATTRIBUTE__SIZE:
-				return getSize();
-			case RoomPackage.ATTRIBUTE__TYPE:
-				return getType();
-			case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
-				return getDefaultValueLiteral();
-			case RoomPackage.ATTRIBUTE__DOCU:
-				return getDocu();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ATTRIBUTE__NAME:
+        return getName();
+      case RoomPackage.ATTRIBUTE__SIZE:
+        return getSize();
+      case RoomPackage.ATTRIBUTE__TYPE:
+        return getType();
+      case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
+        return getDefaultValueLiteral();
+      case RoomPackage.ATTRIBUTE__DOCU:
+        return getDocu();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.ATTRIBUTE__NAME:
-				setName((String)newValue);
-				return;
-			case RoomPackage.ATTRIBUTE__SIZE:
-				setSize((Integer)newValue);
-				return;
-			case RoomPackage.ATTRIBUTE__TYPE:
-				setType((RefableType)newValue);
-				return;
-			case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
-				setDefaultValueLiteral((String)newValue);
-				return;
-			case RoomPackage.ATTRIBUTE__DOCU:
-				setDocu((Documentation)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ATTRIBUTE__NAME:
+        setName((String)newValue);
+        return;
+      case RoomPackage.ATTRIBUTE__SIZE:
+        setSize((Integer)newValue);
+        return;
+      case RoomPackage.ATTRIBUTE__TYPE:
+        setType((RefableType)newValue);
+        return;
+      case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
+        setDefaultValueLiteral((String)newValue);
+        return;
+      case RoomPackage.ATTRIBUTE__DOCU:
+        setDocu((Documentation)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.ATTRIBUTE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case RoomPackage.ATTRIBUTE__SIZE:
-				setSize(SIZE_EDEFAULT);
-				return;
-			case RoomPackage.ATTRIBUTE__TYPE:
-				setType((RefableType)null);
-				return;
-			case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
-				setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
-				return;
-			case RoomPackage.ATTRIBUTE__DOCU:
-				setDocu((Documentation)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ATTRIBUTE__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case RoomPackage.ATTRIBUTE__SIZE:
+        setSize(SIZE_EDEFAULT);
+        return;
+      case RoomPackage.ATTRIBUTE__TYPE:
+        setType((RefableType)null);
+        return;
+      case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
+        setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
+        return;
+      case RoomPackage.ATTRIBUTE__DOCU:
+        setDocu((Documentation)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.ATTRIBUTE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case RoomPackage.ATTRIBUTE__SIZE:
-				return size != SIZE_EDEFAULT;
-			case RoomPackage.ATTRIBUTE__TYPE:
-				return type != null;
-			case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
-				return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null : !DEFAULT_VALUE_LITERAL_EDEFAULT.equals(defaultValueLiteral);
-			case RoomPackage.ATTRIBUTE__DOCU:
-				return docu != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.ATTRIBUTE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RoomPackage.ATTRIBUTE__SIZE:
+        return size != SIZE_EDEFAULT;
+      case RoomPackage.ATTRIBUTE__TYPE:
+        return type != null;
+      case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
+        return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null : !DEFAULT_VALUE_LITERAL_EDEFAULT.equals(defaultValueLiteral);
+      case RoomPackage.ATTRIBUTE__DOCU:
+        return docu != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", size: ");
-		result.append(size);
-		result.append(", defaultValueLiteral: ");
-		result.append(defaultValueLiteral);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(", size: ");
+    result.append(size);
+    result.append(", defaultValueLiteral: ");
+    result.append(defaultValueLiteral);
+    result.append(')');
+    return result.toString();
+  }
 
 } //AttributeImpl

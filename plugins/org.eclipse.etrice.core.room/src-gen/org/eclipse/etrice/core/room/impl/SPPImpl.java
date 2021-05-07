@@ -18,24 +18,24 @@ import org.eclipse.etrice.core.room.SPP;
 public class SPPImpl extends InterfaceItemImpl implements SPP
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected SPPImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.SPP;
-	}
+    return RoomPackage.Literals.SPP;
+  }
 
 } //SPPImpl

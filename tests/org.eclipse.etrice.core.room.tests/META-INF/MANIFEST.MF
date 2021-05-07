@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Room Core Tests
 Bundle-SymbolicName: org.eclipse.etrice.core.room.tests
 Bundle-Version: 0.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: Eclipse eTrice
 Require-Bundle: org.eclipse.etrice.core.room,
   org.eclipse.etrice.core.common,

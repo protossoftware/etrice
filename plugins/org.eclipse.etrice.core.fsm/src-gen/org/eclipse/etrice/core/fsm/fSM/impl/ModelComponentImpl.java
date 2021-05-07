@@ -145,6 +145,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isAbstract()
   {
     return abstract_;
@@ -155,6 +156,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
@@ -168,6 +170,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ComponentCommunicationType getCommType()
   {
     return commType;
@@ -178,6 +181,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCommType(ComponentCommunicationType newCommType)
   {
     ComponentCommunicationType oldCommType = commType;
@@ -191,6 +195,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getComponentName()
   {
     return componentName;
@@ -201,6 +206,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setComponentName(String newComponentName)
   {
     String oldComponentName = componentName;
@@ -214,6 +220,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelComponent getBase()
   {
     if (base != null && base.eIsProxy())
@@ -244,6 +251,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBase(ModelComponent newBase)
   {
     ModelComponent oldBase = base;
@@ -257,6 +265,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StateGraph getStateMachine()
   {
     return stateMachine;
@@ -284,6 +293,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStateMachine(StateGraph newStateMachine)
   {
     if (newStateMachine != stateMachine)
@@ -305,6 +315,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractInterfaceItem> getAbstractInterfaceItems()
   {
     // TODO: implement this method
@@ -317,6 +328,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractInterfaceItem> getAllAbstractInterfaceItems()
   {
     // TODO: implement this method
@@ -457,7 +469,7 @@ public class ModelComponentImpl extends MinimalEObjectImpl.Container implements 
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (abstract: ");
     result.append(abstract_);
     result.append(", commType: ");

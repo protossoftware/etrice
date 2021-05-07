@@ -24,7 +24,7 @@ Require-Bundle:  org.eclipse.etrice.core.room.ui,
   org.eclipse.etrice.expressions.ui,
   org.eclipse.etrice.generator
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: Eclipse eTrice
 Export-Package: org.eclipse.etrice.ui.behavior,
  org.eclipse.etrice.ui.behavior.editor,

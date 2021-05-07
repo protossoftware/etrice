@@ -41,267 +41,273 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class PortImpl extends InterfaceItemImpl implements Port
 {
   /**
-	 * The default value of the '{@link #isConjugated() <em>Conjugated</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #isConjugated() <em>Conjugated</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #isConjugated()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #isConjugated()
+   * @generated
+   * @ordered
+   */
   protected static final boolean CONJUGATED_EDEFAULT = false;
 
   /**
-	 * The cached value of the '{@link #isConjugated() <em>Conjugated</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #isConjugated() <em>Conjugated</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #isConjugated()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #isConjugated()
+   * @generated
+   * @ordered
+   */
   protected boolean conjugated = CONJUGATED_EDEFAULT;
 
   /**
-	 * The default value of the '{@link #getMultiplicity() <em>Multiplicity</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getMultiplicity() <em>Multiplicity</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getMultiplicity()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getMultiplicity()
+   * @generated
+   * @ordered
+   */
   protected static final int MULTIPLICITY_EDEFAULT = 1;
 
   /**
-	 * The cached value of the '{@link #getMultiplicity() <em>Multiplicity</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getMultiplicity() <em>Multiplicity</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getMultiplicity()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getMultiplicity()
+   * @generated
+   * @ordered
+   */
   protected int multiplicity = MULTIPLICITY_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAnnotations()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
   protected EList<Annotation> annotations;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected PortImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.PORT;
-	}
+    return RoomPackage.Literals.PORT;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public boolean isConjugated()
+  public boolean isConjugated()
   {
-		return conjugated;
-	}
+    return conjugated;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setConjugated(boolean newConjugated)
+  public void setConjugated(boolean newConjugated)
   {
-		boolean oldConjugated = conjugated;
-		conjugated = newConjugated;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__CONJUGATED, oldConjugated, conjugated));
-	}
+    boolean oldConjugated = conjugated;
+    conjugated = newConjugated;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__CONJUGATED, oldConjugated, conjugated));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public int getMultiplicity()
+  public int getMultiplicity()
   {
-		return multiplicity;
-	}
+    return multiplicity;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setMultiplicity(int newMultiplicity)
+  public void setMultiplicity(int newMultiplicity)
   {
-		int oldMultiplicity = multiplicity;
-		multiplicity = newMultiplicity;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__MULTIPLICITY, oldMultiplicity, multiplicity));
-	}
+    int oldMultiplicity = multiplicity;
+    multiplicity = newMultiplicity;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__MULTIPLICITY, oldMultiplicity, multiplicity));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<Annotation> getAnnotations()
+  public EList<Annotation> getAnnotations()
   {
-		if (annotations == null) {
-			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.PORT__ANNOTATIONS);
-		}
-		return annotations;
-	}
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.PORT__ANNOTATIONS);
+    }
+    return annotations;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public boolean isReplicated()
+  public boolean isReplicated()
   {
-		return multiplicity>1 || multiplicity==-1;
-	}
+    return multiplicity>1 || multiplicity==-1;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RoomPackage.PORT__ANNOTATIONS:
-				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.PORT__CONJUGATED:
-				return isConjugated();
-			case RoomPackage.PORT__MULTIPLICITY:
-				return getMultiplicity();
-			case RoomPackage.PORT__ANNOTATIONS:
-				return getAnnotations();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT__CONJUGATED:
+        return isConjugated();
+      case RoomPackage.PORT__MULTIPLICITY:
+        return getMultiplicity();
+      case RoomPackage.PORT__ANNOTATIONS:
+        return getAnnotations();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.PORT__CONJUGATED:
-				setConjugated((Boolean)newValue);
-				return;
-			case RoomPackage.PORT__MULTIPLICITY:
-				setMultiplicity((Integer)newValue);
-				return;
-			case RoomPackage.PORT__ANNOTATIONS:
-				getAnnotations().clear();
-				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT__CONJUGATED:
+        setConjugated((Boolean)newValue);
+        return;
+      case RoomPackage.PORT__MULTIPLICITY:
+        setMultiplicity((Integer)newValue);
+        return;
+      case RoomPackage.PORT__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.PORT__CONJUGATED:
-				setConjugated(CONJUGATED_EDEFAULT);
-				return;
-			case RoomPackage.PORT__MULTIPLICITY:
-				setMultiplicity(MULTIPLICITY_EDEFAULT);
-				return;
-			case RoomPackage.PORT__ANNOTATIONS:
-				getAnnotations().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT__CONJUGATED:
+        setConjugated(CONJUGATED_EDEFAULT);
+        return;
+      case RoomPackage.PORT__MULTIPLICITY:
+        setMultiplicity(MULTIPLICITY_EDEFAULT);
+        return;
+      case RoomPackage.PORT__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.PORT__CONJUGATED:
-				return conjugated != CONJUGATED_EDEFAULT;
-			case RoomPackage.PORT__MULTIPLICITY:
-				return multiplicity != MULTIPLICITY_EDEFAULT;
-			case RoomPackage.PORT__ANNOTATIONS:
-				return annotations != null && !annotations.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT__CONJUGATED:
+        return conjugated != CONJUGATED_EDEFAULT;
+      case RoomPackage.PORT__MULTIPLICITY:
+        return multiplicity != MULTIPLICITY_EDEFAULT;
+      case RoomPackage.PORT__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (conjugated: ");
-		result.append(conjugated);
-		result.append(", multiplicity: ");
-		result.append(multiplicity);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (conjugated: ");
+    result.append(conjugated);
+    result.append(", multiplicity: ");
+    result.append(multiplicity);
+    result.append(')');
+    return result.toString();
+  }
 
 } //PortImpl

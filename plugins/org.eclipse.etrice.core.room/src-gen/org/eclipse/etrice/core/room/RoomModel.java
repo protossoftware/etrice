@@ -42,121 +42,113 @@ import org.eclipse.etrice.core.common.base.Import;
 public interface RoomModel extends RoomElement
 {
   /**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>The model name is a dot separated fully qualified name and is
-	 * used to provide a name space. The generators may use that also
-	 * to place the generated code into separate directories.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Name()
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>The model name is a dot separated fully qualified name and is
+   * used to provide a name space. The generators may use that also
+   * to place the generated code into separate directories.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Name()
+   * @model
+   * @generated
+   */
   String getName();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.RoomModel#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.RoomModel#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
   void setName(String value);
 
   /**
-	 * Returns the value of the '<em><b>Docu</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is an optional documentation.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Docu</em>' containment reference.
-	 * @see #setDocu(Documentation)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Docu()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Docu</em>' containment reference.
+   * @see #setDocu(Documentation)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Docu()
+   * @model containment="true"
+   * @generated
+   */
   Documentation getDocu();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.RoomModel#getDocu <em>Docu</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.RoomModel#getDocu <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Docu</em>' containment reference.
-	 * @see #getDocu()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Docu</em>' containment reference.
+   * @see #getDocu()
+   * @generated
+   */
   void setDocu(Documentation value);
 
   /**
-	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
+   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Annotations</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Annotations()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Annotations()
+   * @model containment="true"
+   * @generated
+   */
   EList<Annotation> getAnnotations();
 
   /**
-	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.common.base.Import}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Import}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is a list of all imported models.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Imports()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all imported models.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Imports</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Imports()
+   * @model containment="true"
+   * @generated
+   */
   EList<Import> getImports();
 
   /**
-	 * Returns the value of the '<em><b>Annotation Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.common.base.AnnotationType}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotation Types</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
+   * Returns the value of the '<em><b>Annotation Types</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.AnnotationType}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Annotation Types</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_AnnotationTypes()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Annotation Types</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_AnnotationTypes()
+   * @model containment="true"
+   * @generated
+   */
   EList<AnnotationType> getAnnotationTypes();
 
   /**
-	 * Returns the value of the '<em><b>Room Classes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.room.RoomClass}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Room Classes</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.RoomClass}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is a list of all room classes defined by this model.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Room Classes</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_RoomClasses()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all room classes defined by this model.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Room Classes</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_RoomClasses()
+   * @model containment="true"
+   * @generated
+   */
   EList<RoomClass> getRoomClasses();
 
 } // RoomModel

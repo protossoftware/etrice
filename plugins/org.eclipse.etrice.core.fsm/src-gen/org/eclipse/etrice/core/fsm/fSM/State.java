@@ -70,10 +70,6 @@ public interface State extends StateGraphNode
    * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Annotations</em>' containment reference list.
    * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getState_Annotations()
@@ -194,7 +190,6 @@ public interface State extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return (this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.SimpleState%&gt;)? ((SimpleState)this).getName() :(this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.RefinedState%&gt;)? (((RefinedState)this).getTarget()==null? \"\":((RefinedState)this).getTarget().getName()) :\"\";'"
    * @generated
    */
   String getName();

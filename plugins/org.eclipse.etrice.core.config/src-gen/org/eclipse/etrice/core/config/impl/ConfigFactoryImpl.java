@@ -93,6 +93,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ConfigModel createConfigModel()
   {
     ConfigModelImpl configModel = new ConfigModelImpl();
@@ -104,6 +105,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ConfigElement createConfigElement()
   {
     ConfigElementImpl configElement = new ConfigElementImpl();
@@ -115,6 +117,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubSystemConfig createSubSystemConfig()
   {
     SubSystemConfigImpl subSystemConfig = new SubSystemConfigImpl();
@@ -126,6 +129,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DynamicConfig createDynamicConfig()
   {
     DynamicConfigImpl dynamicConfig = new DynamicConfigImpl();
@@ -137,6 +141,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorClassConfig createActorClassConfig()
   {
     ActorClassConfigImpl actorClassConfig = new ActorClassConfigImpl();
@@ -148,6 +153,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorInstanceConfig createActorInstanceConfig()
   {
     ActorInstanceConfigImpl actorInstanceConfig = new ActorInstanceConfigImpl();
@@ -159,6 +165,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolClassConfig createProtocolClassConfig()
   {
     ProtocolClassConfigImpl protocolClassConfig = new ProtocolClassConfigImpl();
@@ -170,6 +177,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PortClassConfig createPortClassConfig()
   {
     PortClassConfigImpl portClassConfig = new PortClassConfigImpl();
@@ -181,6 +189,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PortInstanceConfig createPortInstanceConfig()
   {
     PortInstanceConfigImpl portInstanceConfig = new PortInstanceConfigImpl();
@@ -192,6 +201,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AttrConfig createAttrConfig()
   {
     AttrConfigImpl attrConfig = new AttrConfigImpl();
@@ -203,6 +213,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AttrClassConfig createAttrClassConfig()
   {
     AttrClassConfigImpl attrClassConfig = new AttrClassConfigImpl();
@@ -214,6 +225,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AttrInstanceConfig createAttrInstanceConfig()
   {
     AttrInstanceConfigImpl attrInstanceConfig = new AttrInstanceConfigImpl();
@@ -225,6 +237,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ConfigValueArray createConfigValueArray()
   {
     ConfigValueArrayImpl configValueArray = new ConfigValueArrayImpl();
@@ -236,6 +249,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ConfigValue createConfigValue()
   {
     ConfigValueImpl configValue = new ConfigValueImpl();
@@ -247,6 +261,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LiteralConfigValue createLiteralConfigValue()
   {
     LiteralConfigValueImpl literalConfigValue = new LiteralConfigValueImpl();
@@ -258,6 +273,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumConfigValue createEnumConfigValue()
   {
     EnumConfigValueImpl enumConfigValue = new EnumConfigValueImpl();
@@ -269,6 +285,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefPath createRefPath()
   {
     RefPathImpl refPath = new RefPathImpl();
@@ -280,6 +297,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefSegment createRefSegment()
   {
     RefSegmentImpl refSegment = new RefSegmentImpl();
@@ -291,6 +309,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ConfigPackage getConfigPackage()
   {
     return (ConfigPackage)getEPackage();

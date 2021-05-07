@@ -48,409 +48,421 @@ import org.eclipse.etrice.core.room.VarDecl;
 public class OperationImpl extends MinimalEObjectImpl.Container implements Operation
 {
   /**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected static final String NAME_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected String name = NAME_EDEFAULT;
 
   /**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getArguments()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getArguments()
+   * @generated
+   * @ordered
+   */
   protected EList<VarDecl> arguments;
 
   /**
-	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getReturnType()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getReturnType()
+   * @generated
+   * @ordered
+   */
   protected RefableType returnType;
 
   /**
-	 * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDocu()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDocu()
+   * @generated
+   * @ordered
+   */
   protected Documentation docu;
 
   /**
-	 * The cached value of the '{@link #getDetailCode() <em>Detail Code</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDetailCode() <em>Detail Code</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getDetailCode()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDetailCode()
+   * @generated
+   * @ordered
+   */
   protected DetailCode detailCode;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected OperationImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.OPERATION;
-	}
+    return RoomPackage.Literals.OPERATION;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public String getName()
+  public String getName()
   {
-		return name;
-	}
+    return name;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setName(String newName)
+  public void setName(String newName)
   {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__NAME, oldName, name));
-	}
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__NAME, oldName, name));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<VarDecl> getArguments()
+  public EList<VarDecl> getArguments()
   {
-		if (arguments == null) {
-			arguments = new EObjectContainmentEList<VarDecl>(VarDecl.class, this, RoomPackage.OPERATION__ARGUMENTS);
-		}
-		return arguments;
-	}
+    if (arguments == null)
+    {
+      arguments = new EObjectContainmentEList<VarDecl>(VarDecl.class, this, RoomPackage.OPERATION__ARGUMENTS);
+    }
+    return arguments;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public RefableType getReturnType()
+  public RefableType getReturnType()
   {
-		return returnType;
-	}
+    return returnType;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetReturnType(RefableType newReturnType, NotificationChain msgs)
   {
-		RefableType oldReturnType = returnType;
-		returnType = newReturnType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__RETURN_TYPE, oldReturnType, newReturnType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    RefableType oldReturnType = returnType;
+    returnType = newReturnType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__RETURN_TYPE, oldReturnType, newReturnType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setReturnType(RefableType newReturnType)
+  public void setReturnType(RefableType newReturnType)
   {
-		if (newReturnType != returnType) {
-			NotificationChain msgs = null;
-			if (returnType != null)
-				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__RETURN_TYPE, null, msgs);
-			if (newReturnType != null)
-				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__RETURN_TYPE, null, msgs);
-			msgs = basicSetReturnType(newReturnType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__RETURN_TYPE, newReturnType, newReturnType));
-	}
+    if (newReturnType != returnType)
+    {
+      NotificationChain msgs = null;
+      if (returnType != null)
+        msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__RETURN_TYPE, null, msgs);
+      if (newReturnType != null)
+        msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__RETURN_TYPE, null, msgs);
+      msgs = basicSetReturnType(newReturnType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__RETURN_TYPE, newReturnType, newReturnType));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public Documentation getDocu()
+  public Documentation getDocu()
   {
-		return docu;
-	}
+    return docu;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
   {
-		Documentation oldDocu = docu;
-		docu = newDocu;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DOCU, oldDocu, newDocu);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Documentation oldDocu = docu;
+    docu = newDocu;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DOCU, oldDocu, newDocu);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setDocu(Documentation newDocu)
+  public void setDocu(Documentation newDocu)
   {
-		if (newDocu != docu) {
-			NotificationChain msgs = null;
-			if (docu != null)
-				msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DOCU, null, msgs);
-			if (newDocu != null)
-				msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DOCU, null, msgs);
-			msgs = basicSetDocu(newDocu, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DOCU, newDocu, newDocu));
-	}
+    if (newDocu != docu)
+    {
+      NotificationChain msgs = null;
+      if (docu != null)
+        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DOCU, null, msgs);
+      if (newDocu != null)
+        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DOCU, null, msgs);
+      msgs = basicSetDocu(newDocu, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DOCU, newDocu, newDocu));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public DetailCode getDetailCode()
+  public DetailCode getDetailCode()
   {
-		return detailCode;
-	}
+    return detailCode;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetDetailCode(DetailCode newDetailCode, NotificationChain msgs)
   {
-		DetailCode oldDetailCode = detailCode;
-		detailCode = newDetailCode;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DETAIL_CODE, oldDetailCode, newDetailCode);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    DetailCode oldDetailCode = detailCode;
+    detailCode = newDetailCode;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DETAIL_CODE, oldDetailCode, newDetailCode);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setDetailCode(DetailCode newDetailCode)
+  public void setDetailCode(DetailCode newDetailCode)
   {
-		if (newDetailCode != detailCode) {
-			NotificationChain msgs = null;
-			if (detailCode != null)
-				msgs = ((InternalEObject)detailCode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DETAIL_CODE, null, msgs);
-			if (newDetailCode != null)
-				msgs = ((InternalEObject)newDetailCode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DETAIL_CODE, null, msgs);
-			msgs = basicSetDetailCode(newDetailCode, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DETAIL_CODE, newDetailCode, newDetailCode));
-	}
+    if (newDetailCode != detailCode)
+    {
+      NotificationChain msgs = null;
+      if (detailCode != null)
+        msgs = ((InternalEObject)detailCode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DETAIL_CODE, null, msgs);
+      if (newDetailCode != null)
+        msgs = ((InternalEObject)newDetailCode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.OPERATION__DETAIL_CODE, null, msgs);
+      msgs = basicSetDetailCode(newDetailCode, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.OPERATION__DETAIL_CODE, newDetailCode, newDetailCode));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RoomPackage.OPERATION__ARGUMENTS:
-				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
-			case RoomPackage.OPERATION__RETURN_TYPE:
-				return basicSetReturnType(null, msgs);
-			case RoomPackage.OPERATION__DOCU:
-				return basicSetDocu(null, msgs);
-			case RoomPackage.OPERATION__DETAIL_CODE:
-				return basicSetDetailCode(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.OPERATION__ARGUMENTS:
+        return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+      case RoomPackage.OPERATION__RETURN_TYPE:
+        return basicSetReturnType(null, msgs);
+      case RoomPackage.OPERATION__DOCU:
+        return basicSetDocu(null, msgs);
+      case RoomPackage.OPERATION__DETAIL_CODE:
+        return basicSetDetailCode(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.OPERATION__NAME:
-				return getName();
-			case RoomPackage.OPERATION__ARGUMENTS:
-				return getArguments();
-			case RoomPackage.OPERATION__RETURN_TYPE:
-				return getReturnType();
-			case RoomPackage.OPERATION__DOCU:
-				return getDocu();
-			case RoomPackage.OPERATION__DETAIL_CODE:
-				return getDetailCode();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.OPERATION__NAME:
+        return getName();
+      case RoomPackage.OPERATION__ARGUMENTS:
+        return getArguments();
+      case RoomPackage.OPERATION__RETURN_TYPE:
+        return getReturnType();
+      case RoomPackage.OPERATION__DOCU:
+        return getDocu();
+      case RoomPackage.OPERATION__DETAIL_CODE:
+        return getDetailCode();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.OPERATION__NAME:
-				setName((String)newValue);
-				return;
-			case RoomPackage.OPERATION__ARGUMENTS:
-				getArguments().clear();
-				getArguments().addAll((Collection<? extends VarDecl>)newValue);
-				return;
-			case RoomPackage.OPERATION__RETURN_TYPE:
-				setReturnType((RefableType)newValue);
-				return;
-			case RoomPackage.OPERATION__DOCU:
-				setDocu((Documentation)newValue);
-				return;
-			case RoomPackage.OPERATION__DETAIL_CODE:
-				setDetailCode((DetailCode)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.OPERATION__NAME:
+        setName((String)newValue);
+        return;
+      case RoomPackage.OPERATION__ARGUMENTS:
+        getArguments().clear();
+        getArguments().addAll((Collection<? extends VarDecl>)newValue);
+        return;
+      case RoomPackage.OPERATION__RETURN_TYPE:
+        setReturnType((RefableType)newValue);
+        return;
+      case RoomPackage.OPERATION__DOCU:
+        setDocu((Documentation)newValue);
+        return;
+      case RoomPackage.OPERATION__DETAIL_CODE:
+        setDetailCode((DetailCode)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.OPERATION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case RoomPackage.OPERATION__ARGUMENTS:
-				getArguments().clear();
-				return;
-			case RoomPackage.OPERATION__RETURN_TYPE:
-				setReturnType((RefableType)null);
-				return;
-			case RoomPackage.OPERATION__DOCU:
-				setDocu((Documentation)null);
-				return;
-			case RoomPackage.OPERATION__DETAIL_CODE:
-				setDetailCode((DetailCode)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.OPERATION__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case RoomPackage.OPERATION__ARGUMENTS:
+        getArguments().clear();
+        return;
+      case RoomPackage.OPERATION__RETURN_TYPE:
+        setReturnType((RefableType)null);
+        return;
+      case RoomPackage.OPERATION__DOCU:
+        setDocu((Documentation)null);
+        return;
+      case RoomPackage.OPERATION__DETAIL_CODE:
+        setDetailCode((DetailCode)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.OPERATION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case RoomPackage.OPERATION__ARGUMENTS:
-				return arguments != null && !arguments.isEmpty();
-			case RoomPackage.OPERATION__RETURN_TYPE:
-				return returnType != null;
-			case RoomPackage.OPERATION__DOCU:
-				return docu != null;
-			case RoomPackage.OPERATION__DETAIL_CODE:
-				return detailCode != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.OPERATION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RoomPackage.OPERATION__ARGUMENTS:
+        return arguments != null && !arguments.isEmpty();
+      case RoomPackage.OPERATION__RETURN_TYPE:
+        return returnType != null;
+      case RoomPackage.OPERATION__DOCU:
+        return docu != null;
+      case RoomPackage.OPERATION__DETAIL_CODE:
+        return detailCode != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
 
 } //OperationImpl

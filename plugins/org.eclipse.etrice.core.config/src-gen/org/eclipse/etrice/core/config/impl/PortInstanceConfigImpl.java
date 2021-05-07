@@ -87,6 +87,7 @@ public class PortInstanceConfigImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InterfaceItem getItem()
   {
     if (item != null && item.eIsProxy())
@@ -117,6 +118,7 @@ public class PortInstanceConfigImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setItem(InterfaceItem newItem)
   {
     InterfaceItem oldItem = item;
@@ -130,6 +132,7 @@ public class PortInstanceConfigImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AttrInstanceConfig> getAttributes()
   {
     if (attributes == null)

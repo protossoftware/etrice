@@ -85,6 +85,7 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getMsg()
   {
     if (msg != null && msg.eIsProxy())
@@ -115,6 +116,7 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMsg(EObject newMsg)
   {
     EObject oldMsg = msg;
@@ -128,6 +130,7 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SemanticsRule> getFollowUps()
   {
     if (followUps == null)

@@ -30,63 +30,55 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 public interface ClassStructor extends RoomElement
 {
   /**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getClassStructor_Name()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getClassStructor_Name()
+   * @model
+   * @generated
+   */
   String getName();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.ClassStructor#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ClassStructor#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
   void setName(String value);
 
   /**
-	 * Returns the value of the '<em><b>Detail Code</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Detail Code</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
+   * Returns the value of the '<em><b>Detail Code</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Detail Code</em>' containment reference.
-	 * @see #setDetailCode(DetailCode)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getClassStructor_DetailCode()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Detail Code</em>' containment reference.
+   * @see #setDetailCode(DetailCode)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getClassStructor_DetailCode()
+   * @model containment="true"
+   * @generated
+   */
   DetailCode getDetailCode();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.ClassStructor#getDetailCode <em>Detail Code</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ClassStructor#getDetailCode <em>Detail Code</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Detail Code</em>' containment reference.
-	 * @see #getDetailCode()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Detail Code</em>' containment reference.
+   * @see #getDetailCode()
+   * @generated
+   */
   void setDetailCode(DetailCode value);
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
+   * @model kind="operation"
+   * @generated
+   */
   boolean isConstructor();
 
 } // ClassStructor

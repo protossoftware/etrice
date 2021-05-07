@@ -86,6 +86,7 @@ public class TriggerImpl extends MinimalEObjectImpl.Container implements Trigger
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<MessageFromIf> getMsgFromIfPairs()
   {
     if (msgFromIfPairs == null)
@@ -100,6 +101,7 @@ public class TriggerImpl extends MinimalEObjectImpl.Container implements Trigger
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Guard getGuard()
   {
     return guard;
@@ -127,6 +129,7 @@ public class TriggerImpl extends MinimalEObjectImpl.Container implements Trigger
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setGuard(Guard newGuard)
   {
     if (newGuard != guard)

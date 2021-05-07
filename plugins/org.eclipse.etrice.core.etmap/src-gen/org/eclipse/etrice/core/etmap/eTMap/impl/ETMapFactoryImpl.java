@@ -79,6 +79,7 @@ public class ETMapFactoryImpl extends EFactoryImpl implements ETMapFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MappingModel createMappingModel()
   {
     MappingModelImpl mappingModel = new MappingModelImpl();
@@ -90,6 +91,7 @@ public class ETMapFactoryImpl extends EFactoryImpl implements ETMapFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mapping createMapping()
   {
     MappingImpl mapping = new MappingImpl();
@@ -101,6 +103,7 @@ public class ETMapFactoryImpl extends EFactoryImpl implements ETMapFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubSystemMapping createSubSystemMapping()
   {
     SubSystemMappingImpl subSystemMapping = new SubSystemMappingImpl();
@@ -112,6 +115,7 @@ public class ETMapFactoryImpl extends EFactoryImpl implements ETMapFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ThreadMapping createThreadMapping()
   {
     ThreadMappingImpl threadMapping = new ThreadMappingImpl();
@@ -123,6 +127,7 @@ public class ETMapFactoryImpl extends EFactoryImpl implements ETMapFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ETMapPackage getETMapPackage()
   {
     return (ETMapPackage)getEPackage();

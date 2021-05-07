@@ -73,6 +73,7 @@ public class TransitionPointImpl extends TrPointImpl implements TransitionPoint
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isHandler()
   {
     return handler;
@@ -83,6 +84,7 @@ public class TransitionPointImpl extends TrPointImpl implements TransitionPoint
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setHandler(boolean newHandler)
   {
     boolean oldHandler = handler;
@@ -167,7 +169,7 @@ public class TransitionPointImpl extends TrPointImpl implements TransitionPoint
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (handler: ");
     result.append(handler);
     result.append(')');

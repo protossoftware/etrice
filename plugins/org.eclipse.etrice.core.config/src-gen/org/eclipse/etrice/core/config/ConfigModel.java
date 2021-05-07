@@ -100,7 +100,6 @@ public interface ConfigModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList&lt;ActorClassConfig&gt; list = new org.eclipse.emf.common.util.BasicEList&lt;ActorClassConfig&gt;();\r\nfor(ConfigElement element : this.getConfigElements())\r\n\tif(element instanceof ActorClassConfig)\r\n\t\tlist.add((ActorClassConfig) element);\r\nreturn list;\r\n'"
    * @generated
    */
   EList<ActorClassConfig> getActorClassConfigs();
@@ -109,7 +108,6 @@ public interface ConfigModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList&lt;ActorInstanceConfig&gt; list = new org.eclipse.emf.common.util.BasicEList&lt;ActorInstanceConfig&gt;();\r\nfor(ConfigElement element : this.getConfigElements())\r\n\tif(element instanceof ActorInstanceConfig)\r\n\t\tlist.add((ActorInstanceConfig) element);\r\nreturn list;'"
    * @generated
    */
   EList<ActorInstanceConfig> getActorInstanceConfigs();
@@ -118,7 +116,6 @@ public interface ConfigModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList&lt;ProtocolClassConfig&gt; list = new org.eclipse.emf.common.util.BasicEList&lt;ProtocolClassConfig&gt;();\r\nfor(ConfigElement element : this.getConfigElements())\r\n\tif(element instanceof ProtocolClassConfig)\r\n\t\tlist.add((ProtocolClassConfig) element);\r\nreturn list;\r\n'"
    * @generated
    */
   EList<ProtocolClassConfig> getProtocolClassConfigs();
@@ -127,7 +124,6 @@ public interface ConfigModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList&lt;SubSystemConfig&gt; list = new org.eclipse.emf.common.util.BasicEList&lt;SubSystemConfig&gt;();\r\nfor(ConfigElement element : this.getConfigElements())\r\n\tif(element instanceof SubSystemConfig)\r\n\t\tlist.add((SubSystemConfig) element);\r\nreturn list;'"
    * @generated
    */
   EList<SubSystemConfig> getSubSystemConfigs();

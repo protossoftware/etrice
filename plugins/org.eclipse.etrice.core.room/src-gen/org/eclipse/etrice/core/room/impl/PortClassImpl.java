@@ -46,271 +46,281 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class PortClassImpl extends MinimalEObjectImpl.Container implements PortClass
 {
   /**
-	 * The cached value of the '{@link #getUserCode() <em>User Code</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getUserCode() <em>User Code</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getUserCode()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getUserCode()
+   * @generated
+   * @ordered
+   */
   protected DetailCode userCode;
 
   /**
-	 * The cached value of the '{@link #getMsgHandlers() <em>Msg Handlers</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getMsgHandlers() <em>Msg Handlers</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getMsgHandlers()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getMsgHandlers()
+   * @generated
+   * @ordered
+   */
   protected EList<MessageHandler> msgHandlers;
 
   /**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getOperations()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getOperations()
+   * @generated
+   * @ordered
+   */
   protected EList<PortOperation> operations;
 
   /**
-	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAttributes()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAttributes()
+   * @generated
+   * @ordered
+   */
   protected EList<Attribute> attributes;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected PortClassImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.PORT_CLASS;
-	}
+    return RoomPackage.Literals.PORT_CLASS;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public DetailCode getUserCode()
+  public DetailCode getUserCode()
   {
-		return userCode;
-	}
+    return userCode;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetUserCode(DetailCode newUserCode, NotificationChain msgs)
   {
-		DetailCode oldUserCode = userCode;
-		userCode = newUserCode;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PORT_CLASS__USER_CODE, oldUserCode, newUserCode);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    DetailCode oldUserCode = userCode;
+    userCode = newUserCode;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PORT_CLASS__USER_CODE, oldUserCode, newUserCode);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setUserCode(DetailCode newUserCode)
+  public void setUserCode(DetailCode newUserCode)
   {
-		if (newUserCode != userCode) {
-			NotificationChain msgs = null;
-			if (userCode != null)
-				msgs = ((InternalEObject)userCode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PORT_CLASS__USER_CODE, null, msgs);
-			if (newUserCode != null)
-				msgs = ((InternalEObject)newUserCode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PORT_CLASS__USER_CODE, null, msgs);
-			msgs = basicSetUserCode(newUserCode, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT_CLASS__USER_CODE, newUserCode, newUserCode));
-	}
+    if (newUserCode != userCode)
+    {
+      NotificationChain msgs = null;
+      if (userCode != null)
+        msgs = ((InternalEObject)userCode).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PORT_CLASS__USER_CODE, null, msgs);
+      if (newUserCode != null)
+        msgs = ((InternalEObject)newUserCode).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PORT_CLASS__USER_CODE, null, msgs);
+      msgs = basicSetUserCode(newUserCode, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT_CLASS__USER_CODE, newUserCode, newUserCode));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<MessageHandler> getMsgHandlers()
+  public EList<MessageHandler> getMsgHandlers()
   {
-		if (msgHandlers == null) {
-			msgHandlers = new EObjectContainmentEList<MessageHandler>(MessageHandler.class, this, RoomPackage.PORT_CLASS__MSG_HANDLERS);
-		}
-		return msgHandlers;
-	}
+    if (msgHandlers == null)
+    {
+      msgHandlers = new EObjectContainmentEList<MessageHandler>(MessageHandler.class, this, RoomPackage.PORT_CLASS__MSG_HANDLERS);
+    }
+    return msgHandlers;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<PortOperation> getOperations()
+  public EList<PortOperation> getOperations()
   {
-		if (operations == null) {
-			operations = new EObjectContainmentEList<PortOperation>(PortOperation.class, this, RoomPackage.PORT_CLASS__OPERATIONS);
-		}
-		return operations;
-	}
+    if (operations == null)
+    {
+      operations = new EObjectContainmentEList<PortOperation>(PortOperation.class, this, RoomPackage.PORT_CLASS__OPERATIONS);
+    }
+    return operations;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public EList<Attribute> getAttributes()
+  public EList<Attribute> getAttributes()
   {
-		if (attributes == null) {
-			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, RoomPackage.PORT_CLASS__ATTRIBUTES);
-		}
-		return attributes;
-	}
+    if (attributes == null)
+    {
+      attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, RoomPackage.PORT_CLASS__ATTRIBUTES);
+    }
+    return attributes;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RoomPackage.PORT_CLASS__USER_CODE:
-				return basicSetUserCode(null, msgs);
-			case RoomPackage.PORT_CLASS__MSG_HANDLERS:
-				return ((InternalEList<?>)getMsgHandlers()).basicRemove(otherEnd, msgs);
-			case RoomPackage.PORT_CLASS__OPERATIONS:
-				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
-			case RoomPackage.PORT_CLASS__ATTRIBUTES:
-				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT_CLASS__USER_CODE:
+        return basicSetUserCode(null, msgs);
+      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
+        return ((InternalEList<?>)getMsgHandlers()).basicRemove(otherEnd, msgs);
+      case RoomPackage.PORT_CLASS__OPERATIONS:
+        return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.PORT_CLASS__USER_CODE:
-				return getUserCode();
-			case RoomPackage.PORT_CLASS__MSG_HANDLERS:
-				return getMsgHandlers();
-			case RoomPackage.PORT_CLASS__OPERATIONS:
-				return getOperations();
-			case RoomPackage.PORT_CLASS__ATTRIBUTES:
-				return getAttributes();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT_CLASS__USER_CODE:
+        return getUserCode();
+      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
+        return getMsgHandlers();
+      case RoomPackage.PORT_CLASS__OPERATIONS:
+        return getOperations();
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        return getAttributes();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.PORT_CLASS__USER_CODE:
-				setUserCode((DetailCode)newValue);
-				return;
-			case RoomPackage.PORT_CLASS__MSG_HANDLERS:
-				getMsgHandlers().clear();
-				getMsgHandlers().addAll((Collection<? extends MessageHandler>)newValue);
-				return;
-			case RoomPackage.PORT_CLASS__OPERATIONS:
-				getOperations().clear();
-				getOperations().addAll((Collection<? extends PortOperation>)newValue);
-				return;
-			case RoomPackage.PORT_CLASS__ATTRIBUTES:
-				getAttributes().clear();
-				getAttributes().addAll((Collection<? extends Attribute>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT_CLASS__USER_CODE:
+        setUserCode((DetailCode)newValue);
+        return;
+      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
+        getMsgHandlers().clear();
+        getMsgHandlers().addAll((Collection<? extends MessageHandler>)newValue);
+        return;
+      case RoomPackage.PORT_CLASS__OPERATIONS:
+        getOperations().clear();
+        getOperations().addAll((Collection<? extends PortOperation>)newValue);
+        return;
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends Attribute>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.PORT_CLASS__USER_CODE:
-				setUserCode((DetailCode)null);
-				return;
-			case RoomPackage.PORT_CLASS__MSG_HANDLERS:
-				getMsgHandlers().clear();
-				return;
-			case RoomPackage.PORT_CLASS__OPERATIONS:
-				getOperations().clear();
-				return;
-			case RoomPackage.PORT_CLASS__ATTRIBUTES:
-				getAttributes().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT_CLASS__USER_CODE:
+        setUserCode((DetailCode)null);
+        return;
+      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
+        getMsgHandlers().clear();
+        return;
+      case RoomPackage.PORT_CLASS__OPERATIONS:
+        getOperations().clear();
+        return;
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        getAttributes().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.PORT_CLASS__USER_CODE:
-				return userCode != null;
-			case RoomPackage.PORT_CLASS__MSG_HANDLERS:
-				return msgHandlers != null && !msgHandlers.isEmpty();
-			case RoomPackage.PORT_CLASS__OPERATIONS:
-				return operations != null && !operations.isEmpty();
-			case RoomPackage.PORT_CLASS__ATTRIBUTES:
-				return attributes != null && !attributes.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.PORT_CLASS__USER_CODE:
+        return userCode != null;
+      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
+        return msgHandlers != null && !msgHandlers.isEmpty();
+      case RoomPackage.PORT_CLASS__OPERATIONS:
+        return operations != null && !operations.isEmpty();
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //PortClassImpl

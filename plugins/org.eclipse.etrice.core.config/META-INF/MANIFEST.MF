@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.etrice.core.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.core,
  org.eclipse.etrice.core.config,
  org.eclipse.etrice.core.config.impl,

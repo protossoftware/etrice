@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.etrice.core.room,
  org.eclipse.etrice.core.common,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.core.etphys,
  org.eclipse.etrice.core.etphys.converters,
  org.eclipse.etrice.core.etphys.eTPhys,

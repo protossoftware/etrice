@@ -137,6 +137,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFilePath()
   {
     return filePath;
@@ -147,6 +148,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFilePath(String newFilePath)
   {
     String oldFilePath = filePath;
@@ -160,6 +162,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getUserCode1()
   {
     return userCode1;
@@ -170,6 +173,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUserCode1(String newUserCode1)
   {
     String oldUserCode1 = userCode1;
@@ -183,6 +187,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getUserCode2()
   {
     return userCode2;
@@ -193,6 +198,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUserCode2(String newUserCode2)
   {
     String oldUserCode2 = userCode2;
@@ -206,6 +212,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public long getPolling()
   {
     return polling;
@@ -216,6 +223,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPolling(long newPolling)
   {
     long oldPolling = polling;
@@ -330,7 +338,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (filePath: ");
     result.append(filePath);
     result.append(", userCode1: ");

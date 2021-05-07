@@ -32,29 +32,29 @@ package org.eclipse.etrice.core.room;
 public interface ExternalPort extends RoomElement
 {
   /**
-	 * Returns the value of the '<em><b>Interface Port</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Interface Port</b></em>' reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is the referenced interface port of the actor class which is now an external end port.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Interface Port</em>' reference.
-	 * @see #setInterfacePort(Port)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getExternalPort_InterfacePort()
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is the referenced interface port of the actor class which is now an external end port.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Interface Port</em>' reference.
+   * @see #setInterfacePort(Port)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getExternalPort_InterfacePort()
+   * @model
+   * @generated
+   */
   Port getInterfacePort();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.ExternalPort#getInterfacePort <em>Interface Port</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ExternalPort#getInterfacePort <em>Interface Port</em>}' reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Interface Port</em>' reference.
-	 * @see #getInterfacePort()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Interface Port</em>' reference.
+   * @see #getInterfacePort()
+   * @generated
+   */
   void setInterfacePort(Port value);
 
 } // ExternalPort

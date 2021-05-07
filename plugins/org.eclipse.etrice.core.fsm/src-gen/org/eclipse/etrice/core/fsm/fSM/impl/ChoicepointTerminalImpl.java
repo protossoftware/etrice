@@ -65,6 +65,7 @@ public class ChoicepointTerminalImpl extends TransitionTerminalImpl implements C
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ChoicePoint getCp()
   {
     if (cp != null && cp.eIsProxy())
@@ -95,6 +96,7 @@ public class ChoicepointTerminalImpl extends TransitionTerminalImpl implements C
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCp(ChoicePoint newCp)
   {
     ChoicePoint oldCp = cp;

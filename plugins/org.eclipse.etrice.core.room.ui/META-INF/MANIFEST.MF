@@ -29,7 +29,7 @@ Require-Bundle: org.eclipse.etrice.core.fsm.ui,
  org.eclipse.etrice.generator.base,
  org.eclipse.xtext.ui.codetemplates.ui
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.core.room.ui.internal,
  org.eclipse.etrice.core.ui,
  org.eclipse.etrice.core.ui.contentassist,

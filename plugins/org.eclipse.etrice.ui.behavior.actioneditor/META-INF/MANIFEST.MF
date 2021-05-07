@@ -23,7 +23,7 @@ Require-Bundle:  org.eclipse.etrice.core.fsm,
  org.eclipse.etrice.core.room.ui,
   org.eclipse.etrice.expressions.ui,
  org.eclipse.ui.editors
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.etrice.ui.behavior.actioneditor,
  org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer

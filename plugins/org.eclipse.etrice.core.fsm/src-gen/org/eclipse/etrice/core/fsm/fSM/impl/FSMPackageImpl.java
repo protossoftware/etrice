@@ -365,7 +365,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link FSMPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -380,7 +380,8 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     if (isInited) return (FSMPackage)EPackage.Registry.INSTANCE.getEPackage(FSMPackage.eNS_URI);
 
     // Obtain or create and register package
-    FSMPackageImpl theFSMPackage = (FSMPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FSMPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FSMPackageImpl());
+    Object registeredFSMPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    FSMPackageImpl theFSMPackage = registeredFSMPackage instanceof FSMPackageImpl ? (FSMPackageImpl)registeredFSMPackage : new FSMPackageImpl();
 
     isInited = true;
 
@@ -396,7 +397,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     // Mark meta-data to indicate it can't be changed
     theFSMPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(FSMPackage.eNS_URI, theFSMPackage);
     return theFSMPackage;
@@ -407,6 +407,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFSMModel()
   {
     return fsmModelEClass;
@@ -417,6 +418,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFSMModel_Components()
   {
     return (EReference)fsmModelEClass.getEStructuralFeatures().get(0);
@@ -427,6 +429,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModelComponent()
   {
     return modelComponentEClass;
@@ -437,6 +440,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModelComponent_Abstract()
   {
     return (EAttribute)modelComponentEClass.getEStructuralFeatures().get(0);
@@ -447,6 +451,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModelComponent_CommType()
   {
     return (EAttribute)modelComponentEClass.getEStructuralFeatures().get(1);
@@ -457,6 +462,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModelComponent_ComponentName()
   {
     return (EAttribute)modelComponentEClass.getEStructuralFeatures().get(2);
@@ -467,6 +473,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModelComponent_Base()
   {
     return (EReference)modelComponentEClass.getEStructuralFeatures().get(3);
@@ -477,6 +484,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModelComponent_StateMachine()
   {
     return (EReference)modelComponentEClass.getEStructuralFeatures().get(4);
@@ -487,6 +495,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStateGraphNode()
   {
     return stateGraphNodeEClass;
@@ -497,6 +506,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStateGraphItem()
   {
     return stateGraphItemEClass;
@@ -507,6 +517,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStateGraph()
   {
     return stateGraphEClass;
@@ -517,6 +528,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStateGraph_States()
   {
     return (EReference)stateGraphEClass.getEStructuralFeatures().get(0);
@@ -527,6 +539,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStateGraph_TrPoints()
   {
     return (EReference)stateGraphEClass.getEStructuralFeatures().get(1);
@@ -537,6 +550,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStateGraph_ChPoints()
   {
     return (EReference)stateGraphEClass.getEStructuralFeatures().get(2);
@@ -547,6 +561,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStateGraph_Transitions()
   {
     return (EReference)stateGraphEClass.getEStructuralFeatures().get(3);
@@ -557,6 +572,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStateGraph_RefinedTransitions()
   {
     return (EReference)stateGraphEClass.getEStructuralFeatures().get(4);
@@ -567,6 +583,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getState()
   {
     return stateEClass;
@@ -577,6 +594,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getState_Docu()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(0);
@@ -587,6 +605,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getState_Annotations()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(1);
@@ -597,6 +616,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getState_EntryCode()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(2);
@@ -607,6 +627,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getState_ExitCode()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(3);
@@ -617,6 +638,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getState_DoCode()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(4);
@@ -627,6 +649,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getState_Subgraph()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(5);
@@ -637,6 +660,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSimpleState()
   {
     return simpleStateEClass;
@@ -647,6 +671,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleState_Name()
   {
     return (EAttribute)simpleStateEClass.getEStructuralFeatures().get(0);
@@ -657,6 +682,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRefinedState()
   {
     return refinedStateEClass;
@@ -667,6 +693,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRefinedState_Target()
   {
     return (EReference)refinedStateEClass.getEStructuralFeatures().get(0);
@@ -677,6 +704,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDetailCode()
   {
     return detailCodeEClass;
@@ -687,6 +715,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDetailCode_Lines()
   {
     return (EAttribute)detailCodeEClass.getEStructuralFeatures().get(0);
@@ -697,6 +726,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDetailCode_Used()
   {
     return (EAttribute)detailCodeEClass.getEStructuralFeatures().get(1);
@@ -707,6 +737,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrPoint()
   {
     return trPointEClass;
@@ -717,6 +748,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrPoint_Name()
   {
     return (EAttribute)trPointEClass.getEStructuralFeatures().get(0);
@@ -727,6 +759,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTransitionPoint()
   {
     return transitionPointEClass;
@@ -737,6 +770,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTransitionPoint_Handler()
   {
     return (EAttribute)transitionPointEClass.getEStructuralFeatures().get(0);
@@ -747,6 +781,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEntryPoint()
   {
     return entryPointEClass;
@@ -757,6 +792,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExitPoint()
   {
     return exitPointEClass;
@@ -767,6 +803,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChoicePoint()
   {
     return choicePointEClass;
@@ -777,6 +814,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChoicePoint_Name()
   {
     return (EAttribute)choicePointEClass.getEStructuralFeatures().get(0);
@@ -787,6 +825,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getChoicePoint_Docu()
   {
     return (EReference)choicePointEClass.getEStructuralFeatures().get(1);
@@ -797,6 +836,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTransitionBase()
   {
     return transitionBaseEClass;
@@ -807,6 +847,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTransitionBase_Docu()
   {
     return (EReference)transitionBaseEClass.getEStructuralFeatures().get(0);
@@ -817,6 +858,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTransitionBase_Annotations()
   {
     return (EReference)transitionBaseEClass.getEStructuralFeatures().get(1);
@@ -827,6 +869,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTransitionBase_Action()
   {
     return (EReference)transitionBaseEClass.getEStructuralFeatures().get(2);
@@ -837,6 +880,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTransition()
   {
     return transitionEClass;
@@ -847,6 +891,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTransition_Name()
   {
     return (EAttribute)transitionEClass.getEStructuralFeatures().get(0);
@@ -857,6 +902,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTransition_To()
   {
     return (EReference)transitionEClass.getEStructuralFeatures().get(1);
@@ -867,6 +913,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNonInitialTransition()
   {
     return nonInitialTransitionEClass;
@@ -877,6 +924,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNonInitialTransition_From()
   {
     return (EReference)nonInitialTransitionEClass.getEStructuralFeatures().get(0);
@@ -887,6 +935,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTransitionChainStartTransition()
   {
     return transitionChainStartTransitionEClass;
@@ -897,6 +946,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getInitialTransition()
   {
     return initialTransitionEClass;
@@ -907,6 +957,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getContinuationTransition()
   {
     return continuationTransitionEClass;
@@ -917,6 +968,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTriggeredTransition()
   {
     return triggeredTransitionEClass;
@@ -927,6 +979,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTriggeredTransition_Triggers()
   {
     return (EReference)triggeredTransitionEClass.getEStructuralFeatures().get(0);
@@ -937,6 +990,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGuardedTransition()
   {
     return guardedTransitionEClass;
@@ -947,6 +1001,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGuardedTransition_Guard()
   {
     return (EReference)guardedTransitionEClass.getEStructuralFeatures().get(0);
@@ -957,6 +1012,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCPBranchTransition()
   {
     return cpBranchTransitionEClass;
@@ -967,6 +1023,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCPBranchTransition_Condition()
   {
     return (EReference)cpBranchTransitionEClass.getEStructuralFeatures().get(0);
@@ -977,6 +1034,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRefinedTransition()
   {
     return refinedTransitionEClass;
@@ -987,6 +1045,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRefinedTransition_Target()
   {
     return (EReference)refinedTransitionEClass.getEStructuralFeatures().get(0);
@@ -997,6 +1056,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTransitionTerminal()
   {
     return transitionTerminalEClass;
@@ -1007,6 +1067,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStateTerminal()
   {
     return stateTerminalEClass;
@@ -1017,6 +1078,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStateTerminal_State()
   {
     return (EReference)stateTerminalEClass.getEStructuralFeatures().get(0);
@@ -1027,6 +1089,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrPointTerminal()
   {
     return trPointTerminalEClass;
@@ -1037,6 +1100,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTrPointTerminal_TrPoint()
   {
     return (EReference)trPointTerminalEClass.getEStructuralFeatures().get(0);
@@ -1047,6 +1111,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubStateTrPointTerminal()
   {
     return subStateTrPointTerminalEClass;
@@ -1057,6 +1122,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubStateTrPointTerminal_TrPoint()
   {
     return (EReference)subStateTrPointTerminalEClass.getEStructuralFeatures().get(0);
@@ -1067,6 +1133,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubStateTrPointTerminal_State()
   {
     return (EReference)subStateTrPointTerminalEClass.getEStructuralFeatures().get(1);
@@ -1077,6 +1144,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChoicepointTerminal()
   {
     return choicepointTerminalEClass;
@@ -1087,6 +1155,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getChoicepointTerminal_Cp()
   {
     return (EReference)choicepointTerminalEClass.getEStructuralFeatures().get(0);
@@ -1097,6 +1166,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrigger()
   {
     return triggerEClass;
@@ -1107,6 +1177,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTrigger_MsgFromIfPairs()
   {
     return (EReference)triggerEClass.getEStructuralFeatures().get(0);
@@ -1117,6 +1188,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTrigger_Guard()
   {
     return (EReference)triggerEClass.getEStructuralFeatures().get(1);
@@ -1127,6 +1199,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMessageFromIf()
   {
     return messageFromIfEClass;
@@ -1137,6 +1210,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMessageFromIf_Message()
   {
     return (EReference)messageFromIfEClass.getEStructuralFeatures().get(0);
@@ -1147,6 +1221,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMessageFromIf_From()
   {
     return (EReference)messageFromIfEClass.getEStructuralFeatures().get(1);
@@ -1157,6 +1232,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractInterfaceItem()
   {
     return abstractInterfaceItemEClass;
@@ -1167,6 +1243,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAbstractInterfaceItem_Name()
   {
     return (EAttribute)abstractInterfaceItemEClass.getEStructuralFeatures().get(0);
@@ -1177,6 +1254,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGuard()
   {
     return guardEClass;
@@ -1187,6 +1265,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGuard_Guard()
   {
     return (EReference)guardEClass.getEStructuralFeatures().get(0);
@@ -1197,6 +1276,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProtocolSemantics()
   {
     return protocolSemanticsEClass;
@@ -1207,6 +1287,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolSemantics_Rules()
   {
     return (EReference)protocolSemanticsEClass.getEStructuralFeatures().get(0);
@@ -1217,6 +1298,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSemanticsRule()
   {
     return semanticsRuleEClass;
@@ -1227,6 +1309,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSemanticsRule_Msg()
   {
     return (EReference)semanticsRuleEClass.getEStructuralFeatures().get(0);
@@ -1237,6 +1320,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSemanticsRule_FollowUps()
   {
     return (EReference)semanticsRuleEClass.getEStructuralFeatures().get(1);
@@ -1247,6 +1331,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getInSemanticsRule()
   {
     return inSemanticsRuleEClass;
@@ -1257,6 +1342,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOutSemanticsRule()
   {
     return outSemanticsRuleEClass;
@@ -1267,6 +1353,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getIInterfaceItemOwner()
   {
     return iInterfaceItemOwnerEClass;
@@ -1277,6 +1364,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getComponentCommunicationType()
   {
     return componentCommunicationTypeEEnum;
@@ -1287,6 +1375,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FSMFactory getFSMFactory()
   {
     return (FSMFactory)getEFactoryInstance();

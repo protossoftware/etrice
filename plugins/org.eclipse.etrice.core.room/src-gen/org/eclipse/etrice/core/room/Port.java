@@ -55,81 +55,77 @@ import org.eclipse.etrice.core.common.base.Annotation;
 public interface Port extends InterfaceItem
 {
   /**
-	 * Returns the value of the '<em><b>Conjugated</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Conjugated</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>If a port is conjugated then the roles of outgoing and incoming messages are interchanged.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Conjugated</em>' attribute.
-	 * @see #setConjugated(boolean)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getPort_Conjugated()
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>If a port is conjugated then the roles of outgoing and incoming messages are interchanged.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Conjugated</em>' attribute.
+   * @see #setConjugated(boolean)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getPort_Conjugated()
+   * @model
+   * @generated
+   */
   boolean isConjugated();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.Port#isConjugated <em>Conjugated</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Port#isConjugated <em>Conjugated</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Conjugated</em>' attribute.
-	 * @see #isConjugated()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Conjugated</em>' attribute.
+   * @see #isConjugated()
+   * @generated
+   */
   void setConjugated(boolean value);
 
   /**
-	 * Returns the value of the '<em><b>Multiplicity</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Multiplicity</b></em>' attribute.
+   * The default value is <code>"1"</code>.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>Ports with multiplicity >1 are called replicated ports. A multiplicity of {@code -1} means replicated
-	 * port with arbitrary multiplicity.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Multiplicity</em>' attribute.
-	 * @see #setMultiplicity(int)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getPort_Multiplicity()
-	 * @model default="1"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>Ports with multiplicity >1 are called replicated ports. A multiplicity of {@code -1} means replicated
+   * port with arbitrary multiplicity.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Multiplicity</em>' attribute.
+   * @see #setMultiplicity(int)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getPort_Multiplicity()
+   * @model default="1"
+   * @generated
+   */
   int getMultiplicity();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.Port#getMultiplicity <em>Multiplicity</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Port#getMultiplicity <em>Multiplicity</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Multiplicity</em>' attribute.
-	 * @see #getMultiplicity()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Multiplicity</em>' attribute.
+   * @see #getMultiplicity()
+   * @generated
+   */
   void setMultiplicity(int value);
 
   /**
-	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
+   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Annotations</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getPort_Annotations()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getPort_Annotations()
+   * @model containment="true"
+   * @generated
+   */
   EList<Annotation> getAnnotations();
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
+   * @model kind="operation"
+   * @generated
+   */
   boolean isReplicated();
 
 } // Port

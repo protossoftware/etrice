@@ -34,29 +34,25 @@ package org.eclipse.etrice.core.room;
 public interface StandardOperation extends Operation
 {
   /**
-	 * Returns the value of the '<em><b>Override</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Override</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
+   * Returns the value of the '<em><b>Override</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Override</em>' attribute.
-	 * @see #setOverride(boolean)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getStandardOperation_Override()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Override</em>' attribute.
+   * @see #setOverride(boolean)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getStandardOperation_Override()
+   * @model
+   * @generated
+   */
   boolean isOverride();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.StandardOperation#isOverride <em>Override</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.StandardOperation#isOverride <em>Override</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Override</em>' attribute.
-	 * @see #isOverride()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Override</em>' attribute.
+   * @see #isOverride()
+   * @generated
+   */
   void setOverride(boolean value);
 
 } // StandardOperation

@@ -50,6 +50,7 @@ public class StateGraphItemImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     if (this instanceof State) 

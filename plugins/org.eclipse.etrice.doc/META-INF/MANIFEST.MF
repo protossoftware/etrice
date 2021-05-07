@@ -8,7 +8,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.help,
  org.eclipse.etrice.core.common.ui
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Activator: org.eclipse.etrice.doc.ETriceHelp
 Export-Package: org.eclipse.etrice.doc
 Bundle-ActivationPolicy: lazy

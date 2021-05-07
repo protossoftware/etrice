@@ -41,124 +41,120 @@ import org.eclipse.etrice.core.common.base.Documentation;
 public interface Message extends RoomElement
 {
   /**
-	 * Returns the value of the '<em><b>Priv</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Priv</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>If this flag is {@code true} then the message is treated as private for this protocol
-	 * and can only be sent by a PortClass.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Priv</em>' attribute.
-	 * @see #setPriv(boolean)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Priv()
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>If this flag is {@code true} then the message is treated as private for this protocol
+   * and can only be sent by a PortClass.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Priv</em>' attribute.
+   * @see #setPriv(boolean)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Priv()
+   * @model
+   * @generated
+   */
   boolean isPriv();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#isPriv <em>Priv</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#isPriv <em>Priv</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Priv</em>' attribute.
-	 * @see #isPriv()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Priv</em>' attribute.
+   * @see #isPriv()
+   * @generated
+   */
   void setPriv(boolean value);
 
   /**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>By this name the message is referred to in the model.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Name()
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>By this name the message is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Name()
+   * @model
+   * @generated
+   */
   String getName();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
   void setName(String value);
 
   /**
-	 * Returns the value of the '<em><b>Data</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Data</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is a reference to optional message data.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Data</em>' containment reference.
-	 * @see #setData(MessageData)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Data()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is a reference to optional message data.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Data</em>' containment reference.
+   * @see #setData(MessageData)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Data()
+   * @model containment="true"
+   * @generated
+   */
   MessageData getData();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Data</em>' containment reference.
-	 * @see #getData()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Data</em>' containment reference.
+   * @see #getData()
+   * @generated
+   */
   void setData(MessageData value);
 
   /**
-	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
+   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Annotations</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Annotations()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Annotations()
+   * @model containment="true"
+   * @generated
+   */
   EList<Annotation> getAnnotations();
 
   /**
-	 * Returns the value of the '<em><b>Docu</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * <br>This is an optional documentation.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Docu</em>' containment reference.
-	 * @see #setDocu(Documentation)
-	 * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Docu()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * <!-- begin-model-doc -->
+   * <br>This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Docu</em>' containment reference.
+   * @see #setDocu(Documentation)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Docu()
+   * @model containment="true"
+   * @generated
+   */
   Documentation getDocu();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getDocu <em>Docu</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getDocu <em>Docu</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Docu</em>' containment reference.
-	 * @see #getDocu()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Docu</em>' containment reference.
+   * @see #getDocu()
+   * @generated
+   */
   void setDocu(Documentation value);
 
 } // Message

@@ -63,10 +63,6 @@ public enum LiteralType implements Enumerator
   /**
    * The '<em><b>BOOL</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>BOOL</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #BOOL
    * @model literal="ptBoolean"
@@ -78,10 +74,6 @@ public enum LiteralType implements Enumerator
   /**
    * The '<em><b>INT</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>INT</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #INT
    * @model literal="ptInteger"
@@ -93,10 +85,6 @@ public enum LiteralType implements Enumerator
   /**
    * The '<em><b>REAL</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>REAL</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #REAL
    * @model literal="ptReal"
@@ -108,10 +96,6 @@ public enum LiteralType implements Enumerator
   /**
    * The '<em><b>CHAR</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>CHAR</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #CHAR
    * @model literal="ptCharacter"
@@ -244,6 +228,7 @@ public enum LiteralType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -254,6 +239,7 @@ public enum LiteralType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -264,6 +250,7 @@ public enum LiteralType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

@@ -125,6 +125,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Annotation createAnnotation()
   {
     AnnotationImpl annotation = new AnnotationImpl();
@@ -136,6 +137,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public KeyValue createKeyValue()
   {
     KeyValueImpl keyValue = new KeyValueImpl();
@@ -147,6 +149,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnnotationType createAnnotationType()
   {
     AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
@@ -158,6 +161,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnnotationAttribute createAnnotationAttribute()
   {
     AnnotationAttributeImpl annotationAttribute = new AnnotationAttributeImpl();
@@ -169,6 +173,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleAnnotationAttribute createSimpleAnnotationAttribute()
   {
     SimpleAnnotationAttributeImpl simpleAnnotationAttribute = new SimpleAnnotationAttributeImpl();
@@ -180,6 +185,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumAnnotationAttribute createEnumAnnotationAttribute()
   {
     EnumAnnotationAttributeImpl enumAnnotationAttribute = new EnumAnnotationAttributeImpl();
@@ -191,6 +197,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -202,6 +209,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation createDocumentation()
   {
     DocumentationImpl documentation = new DocumentationImpl();
@@ -213,6 +221,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LiteralArray createLiteralArray()
   {
     LiteralArrayImpl literalArray = new LiteralArrayImpl();
@@ -224,6 +233,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
@@ -235,6 +245,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BooleanLiteral createBooleanLiteral()
   {
     BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
@@ -246,6 +257,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NumberLiteral createNumberLiteral()
   {
     NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
@@ -257,6 +269,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RealLiteral createRealLiteral()
   {
     RealLiteralImpl realLiteral = new RealLiteralImpl();
@@ -268,6 +281,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IntLiteral createIntLiteral()
   {
     IntLiteralImpl intLiteral = new IntLiteralImpl();
@@ -279,6 +293,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StringLiteral createStringLiteral()
   {
     StringLiteralImpl stringLiteral = new StringLiteralImpl();
@@ -312,6 +327,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BasePackage getBasePackage()
   {
     return (BasePackage)getEPackage();

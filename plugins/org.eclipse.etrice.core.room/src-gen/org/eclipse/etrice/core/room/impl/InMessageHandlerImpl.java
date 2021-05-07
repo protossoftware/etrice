@@ -18,24 +18,24 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class InMessageHandlerImpl extends MessageHandlerImpl implements InMessageHandler
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected InMessageHandlerImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.IN_MESSAGE_HANDLER;
-	}
+    return RoomPackage.Literals.IN_MESSAGE_HANDLER;
+  }
 
 } //InMessageHandlerImpl

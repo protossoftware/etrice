@@ -90,7 +90,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ETMapPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -105,7 +105,8 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     if (isInited) return (ETMapPackage)EPackage.Registry.INSTANCE.getEPackage(ETMapPackage.eNS_URI);
 
     // Obtain or create and register package
-    ETMapPackageImpl theETMapPackage = (ETMapPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ETMapPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ETMapPackageImpl());
+    Object registeredETMapPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ETMapPackageImpl theETMapPackage = registeredETMapPackage instanceof ETMapPackageImpl ? (ETMapPackageImpl)registeredETMapPackage : new ETMapPackageImpl();
 
     isInited = true;
 
@@ -124,7 +125,6 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     // Mark meta-data to indicate it can't be changed
     theETMapPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ETMapPackage.eNS_URI, theETMapPackage);
     return theETMapPackage;
@@ -135,6 +135,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMappingModel()
   {
     return mappingModelEClass;
@@ -145,6 +146,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMappingModel_Name()
   {
     return (EAttribute)mappingModelEClass.getEStructuralFeatures().get(0);
@@ -155,6 +157,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMappingModel_Imports()
   {
     return (EReference)mappingModelEClass.getEStructuralFeatures().get(1);
@@ -165,6 +168,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMappingModel_Mappings()
   {
     return (EReference)mappingModelEClass.getEStructuralFeatures().get(2);
@@ -175,6 +179,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMapping()
   {
     return mappingEClass;
@@ -185,6 +190,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMapping_LogicalSys()
   {
     return (EReference)mappingEClass.getEStructuralFeatures().get(0);
@@ -195,6 +201,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMapping_PhysicalSys()
   {
     return (EReference)mappingEClass.getEStructuralFeatures().get(1);
@@ -205,6 +212,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMapping_SubsysMappings()
   {
     return (EReference)mappingEClass.getEStructuralFeatures().get(2);
@@ -215,6 +223,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubSystemMapping()
   {
     return subSystemMappingEClass;
@@ -225,6 +234,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubSystemMapping_LogicalSubSys()
   {
     return (EReference)subSystemMappingEClass.getEStructuralFeatures().get(0);
@@ -235,6 +245,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubSystemMapping_Node()
   {
     return (EReference)subSystemMappingEClass.getEStructuralFeatures().get(1);
@@ -245,6 +256,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubSystemMapping_ThreadMappings()
   {
     return (EReference)subSystemMappingEClass.getEStructuralFeatures().get(2);
@@ -255,6 +267,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getThreadMapping()
   {
     return threadMappingEClass;
@@ -265,6 +278,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getThreadMapping_LogicalThread()
   {
     return (EReference)threadMappingEClass.getEStructuralFeatures().get(0);
@@ -275,6 +289,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getThreadMapping_PhysicalThread()
   {
     return (EReference)threadMappingEClass.getEStructuralFeatures().get(1);
@@ -285,6 +300,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ETMapFactory getETMapFactory()
   {
     return (ETMapFactory)getEFactoryInstance();

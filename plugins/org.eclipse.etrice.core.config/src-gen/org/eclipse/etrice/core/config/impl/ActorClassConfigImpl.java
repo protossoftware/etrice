@@ -86,6 +86,7 @@ public class ActorClassConfigImpl extends ConfigElementImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorClass getActor()
   {
     if (actor != null && actor.eIsProxy())
@@ -116,6 +117,7 @@ public class ActorClassConfigImpl extends ConfigElementImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setActor(ActorClass newActor)
   {
     ActorClass oldActor = actor;
@@ -129,6 +131,7 @@ public class ActorClassConfigImpl extends ConfigElementImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AttrClassConfig> getAttributes()
   {
     if (attributes == null)

@@ -114,6 +114,7 @@ public class AttrInstanceConfigImpl extends AttrConfigImpl implements AttrInstan
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isDynConfig()
   {
     return dynConfig;
@@ -124,6 +125,7 @@ public class AttrInstanceConfigImpl extends AttrConfigImpl implements AttrInstan
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDynConfig(boolean newDynConfig)
   {
     boolean oldDynConfig = dynConfig;
@@ -137,6 +139,7 @@ public class AttrInstanceConfigImpl extends AttrConfigImpl implements AttrInstan
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isReadOnly()
   {
     return readOnly;
@@ -147,6 +150,7 @@ public class AttrInstanceConfigImpl extends AttrConfigImpl implements AttrInstan
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReadOnly(boolean newReadOnly)
   {
     boolean oldReadOnly = readOnly;
@@ -160,6 +164,7 @@ public class AttrInstanceConfigImpl extends AttrConfigImpl implements AttrInstan
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AttrInstanceConfig> getAttributes()
   {
     if (attributes == null)
@@ -283,7 +288,7 @@ public class AttrInstanceConfigImpl extends AttrConfigImpl implements AttrInstan
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (dynConfig: ");
     result.append(dynConfig);
     result.append(", readOnly: ");

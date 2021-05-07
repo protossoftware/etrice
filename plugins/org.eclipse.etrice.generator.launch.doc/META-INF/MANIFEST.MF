@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.etrice.generator,
  org.eclipse.debug.ui,
  org.eclipse.jdt.launching,
  org.eclipse.etrice.generator.ui
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.eclipse.etrice.generator.doc.launch
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse eTrice

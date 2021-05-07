@@ -21,12 +21,12 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		
-		<xtext.version>2.15.0</xtext.version>
-		<tycho.version>1.4.0</tycho.version>
-		<cbi.version>1.1.4</cbi.version>
+		<eclipse.version>2021-03</eclipse.version>
+		<xtext.version>2.25.0</xtext.version>
+		<tycho.version>2.3.0</tycho.version>
+		<cbi.version>1.1.5</cbi.version>
 
-		<eclipse.url>http://download.eclipse.org/releases/oxygen</eclipse.url>
+		<eclipse.url>http://download.eclipse.org/releases/${eclipse.version}</eclipse.url>
 		<xtext.url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/${xtext.version}</xtext.url>
 		<license.url>http://download.eclipse.org/cbi/updates/license</license.url>
 		<cbi.url>https://repo.eclipse.org/content/repositories/cbi-releases</cbi.url>
@@ -135,17 +135,7 @@
 						<environment>
 							<os>linux</os>
 							<ws>gtk</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
 							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86</arch>
 						</environment>
 						<environment>
 							<os>win32</os>

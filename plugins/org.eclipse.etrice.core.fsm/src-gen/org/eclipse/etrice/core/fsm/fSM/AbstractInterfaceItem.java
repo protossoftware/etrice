@@ -60,7 +60,6 @@ public interface AbstractInterfaceItem extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getName();\r\n'"
    * @generated
    */
   String getDisplayName();
@@ -93,7 +92,6 @@ public interface AbstractInterfaceItem extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return true;'"
    * @generated
    */
   boolean isEventDriven();

@@ -18,6 +18,6 @@ Import-Package: org.apache.log4j,
  org.junit.runners,
  org.junit.runners.model,
  org.hamcrest.core
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.generator
 Automatic-Module-Name: org.eclipse.etrice.generator.fsmtest.tests

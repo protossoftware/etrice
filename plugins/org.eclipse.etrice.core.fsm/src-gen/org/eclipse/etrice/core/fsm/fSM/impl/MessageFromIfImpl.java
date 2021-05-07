@@ -78,6 +78,7 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getMessage()
   {
     if (message != null && message.eIsProxy())
@@ -108,6 +109,7 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMessage(EObject newMessage)
   {
     EObject oldMessage = message;
@@ -121,6 +123,7 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractInterfaceItem getFrom()
   {
     if (from != null && from.eIsProxy())
@@ -151,6 +154,7 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFrom(AbstractInterfaceItem newFrom)
   {
     AbstractInterfaceItem oldFrom = from;

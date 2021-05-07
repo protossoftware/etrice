@@ -96,6 +96,7 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NumberLiteral getMin()
   {
     return min;
@@ -123,6 +124,7 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMin(NumberLiteral newMin)
   {
     if (newMin != min)
@@ -144,6 +146,7 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NumberLiteral getMax()
   {
     return max;
@@ -171,6 +174,7 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMax(NumberLiteral newMax)
   {
     if (newMax != max)
@@ -192,6 +196,7 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AttrClassConfig> getAttributes()
   {
     if (attributes == null)

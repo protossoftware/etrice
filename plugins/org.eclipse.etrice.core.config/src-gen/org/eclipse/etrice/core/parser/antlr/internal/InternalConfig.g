@@ -1156,7 +1156,7 @@ ruleAttrInstanceConfig returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getAttrInstanceConfigRule());
 								}
-								setWithLastConsumed($current, "dynConfig", true, "dynamic configuration");
+								setWithLastConsumed($current, "dynConfig", lv_dynConfig_5_0 != null, "dynamic configuration");
 							}
 						)
 					)
@@ -1171,7 +1171,7 @@ ruleAttrInstanceConfig returns [EObject current=null]
 									if ($current==null) {
 										$current = createModelElement(grammarAccess.getAttrInstanceConfigRule());
 									}
-									setWithLastConsumed($current, "readOnly", true, "read");
+									setWithLastConsumed($current, "readOnly", lv_readOnly_6_0 != null, "read");
 								}
 							)
 						)
@@ -1665,7 +1665,7 @@ ruleSimpleAnnotationAttribute returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getSimpleAnnotationAttributeRule());
 						}
-						setWithLastConsumed($current, "optional", true, "optional");
+						setWithLastConsumed($current, "optional", lv_optional_0_0 != null, "optional");
 					}
 				)
 			)
@@ -1750,7 +1750,7 @@ ruleEnumAnnotationAttribute returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getEnumAnnotationAttributeRule());
 						}
-						setWithLastConsumed($current, "optional", true, "optional");
+						setWithLastConsumed($current, "optional", lv_optional_0_0 != null, "optional");
 					}
 				)
 			)
@@ -2184,7 +2184,7 @@ ruleBooleanLiteral returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getBooleanLiteralRule());
 						}
-						setWithLastConsumed($current, "isTrue", true, "true");
+						setWithLastConsumed($current, "isTrue", lv_isTrue_2_0 != null, "true");
 					}
 				)
 			)

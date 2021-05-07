@@ -112,6 +112,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -122,6 +123,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -135,6 +137,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Import> getImports()
   {
     if (imports == null)
@@ -149,6 +152,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ConfigElement> getConfigElements()
   {
     if (configElements == null)
@@ -163,6 +167,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ActorClassConfig> getActorClassConfigs()
   {
     EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();
@@ -178,6 +183,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ActorInstanceConfig> getActorInstanceConfigs()
   {
     EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();
@@ -192,6 +198,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ProtocolClassConfig> getProtocolClassConfigs()
   {
     EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();
@@ -207,6 +214,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SubSystemConfig> getSubSystemConfigs()
   {
     EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();
@@ -333,7 +341,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

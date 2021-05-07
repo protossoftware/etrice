@@ -91,6 +91,7 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LogicalSystem getRoot()
   {
     if (root != null && root.eIsProxy())
@@ -121,6 +122,7 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRoot(LogicalSystem newRoot)
   {
     LogicalSystem oldRoot = root;
@@ -134,6 +136,7 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubSystemRef getSubSystem()
   {
     if (subSystem != null && subSystem.eIsProxy())
@@ -164,6 +167,7 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSubSystem(SubSystemRef newSubSystem)
   {
     SubSystemRef oldSubSystem = subSystem;
@@ -177,6 +181,7 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DynamicConfig getDynConfig()
   {
     return dynConfig;
@@ -204,6 +209,7 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDynConfig(DynamicConfig newDynConfig)
   {
     if (newDynConfig != dynConfig)

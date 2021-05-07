@@ -30,198 +30,202 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class RefSegmentImpl extends MinimalEObjectImpl.Container implements RefSegment
 {
   /**
-	 * The default value of the '{@link #getRef() <em>Ref</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getRef() <em>Ref</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getRef()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getRef()
+   * @generated
+   * @ordered
+   */
   protected static final String REF_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getRef() <em>Ref</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getRef() <em>Ref</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getRef()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getRef()
+   * @generated
+   * @ordered
+   */
   protected String ref = REF_EDEFAULT;
 
   /**
-	 * The default value of the '{@link #getIdx() <em>Idx</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getIdx() <em>Idx</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getIdx()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getIdx()
+   * @generated
+   * @ordered
+   */
   protected static final int IDX_EDEFAULT = -1;
 
   /**
-	 * The cached value of the '{@link #getIdx() <em>Idx</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getIdx() <em>Idx</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getIdx()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getIdx()
+   * @generated
+   * @ordered
+   */
   protected int idx = IDX_EDEFAULT;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected RefSegmentImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.REF_SEGMENT;
-	}
+    return RoomPackage.Literals.REF_SEGMENT;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public String getRef()
+  public String getRef()
   {
-		return ref;
-	}
+    return ref;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setRef(String newRef)
+  public void setRef(String newRef)
   {
-		String oldRef = ref;
-		ref = newRef;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.REF_SEGMENT__REF, oldRef, ref));
-	}
+    String oldRef = ref;
+    ref = newRef;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.REF_SEGMENT__REF, oldRef, ref));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public int getIdx()
+  public int getIdx()
   {
-		return idx;
-	}
+    return idx;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public void setIdx(int newIdx)
+  public void setIdx(int newIdx)
   {
-		int oldIdx = idx;
-		idx = newIdx;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.REF_SEGMENT__IDX, oldIdx, idx));
-	}
+    int oldIdx = idx;
+    idx = newIdx;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.REF_SEGMENT__IDX, oldIdx, idx));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
-		public String toString()
+  public String toString()
   {
-		return getRef() + ((getIdx()>=0)? ":"+getIdx() : "");
-		
-	}
+    return getRef() + ((getIdx()>=0)? ":"+getIdx() : "");
+    
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RoomPackage.REF_SEGMENT__REF:
-				return getRef();
-			case RoomPackage.REF_SEGMENT__IDX:
-				return getIdx();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.REF_SEGMENT__REF:
+        return getRef();
+      case RoomPackage.REF_SEGMENT__IDX:
+        return getIdx();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RoomPackage.REF_SEGMENT__REF:
-				setRef((String)newValue);
-				return;
-			case RoomPackage.REF_SEGMENT__IDX:
-				setIdx((Integer)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.REF_SEGMENT__REF:
+        setRef((String)newValue);
+        return;
+      case RoomPackage.REF_SEGMENT__IDX:
+        setIdx((Integer)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.REF_SEGMENT__REF:
-				setRef(REF_EDEFAULT);
-				return;
-			case RoomPackage.REF_SEGMENT__IDX:
-				setIdx(IDX_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.REF_SEGMENT__REF:
+        setRef(REF_EDEFAULT);
+        return;
+      case RoomPackage.REF_SEGMENT__IDX:
+        setIdx(IDX_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RoomPackage.REF_SEGMENT__REF:
-				return REF_EDEFAULT == null ? ref != null : !REF_EDEFAULT.equals(ref);
-			case RoomPackage.REF_SEGMENT__IDX:
-				return idx != IDX_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RoomPackage.REF_SEGMENT__REF:
+        return REF_EDEFAULT == null ? ref != null : !REF_EDEFAULT.equals(ref);
+      case RoomPackage.REF_SEGMENT__IDX:
+        return idx != IDX_EDEFAULT;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //RefSegmentImpl

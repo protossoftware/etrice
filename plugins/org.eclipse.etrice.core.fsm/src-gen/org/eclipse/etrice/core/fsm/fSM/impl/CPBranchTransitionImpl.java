@@ -66,6 +66,7 @@ public class CPBranchTransitionImpl extends NonInitialTransitionImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getCondition()
   {
     return condition;
@@ -93,6 +94,7 @@ public class CPBranchTransitionImpl extends NonInitialTransitionImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCondition(DetailCode newCondition)
   {
     if (newCondition != condition)

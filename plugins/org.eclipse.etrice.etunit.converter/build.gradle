@@ -1,9 +1,9 @@
 apply plugin: 'application'
 
 dependencies {
-	implementation "org.eclipse.emf:org.eclipse.emf.common:$versions.xtext"
-	implementation "org.eclipse.emf:org.eclipse.emf.ecore:$versions.xtext"
-	implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.xtext"
+	implementation "org.eclipse.emf:org.eclipse.emf.common:2.22.0"
+	implementation "org.eclipse.emf:org.eclipse.emf.ecore:2.23.0"
+	implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.16.0"
 }
 
 ext.classpath = sourceSets.main.runtimeClasspath

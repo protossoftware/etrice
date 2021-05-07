@@ -87,7 +87,7 @@ public interface RefSegment extends EObject
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return getRef() + ((getIdx()&gt;=0)? \":\"+getIdx() : \"\");\r\n'"
+   * @model
    * @generated
    */
   String toString();

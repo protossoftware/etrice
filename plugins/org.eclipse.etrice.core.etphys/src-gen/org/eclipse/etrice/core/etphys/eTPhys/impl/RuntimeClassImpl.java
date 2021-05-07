@@ -111,6 +111,7 @@ public class RuntimeClassImpl extends MinimalEObjectImpl.Container implements Ru
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -121,6 +122,7 @@ public class RuntimeClassImpl extends MinimalEObjectImpl.Container implements Ru
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -134,6 +136,7 @@ public class RuntimeClassImpl extends MinimalEObjectImpl.Container implements Ru
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -161,6 +164,7 @@ public class RuntimeClassImpl extends MinimalEObjectImpl.Container implements Ru
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -182,6 +186,7 @@ public class RuntimeClassImpl extends MinimalEObjectImpl.Container implements Ru
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ThreadModel getThreadModel()
   {
     return threadModel;
@@ -192,6 +197,7 @@ public class RuntimeClassImpl extends MinimalEObjectImpl.Container implements Ru
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setThreadModel(ThreadModel newThreadModel)
   {
     ThreadModel oldThreadModel = threadModel;
@@ -312,7 +318,7 @@ public class RuntimeClassImpl extends MinimalEObjectImpl.Container implements Ru
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", threadModel: ");

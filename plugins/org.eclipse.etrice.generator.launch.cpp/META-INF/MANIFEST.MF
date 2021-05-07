@@ -18,7 +18,7 @@ Require-Bundle:  org.eclipse.etrice.generator,
   org.eclipse.etrice.core.genmodel,
   org.eclipse.etrice.generator.base
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.eclipse.jdt.launching,
  org.eclipse.ui.dialogs
 Bundle-Vendor: Eclipse eTrice

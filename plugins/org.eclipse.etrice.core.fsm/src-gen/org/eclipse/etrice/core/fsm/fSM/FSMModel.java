@@ -29,10 +29,6 @@ public interface FSMModel extends EObject
    * Returns the value of the '<em><b>Components</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.fsm.fSM.ModelComponent}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Components</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Components</em>' containment reference list.
    * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getFSMModel_Components()

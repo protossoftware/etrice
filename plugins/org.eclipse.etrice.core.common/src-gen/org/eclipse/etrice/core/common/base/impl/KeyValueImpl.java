@@ -88,6 +88,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getKey()
   {
     return key;
@@ -98,6 +99,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKey(String newKey)
   {
     String oldKey = key;
@@ -111,6 +113,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Literal getValue()
   {
     return value;
@@ -138,6 +141,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(Literal newValue)
   {
     if (newValue != value)
@@ -256,7 +260,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (key: ");
     result.append(key);
     result.append(')');

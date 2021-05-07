@@ -72,6 +72,7 @@ public class ConfigValueArrayImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ConfigValue> getValues()
   {
     if (values == null)

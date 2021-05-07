@@ -20,24 +20,24 @@ import org.eclipse.etrice.core.room.SAPoint;
 public class SAPointImpl extends MinimalEObjectImpl.Container implements SAPoint
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected SAPointImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RoomPackage.Literals.SA_POINT;
-	}
+    return RoomPackage.Literals.SA_POINT;
+  }
 
 } //SAPointImpl

@@ -26,7 +26,7 @@ Require-Bundle:  org.eclipse.etrice.core.common.ui,
  org.eclipse.ui.views.properties.tabbed,
  org.eclipse.ui.ide,
  org.eclipse.help
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.etrice.ui.common.base,

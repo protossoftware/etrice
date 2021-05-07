@@ -72,6 +72,7 @@ public class FSMModelImpl extends MinimalEObjectImpl.Container implements FSMMod
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ModelComponent> getComponents()
   {
     if (components == null)
