@@ -29,7 +29,7 @@ import com.google.inject.Inject;
 public class ModelLocatorUriResolver extends ImportUriResolver {
 	
 	@Inject
-	private ModelLocator modelLocator;
+	private IModelLocator modelLocator;
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.scoping.impl.ImportUriResolver#resolve(org.eclipse.emf.ecore.EObject)

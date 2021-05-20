@@ -20,15 +20,15 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Path
 import org.eclipse.emf.common.util.URI
-import org.eclipse.etrice.core.common.scoping.ModelLocator
 import org.eclipse.etrice.core.ui.RoomUiModule
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver
 
 class GeneratorLaunchHelper {
 
 	@Inject XtextResourceSetProvider resourceSetProvider
-	@Inject ModelLocator modelLocator
+	@Inject ModelLocatorUriResolver modelLocator
 	
 	/**
 	 *  @return all transitive dependencies from files within the project
