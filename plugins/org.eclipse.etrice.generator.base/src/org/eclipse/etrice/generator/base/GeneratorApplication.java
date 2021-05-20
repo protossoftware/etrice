@@ -17,6 +17,7 @@ package org.eclipse.etrice.generator.base;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,8 +67,10 @@ public class GeneratorApplication {
 	 * @param moduleName the name of the class of the generator module
 	 * @return the new generator application
 	 */
-	public static GeneratorApplication create(String moduleName) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		Module module = (Module) Class.forName(moduleName).newInstance();
+	public static GeneratorApplication create(String moduleName)
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException, IllegalArgumentException,
+			InvocationTargetException, NoSuchMethodException, SecurityException {
+		Module module = (Module) Class.forName(moduleName).getDeclaredConstructor().newInstance();
 		return create(module);
 	}
 
@@ -139,21 +142,32 @@ public class GeneratorApplication {
 	 */
 	public void run(Arguments arguments, ILineOutput out) throws GeneratorException {
 		Logger logger = createLogger(arguments, out);
-		
 		try {
-			GeneratorFileIO fileIO = createGeneratorFileIO(arguments, logger);
+			List<String> files = Arrays.asList(arguments.get(GeneratorApplicationOptions.FILES));
+			List<String> modelpath = Arrays.asList(arguments.get(GeneratorApplicationOptions.MODELPATH));
+			List<Resource> resources = resourceLoader.load(files, modelpath, arguments, logger);
 			
-			logArguments(arguments, fileIO, logger);
-
-			List<Resource> resources = load(arguments, logger);
-
-			validate(resources, arguments, logger);
-
-			generate(resources, arguments, fileIO, logger);
-			
-			cleanOutputDirectory(arguments, fileIO, logger);
+			validateAndGenerate(resources, arguments, logger);
 		}
 		catch (Exception e) {
+			logException(e, logger);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Runs the generator on the given resources with the specified arguments.
+	 * 
+	 * @param resources the resources to generator code from
+	 * @param arguments the generator arguments
+	 * @param out some output channel
+	 */
+	public void run(List<Resource> resources, Arguments arguments, ILineOutput out) throws GeneratorException {
+		Logger logger = createLogger(arguments, out);
+		try {
+			validateAndGenerate(resources, arguments, logger);
+		}
+		catch(Exception e) {
 			logException(e, logger);
 			throw e;
 		}
@@ -190,44 +204,28 @@ public class GeneratorApplication {
 		String help = helpFormatter.getHelp(name, options, GeneratorApplicationOptions.FILES);
 		out.println(help);
 	}
+	
+	private void validateAndGenerate(List<Resource> resources, Arguments arguments, Logger logger) {
+		resourceValidator.validate(resources, arguments, logger);
+		
+		GeneratorFileIO fileIO = fileIOProvider.get();
+		String genDir = arguments.get(GeneratorApplicationOptions.GEN_DIR);
+		fileIO.init(genDir, logger);
+		logger.logDebug("output directory: " + fileIO.getOutputDirectory().toAbsolutePath());
+		
+		generator.generate(resources, arguments, fileIO, logger);
+		
+		if(arguments.get(GeneratorApplicationOptions.CLEAN)) {
+			fileIO.cleanOutputDirectory();
+		}
+	}
 
 	private Logger createLogger(Arguments arguments, ILineOutput out) {
 		Logger logger = loggerProvider.get();
 		Loglevel loglevel = arguments.get(GeneratorApplicationOptions.LOGLEVEL);
 		logger.init(loglevel, out);
-		return logger;
-	}
-
-	private GeneratorFileIO createGeneratorFileIO(Arguments arguments, Logger logger) {
-		GeneratorFileIO fileIO = fileIOProvider.get();
-		String genDir = arguments.get(GeneratorApplicationOptions.GEN_DIR);
-		fileIO.init(genDir, logger);
-		return fileIO;
-	}
-
-	private List<Resource> load(Arguments arguments, Logger logger) {
-		List<String> files = Arrays.asList(arguments.get(GeneratorApplicationOptions.FILES));
-		List<String> modelpath = Arrays.asList(arguments.get(GeneratorApplicationOptions.MODELPATH));
-		return resourceLoader.load(files, modelpath, arguments, logger);
-	}
-
-	private void validate(List<Resource> models, Arguments arguments, Logger logger) {
-		resourceValidator.validate(models, arguments, logger);
-	}
-
-	private void generate(List<Resource> resources, Arguments arguments, GeneratorFileIO fileIO, Logger logger) {
-		generator.generate(resources, arguments, fileIO, logger);
-	}
-	
-	private void cleanOutputDirectory(Arguments arguments, GeneratorFileIO fileIO, Logger logger) {
-		if(arguments.get(GeneratorApplicationOptions.CLEAN)) {
-			fileIO.cleanOutputDirectory();
-		}
-	}
-	
-	private void logArguments(Arguments arguments, GeneratorFileIO fileIO, Logger logger) {
 		logger.logDebug("arguments: " + arguments);
-		logger.logDebug("output directory: " + fileIO.getOutputDirectory().toAbsolutePath());
+		return logger;
 	}
 	
 	private void logException(Exception e, Logger logger) {

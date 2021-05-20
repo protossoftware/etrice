@@ -14,18 +14,23 @@
 
 package my.etrice.generator.launch;
 
-import my.etrice.generator.DerivedGenerator;
+import my.etrice.generator.setup.DerivedGeneratorModule;
 
-import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.launch.java.JavaGeneratorLaunchConfigurationDelegate;
+
+import com.google.inject.Module;
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
-public class DerivedGeneratorLaunchConfigurationDelegate extends
-		JavaGeneratorLaunchConfigurationDelegate {
+public class DerivedGeneratorLaunchConfigurationDelegate extends JavaGeneratorLaunchConfigurationDelegate {
 
+	@Override
+	protected Module createGeneratorModule() {
+		return new DerivedGeneratorModule();
+	}
+	
 	/**
 	 * EXAMPLE: override console name
 	 * 
@@ -33,16 +38,6 @@ public class DerivedGeneratorLaunchConfigurationDelegate extends
 	 */
 	protected String getConsoleName() {
 		return "Derived Java Generator Console";
-	}
-
-	/**
-	 * call the main generator
-	 * 
-	 * @see org.eclipse.etrice.generator.launch.java.JavaGeneratorLaunchConfigurationDelegate#runGenerator(java.lang.String[], org.eclipse.etrice.generator.base.ILineOutput)
-	 */
-	protected void runGenerator(String[] args, ILineOutput out) {
-		DerivedGenerator.setOutput(out);
-		DerivedGenerator.run(args);
 	}
 
 }

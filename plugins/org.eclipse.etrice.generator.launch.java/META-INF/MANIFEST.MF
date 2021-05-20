@@ -4,10 +4,10 @@ Bundle-Name: eTrice Java Generator Launcher
 Bundle-SymbolicName: org.eclipse.etrice.generator.launch.java;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Bundle-Activator: org.eclipse.etrice.generator.launch.java.Activator
-Require-Bundle:  org.eclipse.etrice.generator,
-  org.eclipse.etrice.generator.fsm,
-  org.eclipse.etrice.generator.java,
-  org.eclipse.etrice.generator.launch,
+Require-Bundle: org.eclipse.etrice.generator,
+ org.eclipse.etrice.generator.fsm,
+ org.eclipse.etrice.generator.java,
+ org.eclipse.etrice.generator.launch,
  org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.debug.core,
@@ -15,8 +15,9 @@ Require-Bundle:  org.eclipse.etrice.generator,
  org.eclipse.jdt.ui,
  org.eclipse.jdt.core,
  org.eclipse.core.variables,
-  org.eclipse.etrice.generator.ui,
-  org.eclipse.etrice.generator.base
+ org.eclipse.etrice.generator.ui,
+ org.eclipse.etrice.generator.base,
+ com.google.inject
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.eclipse.jdt.launching,

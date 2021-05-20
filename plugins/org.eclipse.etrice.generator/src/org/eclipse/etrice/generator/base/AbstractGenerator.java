@@ -78,6 +78,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	 */
 	public static final int GENERATOR_ERROR = 1;
 	
+	@Deprecated
 	protected static ILineOutput output = new LineOutput();
 	private static Arguments settings = null;
 	
@@ -96,6 +97,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	 * be just the console, inside Eclipse this rather would be the console view
 	 * 
 	 * @param out an {@link ILineOutput}
+	 * @deprecated
 	 */
 	public static void setOutput(ILineOutput out) {
 		if (out != null)

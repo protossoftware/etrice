@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.etrice.generator,
  org.eclipse.etrice.generator.launch,
  org.eclipse.debug.ui,
  org.eclipse.jdt.launching,
- org.eclipse.etrice.generator.ui
+ org.eclipse.etrice.generator.ui,
+ com.google.inject
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.eclipse.etrice.generator.doc.launch
 Bundle-ActivationPolicy: lazy

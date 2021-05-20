@@ -14,9 +14,11 @@
 
 package org.eclipse.etrice.generator.launch.cpp;
 
-import org.eclipse.etrice.generator.base.io.ILineOutput;
-import org.eclipse.etrice.generator.cpp.Main;
+import com.google.inject.Module;
+
+import org.eclipse.etrice.generator.cpp.setup.GeneratorModule;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
+
 
 /**
  * @author Henrik Rentz-Reichert
@@ -24,13 +26,9 @@ import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
  */
 public class CppGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfigurationDelegate {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate#runGenerator(java.lang.String[], org.eclipse.etrice.generator.launch.ILineOutput)
-	 */
 	@Override
-	protected void runGenerator(String[] args, ILineOutput out) {
-		Main.setOutput(out);
-		Main.run(args);
+	protected Module createGeneratorModule() {
+		return new GeneratorModule();
 	}
 
 	/* (non-Javadoc)

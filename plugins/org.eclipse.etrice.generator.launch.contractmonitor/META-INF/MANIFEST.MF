@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.etrice.generator.contractmonitor,
  org.eclipse.etrice.generator.fsm,
  org.eclipse.etrice.generator.launch,
  org.eclipse.etrice.generator.ui,
- org.eclipse.etrice.generator.base
+ org.eclipse.etrice.generator.base,
+ com.google.inject
 Import-Package: org.eclipse.jdt.launching,
  org.eclipse.ui.dialogs
 Export-Package: org.eclipse.etrice.generator.launch.contractmonitor

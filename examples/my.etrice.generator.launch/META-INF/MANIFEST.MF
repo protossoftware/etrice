@@ -5,14 +5,15 @@ Bundle-SymbolicName: my.etrice.generator.launch;singleton:=true
 Bundle-Version: 0.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: my.etrice.generator,
-  org.eclipse.etrice.generator,
-  org.eclipse.etrice.generator.launch,
-  org.eclipse.etrice.generator.launch.java,
-  org.eclipse.etrice.generator.fsm,
-  org.eclipse.etrice.generator.java,
+ org.eclipse.etrice.generator,
+ org.eclipse.etrice.generator.launch,
+ org.eclipse.etrice.generator.launch.java,
+ org.eclipse.etrice.generator.fsm,
+ org.eclipse.etrice.generator.java,
  org.eclipse.debug.ui,
  org.eclipse.swt,
  org.eclipse.core.runtime,
  org.eclipse.jdt.launching,
-  org.eclipse.etrice.generator.base
+ org.eclipse.etrice.generator.base,
+ com.google.inject
 Automatic-Module-Name: my.etrice.generator.launch

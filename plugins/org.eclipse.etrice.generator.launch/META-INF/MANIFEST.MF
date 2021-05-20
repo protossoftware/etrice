@@ -20,7 +20,8 @@ Require-Bundle:  org.eclipse.etrice.generator,
  org.eclipse.jdt.launching,
  org.eclipse.ui.ide,
   org.eclipse.etrice.generator.base,
- org.eclipse.etrice.core.common.ui
+ org.eclipse.etrice.core.common.ui,
+ com.google.inject
 Import-Package: org.eclipse.xtext.xbase.lib
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11

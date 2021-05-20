@@ -23,5 +23,6 @@ Require-Bundle:  org.eclipse.etrice.core.genmodel,
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.etrice.generator.doc;uses:="org.eclipse.etrice.generator.base",
- org.eclipse.etrice.generator.doc.gen
+ org.eclipse.etrice.generator.doc.gen,
+ org.eclipse.etrice.generator.doc.setup
 Automatic-Module-Name: org.eclipse.etrice.generator.doc

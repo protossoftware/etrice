@@ -10,5 +10,6 @@ Require-Bundle: org.eclipse.etrice.core.fsm,
  org.eclipse.etrice.generator,
  org.eclipse.etrice.generator.java,
  com.google.inject
-Export-Package: my.etrice.generator
+Export-Package: my.etrice.generator,
+ my.etrice.generator.setup
 Automatic-Module-Name: my.etrice.generator

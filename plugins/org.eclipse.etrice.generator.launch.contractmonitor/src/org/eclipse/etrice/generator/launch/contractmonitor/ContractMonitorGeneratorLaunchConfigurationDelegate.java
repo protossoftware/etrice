@@ -10,22 +10,21 @@
  * CONTRIBUTORS:
  * 		Christian Hilden (initial contribution)
  * 
- *******************************************************************************/package org.eclipse.etrice.generator.launch.contractmonitor;
+ *******************************************************************************/
 
-import org.eclipse.etrice.generator.base.io.ILineOutput;
-import org.eclipse.etrice.generator.contractmonitor.Main;
+package org.eclipse.etrice.generator.launch.contractmonitor;
+
+import com.google.inject.Module;
+
+import org.eclipse.etrice.generator.contractmonitor.setup.GeneratorModule;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
 
 public class ContractMonitorGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfigurationDelegate {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate#runGenerator(java.lang.String[], org.eclipse.etrice.generator.launch.ILineOutput)
-	 */
 	@Override
-	protected void runGenerator(String[] args, ILineOutput out) {
-		Main.setOutput(out);
-		Main.run(args);
+	protected Module createGeneratorModule() {
+		return new GeneratorModule();
 	}
 
 	/* (non-Javadoc)

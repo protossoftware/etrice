@@ -17,18 +17,23 @@ package org.eclipse.etrice.ui.launch
 import java.nio.file.Paths
 import org.junit.Test
 
-import static org.eclipse.etrice.generator.launch.GeneratorLaunchHelper.*
 import static org.junit.Assert.*
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Path
 import org.junit.BeforeClass
 import org.junit.AfterClass
 import java.nio.file.Files
+import org.eclipse.etrice.generator.launch.GeneratorLaunchHelper
+import java.util.List
+import org.eclipse.core.runtime.CoreException
 
 class TestGeneratorLaunchHelper {
 
 	static val basePath = Paths.get('models', 'generatorLaunchHelper')
 	static val projects = #['project1', 'project2']
+	
+	val helper = new GeneratorLaunchHelper
+	val root = ResourcesPlugin.workspace.root
 	
 	@BeforeClass
 	def static void createProjects() {
@@ -44,40 +49,38 @@ class TestGeneratorLaunchHelper {
 
 	@Test
 	def void notExisting() {
-		#[] => [models|assertEquals(models, get('project2', models))]
-		#[''] => [models|assertEquals(models, get('project2', models))]
-		#['1', '.0ß+/§`}]"°'] => [models|assertEquals(models, get('project2', models))]
-		#['1.room', '2.etphys', '3.etmap', '4.etconfig', '5.unknown'] => [models|assertEquals(models, get('project2', models))]
+		#[] => [models | assertEquals(#[], get('project2', models))]
+		#['/project/ '] => [models | assertThrows(CoreException, [get('project2', models)])]
+		#['/project/1', '/project/.0ï¿½+/ï¿½`}]"ï¿½'] => [models | assertThrows(CoreException, [get('project2', models)])]
+		#['/project/1.room', '/project/2.etphys', '/project/3.etmap', '/project/4.etconfig', '/project/5.unknown'] =>
+			[models | assertThrows(CoreException, [get('project2', models)])]
 	}
 
 	@Test
 	def void projectURI() {
-		assertEquals(
-			#[
-			'project1/System.etmap',
-			'project1/NotMapped.room',
-			'project1/Physical.etphys',
-			'project1/Dep.room',
-			'project1/NotMappedDep.room',
-			'project1/Dep2.room'
-		].map[toAbsolutePath], get('project1',
-			#[
-			'project1/System.etmap',
-			'project1/NotMapped.room'
-		].map[toAbsolutePath]))
+		assertEquals(#[
+			'/project1/System.etmap',
+			'/project1/NotMapped.room',
+			'/project1/Physical.etphys',
+			'/project1/Dep.room',
+			'/project1/NotMappedDep.room',
+			'/project1/Dep2.room'
+		], get('project1', #[
+			'/project1/System.etmap',
+			'/project1/NotMapped.room'
+		]))
 
 	}
 	
 	@Test
 	def void projectModelpath() {
 		assertEquals(#[
-				'project2/src/System.etmap',
-				'project2//src/Dep.room',
-				'project2/src/Physical.etphys'
-			].map[toAbsolutePath], get('project2', #[
-				'project2/src/System.etmap'
-			].map[toAbsolutePath])
-		)
+			'/project2/src/System.etmap',
+			'/project2/src/Dep.room',
+			'/project2/src/Physical.etphys'
+		], get('project2', #[
+			'/project2/src/System.etmap'
+		]))
 	}
 	
 	@AfterClass
@@ -88,11 +91,11 @@ class TestGeneratorLaunchHelper {
 		]
 	}
 	
-	private def get(String project, Iterable<String> list) {
-		getAllDependenciesWithinProject(ResourcesPlugin.workspace.root.getProject(project), list).toList
-	}
-	
-	private def toAbsolutePath(String file) {
-		basePath.resolve(file).toAbsolutePath.toString
+	private def get(String project, List<String> list) {
+		helper.loadResources(
+			root.getProject(project),
+			list.map[root.getFile(new Path(it))],
+			true
+		).map[URI.toPlatformString(true)]
 	}
 }

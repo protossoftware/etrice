@@ -14,19 +14,22 @@
 
 package org.eclipse.etrice.generator.launch;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -35,10 +38,12 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.ui.RefreshTab;
-import org.eclipse.etrice.core.common.ui.modelpath.ModelPathManager;
-import org.eclipse.etrice.core.common.ui.modelpath.WorkspaceModelPath;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
-import org.eclipse.etrice.generator.base.io.ILineOutput;
+import org.eclipse.etrice.generator.base.GeneratorApplication;
+import org.eclipse.etrice.generator.base.GeneratorException;
+import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.logging.Loglevel;
 import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.jdt.launching.AbstractJavaLaunchConfigurationDelegate;
@@ -57,13 +62,15 @@ import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
-import com.google.common.collect.Lists;
+import com.google.inject.Module;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
  *
  */
 public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaLaunchConfigurationDelegate{
+	
+	private GeneratorLaunchHelper helper = new GeneratorLaunchHelper();
 	
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode,
@@ -81,19 +88,25 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		try {
 			ConsoleOutput output = getConsoleOutput();
 			
-			List<String> models = getModels(configuration);
-			Map<IProject, List<String>> project2Models = GeneratorLaunchHelper.groupByProject(models);
-			for(Entry<IProject, List<String>> entry: project2Models.entrySet()) {
+			GeneratorApplication genAppl = GeneratorApplication.create(createGeneratorModule());
+			// group files by project and generate separately for every project
+			Map<IProject, List<IFile>> models = getFiles(configuration);
+			for(Entry<IProject, List<IFile>> entry: models.entrySet()) {
+				// load resources
+				boolean includeDependencies = configuration.getAttribute(GeneratorConfigTab.GEN_DEPS_WITHIN_PROJECT, true);
+				List<Resource> resources = helper.loadResources(entry.getKey(), entry.getValue(), includeDependencies);
 				
-				// constructing program arguments
-				StringBuffer argString = new StringBuffer();
-				addModels(configuration, entry.getKey(), entry.getValue(), argString);
-				addArguments(configuration, entry.getKey(), argString);
-				addModelpath(entry.getKey(), argString);
-				String[] args = splitCommandLine(argString.toString());
+				// construct program arguments
+				Arguments args = genAppl.createArguments();
+				configureArguments(args, configuration, entry.getKey());
 				
+				// generate project
 				output.println("\n*** generating project " + entry.getKey().getName() + " ***\n");
-				runGenerator(args, output);
+				try {
+					genAppl.run(resources, args, output);
+				} catch(GeneratorException e) {
+					break; // error is logged to console
+				}
 				
 				// check for cancellation
 				if (monitor.isCanceled()) {
@@ -158,77 +171,62 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		return new ConsoleOutput(out);
 	}
 
-	protected void addModels(ILaunchConfiguration configuration, IProject project, Iterable<String> models, StringBuffer argString) throws CoreException {
-		if(configuration.getAttribute(GeneratorConfigTab.GEN_DEPS_WITHIN_PROJECT, true)) {
-			// generate all dependencies within project
-			models = GeneratorLaunchHelper.getAllDependenciesWithinProject(project, models);
-		}
-		for(String model : models) {
-			argString.append(" \""+model+"\"");
-		}		
-	}
-	
-	@SuppressWarnings("unchecked")
-	protected List<String> getModels(ILaunchConfiguration configuration) throws CoreException {
-		IStringVariableManager variableManager = VariablesPlugin.getDefault().getStringVariableManager();
-		List<String> models = configuration.getAttribute("ModelFiles", Collections.EMPTY_LIST);
-		List<String> substitutedModels = Lists.newArrayList();
-		for(String model : models) {
-			substitutedModels.add(variableManager.performStringSubstitution(model));
-		}
-		return substitutedModels;
-	}
-	
 	/**
-	 * assemble the command line by adding further parameters
+	 * Locates files in the workspace and groups them by project.
 	 * 
-	 * @param configuration
-	 * @param argString
-	 * @throws CoreException
+	 * @param configuration the launch configuration to load the files from
+	 * @return the files grouped by project
+	 * @throws CoreException if there is an error when locating the files in the workspace
 	 */
-	protected void addArguments(ILaunchConfiguration configuration, IProject project, StringBuffer argString) throws CoreException {
-		String projectDir = project.getLocation().toString() + "/";
-		if (configuration.getAttribute(GeneratorConfigTab.LIB, false)) {
-			argString.append(" -"+AbstractGeneratorOptions.LIB.getName());
+	protected Map<IProject, List<IFile>> getFiles(ILaunchConfiguration configuration) throws CoreException {
+		IStringVariableManager variableManager = VariablesPlugin.getDefault().getStringVariableManager();
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		
+		@SuppressWarnings("unchecked")
+		List<String> models = configuration.getAttribute("ModelFiles", Collections.EMPTY_LIST);
+		List<IFile> files = new ArrayList<>();
+		for(String model : models) {
+			String substituted = variableManager.performStringSubstitution(model);
+			IFile file = root.getFileForLocation(new Path(substituted));
+			if(file == null || !file.exists())
+				throw new CoreException(new Status(Status.ERROR, getClass().getName(),
+					"Failed to find file in workspace: " + substituted));
+			files.add(file);
 		}
+		
+		return files.stream().collect(Collectors.groupingBy(IFile::getProject));
+	}
+	
+	protected void configureArguments(Arguments args, ILaunchConfiguration configuration, IProject project) throws CoreException {
+		String projectDir = project.getLocation().toString() + "/";
+		boolean lib = configuration.getAttribute(GeneratorConfigTab.LIB, false);
+		args.set(AbstractGeneratorOptions.LIB, lib);
 		if (configuration.getAttribute(GeneratorConfigTab.SAVE_GEN_MODEL, false)) {
 			String genModelPath = configuration.getAttribute(GeneratorConfigTab.GEN_MODEL_PATH, "?");
-			argString.append(" -"+AbstractGeneratorOptions.SAVE_GEN_MODEL.getName());
-			argString.append(" "+projectDir + genModelPath);
+			args.set(AbstractGeneratorOptions.SAVE_GEN_MODEL, projectDir + genModelPath);
 		}
-		if (!configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()).equals(AbstractGeneratorOptions.MAIN_NAME.getDefaultValue())) {
-			argString.append(" -"+AbstractGeneratorOptions.MAIN_NAME.getName());
-			argString.append(" "+configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()));
-		}
+		String mainName = configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue());
+		args.set(AbstractGeneratorOptions.MAIN_NAME, mainName);
 		if (configuration.getAttribute(GeneratorConfigTab.DEBUG, false)) {
-			argString.append(" -"+GeneratorApplicationOptions.LOGLEVEL.getName());
-			argString.append(" debug");
+			args.set(GeneratorApplicationOptions.LOGLEVEL, Loglevel.DEBUG);
 		}
-		if (configuration.getAttribute(GeneratorConfigTab.MSC_INSTR, false)) {
-			argString.append(" -"+AbstractGeneratorOptions.MSC_INSTR.getName());
-		}
-		if (configuration.getAttribute(GeneratorConfigTab.VERBOSE, false)) {
-			argString.append(" -"+AbstractGeneratorOptions.VERBOSE_RT.getName());
-		}
-		if (!configuration.getAttribute(GeneratorConfigTab.USE_TRAANSLATION, true)) {
-			argString.append(" -"+AbstractGeneratorOptions.NOTRANSLATE.getName());
-		}
-		if (!configuration.getAttribute(GeneratorConfigTab.OLD_STYLE_TRANSITION_DATA, true)) {
-			argString.append(" -"+AbstractGeneratorOptions.OLD_STYLE_TRANSITION_DATA.getName());
-		}
+		boolean mscInstr = configuration.getAttribute(GeneratorConfigTab.MSC_INSTR, false);
+		args.set(AbstractGeneratorOptions.MSC_INSTR, mscInstr);
+		boolean verbose = configuration.getAttribute(GeneratorConfigTab.VERBOSE, false);
+		args.set(AbstractGeneratorOptions.VERBOSE_RT, verbose);
+		boolean notranslate = !configuration.getAttribute(GeneratorConfigTab.USE_TRAANSLATION, true);
+		args.set(AbstractGeneratorOptions.NOTRANSLATE, notranslate);
+		boolean oldStyleTransitionData = configuration.getAttribute(GeneratorConfigTab.OLD_STYLE_TRANSITION_DATA, false);
+		args.set(AbstractGeneratorOptions.OLD_STYLE_TRANSITION_DATA, oldStyleTransitionData);
 		
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
-		
 		boolean override = configuration.getAttribute(GeneratorConfigTab.OVERRIDE_DIRECTORIES, false);
 		String srcgenDir = prefStore.getString(getSrcgenDirPreferenceConstantName());
 		if (override) {
 			srcgenDir = configuration.getAttribute(GeneratorConfigTab.SRCGEN_PATH, srcgenDir);
 		}
-
-		argString.append(" -"+GeneratorApplicationOptions.GEN_DIR.getName());
-		argString.append(" \""+projectDir+srcgenDir+"\"");
-		
-		argString.append(" -clean");
+		args.set(GeneratorApplicationOptions.GEN_DIR, projectDir + srcgenDir);
+		args.set(GeneratorApplicationOptions.CLEAN, true);
 	}
 	
 	protected String getSrcgenDirPreferenceConstantName() {
@@ -236,58 +234,9 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	}
 	
 	/**
-	 * Parses the modelpath of the specified project and appends it to the generator arguments.
+	 * @return the guice module of the generator
 	 */
-	protected void addModelpath(IProject project, StringBuffer argString) throws CoreException {
-		WorkspaceModelPath modelpath = ModelPathManager.INSTANCE.getModelPath(project);
-		String[] paths = modelpath.getPaths().stream()
-			.map(container -> container.getLocation())
-			.filter(Objects::nonNull)
-			.map(path -> path.toOSString())
-			.toArray(size -> new String[size]);
-		
-		if(paths.length > 0) {
-			String modelpathArg = String.join(File.pathSeparator, paths);
-			argString.append(" -modelpath \"").append(modelpathArg).append('"');
-		}
-	}
-	
-	/**
-	 *  split at single spaces but keep strings in double quotes as single argument
-	 *  (with double quotes removed)
-	 */
-	protected String[] splitCommandLine(String cl) {
-		cl = cl.trim();
-		ArrayList<String> res = new ArrayList<String>();
-		int begin = 0;
-		int end = cl.indexOf(' ');
-		boolean inQuotes = false;
-		while (end>0) {
-			if (cl.charAt(begin)=='\"')
-				inQuotes = true;
-			if ((inQuotes && cl.charAt(end-1)=='\"')) {
-				inQuotes = false;
-			}
-			
-			if (!inQuotes) {
-				res.add(cl.substring(begin, end).replace("\"", ""));
-				begin = end+1;
-			}
-			end = cl.indexOf(' ', end+1);
-		}
-		res.add(cl.substring(begin).replace("\"", ""));
-		
-		String[] args = new String[res.size()];
-		return res.toArray(args);
-	}
-	
-	/**
-	 * call the generator main method
-	 * 
-	 * @param args the command line arguments
-	 * @param out line wise output to console
-	 */
-	protected abstract void runGenerator(String[] args, ILineOutput out);
+	protected abstract Module createGeneratorModule();
 	
 	/**
 	 * @return the name of the console for the generator output

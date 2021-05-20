@@ -14,11 +14,13 @@
 
 package org.eclipse.etrice.generator.launch.c;
 
+import com.google.inject.Module;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.etrice.generator.base.io.ILineOutput;
-import org.eclipse.etrice.generator.c.Main;
+import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.c.setup.GeneratorModule;
 import org.eclipse.etrice.generator.c.setup.GeneratorOptions;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
@@ -28,24 +30,19 @@ import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
  */
 public class CGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfigurationDelegate {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate#runGenerator(java.lang.String[], org.eclipse.etrice.generator.launch.ILineOutput)
-	 */
 	@Override
-	protected void runGenerator(String[] args, ILineOutput out) {
-		Main.setOutput(out);
-		Main.run(args);
+	protected Module createGeneratorModule() {
+		return new GeneratorModule();
 	}
 	
 	@Override
-	protected void addArguments(ILaunchConfiguration configuration, IProject project, StringBuffer argString) throws CoreException {
-		super.addArguments(configuration, project, argString);
+	protected void configureArguments(Arguments args, ILaunchConfiguration configuration, IProject project) throws CoreException {
+		super.configureArguments(args, configuration, project);
 		
-		if (configuration.getAttribute(CGeneratorConfigTab.GEN_CPP_FILE_EXTENSIONS, false)) {
-			argString.append(" -"+GeneratorOptions.CPP_FILE_EXTENSIONS.getName());
-		}
+		boolean cppFileExtensions = configuration.getAttribute(CGeneratorConfigTab.GEN_CPP_FILE_EXTENSIONS, false);
+		args.set(GeneratorOptions.CPP_FILE_EXTENSIONS, cppFileExtensions);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate#getConsoleName()
 	 */
