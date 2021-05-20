@@ -123,7 +123,7 @@ public class FileSystemModelPath implements IModelPath {
 	 * @return the new model file
 	 */
 	private ModelFile createModelFile(Path file, QualifiedName pkg) {
-		URI uri = URI.createURI(file.toUri().toString());
+		URI uri = NIOPathUtil.toEMFUri(file);
 		String fileName = file.getFileName().toString();
 		return ModelFile.create(uri, pkg, fileName);
 	}
@@ -179,12 +179,11 @@ public class FileSystemModelPath implements IModelPath {
 	private Optional<Path> toFilePath(URI uri) {
 		if(uri.isFile()) {
 			/* 
-			 * If the authority of the uri is non-empty,
-			 * URI.toFileString produces a file string containing the authority that can't be parsed by Paths.get.
-			 * So we create the path directly from the device and segments of the uri and convert it to an absolute path if necessary.
+			 * If the authority of a uri is non-empty, URI.toFileString produces a file string
+			 * containing the authority that can't be parsed by Path.of.
+			 * Therefore we take the detour via java.net.URI.
 			 */
-			Path path = Paths.get(uri.hasDevice() ? uri.device() : "", uri.segments());
-			return Optional.of(uri.hasAbsolutePath() ? path.toAbsolutePath() : path);
+			return Optional.of(Path.of(java.net.URI.create(uri.toString())));
 		}
 		return Optional.empty();
 	}

@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  */
 public class ResourceSetModelPathProvider implements IModelPathProvider {
 
-	public static final String LOAD_OPTION_MODELPATH = "org.eclipse.etrice.generator.base.modelpath";
+	private static final String LOAD_OPTION_MODELPATH = "org.eclipse.etrice.generator.base.modelpath";
 	
 	@Override
 	public IModelPath get(Resource resource) {
@@ -35,4 +35,7 @@ public class ResourceSetModelPathProvider implements IModelPathProvider {
 		return IModelPath.EMPTY;
 	}
 	
+	public static void install(ResourceSet resourceSet, IModelPath modelpath) {
+		resourceSet.getLoadOptions().put(LOAD_OPTION_MODELPATH, modelpath);
+	}
 }

@@ -20,7 +20,9 @@ import java.util.stream.Stream;
 import java.util.stream.Stream.Builder;
 import java.util.stream.StreamSupport;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -48,6 +50,8 @@ import com.google.inject.Inject;
  */
 public class ModelPathGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	
+	private static final Logger LOG = Logger.getLogger(ModelPathGlobalScopeProvider.class);
+	
 	/**
 	 * Filters the model files.
 	 */
@@ -58,16 +62,14 @@ public class ModelPathGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	private IQualifiedNameProvider qualifiedNameProvider;
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	private IModelPathFileFilter modelPathFileFilter;
-	private ModelLocatorUriResolver uriResolver;
 	
 	@Inject
 	public ModelPathGlobalScopeProvider(IModelPathProvider modelPathProvider, IQualifiedNameProvider qualifiedNameProvider,
-			IResourceServiceProvider.Registry resourceServiceProviderRegistry, IModelPathFileFilter modelPathFileFilter, ModelLocatorUriResolver uriResolver) {
+			IResourceServiceProvider.Registry resourceServiceProviderRegistry, IModelPathFileFilter modelPathFileFilter) {
 		this.modelPathProvider = modelPathProvider;
 		this.qualifiedNameProvider = qualifiedNameProvider;
 		this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
 		this.modelPathFileFilter = modelPathFileFilter;
-		this.uriResolver = uriResolver;
 	}
 	
 	@Override
@@ -193,7 +195,6 @@ public class ModelPathGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		 * @return an optional of the requested resource descriptions
 		 */
 		private Stream<IResourceDescription> getResourceDescription(URI uri, IResourceDescriptions descriptions, ResourceSet resourceSet) {
-			uri = resolveURI(uri);
 			IResourceDescription resourceDescription = descriptions.getResourceDescription(uri);
 			if(resourceDescription != null) {
 				return Stream.of(resourceDescription);
@@ -201,18 +202,21 @@ public class ModelPathGlobalScopeProvider extends AbstractGlobalScopeProvider {
 			else {
 				IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
 				if(resourceServiceProvider != null) {
-					Resource resource = resourceSet.getResource(uri, true);
-					IResourceDescription.Manager descriptionManager = resourceServiceProvider.getResourceDescriptionManager();
-					resourceDescription = descriptionManager.getResourceDescription(resource);
-					return Stream.of(resourceDescription);
+					try {
+						Resource resource = resourceSet.getResource(uri, true);
+						IResourceDescription.Manager descriptionManager = resourceServiceProvider.getResourceDescriptionManager();
+						resourceDescription = descriptionManager.getResourceDescription(resource);
+						return Stream.of(resourceDescription);
+					}
+					catch(WrappedException e) {
+						LOG.error("Failed to load " + uri + "; " + e.getMessage());
+					}
+				}
+				else {
+					LOG.error("Missing resource service provider for uri " + uri);
 				}
 			}
 			return Stream.empty();
-		}
-		
-		private URI resolveURI(URI uri) {
-			String uriStr = uriResolver.resolve(uri.toString(), null);
-			return URI.createURI(uriStr);
 		}
 	}
 	

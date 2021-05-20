@@ -61,8 +61,8 @@ public class GeneratorLaunchHelper {
 				resourceSet.getResource(uri, true);
 			}
 			catch(RuntimeException e) {
-				throw new CoreException(new Status(Status.ERROR, getClass().getName(),
-					"Failed to load resource " + uri));
+				throw new CoreException(new Status(Status.ERROR, getClass(),
+					"Failed to load resource " + uri, e));
 			}
 		}
 		

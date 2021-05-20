@@ -14,11 +14,7 @@
 
 package org.eclipse.etrice.generator.base;
 
-import java.nio.file.Path;
-
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.generator.base.io.GeneratorResourceLoader;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import com.google.inject.Inject;
@@ -26,22 +22,12 @@ import com.google.inject.Provider;
 
 /**
  * @author Henrik Rentz-Reichert
- * 
+ * @deprecated replaced by {@link GeneratorResourceLoader}
  */
 public class ModelLoader extends GeneratorResourceLoader {
 	
-	private ModelLocatorUriResolver uriResolver;
-	
 	@Inject
-	public ModelLoader(Provider<ResourceSet> resourceSetProvider, IGeneratorEMFSetup emfSetup, ModelLocatorUriResolver uriResolver) {
+	public ModelLoader(Provider<ResourceSet> resourceSetProvider, IGeneratorEMFSetup emfSetup) {
 		super(resourceSetProvider, emfSetup);
-		
-		this.uriResolver = uriResolver;
-	}
-	
-	@Override
-	protected URI createURI(Path path) {
-		String uri = uriResolver.resolve(path.toString(), null);
-		return URI.createURI(uri);
 	}
 }

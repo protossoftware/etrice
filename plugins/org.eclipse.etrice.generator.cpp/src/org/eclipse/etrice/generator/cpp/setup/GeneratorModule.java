@@ -14,7 +14,6 @@
 
 package org.eclipse.etrice.generator.cpp.setup;
 
-import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
 import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
@@ -30,7 +29,6 @@ import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
-import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
 
@@ -43,8 +41,6 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 		binder.bind(ProcedureHelpers.class).to(CppProcedureHelpers.class);
 		binder.bind(GenericProtocolClassGenerator.class).to(ProtocolClassGen.class);
 		binder.bind(GenericActorClassGenerator.class).to(ActorClassGen.class);
-
-		binder.bind(ImportUriResolver.class).to(ModelLocatorUriResolver.class);
 	}
 	
 	@Override

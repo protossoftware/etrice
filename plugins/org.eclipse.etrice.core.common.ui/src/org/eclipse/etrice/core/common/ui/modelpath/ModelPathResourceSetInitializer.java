@@ -35,7 +35,7 @@ public class ModelPathResourceSetInitializer implements IResourceSetInitializer 
 	public void initialize(ResourceSet resourceSet, IProject project) {
 		if(project != null) {
 			ModelPathDelegate modelPath = new ModelPathDelegate(project);
-			resourceSet.getLoadOptions().put(ResourceSetModelPathProvider.LOAD_OPTION_MODELPATH, modelPath);
+			ResourceSetModelPathProvider.install(resourceSet, modelPath);
 		}
 	}
 	

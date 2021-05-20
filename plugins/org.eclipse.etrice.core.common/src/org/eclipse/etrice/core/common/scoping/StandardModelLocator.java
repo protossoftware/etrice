@@ -30,6 +30,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.etrice.generator.base.io.NIOPathUtil;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 
 /**
@@ -333,9 +334,9 @@ public class StandardModelLocator implements IModelLocator {
 			// now we give the super class a chance to locate the model file
 			f = locateFile(f);
 			
-			can = f.getCanonicalPath();	// e.g. remove embedded ../
-			URI canonical = URI.createFileURI(can);
-			return canonical;
+			File canonical = f.getCanonicalFile();	// e.g. remove embedded ../
+			URI canonicalUri = NIOPathUtil.toEMFUri(canonical.toPath());
+			return canonicalUri;
 		}
 		
 		return normalized;

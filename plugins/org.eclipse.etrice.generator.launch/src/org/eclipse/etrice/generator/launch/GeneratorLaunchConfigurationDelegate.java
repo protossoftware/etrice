@@ -189,7 +189,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			String substituted = variableManager.performStringSubstitution(model);
 			IFile file = root.getFileForLocation(new Path(substituted));
 			if(file == null || !file.exists())
-				throw new CoreException(new Status(Status.ERROR, getClass().getName(),
+				throw new CoreException(new Status(Status.ERROR, getClass(),
 					"Failed to find file in workspace: " + substituted));
 			files.add(file);
 		}

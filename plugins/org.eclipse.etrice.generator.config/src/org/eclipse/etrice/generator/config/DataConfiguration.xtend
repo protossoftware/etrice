@@ -38,7 +38,6 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper
-import org.eclipse.xtext.scoping.impl.ImportUriResolver
 
 class DataConfiguration implements IDataConfiguration {
 
@@ -47,9 +46,6 @@ class DataConfiguration implements IDataConfiguration {
 	
 	@Inject
 	protected ILogger logger;
-
-	@Inject
-	protected ImportUriResolver uriResolver;
 
 	override doSetup() {
 		if (!EMFPlugin::IS_ECLIPSE_RUNNING)

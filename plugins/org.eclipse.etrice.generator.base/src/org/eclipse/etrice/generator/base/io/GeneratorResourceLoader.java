@@ -70,7 +70,7 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		resourceSet.eAdapters().add(resourceAddedAdapter);
 		
 		IModelPath mp = createModelPath(modelpath, logger);
-		resourceSet.getLoadOptions().putIfAbsent(ResourceSetModelPathProvider.LOAD_OPTION_MODELPATH, mp);
+		ResourceSetModelPathProvider.install(resourceSet, mp);
 		
 		List<Resource> resources = loadResources(files, resourceSet, logger);
 		
@@ -99,7 +99,7 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		Path normalizedPath = Paths.get(file).normalize();
 		if(Files.exists(normalizedPath)) {
 			Path realPath = toRealPath(normalizedPath);
-			URI uri = createURI(realPath);
+			URI uri = NIOPathUtil.toEMFUri(realPath);
 			try {
 				return rs.getResource(uri, true);
 			}
@@ -152,10 +152,6 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		}
 	}
 	
-	protected URI createURI(Path path) {
-		return URI.createURI(path.toUri().toString());
-	}
-		
 	private Path toRealPath(Path path, LinkOption... options) {
 		try {
 			return path.toRealPath(options);
