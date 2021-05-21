@@ -259,7 +259,7 @@ public class BaseValidator extends org.eclipse.etrice.core.common.validation.Abs
 		}	
 		IEObjectDescription eObjDesc = importHelpers.getVisibleScope(resource).getSingleElement(fqn);
 		if(eObjDesc == null) {
-			if(importHelpers.findInWorskpace(fqn, false).iterator().hasNext()) {
+			if(importHelpers.findInWorkspace(resource, fqn, false).iterator().hasNext()) {
 				error("could not find namespace on modelpath '" + fqn + "'", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORTED_NAMESPACE_MISSING);
 			} else {
 				error("could not find imported namespace '" + fqn + "'", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORTED_NAMESPACE_MISSING);

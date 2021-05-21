@@ -66,7 +66,7 @@ class RoomQuickFixProviderXtend extends RoomQuickfixProvider {
 		]
 		// fallback: old style imports with uri
 		if(elementImports.empty) {
-			importHelpers.createURIImports(issueString, type, resource.URI).forEach[imp |
+			importHelpers.createURIImports(resource, issueString, type, resource.URI).forEach[imp |
 				acceptor.accept(issue, '''Import namespace '«imp.importedNamespace»' from '«imp.importURI»' ''', '', null) [elem, ctx |
 					val model = EcoreUtil2.getContainerOfType(elem, RoomModel)
 					model.imports += imp

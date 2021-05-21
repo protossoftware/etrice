@@ -2,7 +2,6 @@ RoomModel CompileTest {
 
 	import etrice.api.types.int32
 	import etrice.api.annotations.TestInstance
-	import DetailExpressionTest.DetailExpressionTest
 	import StatemachineInterfaceTest.StatemachineInterfaceTest
 	import StatemachineInterfaceInheritedTest.StatemachineInterfaceInheritedTest
 	import ContinuationTransitionTest.ContinuationTransitionTest

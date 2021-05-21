@@ -24,7 +24,7 @@ import com.google.inject.Provider;
  * @author Henrik Rentz-Reichert
  * @deprecated replaced by {@link GeneratorResourceLoader}
  */
-public class ModelLoader extends GeneratorResourceLoader {
+@Deprecated public class ModelLoader extends GeneratorResourceLoader {
 	
 	@Inject
 	public ModelLoader(Provider<ResourceSet> resourceSetProvider, IGeneratorEMFSetup emfSetup) {

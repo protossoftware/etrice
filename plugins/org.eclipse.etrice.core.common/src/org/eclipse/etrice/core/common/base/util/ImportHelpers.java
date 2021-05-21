@@ -40,6 +40,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -55,8 +56,10 @@ public class ImportHelpers {
 	
 	@Inject IQualifiedNameConverter nameConverter;
 	@Inject ModelLocatorUriResolver importUriResolver;
-	@Inject IGlobalScopeProvider globalScope;							// visible/imported scope
-	@Inject(optional = true) IResourceDescriptions resourceDescriptions; // world/workspace scope
+	@Inject IGlobalScopeProvider globalScope;								// visible/imported scope
+	@Inject IResourceDescriptionsProvider descriptionsProvider;
+	/** @deprecated use resource descriptions provider instead */
+	@Deprecated @Inject(optional = true) IResourceDescriptions resourceDescriptions; // world/workspace scope
 	
 	public ModelLocatorUriResolver getUriResolver() {
 		return importUriResolver;
@@ -64,15 +67,21 @@ public class ImportHelpers {
 
 	/**
 	 *  Returns elements from workspace.
+	 *  @deprecated use {@link #findInWorkspace(Resource, QualifiedName, boolean)}
 	 */
-	public Iterable<IEObjectDescription> findInWorskpace(QualifiedName fqn, boolean ignoreCase) {
+	@Deprecated public Iterable<IEObjectDescription> findInWorskpace(QualifiedName fqn, boolean ignoreCase) {
 		return getWorkspaceDescriptions().getExportedObjects(EOBJECT, fqn, ignoreCase);
+	}
+	
+	public Iterable<IEObjectDescription> findInWorkspace(Resource context, QualifiedName fqn, boolean ignoreCase) {
+		return getDescriptions(context).getExportedObjects(EOBJECT, fqn, ignoreCase);
 	}
 	
 	/**
 	 *  Returns elements from workspace.
+	 *  @deprecated throws an exception if eclipse is not running and xtext silently ignores exceptions in validators.
 	 */
-	public IResourceDescriptions getWorkspaceDescriptions() {
+	@Deprecated public IResourceDescriptions getWorkspaceDescriptions() {
 		if(resourceDescriptions != null) {
 			return resourceDescriptions;
 		}
@@ -190,9 +199,18 @@ public class ImportHelpers {
 		return result;
 	}
 	
-	public List<Import> createURIImports(String issueString, EClass type, URI baseURI) {
+	/** @deprecated use {@link #createURIImports(Resource, String, EClass, URI)} */
+	@Deprecated public List<Import> createURIImports(String issueString, EClass type, URI baseURI) {
+		return createURIImports(getWorkspaceDescriptions(), issueString, type, baseURI);
+	}
+	
+	public List<Import> createURIImports(Resource context, String issueString, EClass type, URI baseURI) {
+		return createURIImports(getDescriptions(context), issueString, type, baseURI);
+	}
+	
+	private List<Import> createURIImports(IResourceDescriptions descriptions, String issueString, EClass type, URI baseURI) {
 		final List<Import> result = new ArrayList<>();
-		getWorkspaceDescriptions().getExportedObjectsByType(type).forEach((eObjDesc) -> {
+		descriptions.getExportedObjectsByType(type).forEach((eObjDesc) -> {
 			if(eObjDesc.getName().getLastSegment().equalsIgnoreCase(issueString)) {
 				Import imp = BaseFactory.eINSTANCE.createImport();
 				imp.setImportedNamespace(eObjDesc.getQualifiedName().skipLast(1) + ".*");
@@ -200,7 +218,6 @@ public class ImportHelpers {
 				result.add(imp);
 			}
 		});
-		
 		return result;
 	}
 	
@@ -230,5 +247,9 @@ public class ImportHelpers {
 			// else file 
 			return resolvedRelative.toString();	
 		}
+	}
+	
+	private IResourceDescriptions getDescriptions(Resource context) {
+		return descriptionsProvider.getResourceDescriptions(context.getResourceSet());
 	}
 }
