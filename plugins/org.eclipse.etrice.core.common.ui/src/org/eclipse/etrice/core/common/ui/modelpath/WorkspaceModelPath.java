@@ -136,7 +136,7 @@ public class WorkspaceModelPath implements IModelPath {
 	}
 	
 	/**
-	 * Creates a model file from an eclipse file and the name of the package.
+	 * Creates a model file from an eclipse file and the name of its package.
 	 * 
 	 * @param file the eclipse file
 	 * @param pkg the qualified name of the package
@@ -145,7 +145,13 @@ public class WorkspaceModelPath implements IModelPath {
 	private ModelFile createModelFile(IFile file, QualifiedName pkg) {
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		String fileName = file.getName();
-		return ModelFile.create(uri, pkg, fileName);
+		int periodIndex = fileName.lastIndexOf('.');
+		if(periodIndex != -1) {
+			String name = fileName.substring(0, periodIndex);
+			String extension = fileName.substring(periodIndex + 1);
+			return new ModelFile(uri, pkg.append(name), extension);
+		}
+		return new ModelFile(uri, pkg.append(fileName), "");
 	}
 	
 	/**

@@ -22,7 +22,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.ProviderNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +36,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.generator.base.GeneratorException;
 import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.io.FileSystemModelPath.ModelDirectory;
 import org.eclipse.etrice.generator.base.logging.ILogger;
 
 import com.google.inject.Inject;
@@ -79,6 +79,9 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		return resources;
 	}
 	
+	/**
+	 * Executes the language setup if not already initialized.
+	 */
 	private void doEMFRegistration() {
 		if(!initializedEMF) {
 			emfSetup.doEMFRegistration();
@@ -86,6 +89,12 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		}
 	}
 	
+	/**
+	 * @param files a list of strings that are interpreted as paths to files to load
+	 * @param resourceSet a resource set used to load the resources
+	 * @param logger a logger used to report problems
+	 * @return the list of loaded resource
+	 */
 	private List<Resource> loadResources(List<String> files, ResourceSet resourceSet, ILogger logger) {
 		List<Resource> resources = new ArrayList<>(files.size());
 		for(String f: files) {
@@ -95,10 +104,16 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		return resources;
 	}
 	
+	/**
+	 * @param file a string that is interpreted as a path to a file to load
+	 * @param rs a resource set used to load the resource
+	 * @param logger a logger used to report problems
+	 * @return the loaded resource
+	 */
 	private Resource loadResource(String file, ResourceSet rs, ILogger logger) {
-		Path normalizedPath = Paths.get(file).normalize();
-		if(Files.exists(normalizedPath)) {
-			Path realPath = toRealPath(normalizedPath);
+		Path path = Path.of(file).normalize();
+		if(Files.exists(path)) {
+			Path realPath = toRealPath(path);
 			URI uri = NIOPathUtil.toEMFUri(realPath);
 			try {
 				return rs.getResource(uri, true);
@@ -114,19 +129,27 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		}
 	}
 	
+	/**
+	 * @param pathStrings a list of strings that are interpreted as paths to containers of model files
+	 * @param logger a logger used to report problems
+	 * @return a file system modelpath that contains all files that are currently in the passed locations
+	 */
 	private IModelPath createModelPath(List<String> pathStrings, ILogger logger) {
-		ArrayList<Path> paths = new ArrayList<>(pathStrings.size());
+		ArrayList<ModelDirectory> modelDirs = new ArrayList<>(pathStrings.size());
 		for(String pathString: pathStrings) {
-			Path path = Paths.get(pathString).normalize();
+			Path path = Path.of(pathString).normalize();
 			if(Files.exists(path)) {
 				Path realPath = toRealPath(path);
+				// If the path points to a directory, add it to the model directories.
 				if(Files.isDirectory(realPath)) {
-					paths.add(realPath);
+					modelDirs.add(new ModelDirectory(realPath));
 				}
+				// If the path references a file, try to open it as a file system (e.g. zip files)
+				// and add its root directories to the model directories.
 				else if(Files.isRegularFile(realPath)) {
 					FileSystem fileSystem = getFileSystem(realPath, logger);
 					for(Path rootDir: fileSystem.getRootDirectories()) {
-						paths.add(rootDir);
+						modelDirs.add(new ModelDirectory(rootDir));
 					}
 				}
 			}
@@ -135,8 +158,18 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 			}
 		}
 		
-		FileSystemModelPath modelpath = new FileSystemModelPath(paths);
-		return modelpath;
+		// Build up the index of the model directories.
+		modelDirs.forEach(this::indexDirectory);
+		return new FileSystemModelPath(modelDirs);
+	}
+	
+	private void indexDirectory(ModelDirectory modelDir) {
+		try {
+			modelDir.indexDirectory();
+		}
+		catch(IOException e) {
+			throw new UncheckedIOException(e);
+		}
 	}
 	
 	private FileSystem getFileSystem(Path path, ILogger logger) {
@@ -161,8 +194,8 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		}
 	}
 	
+	/** A resource adapter that logs the uris of added resources. */
 	private class ResourceAddedAdapter extends AdapterImpl {
-		
 		private ILogger logger;
 		
 		public ResourceAddedAdapter(ILogger logger) {

@@ -38,6 +38,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 
+import static org.eclipse.etrice.core.common.ide.modelpath.ModelPathManager.MODELPATH_FILE_NAME;
+
 /**
  * Maintains the modelpaths for all eclipse projects.
  */
@@ -45,7 +47,7 @@ public class ModelPathManager implements IResourceChangeListener {
 	
 	public static final ModelPathManager INSTANCE = new ModelPathManager();
 	
-	public static final Path MODELPATH_FILE = new Path("modelpath");
+	public static final Path MODELPATH_FILE = new Path(MODELPATH_FILE_NAME);
 	
 	private HashMap<IProject, ModelPathDescription> descriptionCache;
 	private HashMap<IProject, WorkspaceModelPath> modelpathCache;

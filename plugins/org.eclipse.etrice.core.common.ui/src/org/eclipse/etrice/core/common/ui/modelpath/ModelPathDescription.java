@@ -14,15 +14,12 @@
 
 package org.eclipse.etrice.core.common.ui.modelpath;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -33,21 +30,20 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.etrice.core.common.ide.modelpath.ModelPathDescriptionLexer;
+import org.eclipse.etrice.core.common.ide.modelpath.ModelPathDescriptionLexer.ModelPathDescriptionEntry;
 
 /**
- * Represent a modelpath description.
+ * Represents a modelpath description.
  */
 public class ModelPathDescription {
 	
 	private final List<IContainer> sourceDirectories;
 	private final List<IProject> projectDependencies;
-	private final List<IMarker> problemMarkers;
 	
-	private ModelPathDescription(List<IContainer> sourceDirectories, List<IProject> projectDependencies, List<IMarker> problemMarkers) {
+	private ModelPathDescription(List<IContainer> sourceDirectories, List<IProject> projectDependencies) {
 		this.sourceDirectories = sourceDirectories;
 		this.projectDependencies = projectDependencies;
-		
-		this.problemMarkers = problemMarkers;
 	}
 	
 	/**
@@ -62,13 +58,6 @@ public class ModelPathDescription {
 	 */
 	public List<IProject> getProjectDependencies() {
 		return projectDependencies;
-	}
-	
-	/**
-	 * @return the list of problem markers
-	 */
-	public List<IMarker> getProblemMarkers() {
-		return problemMarkers;
 	}
 	
 	/**
@@ -90,21 +79,15 @@ public class ModelPathDescription {
 	}
 	
 	/**
-	 * Helper class to parse and validate modelpath description files.
+	 * Helper class to load and validate modelpath description files.
 	 */
 	private static class ModelPathDescriptionLoader {
-		
-		private static final String KEYWORD_SRCDIR = "srcDir";
-		private static final String KEYWORD_PROJECT = "project";
-		private static final Pattern KEYWORD_PATTERN = Pattern.compile("\\S+");
 		
 		private IFile file;
 		private IProject project;
 		private IWorkspaceRoot root;
 		private List<IContainer> srcDirs;
 		private List<IProject> projects;
-		private List<IMarker> problemMarkers;
-		private int lineNumber;
 		
 		public ModelPathDescriptionLoader(IFile file) {
 			this.file = file;
@@ -112,97 +95,77 @@ public class ModelPathDescription {
 			root = ResourcesPlugin.getWorkspace().getRoot();
 			srcDirs = new ArrayList<>();
 			projects = new ArrayList<>();
-			problemMarkers = new ArrayList<IMarker>();
-			lineNumber = 0;
 		}
 		
 		public ModelPathDescription load() throws CoreException, IOException {
 			file.deleteMarkers(IMarker.PROBLEM, false, IResource.DEPTH_ZERO);
 			
-			try(BufferedReader reader = new BufferedReader(new InputStreamReader(file.getContents()))) {
-				for(String line = reader.readLine(); line != null; line = reader.readLine(), lineNumber++) {
-					line = trimComments(line);
-					parseLine(line);
+			try(InputStream input = file.getContents()) {
+				for(ModelPathDescriptionEntry entry : ModelPathDescriptionLexer.read(input)) {
+					parseEntry(entry);
 				}
 			}
 			
-			return new ModelPathDescription(Collections.unmodifiableList(srcDirs),
-					Collections.unmodifiableList(projects),
-					Collections.unmodifiableList(problemMarkers));
+			return new ModelPathDescription(Collections.unmodifiableList(srcDirs), Collections.unmodifiableList(projects));
 		}
 		
-		private void parseLine(String line) throws CoreException {
-			Matcher matcher = KEYWORD_PATTERN.matcher(line);
-			if(matcher.find()) {
-				String keyword = matcher.group();
-				String str = line.substring(matcher.end()).trim();
-				
-				switch(keyword) {
-				case KEYWORD_SRCDIR:
-					parseSrcDir(str);
-					break;
-				case KEYWORD_PROJECT:
-					parseProject(str);
-					break;
-				default:
-					addProblemMarker(IMarker.SEVERITY_ERROR, "unexpected keyword " + keyword);
-				}
+		private void parseEntry(ModelPathDescriptionEntry entry) throws CoreException {
+			switch(entry.key) {
+			case ModelPathDescriptionLexer.MODELPATH_KEYWORD_SRCDIR:
+				parseSrcDir(entry.value, entry.lineNumber);
+				break;
+			case ModelPathDescriptionLexer.MODELPATH_KEYWORD_PROJECT:
+				parseProject(entry.value, entry.lineNumber);
+				break;
+			default:
+				createProblemMarker(IMarker.SEVERITY_ERROR, entry.lineNumber, "unexpected keyword " + entry.key);
 			}
 		}
 		
-		private String trimComments(String line) {
-			int index = line.indexOf("//");
-			if(index != -1) {
-				line = line.substring(0, index);
-			}
-			return line;
-		}
-		
-		private void parseSrcDir(String str) throws CoreException {
-			if(str.isEmpty()) {
-				addProblemMarker(IMarker.SEVERITY_ERROR, "directory path is missing");
+		private void parseSrcDir(String value, int lineNumber) throws CoreException {
+			if(value.isEmpty()) {
+				createProblemMarker(IMarker.SEVERITY_ERROR, lineNumber, "directory path is missing");
 				return;
 			}
-			if(!Path.EMPTY.isValidPath(str)) {
-				addProblemMarker(IMarker.SEVERITY_ERROR, str + " isn't a valid path");
+			if(!Path.EMPTY.isValidPath(value)) {
+				createProblemMarker(IMarker.SEVERITY_ERROR, lineNumber, value + " isn't a valid path");
 				return;
 			}
 			
 			try {
-				IContainer dir = project.getFolder(str);
+				IContainer dir = project.getFolder(value);
 				if(!dir.exists()) {
-					addProblemMarker(IMarker.SEVERITY_WARNING, "directory " + dir.getFullPath() + " doesn't exist");
+					createProblemMarker(IMarker.SEVERITY_WARNING, lineNumber, "directory " + dir.getFullPath() + " doesn't exist");
 				}
 				srcDirs.add(dir);
 			}
 			catch(IllegalArgumentException e) {
-				addProblemMarker(IMarker.SEVERITY_ERROR, str + " is not a valid directory");
+				createProblemMarker(IMarker.SEVERITY_ERROR, lineNumber, value + " is not a valid directory");
 			}
 		}
 		
-		private void parseProject(String str) throws CoreException {
-			if(str.isEmpty()) {
-				addProblemMarker(IMarker.SEVERITY_ERROR, "project name is missing");
+		private void parseProject(String value, int lineNumber) throws CoreException {
+			if(value.isEmpty()) {
+				createProblemMarker(IMarker.SEVERITY_ERROR, lineNumber, "project name is missing");
 				return;
 			}
-			if(!Path.EMPTY.isValidSegment(str)) {
-				addProblemMarker(IMarker.SEVERITY_ERROR, str + " isn't a valid project name");
+			if(!Path.EMPTY.isValidSegment(value)) {
+				createProblemMarker(IMarker.SEVERITY_ERROR, lineNumber, value + " isn't a valid project name");
 				return;
 			}
 			
-			IProject project = root.getProject(str);
+			IProject project = root.getProject(value);
 			if(!project.isAccessible()) {
-				addProblemMarker(IMarker.SEVERITY_WARNING, "project " + project.getName() + " doesn't exist");
+				createProblemMarker(IMarker.SEVERITY_WARNING, lineNumber, "project " + project.getName() + " doesn't exist");
 			}
 			projects.add(project);
 		}
 		
-		private void addProblemMarker(int severity, String message) throws CoreException {
+		private void createProblemMarker(int severity, int lineNumber, String message) throws CoreException {
 			IMarker marker = file.createMarker(IMarker.PROBLEM);
 			marker.setAttribute(IMarker.SEVERITY, severity);
 			marker.setAttribute(IMarker.LINE_NUMBER, lineNumber + 1);
 			marker.setAttribute(IMarker.MESSAGE, message);
-			problemMarkers.add(marker);
 		}
 	}
 }

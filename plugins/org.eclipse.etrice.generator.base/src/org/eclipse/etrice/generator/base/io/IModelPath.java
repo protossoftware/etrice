@@ -65,24 +65,6 @@ public interface IModelPath {
 			this.name = name;
 			this.extension = extension;
 		}
-
-		/**
-		 * Computes the name and extension of the new model file from package and file name. 
-		 * 
-		 * @param uri the uri of the file
-		 * @param pkg the package of the file
-		 * @param fileName the name of the file
-		 * @return a new model file
-		 */
-		public static ModelFile create(URI uri, QualifiedName pkg, String fileName) {
-			int periodIndex = fileName.lastIndexOf('.');
-			if(periodIndex != -1) {
-				String name = fileName.substring(0, periodIndex);
-				String extension = fileName.substring(periodIndex + 1);
-				return new ModelFile(uri, pkg.append(name), extension);
-			}
-			return new ModelFile(uri, pkg.append(fileName), "");
-		}
 	}
 	
 	public static class EmptyModelPath implements IModelPath {
